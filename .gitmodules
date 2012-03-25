@@ -1,0 +1,24 @@
+[submodule "system"]
+	path = system
+	url = git://github.com/kohana/core.git
+[submodule "modules/database"]
+	path = modules/database
+	url = git://github.com/kohana/core.git
+[submodule "modules/image"]
+	path = modules/image
+	url = git://github.com/kohana/core.git
+[submodule "modules/codebench"]
+	path = modules/codebench
+	url = git://github.com/kohana/core.git
+[submodule "modules/unittest"]
+	path = modules/unittest
+	url = git://github.com/kohana/core.git
+[submodule "modules/cache"]
+	path = modules/cache
+	url = git://github.com/kohana/core.git
+[submodule "modules/auth"]
+	path = modules/auth
+	url = git://github.com/kohana/core.git
+[submodule "modules/userguide"]
+	path = modules/userguide
+	url = git://github.com/kohana/core.git
