@@ -1,0 +1,16 @@
+# Windows image file caches
+Thumbs.db 
+
+# Folder config file
+Desktop.ini
+
+# Mac specific files
+.DS_Store
+
+# Thumbnails
+._*
+
+# Eclipse 
+.buildpath
+.project
+.settings
