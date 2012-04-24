@@ -4,7 +4,7 @@
  * The User Controller class allows a user to log in and out.
  * Also a new user can register.
  */
-Class Controller_User extends Controller
+Class Controller_User extends Controller_Template_Website
 {
 	/**
 	 * Registers a user. Makes sure the passwords match 
@@ -12,25 +12,15 @@ Class Controller_User extends Controller
 	 */
     public function action_register()
     {
-		$view = View::factory('user/register');
-		$post = $this->request->post();
+		$this->template->title = 'Log in';
+        $this->template->content = View::factory('user/register');
 		
-		// Validate a form ($_POST)
-		if (isset($_POST) && Valid::not_empty($_POST)) {        
-			// Validate the login form
-			$post = Validation::factory($_POST)
-			->rule('username', 'not_empty')
-			->rule('password', 'not_empty')
-			->rule('password', 'min_length', array(':value', 3));
-		}
-		
-		if( ! empty($post)){
-			if ($post['password'] == $post['password2']) {
+		if(isset($_POST) && ! empty($_POST)){
+			if ($_POST['password'] == $_POST['password2']) {
 				Request::current()->redirect('welcome');
 			}
-			$view->errors = 'Passwords did not match';
+			$this->template->content->errors = 'Passwords did not match';
 		}
-		$this->response->body($view);
 	}
 	
 	/**
@@ -40,19 +30,22 @@ Class Controller_User extends Controller
 	 */
 	public function action_login()
 	{
-		$view = View::factory('user/login');
- 		$post = $this->request->post();
-		$success = Auth::instance()->login($post['username'], $post['password']);
-		if ($success)
-		{
-			// Login successful, redirect
-			Request::current()->redirect('welcome');
-		}
+		$this->template->title = 'Log in';
+        $this->template->content = View::factory('user/login');
 		
-		// Login unsuccessful return with error message
-		$view->errors = 'Invalid username or password';
+		if(isset($_POST['username']) && isset($_POST['password'])) {
+			$success = Auth::instance()->login($_POST['username'], $_POST['password']);
+			if ($success)
+			{
+				// Login successful, redirect
+				Request::current()->redirect('welcome');
+			}
+			
+			// Login unsuccessful return with error message
+			$this->template->content->errors = 'Invalid username or password';
+		}
 
-		$this->response->body($view);
+		
 	}
 
 	/**
