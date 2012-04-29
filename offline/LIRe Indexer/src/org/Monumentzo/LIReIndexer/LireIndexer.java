@@ -1,10 +1,10 @@
-package org.Monumentzo.InformationGatherer;
+package org.Monumentzo.LIReIndexer;
 
 import java.io.File;
 
 import net.semanticmetadata.lire.DocumentBuilderFactory;
 
-public class Program {
+public class LireIndexer {
 
 	private static IndexCreator indexCreator = null;
 	
@@ -37,12 +37,12 @@ public class Program {
 		}
 		
 		// Index the images with the indexCreator
-		Program.withIndexCreator(indexCreator);
-		Program.readImageDirectory(new File(sourceDirectory));
+		LireIndexer.withIndexCreator(indexCreator);
+		LireIndexer.readImageDirectory(new File(sourceDirectory));
 	}
 	
 	public static void withIndexCreator(IndexCreator creator) {
-		Program.indexCreator = creator;
+		LireIndexer.indexCreator = creator;
 	}
 	
 	public static void readImageDirectory(File directory) {

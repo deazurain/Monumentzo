@@ -1,4 +1,4 @@
-package org.Monumentzo.InformationGatherer;
+package org.Monumentzo.LIReIndexer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +14,7 @@ import org.apache.lucene.store.LockObtainFailedException;
 import net.semanticmetadata.lire.DocumentBuilder;
 
 public class IndexCreator {
-
+	
 	private DocumentBuilder builder = null;
 	private IndexWriter indexWriter = null;
 	
