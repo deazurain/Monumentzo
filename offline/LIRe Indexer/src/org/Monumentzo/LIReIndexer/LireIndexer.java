@@ -1,12 +1,15 @@
 package org.Monumentzo.LIReIndexer;
 
 import java.io.File;
+import java.net.URL;
+import java.sql.SQLException;
 
 import net.semanticmetadata.lire.DocumentBuilderFactory;
 
 public class LireIndexer {
 
 	private static IndexCreator indexCreator = null;
+	private static DatabaseWriter dbWriter = null;
 	
 	public static void main(String[] args) {
 		String sourceDirectory = "";
@@ -39,10 +42,28 @@ public class LireIndexer {
 		// Index the images with the indexCreator
 		LireIndexer.withIndexCreator(indexCreator);
 		LireIndexer.readImageDirectory(new File(sourceDirectory));
+		
+		// Create database writer
+		DatabaseWriter writer = null;
+		try {
+			writer = new DatabaseWriter(new URL("jdbc:mysql://localhost:3306/"), "Monumentzo", "root", "M0NUM3NTz0");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// Write the information to the database
+		LireIndexer.withDatabaseWriter(writer);
+		LireIndexer.writeIndexToDatabase();
 	}
 	
 	public static void withIndexCreator(IndexCreator creator) {
 		LireIndexer.indexCreator = creator;
+	}
+	
+	public static void withDatabaseWriter(DatabaseWriter writer) {
+		LireIndexer.dbWriter = writer;
 	}
 	
 	public static void readImageDirectory(File directory) {
@@ -64,5 +85,9 @@ public class LireIndexer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void writeIndexToDatabase() {
+		
 	}
 }
