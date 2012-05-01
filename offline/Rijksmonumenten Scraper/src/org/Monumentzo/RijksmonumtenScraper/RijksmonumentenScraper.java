@@ -60,7 +60,10 @@ public class RijksmonumentenScraper {
 		// Write each and every monument to the database
 		// and download the images corresponding with the monuments
 		for(Monument monument : monuments) {
-			ImageScraper.downloadImage(new File(outputFolder, monument.getMonumentID() + ".jpg"), monument.getWikiImageURL());
+			File image = new File(outputFolder, monument.getMonumentID() + ".jpg");
+			ImageScraper.downloadImage(image, monument.getWikiImageURL());
+			monument.setImagePath(image);
+			
 			dbWriter.StoreMonument(monument);
 		}
 	}
