@@ -1,5 +1,7 @@
 package org.Monumentzo.RijksmonumtenScraper;
 
+import java.net.URL;
+
 public class Monument {
 
 	private int monumentID;
@@ -14,24 +16,30 @@ public class Monument {
 	private String foundationDateText;
 	private int foundationYear;
 	private String wikiArticle;
+	private URL wikiImageURL;
 	
 	public Monument(int id, String name, String desc,
 					float latitude, float longitude,
 					String city, String province, String street, String streetNumber,
 					String foundationDate, int foundationYear,
-					String wikiArticle) {
+					String wikiArticle, URL wikiImageURL) {
 		this.monumentID = id;
 		this.name = name;
 		this.description = desc;
+		
 		this.latitude = latitude;
 		this.longitude = longitude;
+		
 		this.city = city;
 		this.province = province;
 		this.street = street;
 		this.streetNumber = streetNumber;
+		
 		this.foundationDateText = foundationDate;
 		this.foundationYear = foundationYear;
+		
 		this.wikiArticle = wikiArticle;
+		this.wikiImageURL = wikiImageURL;
 	}
 	
 	public int getMonumentID() { return monumentID; }
@@ -50,4 +58,5 @@ public class Monument {
 	public int getFoundationYear() { return foundationYear; }
 	
 	public String getWikiArticle() { return wikiArticle; }
+	public URL getWikiImageURL() { return wikiImageURL; }
 }

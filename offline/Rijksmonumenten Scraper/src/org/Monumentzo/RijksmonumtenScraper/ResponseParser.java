@@ -1,6 +1,8 @@
 package org.Monumentzo.RijksmonumtenScraper;
 
 import java.io.StringReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -42,21 +44,27 @@ public class ResponseParser {
 		return monuments;
 	}
 	
-	private static Monument extractMonumentData(Node doc) {
+	private static Monument extractMonumentData(Node doc) throws MalformedURLException {
 		Node child = doc.getFirstChild();
 		
 		int id = 0;
 		String name = null;
 		String descr = null;
+		
 		float lat = 0.0f;
 		float lon = 0.0f;
+		
 		String city = null;
 		String province = null;
 		String street = null;
 		String streetNumber = null;
+		
 		String foundationDate = null;
 		int foundationYear = 0;
+		
 		String wikiArticle = null;
+		String wikiImage = null;	// Needed to get the link to the image
+		URL wikiImageUrl = null;
 		
 		while(child != null) {
 			
@@ -109,6 +117,23 @@ public class ResponseParser {
 				if(wikiArticleChild != null)
 					wikiArticle = wikiArticleChild.getNodeValue();
 				break;
+				
+			case "wiki_image":
+				Node imageChild = child.getFirstChild();
+				if(imageChild != null)
+					wikiImage = imageChild.getNodeValue().replaceAll(" ", "_");
+				break;
+				
+			case "wiki_image_url":
+				if(wikiImage != null) {
+					String temp = child.getFirstChild().getNodeValue().replaceAll("/thumb", "");
+					temp = temp.replaceAll(wikiImage + "/800px-" + wikiImage, wikiImage);
+					wikiImageUrl = new URL(temp);
+					
+					System.out.println(wikiImage);
+					System.out.println(wikiImageUrl.toString());
+				}
+				break;
 			}
 			
 			child = child.getNextSibling();
@@ -118,6 +143,6 @@ public class ResponseParser {
 							lat, lon,
 							city, province, street, streetNumber,
 							foundationDate, foundationYear,
-							wikiArticle);
+							wikiArticle, wikiImageUrl);
 	}
 }

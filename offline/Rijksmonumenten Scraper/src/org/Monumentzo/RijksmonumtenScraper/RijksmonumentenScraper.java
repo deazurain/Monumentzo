@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public class RijksmonumentenScraper {
 	
 	public static void main(String[] args) {
-		String sourceFile = "";
+		String sourceFile = null;
+		String outputFolder = null;
 		
 		// Get the settings from the commandline
 		for(int i = 0; i < args.length - 1; i++) {
@@ -21,6 +22,11 @@ public class RijksmonumentenScraper {
 			case "-s":
 			case "-source":
 				sourceFile = args[i + 1];
+				break;
+				
+			case "-o":
+			case "-output":
+				outputFolder = args[i + 1];
 				break;
 			}
 		}
@@ -46,13 +52,15 @@ public class RijksmonumentenScraper {
 		DatabaseWriter dbWriter = null;
 		try {
 			// dbWriter = new DatabaseWriter(databaseURL, Database, user, password);
-			dbWriter = new DatabaseWriter(new URL("jdbc:mysql://localhost:3306/"), "Monumentzo", "root", "M0NUM3NTz0");
+			dbWriter = new DatabaseWriter("jdbc:mysql://localhost:3306/", "Monumentzo", "root", "M0NUM3NTz0");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 		
 		// Write each and every monument to the database
+		// and download the images corresponding with the monuments
 		for(Monument monument : monuments) {
+			ImageScraper.downloadImage(new File(outputFolder, monument.getMonumentID() + ".jpg"), monument.getWikiImageURL());
 			dbWriter.StoreMonument(monument);
 		}
 	}

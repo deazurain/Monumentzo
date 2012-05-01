@@ -1,6 +1,5 @@
 package org.Monumentzo.RijksmonumtenScraper;
 
-import java.net.URL;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -12,13 +11,13 @@ public class DatabaseWriter {
 	private Connection dbConnection = null;
 	private String currentDatabase = "";
 	
-	public DatabaseWriter(URL databaseURL, String Database, String user, String password) throws SQLException {
+	public DatabaseWriter(String databaseURL, String Database, String user, String password) throws SQLException {
 		currentDatabase = Database;		
 		
 		try {
 			// Create a connection to the database
 			Class.forName("com.mysql.jdbc.Driver");
-			dbConnection = (Connection) DriverManager.getConnection(databaseURL.toString(), user, password);
+			dbConnection = (Connection) DriverManager.getConnection(databaseURL, user, password);
 	        
 			// Select the wanted database
 			Statement stmt = (Statement) dbConnection.createStatement();
