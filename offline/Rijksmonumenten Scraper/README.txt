@@ -2,10 +2,10 @@
 scraper - scrapes the Rijksmonument API (http://api.rijksmonumenten.info)
 
 ===== SYNOPSIS =====
-scraper -s SOURCE_FILE -o OUTPUT_FOLDER
-scraper -o OUTPUT_FOLDER -s SOURCE_FILE
-scraper -source SOURCE_FILE -output OUTPUT_FOLDER
-scraper -output OUTPUT_FOLDER -source SOURCE_FILE
+java -jar scraper.jar -s SOURCE_FILE -o OUTPUT_FOLDER
+java -jar scraper.jar -o OUTPUT_FOLDER -s SOURCE_FILE
+java -jar scraper.jar -source SOURCE_FILE -output OUTPUT_FOLDER
+java -jar scraper.jar -output OUTPUT_FOLDER -source SOURCE_FILE
 
 ===== DESCRIPTION =====
 scraper searches the Rijksmonumenten API for information about the monuments with the "rijksmonumentnummer" that it reads from the SOURCE_FILE
