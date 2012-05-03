@@ -58,7 +58,7 @@ public class RijksmonumentenScraper {
 		DatabaseWriter dbWriter = null;
 		try {
 			// dbWriter = new DatabaseWriter(databaseURL, Database, user, password);
-			dbWriter = new DatabaseWriter("jdbc:mysql://localhost:3306/", "Monumentzo", "root", "");
+			dbWriter = new DatabaseWriter("jdbc:mysql://localhost/", "monumentzo", "root", "aardbei");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,9 +71,11 @@ public class RijksmonumentenScraper {
 			
 			System.out.println("Downloading the image for monument " + monument.getMonumentID());
 			
-			File image = new File(outputFolder, monument.getMonumentID() + ".jpg");
-			ImageScraper.downloadImage(image, monument.getWikiImageURL());
-			monument.setImagePath(image);
+			if(monument.getWikiImageURL() != null) {
+				File image = new File(outputFolder, monument.getMonumentID() + ".jpg");
+				ImageScraper.downloadImage(image, monument.getWikiImageURL());
+				monument.setImagePath(image);
+			}
 			
 			dbWriter.StoreMonument(monument);
 		}
