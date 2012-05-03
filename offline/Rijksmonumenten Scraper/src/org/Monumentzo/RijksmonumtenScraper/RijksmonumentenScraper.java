@@ -58,12 +58,12 @@ public class RijksmonumentenScraper {
 		DatabaseWriter dbWriter = null;
 		try {
 			// dbWriter = new DatabaseWriter(databaseURL, Database, user, password);
-			dbWriter = new DatabaseWriter("jdbc:mysql://localhost:3306/", "Monumentzo", "root", "M0NUM3NTz0");
+			dbWriter = new DatabaseWriter("jdbc:mysql://localhost:3306/", "Monumentzo", "root", "");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Starting to download imgas and write information to the database...");
+		System.out.println("Starting to download images and write information to the database...");
 		
 		// Write each and every monument to the database
 		// and download the images corresponding with the monuments
