@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   `UserID` int(10) unsigned NOT NULL,
   `MonumentID` int(10) unsigned NOT NULL,
   `PlaceDate` date DEFAULT NULL,
-  `Comment` tinytext,
+  `Comment` text DEFAULT NULL,
   PRIMARY KEY (`CommentID`),
   UNIQUE KEY `CommentID_UNIQUE` (`CommentID`),
   KEY `Monumentzo.Comment.UserID` (`UserID`),
@@ -91,8 +91,8 @@ CREATE TABLE IF NOT EXISTS `Image_Image` (
 CREATE TABLE IF NOT EXISTS `Monument` (
   `MonumentID` int(10) unsigned NOT NULL,
   `ImageID` int(10) unsigned DEFAULT NULL,
-  `Name` varchar(45) DEFAULT NULL,
-  `Description` tinytext,
+  `Name` varchar(255) DEFAULT NULL,
+  `Description` text DEFAULT NULL,
   `Latitude` float DEFAULT NULL,
   `Longitude` float DEFAULT NULL,
   `City` varchar(45) DEFAULT NULL,
@@ -101,10 +101,9 @@ CREATE TABLE IF NOT EXISTS `Monument` (
   `StreetNumberText` varchar(45) DEFAULT NULL,
   `FoundationDateText` varchar(45) DEFAULT NULL,
   `FoundationYear` int(11) DEFAULT NULL,
-  `WikiArticle` tinytext,
+  `WikiArticle` text DEFAULT NULL,
   PRIMARY KEY (`MonumentID`),
   UNIQUE KEY `MonumentID_UNIQUE` (`MonumentID`),
-  UNIQUE KEY `Name_UNIQUE` (`Name`),
   KEY `Monumentzo.Monument.ImageID` (`ImageID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
