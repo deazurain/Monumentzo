@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    var login_dialog = toHtml("<?php echo /views/user/login.php; ?>");
     
     var login_options = {
         width		: '60%',
@@ -15,13 +14,13 @@ $(document).ready(function() {
         var src = $(this);
        
         switch(src.attr('href')) {
-            case 'login':
-                $.fancybox(login_dialog, login_options);
+            case '#login':
+                $.fancybox("login_dialog", login_options);
                 break;
-            case 'register':
-                $.fancybox(register_dialog, login_options);
+            case '#register':
+                $.fancybox("register_dialog", login_options);
                 break;
-            case 'close':
+            case '#close':
                 $.fancybox.close();
                 break;
         }

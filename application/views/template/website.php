@@ -22,8 +22,8 @@
               <div class="nav-collapse">
                 <ul class="nav">
                   <li class="active"><?php echo html::anchor("home","Home");?></li>
-                  <li><a class="fancybox" href="login">Inloggen</a></li>
-                  <li><a class="fancybox" href="register">Registreren</a></li>
+                  <li><a class="fancybox" href="#login">Inloggen</a></li>
+                  <li><a class="fancybox" href="#register">Registreren</a></li>
                 </ul>
               </div><!--/.nav-collapse -->
             </div>
