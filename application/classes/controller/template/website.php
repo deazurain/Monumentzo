@@ -29,15 +29,16 @@ class Controller_Template_Website extends Controller_Template
     public function after() {
         if ($this->auto_render) {
             $styles = array(
-            'assets/css/main.css' => 'screen, projection',
-			'assets/css/bootstrap.css' => 'screen, projection',
-			'assets/css/bootstrap-responsive.css' => 'screen, projection',
+                'assets/css/main.css' => 'screen, projection',
+		'assets/css/bootstrap.css' => 'screen, projection',
+		'assets/css/bootstrap-responsive.css' => 'screen, projection',
+                'assets/fancybox/source/jquery.fancybox.css' => 'screen',
             );
             $scripts = array(
-            'http://code.jquery.com/jquery.min.js',
-			'assets/js/bootstrap.js',
-			'assets/js/fancybox/jquery.mousewheel-3.0.4.pack.js',
-			'assets/js/fancybox/jquery.fancybox-1.3.4.pack.js',
+                'http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js',
+		'assets/js/bootstrap.js',
+		//'assets/fancybox/jquery.mousewheel-3.0.4.pack.js',
+		'assets/fancybox/source/jquery.fancybox.pack.js',
             );
             $this->template->styles = array_merge( $this->template->styles, $styles );
             $this->template->scripts = array_merge( $this->template->scripts, $scripts );

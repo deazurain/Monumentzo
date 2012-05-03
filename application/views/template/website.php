@@ -6,20 +6,6 @@
         <title><?php echo $title ?></title>
         <?php foreach ($styles as $file => $type) echo HTML::style($file, array('media' => $type)), PHP_EOL ?>
         <?php foreach ($scripts as $file) echo HTML::script($file), PHP_EOL ?>
-        <style>
-			body {
-				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-			}
-		</style>
-        <script type="text/javascript">
-		$(document).ready(function() {
-			/*
-			*   Examples - images
-			*/
-
-			//$("a").fancybox();
-		});
-		</script>
     </head>
     
     <body>
@@ -32,12 +18,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </a>
-              <a class="brand" href="#">Project name</a>
+              <a class="brand" href="#">Monumentzo</a>
               <div class="nav-collapse">
                 <ul class="nav">
                   <li class="active"><?php echo html::anchor("home","Home");?></li>
-                  <li><?php echo html::anchor("user/login","Inloggen");?></li>
-                  <li><?php echo html::anchor("user/register","Registreren");?></li>
+                  <li><a class="fancybox" href="login">Inloggen</a></li>
+                  <li><a class="fancybox" href="register">Registreren</a></li>
                 </ul>
               </div><!--/.nav-collapse -->
             </div>
@@ -48,5 +34,6 @@
         	<?php echo $content ?>
         </div>
         
+        <script type="text/javascript" src="/assets/js/monumentzo.js"></script>
     </body>
 </html>
