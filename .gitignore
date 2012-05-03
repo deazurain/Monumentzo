@@ -14,3 +14,7 @@ Desktop.ini
 .buildpath
 .project
 .settings
+.metadata
+
+#Netbeans
+nbproject

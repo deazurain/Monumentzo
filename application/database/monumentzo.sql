@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 -- Database: `monumentzo`
 --
 
+CREATE SCHEMA IF NOT EXISTS `monumentzo` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `monumentzo` ;
+
 -- --------------------------------------------------------
 
 --
