@@ -4,7 +4,7 @@ class SampleTest extends Kohana_UnitTest_TestCase
 {
     public function test_add()
     {
-        $this->assertEquals(2, 1+1);
+        $this->assertEquals(3, 1+1);
     }
 }
 
