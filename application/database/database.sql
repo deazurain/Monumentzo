@@ -68,7 +68,7 @@ ENGINE = InnoDB;
 -- Table `monumentzo`.`FavoriteList`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `monumentzo`.`FavoriteList` (
-  `UserID` INT NOT NULL ,
+  `UserID` INT UNSIGNED NOT NULL ,
   `MonumentID` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`UserID`, `MonumentID`) ,
   INDEX `Monumentzo.FavoriteList.UserID` (`UserID` ASC) ,
