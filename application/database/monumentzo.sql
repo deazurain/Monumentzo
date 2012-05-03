@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `Image_Image` (
 CREATE TABLE IF NOT EXISTS `Monument` (
   `MonumentID` int(10) unsigned NOT NULL,
   `ImageID` int(10) unsigned DEFAULT NULL,
-  `Name` varchar(45) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
   `Description` text DEFAULT NULL,
   `Latitude` float DEFAULT NULL,
   `Longitude` float DEFAULT NULL,
