@@ -33,6 +33,8 @@ public class DatabaseWriter {
 	
 	public void StoreMonument(Monument monument) {
 		
+		System.out.println("Storing the information for monument " + monument.getMonumentID());
+		
 		// Create the query column string and the corresponding values string
 		String columns = "MonumentID";
 		String values = String.format("%d", monument.getMonumentID());

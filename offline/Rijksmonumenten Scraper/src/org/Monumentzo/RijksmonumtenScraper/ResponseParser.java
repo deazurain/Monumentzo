@@ -129,9 +129,6 @@ public class ResponseParser {
 					String temp = child.getFirstChild().getNodeValue().replaceAll("/thumb", "");
 					temp = temp.replaceAll(wikiImage + "/800px-" + wikiImage, wikiImage);
 					wikiImageUrl = new URL(temp);
-					
-					System.out.println(wikiImage);
-					System.out.println(wikiImageUrl.toString());
 				}
 				break;
 			}

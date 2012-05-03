@@ -31,6 +31,9 @@ public class RijksmonumentenScraper {
 			}
 		}
 		
+		// Output some information about the current program state
+		System.out.println("Starting to download...");
+		
 		ArrayList<Monument> monuments = new ArrayList<Monument>(100);
 		try {
 			// Read the file containing the numbers of the monuments
@@ -48,6 +51,9 @@ public class RijksmonumentenScraper {
 			e.printStackTrace();
 		}
 		
+		// Give the user some more information
+		System.out.println("Downloading done\n");
+		
 		// Create a database writer to write monument information to the database
 		DatabaseWriter dbWriter = null;
 		try {
@@ -55,20 +61,32 @@ public class RijksmonumentenScraper {
 			dbWriter = new DatabaseWriter("jdbc:mysql://localhost:3306/", "Monumentzo", "root", "M0NUM3NTz0");
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
+		
+		System.out.println("Starting to download imgas and write information to the database...");
 		
 		// Write each and every monument to the database
 		// and download the images corresponding with the monuments
 		for(Monument monument : monuments) {
+			
+			System.out.println("Downloading the image for monument " + monument.getMonumentID());
+			
 			File image = new File(outputFolder, monument.getMonumentID() + ".jpg");
 			ImageScraper.downloadImage(image, monument.getWikiImageURL());
 			monument.setImagePath(image);
 			
 			dbWriter.StoreMonument(monument);
 		}
+		
+		System.out.println("Downloaded the images");
+		System.out.println("Completed the writing of the information to the database");
 	}
 	
 	public static String requestRijksmonumentenAPI(int monumentNummer) throws IOException {
+		
+		// Give the user some information
+		System.out.println("Downloading information about " + monumentNummer);
+		
 		// Create query string
 		String queryString = "?q=rce_obj_nummer:" + monumentNummer;
 
