@@ -22,6 +22,8 @@ class Model_User extends Model_Database {
 		    ->bind(':pass', $password);
 		return $insert->execute();
 	}
+
+	public static function login(
 }
 
 ?>
