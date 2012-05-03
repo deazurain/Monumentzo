@@ -105,7 +105,7 @@ public class DatabaseWriter {
 				String imageID = Integer.toString(generateImageID(1, 5000000));
 				
 				// Store the information
-				values = String.format("%d, %d, %s", monument.getMonumentID(), imageID, monument.getWikiImageURL().toString());
+				values = String.format("%d, %s, %s", monument.getMonumentID(), imageID, monument.getWikiImageURL().toString());
 				insertMonument.execute("INSERT INTO Monumentzo.Monument_Image (MonumentID, ImageID, ImagePath) VALUES (" + values + ");");
 			} catch (SQLException e) {
 				e.printStackTrace();
