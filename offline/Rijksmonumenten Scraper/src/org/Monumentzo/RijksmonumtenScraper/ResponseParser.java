@@ -51,8 +51,8 @@ public class ResponseParser {
 		String name = null;
 		String descr = null;
 		
-		float lat = -1.0f;
-		float lon = -1.0f;
+		float lat = Float.MAX_VALUE;
+		float lon = Float.MAX_VALUE;
 		
 		String city = null;
 		String province = null;

@@ -104,7 +104,6 @@ CREATE TABLE IF NOT EXISTS `Monument` (
   `WikiArticle` text DEFAULT NULL,
   PRIMARY KEY (`MonumentID`),
   UNIQUE KEY `MonumentID_UNIQUE` (`MonumentID`),
-  UNIQUE KEY `Name_UNIQUE` (`Name`),
   KEY `Monumentzo.Monument.ImageID` (`ImageID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
