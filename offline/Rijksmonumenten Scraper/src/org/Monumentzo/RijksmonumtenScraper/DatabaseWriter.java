@@ -91,9 +91,12 @@ public class DatabaseWriter {
 		
 		// Insert the information about the monument in the mysql database
 		Statement insertMonument = null;
-		try {			
-			insertMonument = (Statement) dbConnection.createStatement();
-			insertMonument.execute("INSERT INTO Monumentzo.Monument (" + columns + ") VALUES (" + values + ");");
+		try {
+			PreparedStatement insertMonument = (Statement) dbConnection.prepareStatement("INSERT INTO Monumentzo.Monument (?) VALUES (?);");
+			insertMonument.setString(1, columns);
+			insertMonument.setString(2, values);
+			
+			insertMonument.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -105,8 +108,12 @@ public class DatabaseWriter {
 				String imageID = Integer.toString(generateImageID(1, 5000000));
 				
 				// Store the information
-				values = String.format("%d, %d, %s", monument.getMonumentID(), imageID, monument.getWikiImageURL().toString());
-				insertMonument.execute("INSERT INTO Monumentzo.Monument_Image (MonumentID, ImageID, ImagePath) VALUES (" + values + ");");
+				PreparedStatement insertImage = (Statement) dbConnection.prepareStatement("INSERT INTO Monumentzo.Monument_Image (MonumentID, ImageID, ImagePath) VALUES (?, ?, ?);");
+				insertImage.setInt(1, monument.getMonumentID());
+				insertImage.setString(2, imageID);
+				insertImage.setString(3, monument.getWikiImageURL().toString());
+				
+				insertImage.execute();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
