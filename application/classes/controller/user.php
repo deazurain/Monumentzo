@@ -13,11 +13,13 @@ Class Controller_User extends Controller_Template_Website
 	public function action_register() {
 
 		$this->template->title = 'Log in';
-		$this->template->content = View::factory('user/register');
-		
+      $this->template->content = View::factory('user/register');
+
 		if(isset($_POST) && ! empty($_POST)) {
 			if ($_POST['password'] == $_POST['password2']) {
-				Request::current()->redirect('welcome');
+				if(User::register($_POST['username'], $_POST['password'])) {
+					Request::current()->redirect('welcome');
+				}
 			}
 			$this->template->content->errors = 'Passwords did not match';
 		}

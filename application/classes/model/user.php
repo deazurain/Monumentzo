@@ -14,15 +14,14 @@ class Model_User extends Model_Database {
 	private $visitedList = null;
 	private $favoriteList = null;
 	private $wishList = null;
+	
 
-	/**
-	 * Returns a new user object from the database or null
-	 * if the credentials are wrong/the user doesn't exist
-	 */
-	public static function login($username, $password) {
-		return null;
+	public static function register($username, $password){
+		$insert = DB::query(Database::INSERT, 'INSERT INTO User (username, password) VALUES (:user, :pass)')
+		    ->bind(':user', $username)
+		    ->bind(':pass', $password);
+		return $insert->execute();
 	}
-
 }
 
 ?>
