@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 public class DatabaseWriter {
@@ -41,12 +42,12 @@ public class DatabaseWriter {
 		
 		if(monument.getName() != null) {
 			columns += ", Name";
-			values += String.format(", %s", monument.getName());
+			values += String.format(", '%s'", monument.getName());
 		}
 		
 		if(monument.getDescription() != null) {
 			columns += ", Description";
-			values += String.format(", %s", monument.getDescription());
+			values += String.format(", '%s'", monument.getDescription());
 		}
 		
 		if(monument.getLatitude() != -1.0f) {
@@ -61,22 +62,22 @@ public class DatabaseWriter {
 		
 		if(monument.getCity() != null) {
 			columns += ", City";
-			values += String.format(", %s", monument.getCity());
+			values += String.format(", '%s'", monument.getCity());
 		}
 		
 		if(monument.getStreet() != null) {
 			columns += ", Street";
-			values += String.format(", %s", monument.getStreet());
+			values += String.format(", '%s'", monument.getStreet());
 		}
 		
 		if(monument.getStreetNumber() != null) {
 			columns += ", StreetNumberText";
-			values += String.format(", %s", monument.getStreetNumber());
+			values += String.format(", '%s'", monument.getStreetNumber());
 		}
 		
 		if(monument.getFoundationDate() != null) {
 			columns += ", FoundationDateText";
-			values += String.format(", %s", monument.getFoundationDate());
+			values += String.format(", '%s'", monument.getFoundationDate());
 		}
 		
 		if(monument.getFoundationYear() != 0) {
@@ -86,13 +87,13 @@ public class DatabaseWriter {
 		
 		if(monument.getWikiArticle() != null) {
 			columns += ", WikiArticle";
-			values += String.format(", %s", monument.getWikiArticle());
+			values += String.format(", '%s'", monument.getWikiArticle());
 		}
 		
 		// Insert the information about the monument in the mysql database
-		Statement insertMonument = null;
+		PreparedStatement insertMonument = null;
 		try {
-			PreparedStatement insertMonument = (Statement) dbConnection.prepareStatement("INSERT INTO Monumentzo.Monument (?) VALUES (?);");
+			insertMonument = (PreparedStatement) dbConnection.prepareStatement("INSERT INTO Monumentzo.Monument (?) VALUES (?);");
 			insertMonument.setString(1, columns);
 			insertMonument.setString(2, values);
 			
@@ -108,7 +109,7 @@ public class DatabaseWriter {
 				String imageID = Integer.toString(generateImageID(1, 5000000));
 				
 				// Store the information
-				PreparedStatement insertImage = (Statement) dbConnection.prepareStatement("INSERT INTO Monumentzo.Monument_Image (MonumentID, ImageID, ImagePath) VALUES (?, ?, ?);");
+				PreparedStatement insertImage = (PreparedStatement) dbConnection.prepareStatement("INSERT INTO Monumentzo.Monument_Image (MonumentID, ImageID, ImagePath) VALUES (?, ?, ?);");
 				insertImage.setInt(1, monument.getMonumentID());
 				insertImage.setString(2, imageID);
 				insertImage.setString(3, monument.getWikiImageURL().toString());
