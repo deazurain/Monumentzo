@@ -18,10 +18,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">Monumentzo</a>
+                    <?php echo html::anchor("home", "Monumentzo", array("class" =>"brand")); ?>
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <li class="active"><?php echo html::anchor("home", "Home"); ?></li>
+                            <li class="active"></li>
                             <li><a class="fancybox" href="#login">Inloggen</a></li>
                             <li><a class="fancybox" href="#register">Registreren</a></li>
                         </ul>
@@ -31,11 +31,11 @@
         </div>
 
         <div id="fancy_login" style="display:none">
-            <?php echo html::anchor("user/login", "Inloggen"); ?>
+            <?php echo View::factory('user/login'); ?>
         </div>
 
         <div id="fancy_register" style="display:none">
-            <?php echo HTML::script('views/user/register.php'); ?>
+            <?php echo View::factory('user/register'); ?>
         </div>
 
 
