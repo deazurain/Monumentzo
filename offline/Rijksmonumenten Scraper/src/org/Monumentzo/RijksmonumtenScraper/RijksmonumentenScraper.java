@@ -14,21 +14,33 @@ public class RijksmonumentenScraper {
 	
 	public static void main(String[] args) {
 		String sourceFile = null;
-		String outputFolder = null;
+		String systemDataPath = null;
+		String webDataPath = null;
 		
 		// Get the settings from the commandline
 		for(int i = 0; i < args.length - 1; i++) {
 			switch(args[i]) {			
 			case "-s":
 			case "-source":
+			case "--source":
 				sourceFile = args[i + 1];
 				break;
 				
 			case "-o":
 			case "-output":
-				outputFolder = args[i + 1];
+			case "--systempath":
+				systemDataPath = args[i + 1];
+				break;
+			
+			case "-w":
+			case "--webpath":
+				webDataPath = args[i + 1];
 				break;
 			}
+		}
+		
+		if(webDataPath == null) {
+			webDataPath = systemDataPath;
 		}
 		
 		// Output some information about the current program state
@@ -72,15 +84,16 @@ public class RijksmonumentenScraper {
 			System.out.println("Downloading the image for monument " + monument.getMonumentID());
 			
 			if(monument.getWikiImageURL() != null) {
-				File image = new File(outputFolder, monument.getMonumentID() + ".jpg");
+				File image = new File(systemDataPath, monument.getMonumentID() + ".jpg");
+				String webPath = webDataPath + monument.getMonumentID() + ".jpg";
 				ImageScraper.downloadImage(image, monument.getWikiImageURL());
-				monument.setImagePath(image);
+				monument.setImagePath(webPath);
 			}
 			
 			dbWriter.StoreMonument(monument);
 		}
 		
-		System.out.println("Downloaded the images");
+		System.out.println("Downloaded the images to '" + systemDataPath + "'");
 		System.out.println("Completed the writing of the information to the database");
 	}
 	

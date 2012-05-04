@@ -1,6 +1,5 @@
 package org.Monumentzo.RijksmonumtenScraper;
 
-import java.io.File;
 import java.net.URL;
 
 public class Monument {
@@ -18,7 +17,7 @@ public class Monument {
 	private int foundationYear;
 	private String wikiArticle;
 	private URL wikiImageURL;
-	private File imagePath;
+	private String imagePath; // website relative path
 	
 	public Monument(int id, String name, String desc,
 					float latitude, float longitude,
@@ -61,6 +60,6 @@ public class Monument {
 	
 	public String getWikiArticle() { return wikiArticle; }
 	public URL getWikiImageURL() { return wikiImageURL; }
-	public File getImagePath() { return imagePath; }
-	public void setImagePath(File image) { imagePath = image; }
+	public String getImagePath() { return imagePath; }
+	public void setImagePath(String webpath) { imagePath = webpath; }
 }

@@ -154,7 +154,7 @@ public class DatabaseWriter {
 				PreparedStatement insertImage = (PreparedStatement) dbConnection.prepareStatement("INSERT INTO monumentzo.Monument_Image (MonumentID, ImageID, ImagePath) VALUES (?, ?, ?);");
 				insertImage.setInt(1, monument.getMonumentID());
 				insertImage.setString(2, imageID);
-				insertImage.setString(3, monument.getImagePath().toString());
+				insertImage.setString(3, monument.getImagePath());
 				
 				System.out.println(insertImage);
 				insertImage.execute();
