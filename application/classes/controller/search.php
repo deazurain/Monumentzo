@@ -14,7 +14,9 @@ class Controller_Search extends Controller_Template_Website {
 		$queryVector = array();
 		$monuments = array();
 		foreach(explode($query) as $word) {
-			$result = DB::query(Database::SELECT, 'SELECT Idf FROM Monumentzo.TermIndex');
+			$result = DB::query(Database::SELECT, 'SELECT InverseDocumentFrequency
+													FROM Monumentzo.TextTag 
+													WHERE TextTag = ' . $word);
 			
 			// Only use words that have a relatively high inverse document frequency
 			if($result[0]['idf'] > $idfThreshold) {			
