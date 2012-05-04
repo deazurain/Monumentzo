@@ -21,7 +21,12 @@ public class IndexCreator {
 	@SuppressWarnings("deprecation")
 	public IndexCreator setIndexPath(File path) throws CorruptIndexException, LockObtainFailedException, IOException {
 		this.indexWriter = new IndexWriter(FSDirectory.open(path), new SimpleAnalyzer(), true, 
-										   IndexWriter.MaxFieldLength.UNLIMITED);		
+										   IndexWriter.MaxFieldLength.UNLIMITED);
+		this.indexWriter.setMergeFactor(10);
+		indexWriter.setMergeScheduler(new org.apache.lucene.index.SerialMergeScheduler());
+		indexWriter.setRAMBufferSizeMB(32);
+		indexWriter.setUseCompoundFile(false);
+		
 		return this;
 	}
 	
@@ -48,8 +53,18 @@ public class IndexCreator {
 			// Add the document to the index
 			indexWriter.addDocument(doc);
 			
-			System.out.println("indexed " + file.getAbsolutePath());
+			// System.out.println("indexed " + file.getAbsolutePath());
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void close() {
+		try {
+			indexWriter.optimize();
+			indexWriter.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

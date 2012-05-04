@@ -1,6 +1,7 @@
 package org.Monumentzo.RijksmonumtenScraper;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
@@ -41,8 +42,8 @@ public class DatabaseWriter {
 		PreparedStatement insertMonument = null;
 		try {
 			insertMonument = (PreparedStatement) dbConnection.prepareStatement(
-				"INSERT INTO monumentzo.Monument (MonumentID, Name, Description, Latitude, Longitude, City, Street, StreetNumberText,FoundationDateText, FoundationYear, WikiArticle)" +
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				"INSERT INTO monumentzo.Monument (MonumentID, Name, Description, Latitude, Longitude, Province, City, Street, StreetNumberText,FoundationDateText, FoundationYear, WikiArticle)" +
+				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			
 			// ID
 			int i = 1;
@@ -83,7 +84,16 @@ public class DatabaseWriter {
 			else {
 				insertMonument.setNull(i, 0);
 			}
-			
+
+			// province
+			i++;
+			if(monument.getProvince() != null) {
+				insertMonument.setString(i, monument.getProvince());
+			}
+			else {
+				insertMonument.setNull(i, 0);
+			}
+
 			// city
 			i++;
 			if(monument.getCity() != null) {
@@ -141,31 +151,54 @@ public class DatabaseWriter {
 			System.out.println(insertMonument);
 			insertMonument.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("EXCEPTION!!! " + e.getMessage());
+			//e.printStackTrace();
 		}
 		
 		// Insert the information about the image if the information is available
 		if(monument.getWikiImageURL() != null) {
 			try {
-				// Create a imageID
-				String imageID = Integer.toString(generateImageID(1, 5000000));
-				
+			    
 				// Store the information
-				PreparedStatement insertImage = (PreparedStatement) dbConnection.prepareStatement("INSERT INTO monumentzo.Monument_Image (MonumentID, ImageID, ImagePath) VALUES (?, ?, ?);");
+				PreparedStatement insertImage = (PreparedStatement) dbConnection.prepareStatement(
+						"INSERT INTO monumentzo.Image (MonumentID, Path) " +
+						"VALUES (?, ?) ", Statement.RETURN_GENERATED_KEYS);
 				insertImage.setInt(1, monument.getMonumentID());
-				insertImage.setString(2, imageID);
-				insertImage.setString(3, monument.getImagePath());
+				insertImage.setString(2, monument.getImagePath());
 				
+				// DEBUG info
 				System.out.println(insertImage);
+				
 				insertImage.execute();
+				ResultSet rs = insertImage.getGeneratedKeys();
+				
+				int imageID = -1;
+				
+				if(rs.next()) {
+					imageID = rs.getInt(1);
+					
+					PreparedStatement um = (PreparedStatement) dbConnection.prepareStatement(
+							"UPDATE monumentzo.Monument " +
+							"SET ImageID=? " + 
+							"WHERE MonumentID=? ");
+					um.setInt(1, imageID);
+					um.setInt(2, monument.getMonumentID());
+					
+					System.out.println("monument update query: " + um);
+					
+					um.execute();
+				}
+				else {
+					// throw new Exception("Could not insert image");
+				}
+				
+
+
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println("EXCEPTION!!! " + e.getMessage());
+				//e.printStackTrace();
 			}
 		}
-	}
-	
-	private int generateImageID(int min, int max) {
-	    return (int) Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 }
 

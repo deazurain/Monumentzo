@@ -10,7 +10,7 @@ USE `monumentzo` ;
 -- Table `monumentzo`.`User`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `monumentzo`.`User` (
-  `UserID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `UserID` INT UNSIGNED NOT NULL ,
   `Name` VARCHAR(45) NOT NULL ,
   `HashedPassword` VARCHAR(64) NOT NULL ,
   `EmailAddress` VARCHAR(255) NOT NULL ,
@@ -56,7 +56,6 @@ CREATE  TABLE IF NOT EXISTS `monumentzo`.`Monument` (
   `FoundationDateText` VARCHAR(45) NULL ,
   `FoundationYear` INT NULL ,
   `WikiArticle` TEXT NULL ,
-  `Vector` TEXT NULL ,
   PRIMARY KEY (`MonumentID`) ,
   UNIQUE INDEX `MonumentID_UNIQUE` (`MonumentID` ASC) ,
   INDEX `Monumentzo.Monument.ImageID` (`ImageID` ASC) ,
@@ -153,7 +152,7 @@ ENGINE = InnoDB;
 -- Table `monumentzo`.`TextTag`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `monumentzo`.`TextTag` (
-  `TextTagID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `TextTagID` INT UNSIGNED NOT NULL ,
   `TextTag` VARCHAR(45) NOT NULL ,
   `InverseDocumentFrequency` DOUBLE UNSIGNED NULL ,
   PRIMARY KEY (`TextTagID`) ,
