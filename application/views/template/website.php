@@ -7,7 +7,7 @@
         <?php foreach ($styles as $file => $type) echo HTML::style($file, array('media' => $type)), PHP_EOL ?>
         <?php foreach ($scripts as $file) echo HTML::script($file), PHP_EOL ?>
     </head>
-
+	
     <body>
 
         <div class="navbar navbar-fixed-top">
@@ -21,23 +21,25 @@
                     <?php echo html::anchor("home", "Monumentzo", array("class" =>"brand")); ?>
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <li class="active"></li>
-                            <li><a class="fancybox" href="#login">Inloggen</a></li>
-                            <li><a class="fancybox" href="#register">Registreren</a></li>
+                            <?php if(isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
+                            <?php if(isset($login)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
+							
                         </ul>
-                    </div><!--/.nav-collapse -->
+                    </div>
+					<?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
+						<?php echo Form::input('q', NULL, array('type' => 'text', 'class' => 'search-query', 'placeholder' => 'Search')) ?>
+					<?php echo Form::close(); ?>
                 </div>
             </div>
         </div>
 
-        <div id="fancy_login" style="display:none">
-            <?php echo View::factory('user/login'); ?>
-        </div>
+        	<?php if(isset($login)) {
+		       echo "<div id='login' style='display:none'>".$login."</div>";
+			}?>
 
-        <div id="fancy_register" style="display:none">
-            <?php echo View::factory('user/register'); ?>
-        </div>
-
+			<?php if(isset($register)) {
+			    echo "<div id='register' style='display:none'>".$register."</div>";
+			}?>
 
         <div class="container">
             <?php echo $content ?>

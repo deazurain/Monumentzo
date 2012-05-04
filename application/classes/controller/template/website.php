@@ -18,6 +18,13 @@ class Controller_Template_Website extends Controller_Template
             $this->template->content = '';
             $this->template->styles = array();
             $this->template->scripts = array(); 
+
+				
+				if ( ! Auth::instance()->logged_in())
+				{
+					$this->template->login = View::factory('user/login');
+					$this->template->register = View::factory('user/register');
+				}
         }
     }
      
@@ -30,16 +37,16 @@ class Controller_Template_Website extends Controller_Template
     public function after() {
         if ($this->auto_render) {
             $styles = array(
-                'assets/css/main.css' => 'screen, projection',
-		'assets/css/bootstrap.css' => 'screen, projection',
-		'assets/css/bootstrap-responsive.css' => 'screen, projection',
-                'assets/fancybox/source/jquery.fancybox.css' => 'screen',
+            	'assets/css/main.css' => 'screen, projection',
+					'assets/css/bootstrap.css' => 'screen, projection',
+					'assets/css/bootstrap-responsive.css' => 'screen, projection',
+               'assets/fancybox/source/jquery.fancybox.css' => 'screen',
             );
             $scripts = array(
-                'http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js',
-		'assets/js/bootstrap.js',
-		//'assets/fancybox/jquery.mousewheel-3.0.4.pack.js',
-		'assets/fancybox/source/jquery.fancybox.pack.js',
+            	'http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js',
+					'assets/js/bootstrap.js',
+					//'assets/fancybox/jquery.mousewheel-3.0.4.pack.js',
+					'assets/fancybox/source/jquery.fancybox.pack.js',
             );
             $this->template->styles = array_merge( $this->template->styles, $styles );
             $this->template->scripts = array_merge( $this->template->scripts, $scripts );
