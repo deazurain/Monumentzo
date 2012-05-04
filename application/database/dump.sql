@@ -228,6 +228,8 @@ DROP TABLE IF EXISTS `Monument_TextTag`;
 CREATE TABLE `Monument_TextTag` (
   `MonumentID` int(10) unsigned NOT NULL,
   `TextTagID` int(10) unsigned NOT NULL,
+  `TermFrequencyInverseDocumentFrequency` double DEFAULT NULL,
+  `TermFrequency` double DEFAULT NULL,
   PRIMARY KEY (`MonumentID`,`TextTagID`),
   KEY `Monumentzo.Monument_TextTag.MonumentID` (`MonumentID`),
   KEY `Monumentzo.Monument_TextTag.TextTag` (`TextTagID`),
@@ -280,7 +282,7 @@ DROP TABLE IF EXISTS `TextTag`;
 CREATE TABLE `TextTag` (
   `TextTagID` int(10) unsigned NOT NULL,
   `TextTag` varchar(45) NOT NULL,
-  `Idf` float unsigned DEFAULT NULL,
+  `InverseDocumentFrequency` double unsigned DEFAULT NULL,
   PRIMARY KEY (`TextTagID`),
   UNIQUE KEY `TextTag_UNIQUE` (`TextTag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -385,4 +387,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-05-04 15:38:48
+-- Dump completed on 2012-05-04 17:05:03
