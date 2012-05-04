@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    
     var login_options = {
         width		: '60%',
         height		: '60%',
@@ -15,10 +14,10 @@ $(document).ready(function() {
        
         switch(src.attr('href')) {
             case '#login':
-                $.fancybox("login_dialog", login_options);
+                $.fancybox($(fancy_login), login_options);
                 break;
             case '#register':
-                $.fancybox("register_dialog", login_options);
+                $.fancybox($(fancy_register), login_options);
                 break;
             case '#close':
                 $.fancybox.close();
