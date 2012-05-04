@@ -17,13 +17,12 @@ class Model_User extends Model_Database {
 	
 
 	public static function register($username, $password){
-		$insert = DB::query(Database::INSERT, 'INSERT INTO User (username, password) VALUES (:user, :pass)')
+		$insert = DB::query(Database::INSERT, 'INSERT INTO User (Name, HashedPassword) VALUES (:user, :pass)')
 		    ->bind(':user', $username)
 		    ->bind(':pass', $password);
 		return $insert->execute();
 	}
 
-	public static function login(
 }
 
 ?>

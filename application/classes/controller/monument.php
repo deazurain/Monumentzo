@@ -1,8 +1,7 @@
 <?php defined('SYSPATH') OR die('No Direct Script Access');
 
 /**
- * The User Controller class allows a user to log in and out.
- * Also a new user can register.
+ * The Monument Controller class.
  */
 Class Controller_Monument extends Controller_Template_Website
 {

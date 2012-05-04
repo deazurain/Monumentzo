@@ -17,8 +17,8 @@ Class Controller_User extends Controller_Template_Website
 
 		if(isset($_POST) && ! empty($_POST)) {
 			if ($_POST['password'] == $_POST['password2']) {
-				if(User::register($_POST['username'], $_POST['password'])) {
-					Request::current()->redirect('welcome');
+				if(Model_User::register($_POST['username'], $_POST['password'])) {
+					Request::current()->redirect('home');
 				}
 			}
 			$this->template->content->errors = 'Passwords did not match';
@@ -32,14 +32,14 @@ Class Controller_User extends Controller_Template_Website
 	 */
 	public function action_login() {
 
-		$this->template->title = 'Log in';
-    $this->template->content = View::factory('user/login');
+	$this->template->title = 'Log in';
+   $this->template->content = View::factory('user/login');
 		
 		if(isset($_POST['username']) && isset($_POST['password'])) {
 			$success = Auth::instance()->login($_POST['username'], $_POST['password']);
 			if ($success) {
 				// Login successful, redirect
-				Request::current()->redirect('welcome');
+				Request::current()->redirect('niks');
 			}
 			
 			// Login unsuccessful return with error message

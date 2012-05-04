@@ -1,4 +1,4 @@
-<?php echo Form::open(NULL, array('method' => 'post')); ?>
+<?php echo Form::open('user/login', array('method' => 'post')); ?>
 <dl>
     <dt><?php echo Form::label('username', 'Gebruikersnaam') ?></dt>
     <dd><?php echo Form::input('username') ?></dd>
