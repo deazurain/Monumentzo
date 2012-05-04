@@ -246,21 +246,21 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `monumentzo`.`Image_Image`
+-- Table `monumentzo`.`SimilarImage`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `monumentzo`.`Image_Image` (
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`SimilarImage` (
   `ImageID` INT UNSIGNED NOT NULL ,
-  `LinkedImage` INT UNSIGNED NOT NULL ,
-  PRIMARY KEY (`ImageID`, `LinkedImage`) ,
+  `SimilarImageID` INT UNSIGNED NOT NULL ,
+  `Similarity` FLOAT NULL ,
   INDEX `Monumentzo.Image_Image.ImageID` (`ImageID` ASC) ,
-  INDEX `Monumentzo.Image_Image.LinkedImage` (`LinkedImage` ASC) ,
+  INDEX `Monumentzo.Image_Image.SimilarImageID` (`SimilarImageID` ASC) ,
   CONSTRAINT `Monumentzo.Image_Image.ImageID`
     FOREIGN KEY (`ImageID` )
     REFERENCES `monumentzo`.`Image` (`ImageID` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `Monumentzo.Image_Image.LinkedImage`
-    FOREIGN KEY (`LinkedImage` )
+  CONSTRAINT `Monumentzo.Image_Image.SimilarImageID`
+    FOREIGN KEY (`SimilarImageID` )
     REFERENCES `monumentzo`.`Image` (`ImageID` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

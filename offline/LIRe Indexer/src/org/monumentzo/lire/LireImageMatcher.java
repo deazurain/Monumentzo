@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import net.semanticmetadata.lire.DocumentBuilder;
 import net.semanticmetadata.lire.ImageSearchHits;
 import net.semanticmetadata.lire.ImageSearcher;
 import net.semanticmetadata.lire.ImageSearcherFactory;
@@ -25,8 +24,7 @@ public class LireImageMatcher {
 		this.indexDirectory = new File(indexDirectory).getCanonicalFile();
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void match(String imagePath, int limit) throws Exception {
+	public ImageSearchHits match(String imagePath, int limit) throws Exception {
 		
 		File imageFile = new File(imagePath).getCanonicalFile();
 		
@@ -40,13 +38,10 @@ public class LireImageMatcher {
 		BufferedImage bimg = ImageIO.read(imageStream);
 		
 		ImageSearchHits hits = searcher.search(bimg, reader);
-
-		for (int i = 0; i < limit; i++) {
-		      System.out.println(i + "\t" + hits.score(i) + ": " 
-		    		 + hits.doc(i).getField(DocumentBuilder.FIELD_NAME_IDENTIFIER).stringValue());
-		}
 		
 		reader.close();
+		
+		return hits;
 	}
 	
 }

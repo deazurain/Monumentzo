@@ -1,4 +1,10 @@
 package org.monumentzo.lire;
+
+import java.net.URL;
+
+import net.semanticmetadata.lire.DocumentBuilder;
+import net.semanticmetadata.lire.ImageSearchHits;
+
 /**
  * 
  * @author mick
@@ -25,11 +31,18 @@ public class Main {
 		String imageDirectory = "/home/mick/uni/ti2800/git/offline/LIRe Indexer/monuments";
 		String indexDirectory = "/home/mick/uni/ti2800/git/offline/LIRe Indexer/monuments_index";
 		
+		final int QUERY = 0;
+		final int CREATE_INDEX = 1;
+		final int UPDATE_SIMILAR = 2;
+		
+		int action = CREATE_INDEX;
+		
 		// Get the settings from the commandline
-		for(int i = 0; i < args.length - 1; i++) {
+		for(int i = 0; i < args.length; i++) {
 			switch(args[i]) {
 			case "-q":
 			case "--query":
+				action = QUERY;
 				queryImagePath = args[i + 1];
 				break;
 				
@@ -43,26 +56,46 @@ public class Main {
 			case "--index":
 				indexDirectory = args[i + 1];
 				break;
+			
+			case "-u":
+			case "--update":
+				action = UPDATE_SIMILAR;
+				break;
+				
 			}
+				
 		}
 		
 		// query has precedence over indexing
-		if(queryImagePath != null) {
+		switch(action) {
+		case QUERY:
 			doQuery(queryImagePath, indexDirectory);
-		}
-		else {
+			break;
+		
+		case CREATE_INDEX:
 			doCreateIndex(imageDirectory, indexDirectory);
+			break;
+		
+		case UPDATE_SIMILAR:
+			doUpdateSimilar(imageDirectory, indexDirectory);
+			break;
 		}
 
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void doQuery(String queryImagePath, String indexDirectory) {
 		LireImageMatcher lim;
 		
 		try {
 			lim = new LireImageMatcher(indexDirectory);
-
-			lim.match(queryImagePath, 10);
+			int limit = 10;
+			ImageSearchHits hits = lim.match(queryImagePath, limit);
+			
+			for (int i = 0; i < limit; i++) {
+			      System.out.println(i + "\t" + hits.score(i) + ": " 
+			    		 + hits.doc(i).getField(DocumentBuilder.FIELD_NAME_IDENTIFIER).stringValue());
+			}
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -81,5 +114,22 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void doUpdateSimilar(String imageDirectory, String indexDirectory) {
+	try {
+		String databaseURL = "jdbc:mysql://localhost/";
+		String schema = "monumentzo";
+		String user = "root";
+		String password = "aardbei";
+		DatabaseWriter w = new DatabaseWriter(databaseURL, schema, user, password);
+		DatabaseSimilarImageUpdater up = new DatabaseSimilarImageUpdater(w);
+		
+		up.performUpdate(imageDirectory, indexDirectory);
+		
+	} catch (Exception e) {
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	}
+}
 
 }
