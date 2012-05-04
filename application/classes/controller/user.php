@@ -56,6 +56,22 @@ Class Controller_User extends Controller_Template_Website
 		Auth::instance()->logout();
 		Request::current()->redirect('welcome');
 	}
+
+
+	public function action_testcreate() {
+		$model = ORM::factory('user');
+		$model->values(array(
+			'username' => 'micky',
+			'email' => 'admin@example.com',
+			'password' => 'aardbei',
+			'password_confirm' => 'aardbei',
+		));
+		$model->save();
+		// remember to add the login role AND the admin role
+		// // add a role; add() executes the query immediately
+		// $model->add('roles', ORM::factory('role')->where('name', '=', 'login')->find());
+		// $model->add('roles', ORM::factory('role')->where('name', '=', 'admin')->find());
+	}
 }
 
 ?>

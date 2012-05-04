@@ -11,6 +11,11 @@ public class LireIndexer {
 	private static IndexCreator indexCreator = null;
 	private static DatabaseWriter dbWriter = null;
 	
+	public static final String host = "localhost";
+	public static final String username = "root";
+	public static final String password = "aardbei";
+	public static final String database = "monumentzo";
+	
 	public static void main(String[] args) {
 		String sourceDirectory = "";
 		String indexDirectory = "";
@@ -46,7 +51,7 @@ public class LireIndexer {
 		// Create database writer
 		DatabaseWriter writer = null;
 		try {
-			writer = new DatabaseWriter(new URL("jdbc:mysql://localhost:3306/"), "Monumentzo", "root", "M0NUM3NTz0");
+			writer = new DatabaseWriter(new URL(host), database, username, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
