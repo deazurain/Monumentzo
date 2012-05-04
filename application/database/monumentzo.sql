@@ -1,275 +1,273 @@
--- phpMyAdmin SQL Dump
--- version 3.5.0
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: May 03, 2012 at 09:46 AM
--- Server version: 5.1.62-0ubuntu0.11.10.1
--- PHP Version: 5.3.6-13ubuntu3.6
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `monumentzo`
---
-
+DROP SCHEMA IF EXISTS `monumentzo` ;
 CREATE SCHEMA IF NOT EXISTS `monumentzo` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `monumentzo` ;
 
--- --------------------------------------------------------
+-- -----------------------------------------------------
+-- Table `monumentzo`.`User`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`User` (
+  `UserID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NOT NULL ,
+  `HashedPassword` VARCHAR(64) NOT NULL ,
+  `EmailAddress` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`UserID`) ,
+  UNIQUE INDEX `UserID_UNIQUE` (`UserID` ASC) ,
+  UNIQUE INDEX `Name_UNIQUE` (`Name` ASC) )
+ENGINE = InnoDB;
 
---
--- Table structure for table `Category`
---
 
-CREATE TABLE IF NOT EXISTS `Category` (
-  `CategoryID` int(10) unsigned NOT NULL,
-  `Category` varchar(45) NOT NULL,
-  PRIMARY KEY (`CategoryID`),
-  UNIQUE KEY `Category_UNIQUE` (`Category`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- -----------------------------------------------------
+-- Table `monumentzo`.`Image`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`Image` (
+  `ImageID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `MonumentID` INT UNSIGNED NOT NULL ,
+  `Path` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`ImageID`) ,
+  INDEX `Monumentzo.Image.MonumentID` (`MonumentID` ASC) ,
+  UNIQUE INDEX `ImageID_UNIQUE` (`ImageID` ASC) ,
+  UNIQUE INDEX `Path_UNIQUE` (`Path` ASC) ,
+  CONSTRAINT `Monumentzo.Image.MonumentID`
+    FOREIGN KEY (`MonumentID` )
+    REFERENCES `monumentzo`.`Monument` (`MonumentID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `Comment`
---
+-- -----------------------------------------------------
+-- Table `monumentzo`.`Monument`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`Monument` (
+  `MonumentID` INT UNSIGNED NOT NULL ,
+  `ImageID` INT UNSIGNED NULL ,
+  `Name` TEXT NOT NULL ,
+  `Description` TEXT NULL ,
+  `Latitude` FLOAT NULL ,
+  `Longitude` FLOAT NULL ,
+  `City` VARCHAR(45) NULL ,
+  `Province` VARCHAR(45) NULL ,
+  `Street` VARCHAR(45) NULL ,
+  `StreetNumberText` VARCHAR(45) NULL ,
+  `FoundationDateText` VARCHAR(45) NULL ,
+  `FoundationYear` INT NULL ,
+  `WikiArticle` TEXT NULL ,
+  `Vector` TEXT NULL ,
+  PRIMARY KEY (`MonumentID`) ,
+  UNIQUE INDEX `MonumentID_UNIQUE` (`MonumentID` ASC) ,
+  INDEX `Monumentzo.Monument.ImageID` (`ImageID` ASC) ,
+  CONSTRAINT `Monumentzo.Monument.ImageID`
+    FOREIGN KEY (`ImageID` )
+    REFERENCES `monumentzo`.`Image` (`ImageID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Comment` (
-  `CommentID` int(10) unsigned NOT NULL,
-  `UserID` int(10) unsigned NOT NULL,
-  `MonumentID` int(10) unsigned NOT NULL,
-  `PlaceDate` date DEFAULT NULL,
-  `Comment` text DEFAULT NULL,
-  PRIMARY KEY (`CommentID`),
-  UNIQUE KEY `CommentID_UNIQUE` (`CommentID`),
-  KEY `Monumentzo.Comment.UserID` (`UserID`),
-  KEY `Monumentzo.Comment.MonumentID` (`MonumentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- -----------------------------------------------------
+-- Table `monumentzo`.`FavoriteList`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`FavoriteList` (
+  `UserID` INT UNSIGNED NOT NULL ,
+  `MonumentID` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY (`UserID`, `MonumentID`) ,
+  INDEX `Monumentzo.FavoriteList.UserID` (`UserID` ASC) ,
+  INDEX `Monumentzo.FavoriteList.MonumentID` (`MonumentID` ASC) ,
+  CONSTRAINT `Monumentzo.FavoriteList.UserID`
+    FOREIGN KEY (`UserID` )
+    REFERENCES `monumentzo`.`User` (`UserID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Monumentzo.FavoriteList.MonumentID`
+    FOREIGN KEY (`MonumentID` )
+    REFERENCES `monumentzo`.`Monument` (`MonumentID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
---
--- Table structure for table `FavoriteList`
---
 
-CREATE TABLE IF NOT EXISTS `FavoriteList` (
-  `UserID` int(11) NOT NULL,
-  `MonumentID` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`UserID`,`MonumentID`),
-  KEY `Monumentzo.FavoriteList.UserID` (`UserID`),
-  KEY `Monumentzo.FavoriteList.MonumentID` (`MonumentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- -----------------------------------------------------
+-- Table `monumentzo`.`Comment`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`Comment` (
+  `CommentID` INT UNSIGNED NOT NULL ,
+  `UserID` INT UNSIGNED NOT NULL ,
+  `MonumentID` INT UNSIGNED NOT NULL ,
+  `PlaceDate` DATE NULL ,
+  `Comment` TEXT NULL ,
+  PRIMARY KEY (`CommentID`) ,
+  INDEX `Monumentzo.Comment.UserID` (`UserID` ASC) ,
+  INDEX `Monumentzo.Comment.MonumentID` (`MonumentID` ASC) ,
+  UNIQUE INDEX `CommentID_UNIQUE` (`CommentID` ASC) ,
+  CONSTRAINT `Monumentzo.Comment.UserID`
+    FOREIGN KEY (`UserID` )
+    REFERENCES `monumentzo`.`User` (`UserID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Monumentzo.Comment.MonumentID`
+    FOREIGN KEY (`MonumentID` )
+    REFERENCES `monumentzo`.`Monument` (`MonumentID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `Image_Image`
---
+-- -----------------------------------------------------
+-- Table `monumentzo`.`Category`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`Category` (
+  `CategoryID` INT UNSIGNED NOT NULL ,
+  `Category` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`CategoryID`) ,
+  UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) )
+ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Image_Image` (
-  `ImageID` int(10) unsigned NOT NULL,
-  `LinkedImage` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`ImageID`,`LinkedImage`),
-  KEY `Monumentzo.Image_Image.ImageID` (`ImageID`),
-  KEY `Monumentzo.Image_Image.LinkedImage` (`LinkedImage`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- -----------------------------------------------------
+-- Table `monumentzo`.`WishList`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`WishList` (
+  `UserID` INT UNSIGNED NOT NULL ,
+  `MonumentID` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY (`UserID`, `MonumentID`) ,
+  INDEX `Monumentzo.WishList.MonumentID` (`MonumentID` ASC) ,
+  INDEX `Monumentzo.WishList.UserID` (`UserID` ASC) ,
+  CONSTRAINT `Monumentzo.WishList.MonumentID`
+    FOREIGN KEY (`MonumentID` )
+    REFERENCES `monumentzo`.`Monument` (`MonumentID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Monumentzo.WishList.UserID`
+    FOREIGN KEY (`UserID` )
+    REFERENCES `monumentzo`.`User` (`UserID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
---
--- Table structure for table `Monument`
---
 
-CREATE TABLE IF NOT EXISTS `Monument` (
-  `MonumentID` int(10) unsigned NOT NULL,
-  `ImageID` int(10) unsigned DEFAULT NULL,
-  `Name` varchar(255) DEFAULT NULL,
-  `Description` text DEFAULT NULL,
-  `Latitude` float DEFAULT NULL,
-  `Longitude` float DEFAULT NULL,
-  `City` varchar(45) DEFAULT NULL,
-  `Province` varchar(45) DEFAULT NULL,
-  `Street` varchar(45) DEFAULT NULL,
-  `StreetNumberText` varchar(45) DEFAULT NULL,
-  `FoundationDateText` varchar(45) DEFAULT NULL,
-  `FoundationYear` int(11) DEFAULT NULL,
-  `WikiArticle` text DEFAULT NULL,
-  PRIMARY KEY (`MonumentID`),
-  UNIQUE KEY `MonumentID_UNIQUE` (`MonumentID`),
-  KEY `Monumentzo.Monument.ImageID` (`ImageID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- -----------------------------------------------------
+-- Table `monumentzo`.`TextTag`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`TextTag` (
+  `TextTagID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `TextTag` VARCHAR(45) NOT NULL ,
+  `InverseDocumentFrequency` DOUBLE UNSIGNED NULL ,
+  PRIMARY KEY (`TextTagID`) ,
+  UNIQUE INDEX `TextTag_UNIQUE` (`TextTag` ASC) )
+ENGINE = InnoDB;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `Monument_Category`
---
+-- -----------------------------------------------------
+-- Table `monumentzo`.`Monument_TextTag`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`Monument_TextTag` (
+  `MonumentID` INT UNSIGNED NOT NULL ,
+  `TextTagID` INT UNSIGNED NOT NULL ,
+  `TermFrequencyInverseDocumentFrequency` DOUBLE NULL ,
+  `TermFrequency` DOUBLE NULL ,
+  PRIMARY KEY (`MonumentID`, `TextTagID`) ,
+  INDEX `Monumentzo.Monument_TextTag.MonumentID` (`MonumentID` ASC) ,
+  INDEX `Monumentzo.Monument_TextTag.TextTag` (`TextTagID` ASC) ,
+  CONSTRAINT `Monumentzo.Monument_TextTag.MonumentID`
+    FOREIGN KEY (`MonumentID` )
+    REFERENCES `monumentzo`.`Monument` (`MonumentID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Monumentzo.Monument_TextTag.TextTag`
+    FOREIGN KEY (`TextTagID` )
+    REFERENCES `monumentzo`.`TextTag` (`TextTagID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Monument_Category` (
-  `MonumentID` int(10) unsigned NOT NULL,
-  `CategoryID` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`MonumentID`,`CategoryID`),
-  KEY `Monumentzo.Monument_Category.MonumentID` (`MonumentID`),
-  KEY `Monumentzo.Monument_Category.CategoryID` (`CategoryID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- -----------------------------------------------------
+-- Table `monumentzo`.`Monument_Category`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`Monument_Category` (
+  `MonumentID` INT UNSIGNED NOT NULL ,
+  `CategoryID` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY (`MonumentID`, `CategoryID`) ,
+  INDEX `Monumentzo.Monument_Category.MonumentID` (`MonumentID` ASC) ,
+  INDEX `Monumentzo.Monument_Category.CategoryID` (`CategoryID` ASC) ,
+  CONSTRAINT `Monumentzo.Monument_Category.MonumentID`
+    FOREIGN KEY (`MonumentID` )
+    REFERENCES `monumentzo`.`Monument` (`MonumentID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Monumentzo.Monument_Category.CategoryID`
+    FOREIGN KEY (`CategoryID` )
+    REFERENCES `monumentzo`.`Category` (`CategoryID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
---
--- Table structure for table `Monument_Image`
---
 
-CREATE TABLE IF NOT EXISTS `Monument_Image` (
-  `MonumentID` int(10) unsigned NOT NULL,
-  `ImageID` int(10) unsigned NOT NULL,
-  `ImagePath` text NOT NULL,
-  PRIMARY KEY (`MonumentID`,`ImageID`),
-  KEY `Monumentzo.Monument_Image.MonumentID` (`MonumentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- -----------------------------------------------------
+-- Table `monumentzo`.`ReadList`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`ReadList` (
+  `UserID` INT UNSIGNED NOT NULL ,
+  `Book` TEXT NOT NULL ,
+  PRIMARY KEY (`UserID`) ,
+  INDEX `Monumentzo.ReadList.UserID` (`UserID` ASC) ,
+  CONSTRAINT `Monumentzo.ReadList.UserID`
+    FOREIGN KEY (`UserID` )
+    REFERENCES `monumentzo`.`User` (`UserID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `Monument_TextTag`
---
+-- -----------------------------------------------------
+-- Table `monumentzo`.`VisitedList`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`VisitedList` (
+  `UserID` INT UNSIGNED NOT NULL ,
+  `MonumentID` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY (`UserID`, `MonumentID`) ,
+  INDEX `Monumentzo.VisitedList.UserID` (`UserID` ASC) ,
+  INDEX `Monumentzo.VisitedList.MonumentID` (`MonumentID` ASC) ,
+  CONSTRAINT `Monumentzo.VisitedList.UserID`
+    FOREIGN KEY (`UserID` )
+    REFERENCES `monumentzo`.`User` (`UserID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Monumentzo.VisitedList.MonumentID`
+    FOREIGN KEY (`MonumentID` )
+    REFERENCES `monumentzo`.`Monument` (`MonumentID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Monument_TextTag` (
-  `MonumentID` int(10) unsigned NOT NULL,
-  `TextTagID` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`MonumentID`,`TextTagID`),
-  KEY `Monumentzo.Monument_TextTag.MonumentID` (`MonumentID`),
-  KEY `Monumentzo.Monument_TextTag.TextTag` (`TextTagID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- -----------------------------------------------------
+-- Table `monumentzo`.`Image_Image`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`Image_Image` (
+  `ImageID` INT UNSIGNED NOT NULL ,
+  `LinkedImage` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY (`ImageID`, `LinkedImage`) ,
+  INDEX `Monumentzo.Image_Image.ImageID` (`ImageID` ASC) ,
+  INDEX `Monumentzo.Image_Image.LinkedImage` (`LinkedImage` ASC) ,
+  CONSTRAINT `Monumentzo.Image_Image.ImageID`
+    FOREIGN KEY (`ImageID` )
+    REFERENCES `monumentzo`.`Image` (`ImageID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Monumentzo.Image_Image.LinkedImage`
+    FOREIGN KEY (`LinkedImage` )
+    REFERENCES `monumentzo`.`Image` (`ImageID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
---
--- Table structure for table `ReadList`
---
 
-CREATE TABLE IF NOT EXISTS `ReadList` (
-  `UserID` int(10) unsigned NOT NULL,
-  `Book` varchar(2083) NOT NULL,
-  PRIMARY KEY (`UserID`),
-  KEY `Monumentzo.ReadList.UserID` (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `TextTag`
---
-
-CREATE TABLE IF NOT EXISTS `TextTag` (
-  `TextTagID` int(10) unsigned NOT NULL,
-  `TextTag` varchar(45) NOT NULL,
-  PRIMARY KEY (`TextTagID`),
-  UNIQUE KEY `TextTag_UNIQUE` (`TextTag`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `User`
---
-
-CREATE TABLE IF NOT EXISTS `User` (
-  `UserID` int(10) unsigned NOT NULL,
-  `Name` varchar(45) NOT NULL,
-  `HashedPassword` varchar(45) NOT NULL,
-  `EmailAddress` varchar(45) NOT NULL,
-  PRIMARY KEY (`UserID`),
-  UNIQUE KEY `UserID_UNIQUE` (`UserID`),
-  UNIQUE KEY `Name_UNIQUE` (`Name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `VisitedList`
---
-
-CREATE TABLE IF NOT EXISTS `VisitedList` (
-  `UserID` int(10) unsigned NOT NULL,
-  `MonumentID` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`UserID`,`MonumentID`),
-  KEY `Monumentzo.VisitedList.UserID` (`UserID`),
-  KEY `Monumentzo.VisitedList.MonumentID` (`MonumentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `WishList`
---
-
-CREATE TABLE IF NOT EXISTS `WishList` (
-  `UserID` int(10) unsigned NOT NULL,
-  `MonumentID` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`UserID`,`MonumentID`),
-  KEY `Monumentzo.WishList.MonumentID` (`MonumentID`),
-  KEY `Monumentzo.WishList.UserID` (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `Comment`
---
-ALTER TABLE `Comment`
-  ADD CONSTRAINT `Monumentzo.Comment.UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.Comment.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `Monument_Category`
---
-ALTER TABLE `Monument_Category`
-  ADD CONSTRAINT `Monumentzo.Monument_Category.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.Monument_Category.CategoryID` FOREIGN KEY (`CategoryID`) REFERENCES `Category` (`CategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `Monument_Image`
---
-ALTER TABLE `Monument_Image`
-  ADD CONSTRAINT `Monumentzo.Monument_Image.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `Monument_TextTag`
---
-ALTER TABLE `Monument_TextTag`
-  ADD CONSTRAINT `Monumentzo.Monument_TextTag.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.Monument_TextTag.TextTag` FOREIGN KEY (`TextTagID`) REFERENCES `TextTag` (`TextTagID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `ReadList`
---
-ALTER TABLE `ReadList`
-  ADD CONSTRAINT `Monumentzo.ReadList.UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `VisitedList`
---
-ALTER TABLE `VisitedList`
-  ADD CONSTRAINT `Monumentzo.VisitedList.UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.VisitedList.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `WishList`
---
-ALTER TABLE `WishList`
-  ADD CONSTRAINT `Monumentzo.WishList.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.WishList.UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

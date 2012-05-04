@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project LIRe Indexer with Jar-in-Jar Loader">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="/home/mick/uni/ti2800/git/offline/LIRe Indexer/jar/indexer.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="org.Monumentzo.LIReIndexer.LireIndexer"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ lire.jar lucene-core-3.3.0.jar mysql-connector-java-5.1.19-bin.jar"/>
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="/home/mick/uni/ti2800/git/offline/LIRe Indexer/bin"/>
+            <zipfileset dir="/home/mick/uni/ti2800/git/offline/LIRe Indexer/lib" includes="lire.jar"/>
+            <zipfileset dir="/home/mick/uni/ti2800/git/offline/LIRe Indexer/lib" includes="lucene-core-3.3.0.jar"/>
+            <zipfileset dir="/home/mick/uni/ti2800/git/offline/LIRe Indexer/lib" includes="mysql-connector-java-5.1.19-bin.jar"/>
+        </jar>
+    </target>
+</project>

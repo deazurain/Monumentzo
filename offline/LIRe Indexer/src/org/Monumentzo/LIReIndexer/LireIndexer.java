@@ -1,8 +1,8 @@
 package org.Monumentzo.LIReIndexer;
 
 import java.io.File;
-import java.net.URL;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.semanticmetadata.lire.DocumentBuilderFactory;
 
@@ -11,7 +11,7 @@ public class LireIndexer {
 	private static IndexCreator indexCreator = null;
 	private static DatabaseWriter dbWriter = null;
 	
-	public static final String host = "localhost";
+	public static final String host = "jdbc:mysql://localhost/";
 	public static final String username = "root";
 	public static final String password = "aardbei";
 	public static final String database = "monumentzo";
@@ -39,15 +39,17 @@ public class LireIndexer {
 		IndexCreator indexCreator = new IndexCreator();
 		try {
 			indexCreator.setIndexPath(new File(indexDirectory))
-						.withDocumentBuilder(DocumentBuilderFactory.getEdgeHistogramBuilder());
+				.withDocumentBuilder(DocumentBuilderFactory.getEdgeHistogramBuilder());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		// Index the images with the indexCreator
 		LireIndexer.withIndexCreator(indexCreator);
-		LireIndexer.readImageDirectory(new File(sourceDirectory));
+		LireIndexer.createImageIndex(new File(sourceDirectory));
+		LireIndexer.indexCreator.close();
 		
+		/*
 		// Create database writer
 		DatabaseWriter writer = null;
 		try {
@@ -61,6 +63,7 @@ public class LireIndexer {
 		// Write the information to the database
 		LireIndexer.withDatabaseWriter(writer);
 		LireIndexer.writeIndexToDatabase();
+		*/
 	}
 	
 	public static void withIndexCreator(IndexCreator creator) {
@@ -71,25 +74,47 @@ public class LireIndexer {
 		LireIndexer.dbWriter = writer;
 	}
 	
-	public static void readImageDirectory(File directory) {
+	
+	
+	public static void createImageIndex(File directory) {
+
+		List<File> imageFiles = findImageFiles(directory);
+		
+		for(int i = 0; i < imageFiles.size(); i++) {
+			File imageFile = imageFiles.get(i);
+			System.out.println("Indexing " + (i + 1) + "/" + imageFiles.size() + "\t" + imageFile.getAbsolutePath());
+			indexCreator.indexImage(imageFile);
+		}
+		
+	}
+	
+	public static List<File> findImageFiles(File directory) {
+		List<File> imageFiles = new ArrayList<File>();
+		findImageFiles(directory, imageFiles);
+		return imageFiles;
+	}
+	
+	private static void findImageFiles(File directory, List<File> imageFiles) {
+		
 		try {
-			String pattern = ".jpg";
+			String extension = ".jpg";
 			File listFile[] = directory.listFiles();
 			
 			for (int i = 0; i < listFile.length; i++) {
 				if (listFile[i].isDirectory()) {
 					// directory found -> enter directory in a recursive fashion
-					readImageDirectory(listFile[i]);
+					findImageFiles(listFile[i], imageFiles);
 				} else {
-					if (listFile[i].getName().endsWith(pattern)) {
+					if (listFile[i].getName().endsWith(extension)) {
 						// image found -> index
-						indexCreator.indexImage(listFile[i]);
+						imageFiles.add(listFile[i]);
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public static void writeIndexToDatabase() {
