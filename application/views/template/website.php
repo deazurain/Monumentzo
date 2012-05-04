@@ -7,7 +7,7 @@
         <?php foreach ($styles as $file => $type) echo HTML::style($file, array('media' => $type)), PHP_EOL ?>
         <?php foreach ($scripts as $file) echo HTML::script($file), PHP_EOL ?>
     </head>
-	
+
     <body>
 
         <div class="navbar navbar-fixed-top">
@@ -18,28 +18,31 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <?php echo html::anchor("home", "Monumentzo", array("class" =>"brand")); ?>
+                    <?php echo html::anchor("home", "Monumentzo", array("class" => "brand")); ?>
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <?php if(isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
-                            <?php if(isset($login)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
-							
+                            <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
+                            <?php if (isset($login)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
                         </ul>
                     </div>
-					<?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
-						<?php echo Form::input('q', NULL, array('type' => 'text', 'class' => 'search-query', 'placeholder' => 'Search')) ?>
-					<?php echo Form::close(); ?>
+                    <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
+                    <?php echo Form::input('q', NULL, array('type' => 'text', 'class' => 'search-query', 'placeholder' => 'Search')) ?>
+                    <?php echo Form::close(); ?>
                 </div>
             </div>
         </div>
 
-        	<?php if(isset($login)) {
-		       echo "<div id='login' style='display:none'>".$login."</div>";
-			}?>
-
-			<?php if(isset($register)) {
-			    echo "<div id='register' style='display:none'>".$register."</div>";
-			}?>
+        <?php
+            if (isset($login)) {
+                echo "<div id='login' style='display:none'>" . $login . "</div>";
+            }
+        ?>
+        
+        <?php
+            if (isset($register)) {
+                echo "<div id='register' style='display:none'>" . $register . "</div>";
+            }
+        ?>
 
         <div class="container">
             <?php echo $content ?>

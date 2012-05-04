@@ -1,77 +1,80 @@
-<?php defined('SYSPATH') OR die('No Direct Script Access');
+<?php
+
+defined('SYSPATH') OR die('No Direct Script Access');
 
 /**
+ * User Controller
+ * 
  * The User Controller class allows a user to log in and out.
  * Also a new user can register.
+ * 
+ * @author Monumentzo Team
  */
-Class Controller_User extends Controller_Template_Website
-{
-	/**
-	 * Registers a user. Makes sure the passwords match 
-	 * and that the username does not already exists.
-	 */
-	public function action_register() {
+Class Controller_User extends Controller_Template_Website {
 
-		$this->template->title = 'Log in';
-      $this->template->content = View::factory('user/register');
+    /**
+     * Registers a user. Makes sure the passwords match 
+     * and that the username does not already exists.
+     */
+    public function action_register() {
+        $user = Model::factory('user');
 
-		if(isset($_POST) && ! empty($_POST)) {
-			if ($_POST['password'] == $_POST['password2']) {
-				if(Model_User::register($_POST['username'], $_POST['password'])) {
-					Request::current()->redirect('home');
-				}
-			}
-			$this->template->content->errors = 'Passwords did not match';
-		}
-	}
-	
-	/**
-	 * Logs in a user. If the login is successful the user will be
-	 * redirected. If the login was insuccessful, the previous view
-	 * will be loaded with an error message.
-	 */
-	public function action_login() {
+        $this->template->title = 'Registreren';
+        $this->template->content = View::factory('user/register');
 
-	$this->template->title = 'Log in';
-   $this->template->content = View::factory('user/login');
-		
-		if(isset($_POST['username']) && isset($_POST['password'])) {
-			$success = Auth::instance()->login($_POST['username'], $_POST['password']);
-			if ($success) {
-				// Login successful, redirect
-				Request::current()->redirect('niks');
-			}
-			
-			// Login unsuccessful return with error message
-			$this->template->content->errors = 'Invalid username or password';
-		}
+        $post = Validation::factory($_POST)
+                ->rule('username', 'not_empty')
+                ->rule('email', 'email')
+                ->rule('password', 'matches', array(':validation', 'password', 'password2'));
 
-		
-	}
+        // Check if the data is valid
+        if ($post->check()) {
+            // If the input is correct, register the user
+            $user->register($_POST['username'], $_POST['password'], $_POST['email']);
+            Request::current()->redirect('home');
+        }
 
-	/**
-	 * Logs a user out.
-	 */
-	public function action_logout() {
-		Auth::instance()->logout();
-		Request::current()->redirect('welcome');
-	}
+        // If the validation failed, collect the errors and return them
+        $errors = $post->errors('user');
 
+        $this->response->body->fancybox(View::factory('user/register'))
+                ->bind('post', $post)
+                ->bind('errors', $errors);
+    }
 
-	public function action_testcreate() {
-		$model = ORM::factory('user');
-		$model->values(array(
-			'username' => 'micky',
-			'email' => 'admin@example.com',
-			'password' => 'aardbei',
-			'password_confirm' => 'aardbei',
-		));
-		$model->save();
-		// remember to add the login role AND the admin role
-		// // add a role; add() executes the query immediately
-		// $model->add('roles', ORM::factory('role')->where('name', '=', 'login')->find());
-		// $model->add('roles', ORM::factory('role')->where('name', '=', 'admin')->find());
-	}
+    /**
+     * Logs in a user. If the login is successful the user will be
+     * redirected. If the login was insuccessful, the previous view
+     * will be loaded with an error message.
+     */
+    public function action_login() {
+        $this->template->title = 'Inloggen';
+        $this->template->content = View::factory('user/login');
+
+        $post = Validation::factory($_POST)
+                ->rule('username', 'not_empty')
+                ->rule('password', 'not_empty');
+
+        if ($post->check()) {
+            $success = Auth::instance()->login($_POST['username'], $_POST['password']);
+            
+            if ($success) {
+                // Login successful, redirect
+                Request::current()->redirect('home');
+            } else {
+                // Login unsuccessful return with error message
+                $this->template->content->errors = 'Incorrecte gebruikersnaam of wachtwoord.';
+            }
+        }
+    }
+
+    /**
+     * Logs a user out.
+     */
+    public function action_logout() {
+        Auth::instance()->logout();
+        Request::current()->redirect('welcome');
+    }
 }
 
 ?>

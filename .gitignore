@@ -18,6 +18,8 @@ Desktop.ini
 
 #Netbeans
 nbproject
+
+#Diagrams
 /documents/TI2800 Group 2 Diagrams/Thumbs.db
 /documents/TI2800 Group 2 Diagrams/Abstract Class Diagram.png
 /documents/TI2800 Group 2 Diagrams/Class Diagram Backend.png
@@ -33,3 +35,6 @@ nbproject
 /documents/TI2800 Group 2 Diagrams/Gui-register.png
 /documents/TI2800 Group 2 Diagrams/Sequence Diagram.png
 /documents/TI2800 Group 2 Diagrams/System Decomposition.png
+
+#Database config
+/application/config/database.php
