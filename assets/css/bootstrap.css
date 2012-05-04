@@ -1082,9 +1082,9 @@ select:focus:required:invalid:focus {
   padding-left: 14px;
   padding-right: 14px;
   margin-bottom: 0;
-  -webkit-border-radius: 14px;
-  -moz-border-radius: 14px;
-  border-radius: 14px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 .form-search input,
 .form-inline input,

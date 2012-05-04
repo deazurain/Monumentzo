@@ -1,14 +1,26 @@
 $(document).ready(function() {
     
-    var login_options = {
-        width		: '40%',
-        height		: '40%',
-        autoSize    : false,
+    var fancy_options = {
+        width		: '35%',
+        height		: '60%',
+        autoSize        : false,
         closeClick	: false,
-        openEffect  : 'none',
+        openEffect      : 'none',
         closeEffect	: 'none'
     };
-   
-	$('.fancybox').fancybox(login_options);
+    
+    $('.fancybox').fancybox(fancy_options);
+    
+    $('.fancybox').live('click', function(event){
+        event.preventDefault();
+        var src = $(this);
+        
+        switch(src.attr('href')) {
+            case '#close':
+                $.fancybox.close();
+                break;
+        }
+    });
+    
 	
 });
