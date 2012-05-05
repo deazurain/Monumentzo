@@ -2,7 +2,7 @@
 
 class Controller_Search extends Controller_Template_Website {
 
-	private static final $idfThreshold = 0.350;
+	private static final $idfThreshold = 1.50;
 
 	public function action_search()
 	{
@@ -13,18 +13,26 @@ class Controller_Search extends Controller_Template_Website {
 		// Build a vector from the query and get the monuments that contain the query words
 		$queryVector = array();
 		$monuments = array();
-		foreach(explode($query) as $word) {
-			$result = DB::query(Database::SELECT, 'SELECT InverseDocumentFrequency
-													FROM Monumentzo.TextTag 
+		foreach(explode(' ', $query) as $word) {
+			$result = DB::query(Database::SELECT, 'SELECT TextTagID, InverseDocumentFrequency
+													FROM monumentzo.TextTag 
 													WHERE TextTag = ' . $word);
 			
 			// Only use words that have a relatively high inverse document frequency
-			if($result[0]['idf'] > $idfThreshold) {			
+			if($result[0]['InverseDocumentFrequency'] > $idfThreshold) {			
 				$queryVector[$word] = ($queryVector[$word])
 										? $queryVector[$word]['frequency'] + 1
 										: array('frequency' => 1);
 				
-				$monuments = array_merge($monuments, json_decode($result[0]['monuments'], true));
+				// Get the monuments associated with the current word
+				$monumentResult = DB::query(Database::SELECT, 'SELECT MonumentID
+														FROM monumentzo.Monument_TextTag
+														WHERE TextTagID = ' . $result[0]['TextTagID']);
+				
+				// Store each MonumentID associated to this word														
+				for($i = 0; $i < count($result); $i++) {
+					array_push($monuments, $monumentResult[i]['MonumentID']);
+				}
 			}
 		}
 		
@@ -34,7 +42,11 @@ class Controller_Search extends Controller_Template_Website {
 		// Get the vectors for the monuments
 		$monumentVectors = array();
 		foreach($monuments as $monument) {
-			$result = DB::query(Database::SELECT, 'SELECT MonumentID, Vector FROM Monumentzo.Monument');
+			$result = DB::query(Database::SELECT, 'SELECT MonumentID, Vector 
+													FROM Monumentzo.Monument 
+													WHERE MonumentID = ' . $monument);
+			
+			// Store each vector of the currently retrieved monument
 			$monumentVectors[$result[0]['MonumentID']] = json_decode($result[0]['Vector'], true);			
 		}
 		
