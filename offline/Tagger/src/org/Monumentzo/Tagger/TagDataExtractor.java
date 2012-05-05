@@ -25,8 +25,8 @@ public class TagDataExtractor {
 		// Count the words in all the documents
 		for(int i = 0; i < documentCount; i++) {
 			Monument monument = monumentData.get(i);
-			StringTokenizer tokenizer =
-					new StringTokenizer(monument.getName() + " " + monument.getDescription() + " " + monument.getCity());
+			String text = sanitize(monument.getName() + " " + monument.getDescription() + " " + monument.getCity());
+			StringTokenizer tokenizer = new StringTokenizer(text);
 			
 			// Store the word count for each document
 			documentTotalCount.put(monument.getMonumentID(), tokenizer.countTokens());
@@ -36,7 +36,12 @@ public class TagDataExtractor {
 			
 			// Count the words in the current document
 			while(tokenizer.hasMoreTokens()) {
-				String word = tokenizer.nextToken();
+				String word = tokenizer.nextToken().toLowerCase();
+				
+				// Skip certain words like "." or "/"
+				if(word.compareTo(".") == 0 || word.compareTo("/") == 0 || 
+					word.compareTo("-") == 0 || word.length() <= 1)
+					continue;
 				
 				if(wordCounts.containsKey(word)) {
 					WordData data = wordCounts.get(word);
@@ -52,7 +57,7 @@ public class TagDataExtractor {
 				}
 			}
 			
-			// Increment the correct word document counts
+			// Increment the correct word document counts and associate the current document
 			Iterator<String> iterator = addedWords.iterator();
 		    while (iterator.hasNext()) {
 		      WordData data = wordCounts.get(iterator.next());
@@ -70,19 +75,38 @@ public class TagDataExtractor {
 	public double calculateTermFrequency(int monument, String word) {
 		WordData data = wordCounts.get(word);
 		return data.getAssociatedMonuments().contains(monument)
-				? data.getWordDocumentCount(monument) / documentTotalCount.get(monument)
+				? (double)data.getWordDocumentCount(monument) / (double)documentTotalCount.get(monument)
 				: -1.0; 
 	}
 	
 	public double calculateInverseDocumentFrequency(String word) {
 		WordData data = wordCounts.get(word);
-		return (data != null) ? Math.log10(monumentData.size() / data.getDocumentCount()) : -1.0;
+		return (data != null) ? Math.log10((double)monumentData.size() / (double)data.getDocumentCount()) : -1.0;
+	}
+	
+	private String sanitize(String text) {
+		
+		String result = null;
+		
+		// Remove the following characters: (, ), ",", \, /
+		result = text.replaceAll("\\(|\\)|,|\\|/|;", " ");
+		
+		// Trim left and right spaces
+		result = result.trim();
+		
+		// Remove trailing periods
+		result = result.replaceAll("\\.(?=\\s|$)", " ");
+		
+		// Change multiple spaces to a single space
+		result = result.replaceAll("( )\\1+", " ");
+		
+		return result;
 	}
 	
 	private class WordData {
 		
 		private int documentCount = 0;
-		private HashMap<Integer, Integer> wordDocumentCount = null;
+		private HashMap<Integer, Integer> wordDocumentCount = new HashMap<Integer, Integer>();
 		private Set<Integer> associatedMonuments = new HashSet<Integer>();
 		
 		public void increaseDocumentCount() {
@@ -90,7 +114,12 @@ public class TagDataExtractor {
 		}
 		
 		public void incrementDocumentWordCount(int documentID) {
-			wordDocumentCount.put(documentID, wordDocumentCount.get(documentID) + 1);
+			
+			if(wordDocumentCount.containsKey(documentID)) {
+				wordDocumentCount.put(documentID, wordDocumentCount.get(documentID) + 1);
+			} else {
+				wordDocumentCount.put(documentID, 1);
+			}
 		}
 		
 		public void associateMonument(int monumentID) {

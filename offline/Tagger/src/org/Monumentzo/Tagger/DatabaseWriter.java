@@ -34,35 +34,50 @@ public class DatabaseWriter {
 		}
 	}
 	
-	public void writeTf_IdfInformation(int monumentID, String word, double tf, double idf, double tfIdf) {
+	public int writeIdfInformation(String word, double idf) {
 		
+		// Insert the tag
+		int tagID = -1;
 		try {
-			// Insert the tag
-			PreparedStatement insertTag =
-					dbConnection.prepareStatement("INSERT INTO Monumentzo.TextTag (TextTag, InverseDocumentFrequency) " +
-												  "VALUES (?, ?);");
-			insertTag.setString(1, word);
-			insertTag.setDouble(2, idf);
-			insertTag.execute();
-			
-			// Get the generated ID of the tag that was inserted above 
-			PreparedStatement tagIDRetrieving = dbConnection.prepareStatement("SELECT TextTagID" +
-																			  "FROM Monumentzo.TextTag" +
-																			  "WHERE TextTag = ?;");
-			tagIDRetrieving.setString(1, word);
-			ResultSet tag = tagIDRetrieving.executeQuery();
-			
-			int tagID = tag.getInt("TextTagID");
-			
-			// Insert the link of the monument to the tag
-			PreparedStatement insertMonument_TagLink = 
-				dbConnection.prepareStatement("INSERT INTO Monumentzo.Monument_TextTag (MonumentID, TextTagID, TermFrequencyInverseDocumentFrequency, TermFrequency)" +
-											  "VALUES (?, ?, ?, ?);");
-			insertMonument_TagLink.setInt(1, monumentID);
-			insertMonument_TagLink.setInt(2, tagID);
-			insertMonument_TagLink.setDouble(3, tfIdf);
-			insertMonument_TagLink.setDouble(4, idf);
-			insertMonument_TagLink.execute();
+			if(idf > 0) {
+				PreparedStatement insertTag =
+						dbConnection.prepareStatement("INSERT INTO Monumentzo.TextTag (TextTag, InverseDocumentFrequency) " +
+													  "VALUES (?, ?);");
+				insertTag.setString(1, word);
+				insertTag.setDouble(2, idf);
+				insertTag.execute();
+				
+				// Get the generated ID of the tag that was inserted above 
+				PreparedStatement tagIDRetrieving = dbConnection.prepareStatement("SELECT TextTagID" +
+																				  " FROM Monumentzo.TextTag" +
+																				  " WHERE TextTag = ?;");
+				tagIDRetrieving.setString(1, word);
+				
+				ResultSet tag = tagIDRetrieving.executeQuery();
+				tag.next();
+				tagID = tag.getInt("TextTagID");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return tagID;
+	}
+	
+	public void writeTfIdfInformation(int monumentID, int tagID, double tf, double tfIdf) {
+		
+		try {			
+			if(tfIdf > 0 && tagID >= 0) {
+				// Insert the link of the monument to the tag
+				PreparedStatement insertMonument_TagLink = 
+					dbConnection.prepareStatement("INSERT INTO Monumentzo.Monument_TextTag (MonumentID, TextTagID, TermFrequencyInverseDocumentFrequency, TermFrequency)" +
+												  "VALUES (?, ?, ?, ?);");
+				insertMonument_TagLink.setInt(1, monumentID);
+				insertMonument_TagLink.setInt(2, tagID);
+				insertMonument_TagLink.setDouble(3, tfIdf);
+				insertMonument_TagLink.setDouble(4, tf);
+				insertMonument_TagLink.execute();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -79,13 +79,15 @@ public class Tagger {
 			if(idf < 0)
 				continue;
 			
+			int tagID = writer.writeIdfInformation(word, idf);
+			
 			for(Monument monument : monumentData) {
 				double tf = extractor.calculateTermFrequency(monument.getMonumentID(), word);
 				if(tf < 0)
 					continue;
 				
 				double tfIdf = tf * idf;
-				writer.writeTf_IdfInformation(monument.getMonumentID(), word, tf, idf, tfIdf);
+				writer.writeTfIdfInformation(monument.getMonumentID(), tagID, tf, tfIdf);
 			}
 		}
 		

@@ -8,13 +8,13 @@ public class MonumentVectorizer {
 
 	public static String Vectorize(Monument monument) {
 		
-		StringTokenizer tokenizer =
-				new StringTokenizer(monument.getName() + " " + monument.getDescription() + " " + monument.getCity());
+		String text = sanitize(monument.getName() + " " + monument.getDescription() + " " + monument.getCity());
+		StringTokenizer tokenizer = new StringTokenizer(text);
 		HashMap<String, Integer> wordCounts = new HashMap<String, Integer>();		
 		
 		// Count the words in the current monument
 		while(tokenizer.hasMoreTokens()) {
-			String word = tokenizer.nextToken();
+			String word = tokenizer.nextToken().toLowerCase();
 			
 			if(wordCounts.containsKey(word))
 				wordCounts.put(word, wordCounts.get(word) + 1);
@@ -36,5 +36,24 @@ public class MonumentVectorizer {
 			vector = vector.substring(0, index);
 		
 		return vector + "}";
+	}
+	
+	private static String sanitize(String text) {
+		
+		String result = null;
+		
+		// Remove the following characters: (, ), ",", \, /
+		result = text.replaceAll("\\(|\\)|,|\\|/|;", " ");
+		
+		// Trim left and right spaces
+		result = result.trim();
+		
+		// Remove trailing periods
+		result = result.replaceAll("\\.(?=\\s|$)", " ");
+		
+		// Change multiple spaces to a single space
+		result = result.replaceAll("( )\\1+", " ");
+		
+		return result;
 	}
 }
