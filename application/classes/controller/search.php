@@ -43,7 +43,7 @@ class Controller_Search extends Controller_Template_Website {
 		$monumentVectors = array();
 		foreach($monuments as $monument) {
 			$result = DB::query(Database::SELECT, 'SELECT MonumentID, Vector 
-													FROM Monumentzo.Monument 
+													FROM monumentzo.Monument 
 													WHERE MonumentID = ' . $monument);
 			
 			// Store each vector of the currently retrieved monument
