@@ -2,10 +2,10 @@
 
 class Controller_Search extends Controller_Template_Website {
 
-	private static final $idfThreshold = 1.50;
-
 	public function action_search()
 	{
+		const $idfThreshold = 1.50;
+		
 		// Get the query parameters
 		$query = $this->request->param('q');
 		$resultSize = $this->request->param('rsz', 10);
@@ -82,8 +82,8 @@ class Controller_Search extends Controller_Template_Website {
 		$dot = 0;
 		
 		// Calculate the angle between the vectors (dot product)
-		foreach($vector1 as $key => $value1) {
-			$value2 = $vector2[$key] ? $vector2[$key] : 0;
+		foreach($vector1 as $word => $value1) {
+			$value2 = $vector2[$word] ? $vector2[$word] : 0;
 			$dot += $value1 * $value2;
 		}
 		
