@@ -2,9 +2,10 @@
 
 class Controller_Search extends Controller_Template_Website {
 
-	public function action_search()
+	const idfThreshold = 1.50;
+
+	public function action_query()
 	{
-		const $idfThreshold = 1.50;
 		
 		// Get the query parameters
 		$query = $this->request->param('q');
@@ -16,10 +17,11 @@ class Controller_Search extends Controller_Template_Website {
 		foreach(explode(' ', $query) as $word) {
 			$result = DB::query(Database::SELECT, 'SELECT TextTagID, InverseDocumentFrequency
 													FROM monumentzo.TextTag 
-													WHERE TextTag = ' . $word);
+													WHERE TextTag = ' . $word)->execute();
+			$result = $result->as_array();
 			
 			// Only use words that have a relatively high inverse document frequency
-			if($result[0]['InverseDocumentFrequency'] > $idfThreshold) {			
+			if($result[0]['InverseDocumentFrequency'] > self::idfThreshold) {			
 				$queryVector[$word] = ($queryVector[$word])
 										? $queryVector[$word]['frequency'] + 1
 										: array('frequency' => 1);
@@ -27,7 +29,8 @@ class Controller_Search extends Controller_Template_Website {
 				// Get the monuments associated with the current word
 				$monumentResult = DB::query(Database::SELECT, 'SELECT MonumentID
 														FROM monumentzo.Monument_TextTag
-														WHERE TextTagID = ' . $result[0]['TextTagID']);
+														WHERE TextTagID = ' . $result[0]['TextTagID'])->execute();
+				$monumentResult= $monumentResult->as_array();
 				
 				// Store each MonumentID associated to this word														
 				for($i = 0; $i < count($result); $i++) {
@@ -44,7 +47,8 @@ class Controller_Search extends Controller_Template_Website {
 		foreach($monuments as $monument) {
 			$result = DB::query(Database::SELECT, 'SELECT MonumentID, Vector 
 													FROM monumentzo.Monument 
-													WHERE MonumentID = ' . $monument);
+													WHERE MonumentID = ' . $monument)->execute();
+			$result = $result->as_array();
 			
 			// Store each vector of the currently retrieved monument
 			$monumentVectors[$result[0]['MonumentID']] = json_decode($result[0]['Vector'], true);			

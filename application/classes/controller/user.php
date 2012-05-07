@@ -17,7 +17,7 @@ Class Controller_User extends Controller_Template_Website {
      * and that the username does not already exists.
      */
     public function action_register() {
-        $user = Model::factory('user');
+        $user = Model::factory('monumentzo_user');
 
         $this->template->title = 'Registreren';
         $this->template->content = View::factory('user/register');

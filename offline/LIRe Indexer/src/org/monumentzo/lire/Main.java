@@ -1,7 +1,5 @@
 package org.monumentzo.lire;
 
-import java.net.URL;
-
 import net.semanticmetadata.lire.DocumentBuilder;
 import net.semanticmetadata.lire.ImageSearchHits;
 
