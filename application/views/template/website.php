@@ -18,7 +18,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <?php echo html::anchor("home", "Monumentzo", array("class" => "brand")); ?>
+                    <a class="brand" href="/home">Monumentzo</a>
                     <div class="nav-collapse">
                         <ul class="nav">
                             <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
