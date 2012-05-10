@@ -30,7 +30,7 @@ class Model_Monumentzo_User extends Model_Database {
     public function register($username, $password, $email) {
         $hashed_password = Auth::instance()->hash($password);
         
-        $id = DB::insert('User', array('Name', 'HashedPassword', 'EmailAddress'))
+        $id = DB::insert('user', array('Name', 'HashedPassword', 'EmailAddress'))
                 ->bind(':user', $username)
                 ->bind(':pass', $hashed_password)
                 ->bind(':email', $email)
