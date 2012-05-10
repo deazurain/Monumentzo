@@ -14,9 +14,12 @@ CREATE  TABLE IF NOT EXISTS `monumentzo`.`User` (
   `Name` VARCHAR(45) NOT NULL ,
   `HashedPassword` VARCHAR(64) NOT NULL ,
   `EmailAddress` VARCHAR(255) NOT NULL ,
+  `LoginAttempts` INT UNSIGNED NOT NULL DEFAULT 0 ,
+  `LastLoginAttempt` INT UNSIGNED NOT NULL DEFAULT 0 ,
   PRIMARY KEY (`UserID`) ,
   UNIQUE INDEX `UserID_UNIQUE` (`UserID` ASC) ,
-  UNIQUE INDEX `Name_UNIQUE` (`Name` ASC) )
+  UNIQUE INDEX `Name_UNIQUE` (`Name` ASC) ,
+  UNIQUE INDEX `EmailAddress_UNIQUE` (`EmailAddress` ASC) )
 ENGINE = InnoDB;
 
 
@@ -265,6 +268,63 @@ CREATE  TABLE IF NOT EXISTS `monumentzo`.`SimilarImage` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `monumentzo`.`Role`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`Role` (
+  `RoleID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NOT NULL ,
+  `Description` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`RoleID`) ,
+  UNIQUE INDEX `Name_UNIQUE` (`Name` ASC) ,
+  UNIQUE INDEX `RoleID_UNIQUE` (`RoleID` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `monumentzo`.`User_Role`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`User_Role` (
+  `UserID` INT UNSIGNED NOT NULL ,
+  `RoleID` INT UNSIGNED NOT NULL ,
+  INDEX `fk_User_Role_UserID` (`UserID` ASC) ,
+  INDEX `fk_User_Role_RoleID` (`RoleID` ASC) ,
+  CONSTRAINT `fk_User_Role_UserID`
+    FOREIGN KEY (`UserID` )
+    REFERENCES `monumentzo`.`User` (`UserID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_User_Role_RoleID`
+    FOREIGN KEY (`RoleID` )
+    REFERENCES `monumentzo`.`Role` (`RoleID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `monumentzo`.`UserToken`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `monumentzo`.`UserToken` (
+  `UserTokenID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `UserID` INT UNSIGNED NOT NULL ,
+  `Agent` VARCHAR(64) NOT NULL ,
+  `Token` VARCHAR(45) NOT NULL ,
+  `Type` VARCHAR(45) NOT NULL ,
+  `Created` INT UNSIGNED NOT NULL ,
+  `Expires` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY (`UserTokenID`) ,
+  UNIQUE INDEX `UserTokenID_UNIQUE` (`UserTokenID` ASC) ,
+  UNIQUE INDEX `Token_UNIQUE` (`Token` ASC) ,
+  INDEX `fk_UserToken_UserID` (`UserID` ASC) ,
+  CONSTRAINT `fk_UserToken_UserID`
+    FOREIGN KEY (`UserID` )
+    REFERENCES `monumentzo`.`User` (`UserID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = MyISAM;
 
 
 
