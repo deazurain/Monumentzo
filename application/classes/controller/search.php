@@ -19,6 +19,11 @@ class Controller_Search extends Controller_Template_Website {
 													WHERE TextTag = :word')->param(':word', $word)->execute();
 			$result = $result->as_array();
 
+			// If the query words of the user can't be found skip
+			if(count($result) <= 0) {
+				continue;
+			}
+
 			// Only use words that have a relatively high inverse document frequency
 			if($result[0]['InverseDocumentFrequency'] > self::idfThreshold) {			
 				$queryVector[$word] = isset($queryVector[$word])
@@ -85,7 +90,7 @@ class Controller_Search extends Controller_Template_Website {
 		echo "<pre>" . Debug::dump($results) . "</pre>";
 
 		$this->template->title = 'Search results';
-	        $this->template->content = View::factory('search/results')->set('results', $results);
+		$this->template->content = View::factory('search/results')->set('results', $results);
 	}
 	
 	private function calculate_angle($vector1, $vector2) {
