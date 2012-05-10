@@ -1,10 +1,6 @@
-
-var container, stats;
-
+var container;
 var camera, scene, renderer;
-
 var geometry, group;
-
 var mouseX = 0, mouseY = 0;
 
 window.innerHeight = 800;
@@ -64,18 +60,12 @@ function onDocumentMouseMove(event) {
 
 	mouseX = ( event.clientX - windowHalfX ) * 10;
 	mouseY = ( event.clientY - windowHalfY ) * 10;
-
 }
-
-//
 
 function animate() {
 
 	requestAnimationFrame( animate );
-
 	render();
-	stats.update();
-
 }
 
 function render() {
@@ -96,5 +86,4 @@ function render() {
 	group.rotation.z = rz;
 
 	renderer.render( scene, camera );
-
 }
