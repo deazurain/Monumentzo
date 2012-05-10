@@ -7,58 +7,37 @@
  * 
  * @author Monumentzo Team
  */
-class Model_Monumentzo_User extends ORM {
 
-	protected $_table_name = 'User';
-	protected $_primary_key = 'UserID';
+class Model_Monumentzo_User extends Model_Database {
 
-	/*
-	protected $_belongs_to = array(
-		'[alias name]' => array(
-			'model'       => '[model name]',
-			'foreign_key' => '[column]',
-		),
-	);
+    private $userID;
+    private $username;
+    private $password;
+    private $emailaddress;
+    private $visitedList = null;
+    private $favoriteList = null;
+    private $wishList = null;
 
-	public function rules() {
-		return array(
-			'Name' => array(
-				array('not_empty'),
-				array('min_length', array(':value', 2)),
-				array('max_length', array(':value', 32)),
-      	array('regex', array(':value', '/^[-\pL\pN_.]++$/uD')),
-      ),
-			'HashedPassword' => array(
-				array('not_empty'),
-			),
-			'EmailAddress' => array(
-				array('not_empty'),
-				array('min_length', array(':value', 6)),
-				array('max_length', array(':value', 255)),
-				array('email'),
-			),
-		);
-	} // rules
- 
-  public function filters() {
-		return array(
-			'HashedPassword' => array(
-					array(array($this, 'filter_hash_password')),
-			),
-		);
-	}
-
-	public function validate_username($username) {
-		// make sure user name is available
-		return ORM::factory('member', array('username' => $username))->loaded();
-	}
-
-	public function filter_password($password) {
-		// Do something to hash the password
-		
-	}
-
-	*/
+    /*
+     * Registers a new user
+     * 
+     * @param string    The username
+     * @param string    The password
+     * @param string    The email address
+     * @return array    Query result
+     */
+    public function register($username, $password, $email) {
+        $hashed_password = Auth::instance()->hash($password);
+        
+        $id = DB::insert('user', array('Name', 'HashedPassword', 'EmailAddress'))
+                ->bind(':user', $username)
+                ->bind(':pass', $hashed_password)
+                ->bind(':email', $email)
+                ->values(array(':user', ':pass', ':email'))
+                ->execute();
+        
+        return $id;
+    }
 }
 
 ?>
