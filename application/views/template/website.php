@@ -5,6 +5,7 @@
         <meta name="language" content="<?php echo I18n::$lang ?>" /> 
         <title><?php echo $title ?></title>
         <?php foreach ($styles as $file => $type) echo HTML::style($file, array('media' => $type)), PHP_EOL ?>
+        <link rel="stylesheet/less" href="/assets/js/bootstrap.less">
         <?php foreach ($scripts as $file) echo HTML::script($file), PHP_EOL ?>
     </head>
 
