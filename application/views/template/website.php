@@ -23,11 +23,12 @@
                         <ul class="nav">
                             <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
                             <?php if (isset($login)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
+							<li><?php echo HTML::anchor('/browse/index', 'Browse'); ?></li>
                         </ul>
                     </div>
                     <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
                     <?php echo Form::input('q', NULL, array('type' => 'text', 'class' => 'search-query', 'placeholder' => 'Search')); ?>
-		    <?php echo Form::hidden('rsz', '10'); ?>
+		    		<?php echo Form::hidden('rsz', '10'); ?>
                     <?php echo Form::close(); ?>
                 </div>
             </div>
