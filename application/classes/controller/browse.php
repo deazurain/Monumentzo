@@ -1,15 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Browse extends Controller_Template_Website {
-
-	 public function before()
-	 {
-		 $this->auto_render = ! $this->request->is_ajax();
-		 if($this->auto_render === TRUE){
-			parent::before();
-		 }
-	 }
-
+	
 	public function action_index()
 	{
 		$this->template->title = 'Browse';
