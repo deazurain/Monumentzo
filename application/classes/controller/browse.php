@@ -2,6 +2,14 @@
 
 class Controller_Browse extends Controller_Template_Website {
 
+	 public function before()
+	 {
+		 $this->auto_render = ! $this->request->is_ajax();
+		 if($this->auto_render === TRUE){
+			parent::before();
+		 }
+	 }
+
 	public function action_index()
 	{
 		$this->template->title = 'Browse';
@@ -17,8 +25,10 @@ class Controller_Browse extends Controller_Template_Website {
 												LIMIT 20');
 		$result = $result->as_array();
 		
-		// Return json to the caller
-		$this->request->header['Content-Type'] = 'application/json';
-		$this->request->response = json_encode($result);
+		if($this->request->is_ajax()) {
+			// Return json to the caller
+			$this->request->header['Content-Type'] = 'application/json';
+			$this->request->response = json_encode($result);
+		}
 	}
 }
