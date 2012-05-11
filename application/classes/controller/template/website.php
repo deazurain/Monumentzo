@@ -21,8 +21,10 @@ class Controller_Template_Website extends Controller_Template {
             $this->template->styles = array();
             $this->template->scripts = array();
 
-
-            if (!Auth::instance()->logged_in()) {
+						if (Auth::instance()->logged_in()) {
+							$this->template->logout = View::factory('user/logout');
+						}
+						else {
                 $this->template->login = View::factory('user/login');
                 $this->template->register = View::factory('user/register');
             }

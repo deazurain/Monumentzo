@@ -15,7 +15,12 @@ class Model_Auth_User_Token extends ORM {
 	protected $_primary_key = 'UserTokenID';
 
 	// Relationships
-	protected $_belongs_to = array('User' => array());
+	protected $_belongs_to = array(
+		'User' => array(
+			'model' => 'User',
+			'foreign_key' => 'UserID',
+		)
+	);
 
 	/**
 	 * Handles garbage collection and deleting of expired objects.

@@ -22,7 +22,9 @@
                     <div class="nav-collapse">
                         <ul class="nav">
                             <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
-                            <?php if (isset($login)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
+                            <?php if (isset($register)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
+                            <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>
+														
 							<li><?php echo HTML::anchor('/browse/index', 'Browse'); ?></li>
                         </ul>
                     </div>
@@ -45,6 +47,13 @@
                 echo "<div id='register' style='display:none'>" . $register . "</div>";
             }
         ?>
+ 
+        <?php
+            if (isset($logout)) {
+                echo "<div id='logout' style='display:none'>" . $logout . "</div>";
+            }
+        ?>
+
 
         <div class="container">
             <?php echo $content ?>

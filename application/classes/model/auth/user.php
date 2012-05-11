@@ -19,7 +19,10 @@ class Model_Auth_User extends ORM {
 	 * @var array Relationhips
 	 */
 	protected $_has_many = array(
-		'UserToken' => array('model' => 'User_Token'),
+		'UserToken' => array(
+			'model' => 'User_Token',
+			'foreign_key' => 'UserID', 
+		),
 		'Role'       => array(
 			'model' => 'Role',
 			'through' => 'User_Role', 

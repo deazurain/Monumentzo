@@ -153,9 +153,9 @@ class Monumentzo_Auth_ORM extends Auth {
 			// Load the token and user
 			$token = ORM::factory('User_Token', array('Token' => $token));
 
-			if ($token->loaded() AND $token->user->loaded())
+			if ($token->loaded() AND $token->User->loaded())
 			{
-				if ($token->user_agent === sha1(Request::$user_agent))
+				if ($token->Agent === sha1(Request::$user_agent))
 				{
 					// Save the token to create a new unique token
 					$token->save();
@@ -164,10 +164,10 @@ class Monumentzo_Auth_ORM extends Auth {
 					Cookie::set('authautologin', $token->Token, $token->Expires - time());
 
 					// Complete the login with the found data
-					$this->complete_login($token->user);
+					$this->complete_login($token->User);
 
 					// Automatic login was successful
-					return $token->user;
+					return $token->User;
 				}
 
 				// Token is invalid
