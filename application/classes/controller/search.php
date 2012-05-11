@@ -87,7 +87,7 @@ class Controller_Search extends Controller_Template_Website {
 							'place' => $result[0]['City'],
 							'image' => $result[0]['Image']);
 		}
-		echo "<pre>" . Debug::dump($results) . "</pre>";
+
 
 		$this->template->title = 'Search results';
 		$this->template->content = View::factory('search/results')->set('results', $results);

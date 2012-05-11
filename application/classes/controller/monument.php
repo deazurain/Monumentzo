@@ -8,8 +8,8 @@ Class Controller_Monument extends Controller_Template_Website
 	public function action_view($id){
 		$monument = new monument($id);
 		
-		$this->template->title = 'Log in';
-      $this->template->content = View::factory('monument');
+		$this->template->title = $monument->name;
+		$this->template->content = View::factory('monument');
 		$this->template->content->monument = $monument;
 	}
 }
