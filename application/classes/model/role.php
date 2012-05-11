@@ -4,6 +4,6 @@
  * Monumentzo auth user
  */
 
-class Model_Role extends Model_Monumentzo_Ormrole {
+class Model_Role extends Model_Auth_Role {
 
 }
