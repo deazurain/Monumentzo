@@ -34,7 +34,7 @@ $.get('/browse/info', function(responseText) {
 	
 		group = new THREE.Object3D();
 	
-		$.each(data, function(index, monument) {
+		$.each(responseText, function(index, monument) {
 			var mesh = new THREE.mesh(geometry, material);
 			mesh.position.x = (index % 5) * 120;
 			mesh.position.y = (index % 5) * 120;
