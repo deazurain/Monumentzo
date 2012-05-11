@@ -13,7 +13,9 @@ $(document).on('mousemove', function (event) {
 	mouseY = ( event.clientY - windowHalfY ) * 10;
 });
 
-$.getJSON('/browse/info', function(data) {
+$.get('/browse/info', function(responseText) {
+	
+	console.log(responseText);
 	
 	(function init() {
 	
