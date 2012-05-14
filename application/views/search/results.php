@@ -6,7 +6,7 @@ foreach($results as $result){
 	echo "<div class='span3'>";
 	echo "<div class='well result'>";
 	echo "<div class='row'>";
-	echo "<img src='/".$result['image']."' />";
+	echo "<img src='/".$result['image']."' href='/monument/view/".$result['id']."'/>";
 	echo "</div><div class='row'><p>";
 	echo $result['name'];
 	echo "</p></div><div class='row'><p>";
