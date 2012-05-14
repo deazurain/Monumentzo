@@ -50,6 +50,7 @@ class Controller_Template_Website extends Controller_Template {
                 'assets/js/bootstrap.js',
                 //'assets/fancybox/jquery.mousewheel-3.0.4.pack.js',
                 'assets/fancybox/source/jquery.fancybox.pack.js',
+				'assets/js/bootstrap-dropdown.js'
             );
             $this->template->styles = array_merge($this->template->styles, $styles);
             $this->template->scripts = array_merge($this->template->scripts, $scripts);

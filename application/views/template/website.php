@@ -26,6 +26,14 @@
                             <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>
 														
 							<li><?php echo HTML::anchor('/browse/index', 'Browse'); ?></li>
+                            <li class='dropdown'>
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Lijsten</a>
+                                <ul class="dropdown-menu">
+                                	<li><?php echo HTML::anchor('/list/favorites', 'Favorieten'); ?></li>
+                                    <li><?php echo HTML::anchor('/list/visited', 'Bezochte monumenten'); ?></li>
+                                    <li><?php echo HTML::anchor('/list/wanttovisit', 'Nog te bezoeken monumenten'); ?></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                     <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
