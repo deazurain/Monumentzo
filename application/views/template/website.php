@@ -4,11 +4,8 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
         <meta name="language" content="<?php echo I18n::$lang ?>" /> 
         <title><?php echo $title ?></title>
-        <?php foreach ($styles as $file => $type)
-            echo HTML::style($file, array('media' => $type)), PHP_EOL ?>
-        <link rel="stylesheet/less" href="/assets/less/bootstrap.less">
-<?php foreach ($scripts as $file)
-    echo HTML::script($file), PHP_EOL ?>
+        <?php foreach ($styles as $file => $type) echo HTML::style($file, array('media' => $type)), PHP_EOL ?>
+        <?php foreach ($scripts as $file) echo HTML::script($file), PHP_EOL ?>
     </head>
 
     <body>
@@ -21,27 +18,53 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="/page/home">Monumentzo</a>
+                    <a class="brand" href="/home">Monumentzo</a>
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <?php if (isset($login)) echo "<li><a class='fancybox' href='/page/login'>Inloggen</a></li>" ?>
-                            <?php if (isset($login)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
-                            <li><?php echo HTML::anchor('/browse/index', 'Browse'); ?></li>
+                            <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
+                            <?php if (isset($register)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
+                            <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>
+														
+							<li><?php echo HTML::anchor('/browse/index', 'Browse'); ?></li>
+                            <li class='dropdown'>
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									Lijsten
+									<b class="caret"></b>
+								</a>
+                                <ul class="dropdown-menu">
+                                	<li><?php echo HTML::anchor('/list/favorite/view', 'Favorieten'); ?></li>
+                                    <li><?php echo HTML::anchor('/list/visited/view', 'Bezochte monumenten'); ?></li>
+                                    <li><?php echo HTML::anchor('/list/wish/view', 'Nog te bezoeken monumenten'); ?></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                     <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
                     <?php echo Form::input('q', NULL, array('type' => 'text', 'class' => 'search-query', 'placeholder' => 'Search')); ?>
-                    <?php echo Form::hidden('rsz', '10'); ?>
+		    		<?php echo Form::hidden('rsz', '10'); ?>
                     <?php echo Form::close(); ?>
                 </div>
             </div>
         </div>
-        
-         <?php
-        if (isset($register)) {
-            echo "<div id='register' style='display:none'>" . $register . "</div>";
-        }
+
+        <?php
+            if (isset($login)) {
+                echo "<div id='login' style='display:none'>" . $login . "</div>";
+            }
         ?>
+        
+        <?php
+            if (isset($register)) {
+                echo "<div id='register' style='display:none'>" . $register . "</div>";
+            }
+        ?>
+ 
+        <?php
+            if (isset($logout)) {
+                echo "<div id='logout' style='display:none'>" . $logout . "</div>";
+            }
+        ?>
+
 
         <div class="container">
             <?php echo $content ?>

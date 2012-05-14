@@ -122,3 +122,9 @@ Route::set('default', '(<controller>(/<action>(/<id>)))')
 		'controller' => 'page',
 		'action'     => 'home'
 	));
+
+/**
+ * Set the cookie salt. 
+ */
+Cookie::$salt = '23WQES28t0CwLRrDc9OPQBSuBlYjPoCuGyzlROpNd1y9CuvNl24QsMoXM55Lnd6';
+

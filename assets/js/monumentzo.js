@@ -5,6 +5,10 @@ var variables = {
 
 $(document).ready(function() {
     
+
+	/*
+	Fancybox
+	*/
     var fancy_options = {
         type            : 'iframe',
         href            : '/page/login',
@@ -31,6 +35,11 @@ $(document).ready(function() {
                 break;
         }
     });
-    
+
+
+	/*
+	dropdown menu
+	*/
+	$('.dropdown-toggle').dropdown()
 	
 });

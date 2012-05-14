@@ -30,3 +30,32 @@ Fancybox
 .fancybox-inner input {
     align: right;
 }
+
+/*
+Browse
+*/
+
+#browseWindow {
+	padding-top: 0px;
+}
+
+/*
+Search
+*/
+
+#resultsWindow img{
+	max-height:100px;
+	max-width:200px;
+}
+
+#resultsWindow .result{
+	padding:10px;
+}
+
+/*
+Monument
+*/
+#monument img{
+	max-height:95%;
+	max-width:95%;
+}
