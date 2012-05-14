@@ -2,6 +2,14 @@
 
 class Controller_List extends Controller_Template_Website {
 
+	public function action_add_favorite() {
+		echo '<pre>' . Debug::Dump($this->request->param('id')) . '</pre>';
+	}
+	
+	public function action_remove_favorite() {
+		
+	}
+
 	public function action_favorites() {
 		
 		// Get the user that is currently logged in
