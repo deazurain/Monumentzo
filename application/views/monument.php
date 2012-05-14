@@ -45,7 +45,7 @@
 			</div><!--/row-->
 		</div><!--/span-->
         <div class="row">
-        	<?php echo HTML::anchor('/list/add_favorite/' . $monument['MonumentID'], 'Toevoegen aan favorieten'); ?>
+        	<?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Toevoegen aan favorieten'); ?>
         </div>
 	</div><!--/row-->
 </div><!--/container-->
