@@ -32,9 +32,9 @@
 									<b class="caret"></b>
 								</a>
                                 <ul class="dropdown-menu">
-                                	<li><?php echo HTML::anchor('/list/favorites', 'Favorieten'); ?></li>
-                                    <li><?php echo HTML::anchor('/list/visited', 'Bezochte monumenten'); ?></li>
-                                    <li><?php echo HTML::anchor('/list/wanttovisit', 'Nog te bezoeken monumenten'); ?></li>
+                                	<li><?php echo HTML::anchor('/list/favorite/view', 'Favorieten'); ?></li>
+                                    <li><?php echo HTML::anchor('/list/visited/view', 'Bezochte monumenten'); ?></li>
+                                    <li><?php echo HTML::anchor('/list/wish/view', 'Nog te bezoeken monumenten'); ?></li>
                                 </ul>
                             </li>
                         </ul>
