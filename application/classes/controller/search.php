@@ -15,7 +15,7 @@ class Controller_Search extends Controller_Template_Website {
 		$monuments = array();
 		foreach(explode(' ', $query) as $word) {
 			$result = DB::query(Database::SELECT, 'SELECT TextTagID, InverseDocumentFrequency
-													FROM monumentzo.texttag 
+													FROM monumentzo.TextTag 
 													WHERE TextTag = :word')->param(':word', $word)->execute();
 			$result = $result->as_array();
 
@@ -32,7 +32,7 @@ class Controller_Search extends Controller_Template_Website {
 				
 				// Get the monuments associated with the current word
 				$monumentResult = DB::query(Database::SELECT, 'SELECT MonumentID
-														FROM monumentzo.monument_texttag
+														FROM monumentzo.Monument_TextTag
 														WHERE TextTagID = :tagID')->param(':tagID', $result[0]['TextTagID'])->execute();
 				
 				$monumentResult = $monumentResult->as_array();
@@ -51,7 +51,7 @@ class Controller_Search extends Controller_Template_Website {
 		$monumentVectors = array();
 		foreach($monuments as $monumentID) {
 			$result = DB::query(Database::SELECT, 'SELECT MonumentID, Vector 
-													FROM monumentzo.monument 
+													FROM monumentzo.Monument 
 													WHERE MonumentID = :monumentID')->param(':monumentID', $monumentID)->execute();
 			$result = $result->as_array();
 			
@@ -78,9 +78,9 @@ class Controller_Search extends Controller_Template_Website {
 		$results = array();
 		foreach($relevance as $monumentID => $angle) {
 			$result = DB::query(Database::SELECT, 'SELECT Name, City, Path as Image 
-								FROM monumentzo.monument, monumentzo.image 
-								WHERE monumentzo.monument.MonumentID = monumentzo.image.MonumentID 
-								AND monumentzo.monument.MonumentID = :monumentID')->param(':monumentID', $monumentID)->execute();
+								FROM monumentzo.Monument, monumentzo.Image 
+								WHERE monumentzo.Monument.MonumentID = monumentzo.Image.MonumentID 
+								AND monumentzo.Monument.MonumentID = :monumentID')->param(':monumentID', $monumentID)->execute();
 			$result = $result->as_array();
 
 			$results[$monumentID] = array('name' => $result[0]['Name'],

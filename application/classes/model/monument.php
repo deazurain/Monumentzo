@@ -5,44 +5,30 @@
  */
 class Model_Monument extends Model_Database {
 
-	$monumentID;
-	$name;
-	$discription;
-	$latitude;
-	$longitude;
-	$city;
-	$province;
-	$street;
-	$streetNumberText;
-	$foundationDateText;
-	$attributes;
-	$categories;
+	private $monument;
 
 	public function __construct($id){
-		parent::__construct()
+		parent::__construct();
 		$result = DB::query(Database::SELECT, 'SELECT * FROM Monument WHERE MonumentID = :id')->bind(':id', $id)->execute();
-
-		$monument = $result[0];
 		
-		$monumentID			= $id;
-		$name 				= $monument->Name;
-		$discription 		= $monument->Discription;
-		$latitude 			= $monument->Latitude;
-		$longitude			= $monument->Latitude;
-		$city 				= $monument->City;
-		$province 			= $monument->Province;
-		$street				= $monument->Street;
-		$streetNumberText 	= $monument->StreetNumberText;
-		$foundationDateText = $monument->FoundationDateText;
-		$attributes 		= $monument->Attributes;
-		$categories 		= $monument->Categories;
+		$result = $result->as_array();
+		$this->monument = $result[0];
+		$this->monument['Image'] = $this->getBaseImage();
 	}
 	
-	public function viewMonument(){}
+	public function viewMonument(){
+
+		return $this->monument;
+	}
 	
 	public function getInfo(){}
 	
-	public function getBaseImage(){}
+	public function getBaseImage(){
+		$result = DB::query(Database::SELECT, 'SELECT Path FROM Image WHERE ImageID = :id')->bind(':id', $this->monument['ImageID'])->execute();
+		$result = $result->as_array();
+		
+		return $result[0]['Path'];
+	}
 	
 	public function getAllImages(){}
 }
