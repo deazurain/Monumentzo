@@ -27,7 +27,10 @@
 														
 							<li><?php echo HTML::anchor('/browse/index', 'Browse'); ?></li>
                             <li class='dropdown'>
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Lijsten</a>
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									Lijsten
+									<b class="caret"></b>
+								</a>
                                 <ul class="dropdown-menu">
                                 	<li><?php echo HTML::anchor('/list/favorites', 'Favorieten'); ?></li>
                                     <li><?php echo HTML::anchor('/list/visited', 'Bezochte monumenten'); ?></li>

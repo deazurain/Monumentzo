@@ -4,6 +4,7 @@ class Controller_Home extends Controller_Template_Website {
 
 	public function action_index()
 	{
+		/*
 		echo '<pre>' . Debug::dump(ORM::factory('Role')->where('Name', '=', 'login')->find()->loaded()) . '</pre>';
 		if(! ORM::factory('Role')->where('Name', '=', 'login')->find()->loaded()) {
 			echo 'CREATING LOGIN ROLE';
@@ -58,7 +59,7 @@ class Controller_Home extends Controller_Template_Website {
 			catch (ORM_Validation_Exception $e) {
 				echo '<pre>' . $e->errors() . '</pre>';
 			}
-		}
+		}*/
 
 		$this->template->title = 'Home';
       	$this->template->content = View::factory('home');

@@ -17,7 +17,7 @@ class Model_User extends Model_Monumentzo_User {
 	}
 
 	public function containsUser() {
-		return ($user != NULL);
+		return ($this->user != NULL);
 	}
 
 	public function getWishList() {

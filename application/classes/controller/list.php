@@ -5,10 +5,10 @@ class Controller_List extends Controller_Template_Website {
 	public function action_favorites() {
 		
 		// Get the user that is currently logged in
-		$userID = // DON'T KNOW HOW TO DO THIS
+		$userID = Auth::instance()->get_user();
 		
 		// If there is no user logged in display error page
-		if($user == NULL)
+		if($userID === NULL)
 			echo 'ERROR';
 			
 		$user = new Model_User($userID);
@@ -21,10 +21,10 @@ class Controller_List extends Controller_Template_Website {
 	public function action_visited() {
 		
 		// Get the user that is currently logged in
-		$userID = // DON'T KNOW HOW TO DO THIS
+		$userID = Auth::instance()->get_user();
 		
 		// If there is no user logged in display error page
-		if($user == NULL)
+		if($userID === NULL)
 			echo 'ERROR';
 			
 		$user = new Model_User($userID);
@@ -37,10 +37,10 @@ class Controller_List extends Controller_Template_Website {
 	public function action_wanttovisit() {
 		
 		// Get the user that is currently logged in
-		$userID = // DON'T KNOW HOW TO DO THIS
+		$userID = Auth::instance()->get_user();
 		
 		// If there is no user logged in display error page
-		if($user == NULL)
+		if($userID === NULL)
 			echo 'ERROR';
 			
 		$user = new Model_User($userID);

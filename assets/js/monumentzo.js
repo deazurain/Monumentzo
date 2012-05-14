@@ -1,5 +1,9 @@
 $(document).ready(function() {
     
+
+	/*
+	Fancybox
+	*/
     var fancy_options = {
         width		: '35%',
         height		: '60%',
@@ -21,6 +25,11 @@ $(document).ready(function() {
                 break;
         }
     });
-    
+
+
+	/*
+	dropdown menu
+	*/
+	$('.dropdown-toggle').dropdown()
 	
 });
