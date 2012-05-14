@@ -119,6 +119,6 @@ Route::set('mick', 'mick/<action>')
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'home',
-		'action'     => 'index'
+		'controller' => 'page',
+		'action'     => 'home'
 	));
