@@ -20,7 +20,7 @@ $(document).ready(function() {
         closeEffect	: 'none'
     };
     
-    //$('.fancybox').fancybox(fancy_options);
+    $('.fancybox').fancybox(fancy_options);
     
     $('.fancybox').live('click', function(event){
         event.preventDefault();
