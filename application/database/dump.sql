@@ -15,6 +15,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+DROP SCHEMA IF EXISTS `monumentzo` ;
+CREATE SCHEMA IF NOT EXISTS `monumentzo` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `monumentzo` ;
+
+
 --
 -- Table structure for table `Category`
 --
