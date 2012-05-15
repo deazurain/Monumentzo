@@ -100,7 +100,7 @@ class Controller_Search extends Controller_Template_Website {
 
 		// Calculate the angle between the vectors (dot product)
 		foreach($vector1 as $word => $value1) {
-			$value2 = $vector2[$word] ? $vector2[$word] : 0;
+			$value2 = isset($vector2[$word]) ? $vector2[$word] : 0;
 			$dot += doubleval($value1) * doubleval($value2);
 		}
 		
