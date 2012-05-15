@@ -10,8 +10,8 @@ $(document).ready(function() {
 	Fancybox
 	*/
     var fancy_options = {
-        type            : 'iframe',
-        href            : '/page/login',
+        type            : 'inline',
+        /*href            : '/page/login',*/
         width		: '35%',
         height		: 'auto',
         autoSize        : false,

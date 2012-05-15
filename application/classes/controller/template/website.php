@@ -13,21 +13,23 @@ class Controller_Template_Website extends Controller_Template {
      * controllers if they need to be modified.
      */
     public function before() {
-        parent::before();
-        if ($this->auto_render) {
-            // Initialize empty values
-            $this->template->title = '';
-            $this->template->content = '';
-            $this->template->styles = array();
-            $this->template->scripts = array();
 
-						if (Auth::instance()->logged_in()) {
-							$this->template->logout = View::factory('user/logout');
-						}
-						else {
-                $this->template->login = View::factory('user/login');
-                $this->template->register = View::factory('user/register');
-            }
+        parent::before();
+
+        if ($this->auto_render) {
+					// Initialize empty values
+					$this->template->title = '';
+					$this->template->content = '';
+					$this->template->styles = array();
+					$this->template->scripts = array();
+
+					if (Auth::instance()->logged_in()) {
+						$this->template->logout = View::factory('user/logout');
+					}
+					else {
+						$this->template->login = View::factory('user/login');
+						$this->template->register = View::factory('user/register');
+					}
         }
     }
 
