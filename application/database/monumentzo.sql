@@ -324,7 +324,7 @@ CREATE  TABLE IF NOT EXISTS `monumentzo`.`UserToken` (
     REFERENCES `monumentzo`.`User` (`UserID` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 
