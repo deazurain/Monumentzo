@@ -13,9 +13,9 @@ $(document).on('mousemove', function (event) {
 	mouseY = ( event.clientY - windowHalfY ) * 10;
 });
 
-$.get('/browse/info', function(responseText) {
-	
-	console.log(responseText);
+var infoUrl = $('body').attr('data-base') + 'browse/info'; 
+
+$.getJSON(infoUrl, function(data, textStatus) {
 	
 	(function init() {
 	
@@ -33,12 +33,22 @@ $.get('/browse/info', function(responseText) {
 		var material = new THREE.MeshNormalMaterial();
 	
 		group = new THREE.Object3D();
-	
-		$.each(responseText, function(index, monument) {
-			var mesh = new THREE.mesh(geometry, material);
-			mesh.position.x = (index % 5) * 120;
-			mesh.position.y = (index % 5) * 120;
+		
+		var x = -2, y = -1.5;
+		$.each(data, function(index, monument) {
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.x = x * 120;
+			mesh.position.y = y * 120;
 			mesh.position.z = 0;
+			
+			// Increase the x position
+			x += 1;
+			
+			// Make the cube in a nice little square
+			if(x >= 3) {
+				x = -2;
+				y += 1;
+			}
 			
 			mesh.rotation.x = 0;
 			mesh.rotation.y = 0;
@@ -65,7 +75,7 @@ $.get('/browse/info', function(responseText) {
 	
 	function render() {
 	
-		var time = Date.now() * 0.001;
+		/*var time = Date.now() * 0.001;
 	
 		var rx = Math.sin( time * 0.7 ) * 0.5,
 			ry = Math.sin( time * 0.3 ) * 0.5,
@@ -78,7 +88,7 @@ $.get('/browse/info', function(responseText) {
 	
 		group.rotation.x = rx;
 		group.rotation.y = ry;
-		group.rotation.z = rz;
+		group.rotation.z = rz; */
 	
 		renderer.render( scene, camera );
 	}

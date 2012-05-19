@@ -9,7 +9,7 @@
         <?php foreach ($scripts as $file) echo HTML::script($file), PHP_EOL ?>
     </head>
 
-    <body>
+    <body data-base="<?php echo url::base(); ?>">
 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -72,6 +72,5 @@
         </div>
 
 		<?php echo HTML::script('assets/js/monumentzo.js'), PHP_EOL ?>
-        <!--<script type="text/javascript" src="/assets/js/monumentzo.js"></script>-->
     </body>
 </html>

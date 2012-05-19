@@ -16,6 +16,9 @@ class Controller_Template_Website extends Controller_Template {
 
         parent::before();
 
+		if ($this->request->is_ajax())
+			$this->auto_render = false;
+
         if ($this->auto_render) {
 					// Initialize empty values
 					$this->template->title = '';
