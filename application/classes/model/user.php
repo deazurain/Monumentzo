@@ -4,6 +4,4 @@
  * Monumentzo auth user
  */
 
-class Model_User extends Model_Auth_User { 
-
-}
+class Model_User extends Model_Monumentzo_User {}

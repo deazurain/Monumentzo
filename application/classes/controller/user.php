@@ -45,15 +45,17 @@ Class Controller_User extends Controller_Template_Website {
 					}
 					$user->add('Role', $login_role);
 
-					Request::current()->redirect('home');
+					Request::current()->redirect('');
         }
 
         // If the validation failed, collect the errors and return them
         $errors = $post->errors('user');
 
+				/* TODO: repair this code
         $this->response->body->fancybox(View::factory('user/register'))
                 ->bind('post', $post)
                 ->bind('errors', $errors);
+				 */
     }
 
     /**
@@ -67,7 +69,7 @@ Class Controller_User extends Controller_Template_Website {
 
 			if($user) {
 				// already logged in
-				Request::current()->redirect('home');
+				Request::current()->redirect('');
 			}
 
         $this->template->title = 'Inloggen';
@@ -82,7 +84,7 @@ Class Controller_User extends Controller_Template_Website {
             
             if ($success) {
                 // Login successful, redirect
-                Request::current()->redirect('home');
+                Request::current()->redirect('');
             } else {
                 // Login unsuccessful return with error message
                 $this->template->content->errors = 'Incorrecte gebruikersnaam of wachtwoord.';
@@ -95,7 +97,7 @@ Class Controller_User extends Controller_Template_Website {
      */
     public function action_logout() {
         Auth::instance()->logout();
-        Request::current()->redirect('welcome');
+        Request::current()->redirect('');
     }
 }
 

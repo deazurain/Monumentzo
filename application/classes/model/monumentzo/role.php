@@ -1,4 +1,5 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
+
 /**
  * Default auth role
  *
@@ -6,7 +7,7 @@
  * @author     Monumentzo Team
  * @copyright  (c) 2012 Monumentzo Team
  */
-class Model_Auth_Role extends ORM {
+class Model_Monumentzo_Role extends ORM {
 
 	protected $_object_name = 'Role';
 	protected $_table_name = 'Role';
