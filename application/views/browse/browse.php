@@ -1,4 +1,4 @@
 <div class="container-fluid" id="browseWindow">
-	<script src="/assets/js/Three.js"></script>
-	<script src="/assets/js/browse.js"></script>
+	<?php echo HTML::script('/assets/js/Three.js'), PHP_EOL ?>
+	<?php echo HTML::script('/assets/js/browse.js'), PHP_EOL ?>
 </div>

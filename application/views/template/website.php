@@ -19,7 +19,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="/home">Monumentzo</a>
+                    <?php echo HTML::anchor('/home', 'Monumentzo', array('class' => 'brand')); ?>
+                    <!--<a class="brand" href="/home">Monumentzo</a>-->
                     <div class="nav-collapse">
                         <ul class="nav">
                             <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
@@ -70,6 +71,7 @@
             <?php echo $content ?>
         </div>
 
-        <script type="text/javascript" src="/assets/js/monumentzo.js"></script>
+		<?php echo HTML::script('assets/js/monumentzo.js'), PHP_EOL ?>
+        <!--<script type="text/javascript" src="/assets/js/monumentzo.js"></script>-->
     </body>
 </html>
