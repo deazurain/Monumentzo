@@ -8,7 +8,7 @@
  * @copyright  (c) 2007-2011 Kohana Team
  * @license    http://kohanaframework.org/license
  */
-class Model_Auth_User_Token extends ORM {
+class Model_Monumentzo_User_Token extends ORM {
 
 	protected $_object_name = 'User_Token';
 	protected $_table_name = 'UserToken';

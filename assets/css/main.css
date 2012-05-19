@@ -51,3 +51,11 @@ Search
 #resultsWindow .result{
 	padding:10px;
 }
+
+/*
+Monument
+*/
+#monument img{
+	max-height:95%;
+	max-width:95%;
+}

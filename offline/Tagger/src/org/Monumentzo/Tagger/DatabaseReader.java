@@ -42,7 +42,7 @@ public class DatabaseReader {
 		PreparedStatement monumentData = null;
 		try {
 			monumentData =
-				dbConnection.prepareStatement("SELECT MonumentID, Name, Description, City FROM Monumentzo.Monument;");
+				dbConnection.prepareStatement("SELECT MonumentID, Name, Description, City FROM monumentzo.Monument;");
 			monumentData.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
