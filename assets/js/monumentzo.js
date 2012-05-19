@@ -1,3 +1,8 @@
+var variables = {
+    base: this.base,
+    user: this.user
+};
+
 $(document).ready(function() {
     
 
@@ -5,8 +10,10 @@ $(document).ready(function() {
 	Fancybox
 	*/
     var fancy_options = {
+        type            : 'inline',
+        /*href            : '/page/login',*/
         width		: '35%',
-        height		: '60%',
+        height		: 'auto',
         autoSize        : false,
         closeClick	: false,
         openEffect      : 'none',
@@ -20,6 +27,9 @@ $(document).ready(function() {
         var src = $(this);
         
         switch(src.attr('href')) {
+            case '/page/login':
+                $.fancybox(fancy_options);
+                break;
             case '#close':
                 $.fancybox.close();
                 break;

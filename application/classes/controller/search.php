@@ -83,9 +83,10 @@ class Controller_Search extends Controller_Template_Website {
 								AND monumentzo.Monument.MonumentID = :monumentID')->param(':monumentID', $monumentID)->execute();
 			$result = $result->as_array();
 
-			$results[$monumentID] = array('name' => $result[0]['Name'],
-							'place' => $result[0]['City'],
-							'image' => $result[0]['Image']);
+			$results[$monumentID] = array('MonumentID' => $monumentID,
+			        'Name' => $result[0]['Name'],
+							'Place' => $result[0]['City'],
+							'Image' => $result[0]['Image']);
 		}
 
 
@@ -99,7 +100,7 @@ class Controller_Search extends Controller_Template_Website {
 
 		// Calculate the angle between the vectors (dot product)
 		foreach($vector1 as $word => $value1) {
-			$value2 = $vector2[$word] ? $vector2[$word] : 0;
+			$value2 = isset($vector2[$word]) ? $vector2[$word] : 0;
 			$dot += doubleval($value1) * doubleval($value2);
 		}
 		

@@ -25,6 +25,9 @@ public class TagDataExtractor {
 		// Count the words in all the documents
 		for(int i = 0; i < documentCount; i++) {
 			Monument monument = monumentData.get(i);
+			
+			System.out.println("Extracting words from monument: " + monument.getName() + "(" + i + "/" + documentCount + ")");
+			
 			String text = sanitize(monument.getName() + " " + monument.getDescription() + " " + monument.getCity());
 			StringTokenizer tokenizer = new StringTokenizer(text);
 			

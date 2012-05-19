@@ -41,7 +41,7 @@ public class DatabaseWriter {
 		try {
 			if(idf > 0) {
 				PreparedStatement insertTag =
-						dbConnection.prepareStatement("INSERT INTO Monumentzo.TextTag (TextTag, InverseDocumentFrequency) " +
+						dbConnection.prepareStatement("INSERT INTO monumentzo.TextTag (TextTag, InverseDocumentFrequency) " +
 													  "VALUES (?, ?);");
 				insertTag.setString(1, word);
 				insertTag.setDouble(2, idf);
@@ -49,7 +49,7 @@ public class DatabaseWriter {
 				
 				// Get the generated ID of the tag that was inserted above 
 				PreparedStatement tagIDRetrieving = dbConnection.prepareStatement("SELECT TextTagID" +
-																				  " FROM Monumentzo.TextTag" +
+																				  " FROM monumentzo.TextTag" +
 																				  " WHERE TextTag = ?;");
 				tagIDRetrieving.setString(1, word);
 				
@@ -70,7 +70,7 @@ public class DatabaseWriter {
 			if(tfIdf > 0 && tagID >= 0) {
 				// Insert the link of the monument to the tag
 				PreparedStatement insertMonument_TagLink = 
-					dbConnection.prepareStatement("INSERT INTO Monumentzo.Monument_TextTag (MonumentID, TextTagID, TermFrequencyInverseDocumentFrequency, TermFrequency)" +
+					dbConnection.prepareStatement("INSERT INTO monumentzo.Monument_TextTag (MonumentID, TextTagID, TermFrequencyInverseDocumentFrequency, TermFrequency)" +
 												  "VALUES (?, ?, ?, ?);");
 				insertMonument_TagLink.setInt(1, monumentID);
 				insertMonument_TagLink.setInt(2, tagID);
@@ -88,7 +88,7 @@ public class DatabaseWriter {
 		try {
 			// Write the vector representation of the monument to the database
 			PreparedStatement insertVector = 
-					dbConnection.prepareStatement("UPDATE Monumentzo.Monument SET Vector = ? WHERE MonumentID = ?;");
+					dbConnection.prepareStatement("UPDATE monumentzo.Monument SET Vector = ? WHERE MonumentID = ?;");
 			insertVector.setString(1, vector);
 			insertVector.setInt(2, monumentID);
 			insertVector.execute();

@@ -75,6 +75,8 @@ public class Tagger {
 		while(iterator.hasNext()) {
 			String word = iterator.next();
 			
+			System.out.println("Writing the information for word: " + word);
+			
 			double idf = extractor.calculateInverseDocumentFrequency(word);
 			if(idf < 0)
 				continue;
@@ -93,6 +95,8 @@ public class Tagger {
 		
 		// Vectorize each monument and put it in the database
 		for(Monument monument : monumentData) {
+			System.out.println("Vectorizing monument: " + monument.getMonumentID());
+			
 			String vector = MonumentVectorizer.Vectorize(monument);
 			writer.writeMonumentVector(monument.getMonumentID(), vector);
 		}
