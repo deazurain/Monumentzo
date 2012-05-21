@@ -10,7 +10,7 @@
     <button type="submit" class="btn btn-info">Inloggen</button>
     <button type="button" class="btn btn-danger fancybox" href="#close">Annuleren</button>
 </p>
-<?php if (isset($errors)) echo $errors; ?>
+<?php if (isset($errors)) echo '<div class="alert alert-error">' . $errors . '</div>'; ?>
 
 <?php echo Form::close(); ?>
 

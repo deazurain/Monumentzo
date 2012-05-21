@@ -10,9 +10,7 @@
 
     <body data-base="<?php echo url::base(); ?>">
 
-        <div class="container">
-            <?php echo $content ?>
-        </div>
+				<?php echo $content ?>
 
 				<div class="scripts">
 					<!-- add the scripts last to make the page load faster -->
