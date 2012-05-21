@@ -45,7 +45,17 @@
 			</div><!--/row-->
 		</div><!--/span-->
         <div class="row">
-        	<?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Toevoegen aan favorieten'); ?>
+        	<div class="btn-group">
+            	<button class="btn btn-primary dropdrown-toggle pull-right" data-toggle="dropdown">
+                	Toevoegen aan...
+                    <b class="caret" />
+                </button>
+                <ul class="dropdown-menu">
+                	<li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Toevoegen aan favorieten'); ?></li>
+                    <li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Toevoegen aan bezochte monumenten'); ?></li>
+                    <li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Toevoegen aan wishlist'); ?></li>
+                </ul>
+            </div>
         </div>
 	</div><!--/row-->
 </div><!--/container-->
