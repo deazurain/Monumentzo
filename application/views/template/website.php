@@ -27,18 +27,8 @@
                             <?php if (isset($register)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
                             <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>
 														
-							<li><?php echo HTML::anchor('/browse/index', 'Browse'); ?></li>
-                            <li class='dropdown'>
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									Lijsten
-									<b class="caret"></b>
-								</a>
-                                <ul class="dropdown-menu">
-                                	<li><?php echo HTML::anchor('/list/favorite/view', 'Favorieten'); ?></li>
-                                    <li><?php echo HTML::anchor('/list/visited/view', 'Bezochte monumenten'); ?></li>
-                                    <li><?php echo HTML::anchor('/list/wish/view', 'Nog te bezoeken monumenten'); ?></li>
-                                </ul>
-                            </li>
+							<li><?php echo HTML::anchor('/browse/index', 'Bladeren'); ?></li>
+							<?php if ( isset( $list )) echo $list ?>
                         </ul>
                     </div>
                     <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
