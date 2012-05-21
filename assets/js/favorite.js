@@ -4,4 +4,4 @@ var myOptions = {
 	mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 
-var map = new google.maps.Map($('#map_canvas'), myOptions);
+var map = new google.maps.Map($('#map_canvas').get(0), myOptions);
