@@ -2,7 +2,7 @@
 
 abstract class Model_List extends Model_Database {
 	
-	public abstract function add($monumentID, $userID);
+	public abstract static function add($monumentID, $userID);
 	
-	public abstract function remove($monumentID, $userID);
+	public abstract static function remove($monumentID, $userID);
 }
