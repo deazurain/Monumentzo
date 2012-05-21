@@ -89,3 +89,8 @@ Monument
 	max-height:95%;
 	max-width:95%;
 }
+
+#map_canvas {
+	width: 100%;
+	height: 100%;
+}
