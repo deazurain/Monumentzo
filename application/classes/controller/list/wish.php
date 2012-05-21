@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_List_Favorite extends Controller_List {
+class Controller_List_Wish extends Controller_List {
 	
 	public function action_add(){
 		$id = $this->request->param('id');
@@ -29,3 +29,4 @@ class Controller_List_Favorite extends Controller_List {
 		$this->template->title = 'Nog te bezoeken monumenten';
 		$this->template->content = View::factory('lists/wanttovisit', array('wishList' => $wishList));
 	}
+}

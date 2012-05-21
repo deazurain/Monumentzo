@@ -22,7 +22,7 @@ return array
 			'hostname'   => 'localhost',
 			'database'   => 'monumentzo',
 			'username'   => 'root',
-			'password'   => 'aardbei',
+			'password'   => 'root',
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',

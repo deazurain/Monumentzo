@@ -11,16 +11,15 @@ class Controller_Browse extends Controller_Template_Website {
 	public function action_info() {
 		
 		// Get the information of the monuments out of the database
-		$result = DB::query(Database::SELECT, 'SELECT monumentzo.monument.MonumentID, monumentzo.image.Path AS Image
-												FROM monumentzo.monument, monumentzo.image 
-												WHERE monumentzo.monument.MonumentID = monumentzo.image.MonumentID
-												LIMIT 20');
+		$result = DB::query(Database::SELECT, 'SELECT monumentzo.Monument.MonumentID, monumentzo.Image.Path AS Image
+												FROM monumentzo.Monument, monumentzo.Image 
+												WHERE monumentzo.Monument.MonumentID = monumentzo.Image.MonumentID
+												LIMIT 20')->execute();
 		$result = $result->as_array();
 		
 		if($this->request->is_ajax()) {
-			// Return json to the caller
-			$this->request->header['Content-Type'] = 'application/json';
-			$this->request->response = json_encode($result);
+			$this->response->headers(array('Content-Type' => 'application/json'))
+						  ->body(json_encode($result));
 		}
 	}
 }
