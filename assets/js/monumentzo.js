@@ -4,14 +4,12 @@ var variables = {
 };
 
 $(document).ready(function() {
-    
 
-	/*
+    /*
 	Fancybox
-	*/
+    */
     var fancy_options = {
         type            : 'inline',
-        /*href            : '/page/login',*/
         width		: '35%',
         height		: 'auto',
         autoSize        : false,
@@ -21,25 +19,10 @@ $(document).ready(function() {
     };
     
     $('.fancybox').fancybox(fancy_options);
-    
-    $('.fancybox').live('click', function(event){
-        event.preventDefault();
-        var src = $(this);
-        
-        switch(src.attr('href')) {
-            case '/page/login':
-                $.fancybox(fancy_options);
-                break;
-            case '#close':
-                $.fancybox.close();
-                break;
-        }
-    });
 
-
-	/*
+    /*
 	dropdown menu
-	*/
-	$('.dropdown-toggle').dropdown()
+    */
+    $('.dropdown-toggle').dropdown()
 	
 });
