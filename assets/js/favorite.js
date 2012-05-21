@@ -12,4 +12,5 @@ $(window).resize(function() {
 				.top(60)
 				.width($(window).width())
 				.height($(window).height() - 60);
-});
+}).resize();
+
