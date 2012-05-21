@@ -40,15 +40,15 @@
 				</table>
 			</div><!--/row-->
             <div class="row">
-                <div class="btn-group">
-                    <button class="btn btn-primary dropdrown-toggle" data-toggle="dropdown">
-                        Toevoegen aan...
+                <div class="btn-group open">
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-list icon-white"></i> Toevoegen aan... 
                         <span class="caret"></span>
-                    </button>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Toevoegen aan favorieten'); ?></li>
-                        <li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Toevoegen aan bezochte monumenten'); ?></li>
-                        <li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Toevoegen aan wishlist'); ?></li>
+                        <li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Favorieten'); ?></li>
+                        <li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
+                        <li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
                     </ul>
                 </div>
             </div>

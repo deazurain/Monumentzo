@@ -3,9 +3,10 @@
 class Controller_List_Favorite extends Controller_List {
 	
 	public function action_add(){
-		$id = $this->request->param('id');
+		$monumentId = $this->request->param('id');
+		$user = Auth::instance()->get_user();
 		
-		Model_List_Favorite::add($id);
+		Model_List_Favorite::add( $monumentId, $user->UserID);
 	}
 	
 	public function action_remove(){
