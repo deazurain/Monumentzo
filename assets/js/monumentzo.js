@@ -4,6 +4,15 @@ var variables = {
 };
 
 $(document).ready(function() {
+    
+	$("#loginlink").fancybox({
+		width : '35%',
+		height : 'auto',
+		autoScale : false,
+		transitionIn : 'none',
+		transitionOut : 'none',
+		type : 'iframe'
+	}); 
 
     /*
 	Fancybox

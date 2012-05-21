@@ -5,14 +5,32 @@
 */
 
 body {
-    padding-top: 60px;
+	padding: 0;
+}
+
+#content {
+	padding-top: 60px;
 }
 
 /*
 Fancybox
 */
+
+/*
+ * Een padding van 20 zorgt bij mij voor dubbele scroll bars
+ * Bij inner of outer zorgt de padding bij mij voor een lelijk
+ * overflow effect dat ik niet met overflow:hidden kan verhelpen
+ * ...
+ */
+.fancybox-iframe {
+	padding: 20px;
+}
+
+.fancybox-outer {
+}
+
 .fancybox-inner {
-    padding: 20px;
+    padding: 0px;
 }
 
 .fancybox-inner form {
@@ -47,6 +65,8 @@ Search
 	max-height:100px;
 	max-width:200px;
 }
+
+
 
 #resultsWindow .result{
 	padding:10px;

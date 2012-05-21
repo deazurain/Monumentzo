@@ -10,7 +10,8 @@ defined('SYSPATH') OR die('No Direct Script Access');
  * 
  * @author Monumentzo Team
  */
-Class Controller_User extends Controller_Template_Website {
+
+Class Controller_User extends Controller_Template_Plain {
 
     /**
      * Registers a user. Makes sure the passwords match 

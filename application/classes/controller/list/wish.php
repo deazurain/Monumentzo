@@ -17,15 +17,13 @@ class Controller_List_Wish extends Controller_List {
 	public function action_view() {
 		
 		// Get the user that is currently logged in
-		$userID = Auth::instance()->get_user();
+		$user = Auth::instance()->get_user();
 		
 		// If there is no user logged in display error page
-		if($userID === NULL)
+		if($user === NULL)
 			echo 'ERROR';
 			
-		$user = new Model_User($userID);
 		$wishList = $user->getWishList();
-		
 		$this->template->title = 'Nog te bezoeken monumenten';
 		$this->template->content = View::factory('lists/wanttovisit', array('wishList' => $wishList));
 	}
