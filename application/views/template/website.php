@@ -23,7 +23,7 @@
                     <!--<a class="brand" href="/home">Monumentzo</a>-->
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
+                            <?php if (isset($login)) echo "<li><a id='loginlink' href='/user/login'>Inloggen</a></li>" ?>
                             <?php if (isset($register)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
                             <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>
 														
