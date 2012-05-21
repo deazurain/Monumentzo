@@ -8,9 +8,7 @@ var map_canvas = $('#map_canvas');
 var map = new google.maps.Map(map_canvas.get(0), myOptions);
 
 $(window).resize(function() {
-	map_canvas.css('left', 0)
-				.css('top', 60)
-				.width($(window).width())
+	map_canvas.width($(window).width())
 				.height($(window).height() - 60);
 }).resize();
 
