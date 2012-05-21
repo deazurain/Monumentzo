@@ -27,7 +27,9 @@
                             <?php if (isset($register)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
                             <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>
 														
-							<li><?php echo HTML::anchor('/browse/index', 'Browse'); ?></li>
+							<li><?php echo HTML::anchor('/browse/index', 'Bladeren'); ?></li>
+                            
+                            <?php if(Auth::get_user() != NULL): ?>
                             <li class='dropdown'>
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 									Lijsten
@@ -39,6 +41,7 @@
                                     <li><?php echo HTML::anchor('/list/wish/view', 'Nog te bezoeken monumenten'); ?></li>
                                 </ul>
                             </li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                     <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
