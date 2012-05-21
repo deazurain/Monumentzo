@@ -116,12 +116,22 @@ Route::set('mick', 'mick/<action>')
 	->defaults(array(
 		'controller' => 'mick'
 	));
+	
+Route::set('list', 'list/(<controller>(/<action>(/<id>)))')
+	->defaults(array(
+		'directory' => 'list',
+		'controller' => 'test',
+		'action'     => 'index',
+	));
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'controller' => 'home',
 		'action'     => 'index',
 	));
+	
+
+	
 
 /**
  * Set the cookie salt. 
