@@ -13,6 +13,16 @@ body {
 }
 
 /*
+ * Error Container
+ */
+.error-container {
+	display: none;
+}
+
+.error-container li {
+}
+
+/*
 Fancybox
 */
 

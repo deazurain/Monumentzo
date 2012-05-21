@@ -1,4 +1,5 @@
 <h1>Inloggen</h1>
+<?php if (isset($errors)) echo '<div class="alert alert-error">' . $errors . '</div>'; ?>
 <?php echo Form::open('user/login', array('method' => 'post')); ?>
 <dl>
     <dt><?php echo Form::label('username', 'Gebruikersnaam') ?></dt>
@@ -8,9 +9,9 @@
 </dl>
 <p>
     <button type="submit" class="btn btn-info">Inloggen</button>
-    <button type="button" class="btn btn-danger fancybox" href="#close">Annuleren</button>
+    <button type="button" class="btn btn-danger" href="#">Annuleren</button>
 </p>
-<?php if (isset($errors)) echo '<div class="alert alert-error">' . $errors . '</div>'; ?>
+<div class='error-container'></div>
 
 <?php echo Form::close(); ?>
 

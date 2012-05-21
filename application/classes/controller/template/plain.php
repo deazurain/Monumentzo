@@ -16,12 +16,18 @@ class Controller_Template_Plain extends Controller_Template {
 	*/
 	public function before() {
 
+		if($this->request->is_ajax()) {
+			$this->auto_render = false;
+		}
+
 		parent::before();
 
-		$this->template->title = '';
-		$this->template->content = '';
-		$this->template->styles = array();
-		$this->template->scripts = array();
+		if($this->auto_render) {
+			$this->template->title = '';
+			$this->template->content = '';
+			$this->template->styles = array();
+			$this->template->scripts = array();
+		}
 
 	}
 
@@ -32,27 +38,31 @@ class Controller_Template_Plain extends Controller_Template {
 	* is rendered.
 	*/
 	public function after() {
-		$styles = array(
-			'assets/css/bootstrap.css' => 'screen, projection',
-			'assets/css/bootstrap-responsive.css' => 'screen, projection',
-			'assets/fancybox/source/jquery.fancybox.css' => 'screen',
-			'assets/css/main.css' => 'screen, projection',
-		);
 
-		$scripts = array(
-			'http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js',
-			'assets/js/bootstrap.js',
-			'assets/js/less-1.3.0.min.js',
-			//'assets/fancybox/jquery.mousewheel-3.0.4.pack.js',
-			'assets/fancybox/source/jquery.fancybox.pack.js',
-			'assets/js/bootstrap-dropdown.js',
-			'assets/js/monumentzo.js',
-		);
+		if($this->auto_render) {
+			$styles = array(
+				'assets/css/bootstrap.css' => 'screen, projection',
+				'assets/css/bootstrap-responsive.css' => 'screen, projection',
+				'assets/fancybox/source/jquery.fancybox.css' => 'screen',
+				'assets/css/main.css' => 'screen, projection',
+			);
 
-		$this->template->styles = array_merge($this->template->styles, $styles);
-		$this->template->scripts = array_merge($this->template->scripts, $scripts);
+			$scripts = array(
+				'http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js',
+				'assets/js/bootstrap.js',
+				'assets/js/less-1.3.0.min.js',
+				//'assets/fancybox/jquery.mousewheel-3.0.4.pack.js',
+				'assets/fancybox/source/jquery.fancybox.pack.js',
+				'assets/js/bootstrap-dropdown.js',
+				'assets/js/monumentzo.js',
+			);
+
+			$this->template->styles = array_merge($this->template->styles, $styles);
+			$this->template->scripts = array_merge($this->template->scripts, $scripts);
+		}
 
 		parent::after();
+
 	}
 
 }
