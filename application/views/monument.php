@@ -39,13 +39,23 @@
 					</tr>
 				</table>
 			</div><!--/row-->
+            <div class="row">
+                <div class="btn-group">
+                    <button class="btn btn-primary dropdrown-toggle" data-toggle="dropdown">
+                        Toevoegen aan...
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Toevoegen aan favorieten'); ?></li>
+                        <li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Toevoegen aan bezochte monumenten'); ?></li>
+                        <li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Toevoegen aan wishlist'); ?></li>
+                    </ul>
+                </div>
+            </div>
 			<div class="row">
 				<h2>Beschrijving</h2>
 				<p><?php echo isset($monument) ? $monument['Description'] : 'Undefined' ?></p>
 			</div><!--/row-->
 		</div><!--/span-->
-        <div class="row">
-        	<?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Toevoegen aan favorieten'); ?>
-        </div>
 	</div><!--/row-->
 </div><!--/container-->
