@@ -43,7 +43,7 @@
                 <div class="btn-group">
                     <button class="btn btn-primary dropdrown-toggle" data-toggle="dropdown">
                         Toevoegen aan...
-                        <b class="caret" />
+                        <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
                         <li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Toevoegen aan favorieten'); ?></li>
