@@ -30,7 +30,7 @@
                             <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>														
 							<li><?php echo HTML::anchor('/browse/index', 'Bladeren'); ?></li>
                             
-                            <?php if(Auth::get_user() != NULL): ?>
+                            <?php if(Auth::instance()->get_user() != NULL): ?>
                             <li class='dropdown'>
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     Lijsten
