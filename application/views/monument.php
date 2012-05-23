@@ -1,17 +1,17 @@
 
 <div id="monument" class="container">
 	<div class="row">
-		<div class="span7">
+		<div class="span5">
     		<?php echo isset($monument) ? "<img src='/".$monument['Image']."' />" : 'Undefined' ?>
 		</div><!--/span-->
-		<div class="span5">
+		<div class="span7">
 			<div class="row">
 				<h1><?php echo isset($monument) ? $monument['Name'] : 'Undefined' ?></h1>
 				<table class="table">
 					<tr>
 						<td>Monumentnummer</td>
 						<td><?php echo isset($monument) ? $monument['MonumentID'] : 'Undefined' ?></td>
-					<tr>
+					</tr>
 					<tr>
 						<td>Plaats</td>
 						<td><?php echo isset($monument) ? $monument['City'] : 'Undefined' ?></td>
@@ -28,7 +28,7 @@
 					<tr>
 						<td>Gebouwd in </td>
 						<td><?php echo isset($monument) ? $monument['FoundationDateText'] : 'Undefined' ?></td>
-					<tr>
+					</tr>
 					<tr>
 						<td>Lengtegraad</td>
 						<td><?php echo isset($monument) ? $monument['Longitude'] : 'Undefined' ?></td>
@@ -40,7 +40,7 @@
 				</table>
 			</div><!--/row-->
             <div class="row">
-                <div class="btn-group open">
+                <div class="btn-group">
                     <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="icon-list icon-white"></i> Toevoegen aan... 
                         <span class="caret"></span>
@@ -50,11 +50,18 @@
                         <li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
                         <li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
                     </ul>
-                </div>
-            </div>
+                </div><!--/btn-group-->
+            </div><!--/row-->
 			<div class="row">
 				<h2>Beschrijving</h2>
 				<p><?php echo isset($monument) ? $monument['Description'] : 'Undefined' ?></p>
+			</div><!--/row-->
+			<div class="row">
+			    <p>
+			        <?php foreach($monument['TextTag'] as $tag) {
+    				    echo "<a href='/search/query/".$tag['TextTag']."'>".$tag['TextTag']."</a>, ";
+    				}?>
+    			</p>
 			</div><!--/row-->
 		</div><!--/span-->
 	</div><!--/row-->
