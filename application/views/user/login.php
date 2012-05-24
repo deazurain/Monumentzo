@@ -9,7 +9,7 @@
 </dl>
 <p>
     <button type="submit" class="btn btn-info">Inloggen</button>
-    <button type="button" class="btn btn-danger" href="#">Annuleren</button>
+    <button type="reset" class="btn btn-danger" href="#">Annuleren</button>
 </p>
 <div class='error-container alert alert-error'></div>
 
