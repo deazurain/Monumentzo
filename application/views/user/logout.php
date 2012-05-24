@@ -4,6 +4,7 @@
     <button type="submit" class="btn btn-info">Uitloggen</button>
     <button type="button" class="btn btn-danger" href="#">Annuleren</button>
 </p>
+<div class='error-container alert alert-error'></div>
 <?php if (isset($errors)) echo '<div class="alert alert-error">' . $errors . '</div>'; ?>
 
 <?php echo Form::close(); ?>
