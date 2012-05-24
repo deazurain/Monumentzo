@@ -123,8 +123,8 @@ ENGINE = InnoDB;
 -- Table `monumentzo`.`Category`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `monumentzo`.`Category` (
-  `CategoryID` INT UNSIGNED NOT NULL ,
-  `Category` VARCHAR(45) NOT NULL ,
+  `CategoryID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Category` VARCHAR(255) NOT NULL ,
   PRIMARY KEY (`CategoryID`) ,
   UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) )
 ENGINE = InnoDB;
