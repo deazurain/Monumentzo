@@ -46,6 +46,14 @@ class Model_Monument extends Model_Database {
 	}
 	
 	public function getAllImages(){}
+	
+	public function getPostedComments() {
+		$result = DB::query(Database::SELECT, 'SELECT PlaceDate, Comment FROM monumentzo.Comment WHERE MonumentID = :id')
+						->bind(':id', $this->monument['MonumentID'])
+						->execute();
+		
+		return $result->as_array();
+	}
 }
 
 ?>

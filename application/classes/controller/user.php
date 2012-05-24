@@ -23,22 +23,22 @@ Class Controller_User extends Controller_Template_Plain {
 			$this->template->title = 'Registreren';
 			$this->template->content = View::factory('user/register');
 		}
-
-		$post = Validation::factory($_POST)
+                
+		$post = Validation::factory($this->request->post())
 			->rule('username', 'not_empty')
 			->rule('email', 'not_empty')
 			->rule('email', 'email')
 			->rule('password', 'not_empty')
 			->rule('password', 'matches', array(':validation', 'password', 'password2'));
-
+        
 		// Check if the data is valid
 		if ($post->check()) {
 
 			// create a new user
 			$user = ORM::factory('User');
-			$user->Name = $_POST['username'];
-			$user->HashedPassword = Auth::instance()->hash($_POST['password']);
-			$user->EmailAddress = $_POST['email'];
+			$user->Name = $this->request->post('username');
+			$user->HashedPassword = Auth::instance()->hash($this->request->post('password'));
+			$user->EmailAddress = $this->request->post('email');
 			$user->save();
 
 			// add login role to the user
@@ -89,12 +89,12 @@ Class Controller_User extends Controller_Template_Plain {
 			$this->template->content = View::factory('user/login');
 		}
 
-		$post = Validation::factory($_POST)
+		$post = Validation::factory($this->request->post())
 			->rule('username', 'not_empty')
 			->rule('password', 'not_empty');
 
 		if ($post->check()) {
-			$success = Auth::instance()->login($_POST['username'], $_POST['password']);
+			$success = Auth::instance()->login($this->request->post('username'), $this->request->post('password'));
 
 			if ($success) {
 				// Login successful

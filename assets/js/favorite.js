@@ -4,11 +4,12 @@ var myOptions = {
 	mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 
-var map_canvas = $('#map_canvas');
+var map_canvas = $('#map_canvas').width($(this).parent().width())
+									.height($(this).parent().height());
 var map = new google.maps.Map(map_canvas.get(0), myOptions);
 
 $(window).resize(function() {
-	map_canvas.width($(window).width())
-				.height($(window).height() - 60);
+	map_canvas.width($(this).parent().width())
+				.height($(this).parent().height());
 }).resize();
 
