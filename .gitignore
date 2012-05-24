@@ -19,6 +19,9 @@ Desktop.ini
 #Netbeans
 nbproject
 
+#PhpStorm
+.idea
+
 #Diagrams
 /documents/TI2800 Group 2 Diagrams/Thumbs.db
 /documents/TI2800 Group 2 Diagrams/Abstract Class Diagram.png

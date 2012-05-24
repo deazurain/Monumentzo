@@ -52,6 +52,7 @@ public class ResponseParser {
 		int id = 0;
 		String name = null;
 		String descr = null;
+		String cat = null;
 		
 		float lat = Float.MAX_VALUE;
 		float lon = Float.MAX_VALUE;
@@ -81,6 +82,10 @@ public class ResponseParser {
 				
 			case "cit_tekst":			// Description
 				descr = child.getFirstChild().getFirstChild().getNodeValue();
+				break;
+				
+			case "rce_categorie":
+				cat = child.getFirstChild().getNodeValue();
 				break;
 				
 			case "abc_lat":				// Latitude
@@ -155,7 +160,7 @@ public class ResponseParser {
 			foundationYear = getYear(foundationDate);
 		}
 		
-		return new Monument(id, name, descr,
+		return new Monument(id, name, descr, cat,
 							lat, lon,
 							city, province, street, streetNumber,
 							foundationDate, foundationYear,

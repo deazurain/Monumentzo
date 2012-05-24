@@ -11,7 +11,7 @@
     <button type="submit" class="btn btn-info">Inloggen</button>
     <button type="button" class="btn btn-danger" href="#">Annuleren</button>
 </p>
-<div class='error-container'></div>
+<div class='error-container alert alert-error'></div>
 
 <?php echo Form::close(); ?>
 
