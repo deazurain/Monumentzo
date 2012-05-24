@@ -58,11 +58,22 @@
 			</div><!--/row-->
 			<div class="row">
 			    <p>
-			        <?php foreach($monument['TextTag'] as $tag) {
-    				    echo "<a href='/search/query/".$tag['TextTag']."'>".$tag['TextTag']."</a>, ";
-    				}?>
+			        <?php foreach($monument['TextTag'] as $tag): ?>
+    				    <a href="/search/query/<?php echo $tag['TextTag']; ?>"><?php echo $tag['TextTag']; ?></a>
+    				<?php endforeach; ?>
     			</p>
 			</div><!--/row-->
 		</div><!--/span-->
 	</div><!--/row-->
+    
+    <!-- Start of the comments -->
+    <div class="row">
+    	<div class="span3">&nbsp;</div>
+        <div class="span6">
+        	<?php foreach(comments as comment): ?>
+            
+            <?php endforeach; ?>
+        </div>
+     	<div class="span3">&nbsp;</div>
+    </div>
 </div><!--/container-->
