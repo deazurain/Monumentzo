@@ -106,10 +106,11 @@ Monument comments
 	margin-top: 20px;
 }
 
-.comment-header > h3 {
-	padding: 0 10px;
-}
-
 .comment-content {
 	margin-top: 0;
+}
+
+.comment-header > h3,
+.comment-content > p {
+	padding: 0 10px;
 }
