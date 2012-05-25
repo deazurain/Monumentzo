@@ -19,6 +19,7 @@ public class Monument {
 	private String wikiArticle;
 	private URL wikiImageURL;
 	private String imagePath; // website relative path
+	private String thumbnailPath;
 	
 	public Monument(int id, String name, String desc, String cat,
 					float latitude, float longitude,
@@ -65,4 +66,7 @@ public class Monument {
 	public URL getWikiImageURL() { return wikiImageURL; }
 	public String getImagePath() { return imagePath; }
 	public void setImagePath(String webpath) { imagePath = webpath; }
+
+	public String getThumbnailPath() { return thumbnailPath; }
+	public void setThumbnailPath(String path) { thumbnailPath = path; }
 }

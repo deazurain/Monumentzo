@@ -173,10 +173,11 @@ public class DatabaseWriter {
 			    
 				// Store the information
 				PreparedStatement insertImage = (PreparedStatement) dbConnection.prepareStatement(
-						"INSERT INTO monumentzo.Image (MonumentID, Path) " +
+						"INSERT INTO monumentzo.Image (MonumentID, Path, Thumbnail) " +
 						"VALUES (?, ?) ", Statement.RETURN_GENERATED_KEYS);
 				insertImage.setInt(1, monument.getMonumentID());
 				insertImage.setString(2, monument.getImagePath());
+				insertImage.setString(3, monument.getThumbnailPath());
 				
 				// DEBUG info
 				System.out.println(insertImage);

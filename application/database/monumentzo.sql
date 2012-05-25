@@ -126,8 +126,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `monumentzo`.`Category` (
   `CategoryID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `Category` TEXT NOT NULL ,
+  `Category` VARCHAR(255) NOT NULL ,
   PRIMARY KEY (`CategoryID`) ,
+  UNIQUE INDEX `CategoryID_UNIQUE` (`CategoryID` ASC) ,
   UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) )
 ENGINE = InnoDB;
 
@@ -333,3 +334,12 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `monumentzo`.`Role`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `monumentzo`;
+INSERT INTO `monumentzo`.`Role` (`RoleID`, `Name`, `Description`) VALUES (0, 'login', 'Login privilege');
+
+COMMIT;
