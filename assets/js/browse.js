@@ -16,8 +16,8 @@ $.getJSON(infoUrl, function(data, textStatus) {
 	
 	(function init() {
 		console.log(data);
-		container = $( '<div></div>' ).attr( 'id', 'browseWindow' );;
-		$(document.body).append( container );
+		container = $( '<div></div>' ).attr( 'id', 'browseWindow' );
+		$( '.container' ).append( container );
 	
 		scene = new THREE.Scene();
 		scene.fog = new THREE.Fog( 0xffffff, 1, 10000 );
