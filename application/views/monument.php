@@ -66,6 +66,7 @@
 	</div><!--/row-->
     
     <!-- Start of the comments -->
+    <?php if(count($comments) > 0): ?>
     <div class="row">
     	<div class="span2">&nbsp;</div>
         <div class="span8">
@@ -94,18 +95,17 @@
         </div>
      	<div class="span2">&nbsp;</div>
     </div>
+    <?php endif; ?>
     
     <!-- Start of comment typing section -->
     <div class="row">
-    	<div class="span2">&nbsp;</div>
-        <div class="span8">
-        	<div class="page-header">
-            	<h1>Plaats commentaar</h1>
+		<?php if($user): ?>
+        <div class="span8 offset2">
+            <div class="page-header">
+                <h1>Plaats commentaar</h1>
             </div>
         
-        	<div>
-				<?php if(!$user) { die('Je moet ingelogd zijn om commentaar te plaatsen.'); } ?>
-                
+            <div>                
                 <?php echo Form::open('comment/create', array('id' => 'create-comment', 'method' => 'post')); ?>
                 
                 <dl>
@@ -124,6 +124,9 @@
                 <?php echo Form::close(); ?>
             </div>
         </div>
-        <div class="span2">&nbsp;</div>
+        <?php else: ?>
+        <div class="span8 offset2">
+        </div>
+        <?php endif; ?>
     </div>
 </div><!--/container-->
