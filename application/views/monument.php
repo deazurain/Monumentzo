@@ -59,7 +59,7 @@
 			    <p>
 				<?php 
 				foreach($monument['TextTag'] as $tag) {
-                   	echo HTML::anchor('/search/query/' . $tag['TextTag'], $tag['TextTag']);
+                   	echo HTML::anchor('/search/query/' . $tag['TextTag'], $tag['TextTag']) . '&nbsp;';
 				} 
 				?>
     			</p>
@@ -71,7 +71,7 @@
     <div class="row">
     	<div class="span3">&nbsp;</div>
         <div class="span6">
-        	<?php foreach($comments as $comment): ?>
+        	<?php //foreach($comments as $comment): ?>
             <div class="row">
             	<div class="comment-header">
                 	<h4>Test user<small class="pull-right">17/02/8213</small></h4>
@@ -92,7 +92,7 @@
                 </div>-->
             </div>
             <hr />
-			<?php endforeach; ?>
+			<?php //endforeach; ?>
         </div>
      	<div class="span3">&nbsp;</div>
     </div>
