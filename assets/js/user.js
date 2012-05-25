@@ -34,7 +34,7 @@ $(document).ready(function () {
 					// failed to log in
 	
 					var errors = data.result;
-					var errorhtml = '<h4 class="alert-heading">Please revise the following fields</h4>';
+					var errorhtml = '<h4 class="alert-heading">Gelieve de volgende velden geldig in te vullen:</h4>';
 
 					for(var i = 0, length = errors.length; i < length; i++) {
 						errorhtml += '<li>' + errors[i] + '</li>';
@@ -61,14 +61,14 @@ $(document).ready(function () {
 			success: function(data) {
 				if(data.status == "success") {
 					// successfully registered
-					form.html('You have succesfully registered ' + data.result.username);
+					form.html('Je bent succesvol geregistreerd onder de gebruikersnaam "' + data.result.username + '"');
 					//window.location.replace('');
 				}
 				else if(data.status == "fail") {
 					// failed to register
 
 					var errors = data.result;
-					var errorhtml = '<h4 class="alert-heading">Please revise the following fields</h4>';
+					var errorhtml = '<h4 class="alert-heading">Gelieve de volgende velden geldig in te vullen:</h4>';
 
 					for(var i = 0, length = errors.length; i < length; i++) {
 						errorhtml += '<li>' + errors[i] + '</li>';
