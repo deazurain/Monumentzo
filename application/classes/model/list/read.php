@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 
-class Model_List_Read extends Model_List {
+class Model_List_Read implements Model_List {
 	
 	public static function add($book, $userID) {
 		DB::query(Database::INSERT, 

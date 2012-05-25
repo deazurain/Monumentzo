@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 
-class Model_List_Favorite extends Model_List {
+class Model_List_Favorite implements Model_List {
 	
 	public static function add($monumentID, $userID) {
 		DB::query(Database::INSERT, 
