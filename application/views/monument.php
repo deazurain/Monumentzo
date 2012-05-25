@@ -106,17 +106,21 @@
             <div>              
                 <?php echo Form::open('comment/create', array('id' => 'create-comment', 'method' => 'post')); ?>
                 
-                <div class="row-fluid">
-                    <div class="span6">
+                <div class="row">
+                    <div class="span5">
                         <dl>
                             <dt><?php echo Form::hidden('MonumentID', $monument['MonumentID']); ?></dt>
                             <dt><?php echo Form::label('Comment', 'Commentaar'); ?></dt>
                             <dd><?php echo Form::textarea('Comment'); ?></dd>
                         </dl>
                     </div>
-                    <div class="span2">
-                        <button type="submit" class="btn btn-info">Plaats Commentaar</button>
-                        <button type="reset" class="btn btn-danger" href="#">Annuleer</button>
+                    <div class="span3">
+                    	<div class="btn-toolbar">
+                        	<button type="submit" class="btn btn-info">Plaats Commentaar</button>
+                        </div>
+                        <div class="btn-toolbar">
+                        	<button type="reset" class="btn btn-danger" href="#">Annuleer</button>
+                        </div>
                     </div>
                 </div>
                 <div class='error-container alert alert-error'></div>
