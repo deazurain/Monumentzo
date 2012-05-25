@@ -98,5 +98,14 @@ Monument
 #map_canvas {
 	height:100%;
 }
+
+/*
+Monument comments
+*/
+.comment-header {
+	margin-top: 20px;
 }
 
+.comment-content {
+	margin-top: 10px;
+}
