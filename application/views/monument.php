@@ -110,7 +110,7 @@
                     <div class="span7">
                         <dl>
                             <dt><?php echo Form::hidden('MonumentID', $monument['MonumentID']); ?></dt>
-                            <dd><?php echo Form::textarea('Comment'); ?></dd>
+                            <dd><?php echo Form::textarea('Comment', '', array('row' => 7, 'placeholder' => 'Commentaar over het monument...')); ?></dd>
                         </dl>
                     </div>
                     <div id="comment-buttons" class="pull-right">
