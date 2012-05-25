@@ -55,6 +55,8 @@ class Controller_Template_Plain extends Controller_Template {
 				'assets/fancybox/source/jquery.fancybox.pack.js',
 				'assets/js/bootstrap-dropdown.js',
 				'assets/js/monumentzo.js',
+                'assets/js/user.js',
+                'assets/js/comment.js',
 			);
 
 			$this->template->styles = array_merge($this->template->styles, $styles);

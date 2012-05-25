@@ -14,13 +14,10 @@ html, body {
 }
 
 /*
- * Error Container
+ * Error/Success message containers
  */
-.error-container {
+.error-container , .success-container {
 	display: none;
-}
-
-.error-container li {
 }
 
 /*

@@ -55,8 +55,7 @@ class Model_Comment extends Model_Database {
 
         $id = $this->get('CommentID');
 
-        $r = $this->_db->query(Database::SELECT, 'SELECT * FROM Comment WHERE CommentID = :id')
-            ->bind(':id', $id)->execute();
+        $r = DB::select('*')->from('Comment')->where('CommentID', '=', $id)->execute($this->_db);
 
         set($r->as_array());
 
@@ -76,21 +75,25 @@ class Model_Comment extends Model_Database {
             unset($data['CommentID']);
 
             // create a new comment
-            $q = $this->_db->insert('Comment')
+            $q = DB::insert('Comment')
                 ->columns(array_keys($data))
                 ->values(array_values($data));
 
             // returns insert id and num affected rows
-            list($insert_id) = $q->execute();
+            list($insert_id) = $q->execute($this->_db);
 
             $this->set('CommentID', $insert_id);
         }
         else {
-            // update the comment
-            $q = $this->_db->update('Comment')
-                ->set($this->_data);
 
-            $q->execute();
+            $data = $this->_data;
+            unset($data['CommentID']);
+
+            // update the comment
+            $q = DB::update('Comment')
+                ->set($data);
+
+            $q->execute($this->_db);
 
             // hope on success
         }
@@ -102,27 +105,27 @@ class Model_Comment extends Model_Database {
         $validator = Validation::factory($this->_data);
 
         $validator->rules('CommentID', array(
-            'numeric' => NULL,
+            array('numeric'),
         ));
 
         $validator->rules('MonumentID', array(
-            'not_empty' => NULL,
-            'numeric' => NULL,
+            array('not_empty'),
+            array('numeric'),
         ));
 
         $validator->rules('UserID', array(
-            'not_empty' => NULL,
-            'numeric' => NULL,
+            array('not_empty'),
+            array('numeric'),
         ));
 
         $validator->rules('Comment', array(
-            'min_length' => array(':value', 3),
-            'max_length' => array(':value', 500),
+            array('min_length', array(':value', 3)),
+            array('max_length', array(':value', 500)),
         ));
 
         $validator->rules('PlaceDate', array(
-            'not_empty' => NULL,
-            'date' => NULL,
+            array('not_empty'),
+            array('date'),
         ));
 
         return $validator;
