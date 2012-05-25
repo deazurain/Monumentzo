@@ -66,9 +66,9 @@
 	</div><!--/row-->
     
     <!-- Start of the comments -->
+    <?php if(count($comments) > 0): ?>
     <div class="row">
-    	<div class="span2">&nbsp;</div>
-        <div class="span8">
+        <div class="span8 offset2">
         	<div class="page-header">
             	<h1>Commentaar</h1>
             </div>
@@ -92,6 +92,46 @@
             <hr />
 			<?php endforeach; ?>
         </div>
-     	<div class="span2">&nbsp;</div>
+    </div>
+    <?php endif; ?>
+    
+    <!-- Start of comment typing section -->
+    <div class="row">
+		<?php if($user): ?>
+        <div class="span8 offset2">
+            <div class="page-header">
+                <h1>Plaats commentaar</h1>
+            </div>
+        
+            <div>              
+                <?php echo Form::open('comment/create', array('id' => 'create-comment', 'method' => 'post')); ?>
+                
+                <div class="row">
+                    <div class="span5">
+                        <dl>
+                            <dt><?php echo Form::hidden('MonumentID', $monument['MonumentID']); ?></dt>
+                            <dt><?php echo Form::label('Comment', 'Commentaar'); ?></dt>
+                            <dd><?php echo Form::textarea('Comment'); ?></dd>
+                        </dl>
+                    </div>
+                    <div class="span3">
+                    	<div class="btn-toolbar">
+                        	<button type="submit" class="btn btn-info">Plaats Commentaar</button>
+                        </div>
+                        <div class="btn-toolbar">
+                        	<button type="reset" class="btn btn-danger" href="#">Annuleer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class='error-container alert alert-error'></div>
+                <div class='success-container alert alert-success'></div>
+                
+                <?php echo Form::close(); ?>
+            </div>
+        </div>
+        <?php else: ?>
+        <div class="span8 offset2">
+        </div>
+        <?php endif; ?>
     </div>
 </div><!--/container-->

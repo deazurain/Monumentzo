@@ -16,6 +16,7 @@ Class Controller_Monument extends Controller_Template_Website
 		$this->template->content = View::factory('monument');
 		$this->template->content->monument = $monument;
 		$this->template->content->comments = $comments;
+		$this->template->content->user = Auth::instance()->get_user();
 	}
 	
 	public function action_test(){
