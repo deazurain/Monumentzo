@@ -107,13 +107,13 @@
                 <?php echo Form::open('comment/create', array('id' => 'create-comment', 'method' => 'post')); ?>
                 
                 <div class="row">
-                    <div class="span6.5">
+                    <div class="span7">
                         <dl>
                             <dt><?php echo Form::hidden('MonumentID', $monument['MonumentID']); ?></dt>
                             <dd><?php echo Form::textarea('Comment'); ?></dd>
                         </dl>
                     </div>
-                    <div class="pull-right">
+                    <div id="comment-buttons" class="pull-right">
                     	<div class="btn-toolbar">
                         	<button type="submit" class="btn btn-info">Plaats</button>
                         </div>

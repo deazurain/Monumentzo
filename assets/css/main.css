@@ -111,3 +111,11 @@ Monument comments
 .comment-content > p {
 	padding: 0 10px;
 }
+
+#comment-buttons button {
+	width: 55px;
+}
+
+#create-comment textarea {
+	width: 100%;
+}
