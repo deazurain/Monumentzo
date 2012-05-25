@@ -39,13 +39,15 @@ $(document).ready(function () {
 					// failed to log in
 	
 					var errors = data.result;
-					var errorhtml = '<h4 class="alert-heading">Please revise the following fields</h4>';
+                    var errorhtml = '<h4 class="alert-heading">Gelieve de volgende velden geldig in te vullen:</h4>';
 
+                    errorhtml += '<ul>';
 					for(var i = 0, length = errors.length; i < length; i++) {
 						errorhtml += '<li>' + errors[i] + '</li>';
 					}
+                    errorhtml += '</ul>';
 
-					form.find('.error-container').html('<ul>' + errorhtml + '</ul>').show();
+					form.find('.error-container').html(errorhtml).show();
 				}
 				else {
 					// unknown status

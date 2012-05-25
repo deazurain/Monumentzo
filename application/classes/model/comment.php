@@ -119,6 +119,7 @@ class Model_Comment extends Model_Database {
         ));
 
         $validator->rules('Comment', array(
+            array('not_empty'),
             array('min_length', array(':value', 3)),
             array('max_length', array(':value', 500)),
         ));

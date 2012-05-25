@@ -33,7 +33,7 @@ Class Controller_Ajax_Comment extends Controller_Template_Ajax {
 
         if(!$v->check()) {
 
-            $errors = array_merge($errors, $v->errors());
+            $errors = array_merge($errors, array_keys($v->errors()));
 
             $this->json_fail($errors);
 
@@ -42,7 +42,11 @@ Class Controller_Ajax_Comment extends Controller_Template_Ajax {
 
             $c->save();
 
-            $this->json_success($c->get());
+            // return place date, comment and username
+            $result= $c->get(array('PlaceDate', 'Comment'));
+            $result['User'] = $user->Name;
+
+            $this->json_success($result);
 
         }
     }

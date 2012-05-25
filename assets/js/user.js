@@ -36,11 +36,13 @@ $(document).ready(function () {
 					var errors = data.result;
 					var errorhtml = '<h4 class="alert-heading">Gelieve de volgende velden geldig in te vullen:</h4>';
 
-					for(var i = 0, length = errors.length; i < length; i++) {
-						errorhtml += '<li>' + errors[i] + '</li>';
-					}
+                    errorhtml += '<ul>';
+                    for(var i = 0, length = errors.length; i < length; i++) {
+                        errorhtml += '<li>' + errors[i] + '</li>';
+                    }
+                    errorhtml += '</ul>';
 
-					form.find('.error-container').html('<ul>' + errorhtml + '</ul>').show();
+					form.find('.error-container').html(errorhtml).show();
 				}
 				else {
 					// unknown status
@@ -70,11 +72,13 @@ $(document).ready(function () {
 					var errors = data.result;
 					var errorhtml = '<h4 class="alert-heading">Gelieve de volgende velden geldig in te vullen:</h4>';
 
-					for(var i = 0, length = errors.length; i < length; i++) {
-						errorhtml += '<li>' + errors[i] + '</li>';
-					}
+                    errorhtml += '<ul>';
+                    for(var i = 0, length = errors.length; i < length; i++) {
+                        errorhtml += '<li>' + errors[i] + '</li>';
+                    }
+                    errorhtml += '</ul>';
 
-					form.find('.error-container').html('<ul>' + errorhtml + '</ul>').show();
+                    form.find('.error-container').html(errorhtml).show();
 
 				}
 				else {
