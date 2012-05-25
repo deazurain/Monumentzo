@@ -9,8 +9,8 @@ Class Controller_Monument extends Controller_Template_Website
 		$id = $this->request->param('id');
 		$monument = new Model_Monument($id);
 
-		$monument = $monument->viewMonument();
 		$comments = $monument->getPostedComments();
+		$monument = $monument->viewMonument();
 		
 		$this->template->title = $monument['Name'];
 		$this->template->content = View::factory('monument');
