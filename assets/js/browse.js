@@ -16,8 +16,8 @@ $.getJSON(infoUrl, function(data, textStatus) {
 	
 	(function init() {
 		console.log(data);
-		container = $( '<div></div>' ).attr( 'id', 'browseWindow' );;
-		$(document.body).append( container );
+		container = $( '<div></div>' ).attr( 'id', 'browseWindow' );
+		$( '.container' ).append( container );
 	
 		scene = new THREE.Scene();
 		scene.fog = new THREE.Fog( 0xffffff, 1, 10000 );
@@ -34,7 +34,8 @@ $.getJSON(infoUrl, function(data, textStatus) {
 		var x = -2, y = -1.5;
 		$.each(data, function(index, monument) {
 			
-			material = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( $('body').attr('data-base') + monument.Image ) });
+			material = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( $('body').attr('data-base') + 
+				"assets/img/monuments/thumb/" + monument.MonumentID + ".jpg" ) });
 			var mesh = new THREE.Mesh(geometry, material);
 			mesh.position.x = x * 120;
 			mesh.position.y = y * 120;
