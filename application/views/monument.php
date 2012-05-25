@@ -1,4 +1,3 @@
-
 <div id="monument" class="container">
 	<div class="row">
 		<div class="span5">
@@ -58,9 +57,9 @@
 			</div><!--/row-->
 			<div class="row">
 			    <p>
-			        <?php foreach($monument['TextTag'] as $tag): ?>
-    				    <a href="/search/query/<?php echo $tag['TextTag']; ?>"><?php echo $tag['TextTag']; ?></a>
-    				<?php endforeach; ?>
+				<?php foreach($monument['TextTag'] as $tag) {
+					echo "<a href='/search/query/".$tag['TextTag']."'>".$tag['TextTag']."</a>, ";
+				}?>
     			</p>
 			</div><!--/row-->
 		</div><!--/span-->
@@ -68,12 +67,31 @@
     
     <!-- Start of the comments -->
     <div class="row">
-    	<div class="span3">&nbsp;</div>
-        <div class="span6">
-        	<?php foreach(comments as comment): ?>
-            
-            <?php endforeach; ?>
+    	<div class="span2">&nbsp;</div>
+        <div class="span8">
+        	<div class="page-header">
+            	<h1>Commentaar</h1>
+            </div>
+        
+        	<?php foreach($comments as $comment): ?>
+            <div>
+            	<div class="comment-header">
+                	<h3>
+					<?php echo htmlspecialchars($comment['Name']); ?>
+                        <small class="pull-right">
+						<?php echo htmlspecialchars($comment['PlaceDate']); ?>
+                        </small>
+					</h3>
+				</div>
+                <div class="comment-content">
+                	<p>
+                	<?php echo htmlspecialchars($comment['Comment']); ?>
+                    </p>
+                </div>
+            </div>
+            <hr />
+			<?php endforeach; ?>
         </div>
-     	<div class="span3">&nbsp;</div>
+     	<div class="span2">&nbsp;</div>
     </div>
 </div><!--/container-->

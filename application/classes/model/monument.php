@@ -27,15 +27,14 @@ class Model_Monument extends Model_Database {
 	public function getTextTags(){
 	    $result = DB::query(Database::SELECT, 
 	        'SELECT TextTag 
-	        FROM TextTag JOIN Monument_TextTag USING (TextTagID) 
-	        WHERE MonumentID = :id
-	        AND InverseDocumentFrequency > :threshold')
+				FROM TextTag JOIN Monument_TextTag USING (TextTagID) 
+				WHERE MonumentID = :id
+				 AND InverseDocumentFrequency > :threshold')
 	        ->bind(':id', $this->monument['MonumentID'])
 	        ->param(':threshold', self::idfThreshold)
 	        ->execute();
-		$result = $result->as_array();
-				
-		return $result;
+			
+		return $result->as_array();
 	}
 	
 	public function getBaseImage(){
@@ -48,7 +47,10 @@ class Model_Monument extends Model_Database {
 	public function getAllImages(){}
 	
 	public function getPostedComments() {
-		$result = DB::query(Database::SELECT, 'SELECT PlaceDate, Comment FROM monumentzo.Comment WHERE MonumentID = :id')
+		$result = DB::query(Database::SELECT, 'SELECT Name, Comment, PlaceDate 
+												FROM monumentzo.Comment, monumentzo.User 
+												WHERE User.UserID = Comment.UserID 
+												 AND MonumentID = :id')
 						->bind(':id', $this->monument['MonumentID'])
 						->execute();
 		

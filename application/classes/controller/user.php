@@ -54,7 +54,7 @@ Class Controller_User extends Controller_Template_Plain {
 				));
 			}
 			else {
-				Request::current()->redirect('');
+			//	Request::current()->redirect('');
 			}
 
 		}
@@ -105,7 +105,7 @@ Class Controller_User extends Controller_Template_Plain {
 					));
 				}
 				else {
-					Request::current()->redirect('');
+				    //Request::current()->redirect('');
 				}
 			}
 			else {
