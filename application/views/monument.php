@@ -81,14 +81,14 @@
                 </div>
             	<!--<div class="comment-header">
                 	<h4>
-					<?php echo htmlspecialchars($comment['Name']); ?>
+					<?php //echo htmlspecialchars($comment['Name']); ?>
                         <small class="pull-right">
-						<?php echo htmlspecialchars($comment['PlaceDate']); ?>
+						<?php //echo htmlspecialchars($comment['PlaceDate']); ?>
                         </small>
 					</h4>
 				</div>
                 <div class="comment-content">
-                	<?php echo htmlspecialchars($comment['Comment']); ?>
+                	<?php //echo htmlspecialchars($comment['Comment']); ?>
                 </div>-->
             </div>
             <hr />
