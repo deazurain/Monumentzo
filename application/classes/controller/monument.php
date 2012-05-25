@@ -9,11 +9,13 @@ Class Controller_Monument extends Controller_Template_Website
 		$id = $this->request->param('id');
 		$monument = new Model_Monument($id);
 
+		$comments = $monument->getPostedComments();
 		$monument = $monument->viewMonument();
 		
 		$this->template->title = $monument['Name'];
 		$this->template->content = View::factory('monument');
 		$this->template->content->monument = $monument;
+		$this->template->content->comments = $comments;
 	}
 	
 	public function action_test(){

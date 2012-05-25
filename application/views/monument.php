@@ -1,4 +1,3 @@
-
 <div id="monument" class="container">
 	<div class="row">
 		<div class="span5">
@@ -58,11 +57,47 @@
 			</div><!--/row-->
 			<div class="row">
 			    <p>
-			        <?php foreach($monument['TextTag'] as $tag) {
-    				    echo "<a href='/search/query/".$tag['TextTag']."'>".$tag['TextTag']."</a>, ";
-    				}?>
+				<?php foreach($monument['TextTag'] as $tag) {
+					echo "<a href='/search/query/".$tag['TextTag']."'>".$tag['TextTag']."</a>, ";
+				}?>
     			</p>
 			</div><!--/row-->
 		</div><!--/span-->
 	</div><!--/row-->
+    
+    <!-- Start of the comments -->
+    <div class="row">
+    	<div class="span2">&nbsp;</div>
+        <div class="span8">
+        	<div class="page-header">
+            	<h1>Commentaar</h1>
+            </div>
+        
+        	<?php //foreach($comments as $comment): ?>
+            <div class="row">
+            	<div class="comment-header">
+                	<h3>Test user<small class="pull-right">17/02/8213</small></h3>
+				</div>
+                <div class="comment-content">
+                	<p>
+                	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna neque, semper ut gravida a, porttitor quis lacus. Praesent consequat elit vel massa rutrum nec porta ipsum hendrerit. Fusce rutrum, tellus sed dapibus hendrerit, ipsum dui tincidunt urna, eu fermentum sapien sem sit amet ipsum. Duis id neque ut turpis venenatis porttitor vitae adipiscing mi. Nam blandit diam sed neque interdum consectetur. Cras molestie accumsan facilisis. Mauris ac dolor nisi. Integer ac lacus ut ligula aliquet aliquet aliquam non libero. Donec dictum fringilla urna sit amet egestas. Aliquam id risus tristique nisl tristique accumsan.
+                    </p>
+                </div>
+            	<!--<div class="comment-header">
+                	<h3>
+					<?php //echo htmlspecialchars($comment['Name']); ?>
+                        <small class="pull-right">
+						<?php //echo htmlspecialchars($comment['PlaceDate']); ?>
+                        </small>
+					</h3>
+				</div>
+                <div class="comment-content">
+                	<?php //echo htmlspecialchars($comment['Comment']); ?>
+                </div>-->
+            </div>
+            <hr />
+			<?php //endforeach; ?>
+        </div>
+     	<div class="span2">&nbsp;</div>
+    </div>
 </div><!--/container-->

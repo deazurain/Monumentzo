@@ -24,8 +24,30 @@ Class Controller_Ajax_Comment extends Controller_Template_Ajax {
             $this->json_fail($errors);
         }
 
+        $data = $_POST;
+        $data['PlaceDate'] = time();
 
+        $c = Model::factory('comment');
+        $c->set($_POST);
+
+        $v = $c->validator();
+
+        if(!$v->check()) {
+
+            $errors = array_merge($errors, $v->errors());
+
+            $this->json_fail($errors);
+
+        }
+        else {
+
+            $c->save();
+
+            $this->json_success($c->get());
+
+        }
     }
+
 }
 
 ?>

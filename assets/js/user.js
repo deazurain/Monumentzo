@@ -5,6 +5,11 @@
 $(document).ready(function () {
 
 	var cancelOnClick = function() {
+
+        var form = $(this).parent().parent();
+        console.log(form.find('.error-container'));
+        form.find('.error-container').hide();
+
 		parent.$.fancybox.close();
 	}
 
