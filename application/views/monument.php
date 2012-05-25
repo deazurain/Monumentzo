@@ -107,16 +107,15 @@
                 <?php echo Form::open('comment/create', array('id' => 'create-comment', 'method' => 'post')); ?>
                 
                 <div class="row">
-                    <div class="span5">
+                    <div class="span7">
                         <dl>
                             <dt><?php echo Form::hidden('MonumentID', $monument['MonumentID']); ?></dt>
-                            <dt><?php echo Form::label('Comment', 'Commentaar'); ?></dt>
-                            <dd><?php echo Form::textarea('Comment'); ?></dd>
+                            <dd><?php echo Form::textarea('Comment', '', array('rows' => 7, 'placeholder' => 'Commentaar over het monument...')); ?></dd>
                         </dl>
                     </div>
-                    <div class="span3">
+                    <div id="comment-buttons" class="pull-right">
                     	<div class="btn-toolbar">
-                        	<button type="submit" class="btn btn-info">Plaats Commentaar</button>
+                        	<button type="submit" class="btn btn-info">Plaats</button>
                         </div>
                         <div class="btn-toolbar">
                         	<button type="reset" class="btn btn-danger" href="#">Annuleer</button>
