@@ -94,4 +94,36 @@
         </div>
      	<div class="span2">&nbsp;</div>
     </div>
+    
+    <!-- Start of comment typing section -->
+    <div class="row">
+    	<div class="span2">&nbsp;</div>
+        <div class="span8">
+        	<div class="page-header">
+            	<h1>Plaats commentaar</h1>
+            </div>
+        
+        	<div>
+				<?php if(!$user) { die('Je moet ingelogd zijn om commentaar te plaatsen.'); } ?>
+                
+                <?php echo Form::open('comment/create', array('id' => 'create-comment', 'method' => 'post')); ?>
+                
+                <dl>
+                    <dt><?php echo Form::label('MonumentID', 'Monument ID'); ?></dt>
+                    <dd><?php echo Form::input('MonumentID'); ?></dd>
+                    <dt><?php echo Form::label('Comment', 'Commentaar'); ?></dt>
+                    <dd><?php echo Form::textarea('Comment'); ?></dd>
+                </dl>
+                <p>
+                    <button type="submit" class="btn btn-info">Plaats Commentaar</button>
+                    <button type="reset" class="btn btn-danger" href="#">Annuleer</button>
+                </p>
+                <div class='error-container alert alert-error'></div>
+                <div class='success-container alert alert-success'></div>
+                
+                <?php echo Form::close(); ?>
+            </div>
+        </div>
+        <div class="span2">&nbsp;</div>
+    </div>
 </div><!--/container-->
