@@ -174,7 +174,7 @@ public class DatabaseWriter {
 				// Store the information
 				PreparedStatement insertImage = (PreparedStatement) dbConnection.prepareStatement(
 						"INSERT INTO monumentzo.Image (MonumentID, Path, Thumbnail) " +
-						"VALUES (?, ?) ", Statement.RETURN_GENERATED_KEYS);
+						"VALUES (?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 				insertImage.setInt(1, monument.getMonumentID());
 				insertImage.setString(2, monument.getImagePath());
 				insertImage.setString(3, monument.getThumbnailPath());
@@ -226,7 +226,7 @@ public class DatabaseWriter {
 			// Get the key of the category that was inserted
 			ResultSet keys = insertCategory.getGeneratedKeys();
 			if(keys.next()) {
-				categoryID = keys.getInt("CategoryID");
+				categoryID = keys.getInt(1);
 				keys.close();
 			} else {
 				// Don't need the current keys resultset because it is invalid at this point in the code

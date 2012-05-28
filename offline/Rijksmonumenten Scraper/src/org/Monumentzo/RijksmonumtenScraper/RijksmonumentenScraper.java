@@ -76,7 +76,7 @@ public class RijksmonumentenScraper {
 		DatabaseWriter dbWriter = null;
 		try {
 			// dbWriter = new DatabaseWriter(databaseURL, Database, user, password);
-			dbWriter = new DatabaseWriter("jdbc:mysql://localhost/", "monumentzo", "root", "aardbei");
+			dbWriter = new DatabaseWriter("jdbc:mysql://localhost/", "monumentzo", user, password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

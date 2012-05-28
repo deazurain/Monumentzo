@@ -117,8 +117,8 @@ public class Main {
 	try {
 		String databaseURL = "jdbc:mysql://localhost/";
 		String schema = "monumentzo";
-		String user = "root";
-		String password = "aardbei";
+		String user = ;
+		String password = ;
 		DatabaseWriter w = new DatabaseWriter(databaseURL, schema, user, password);
 		DatabaseSimilarImageUpdater up = new DatabaseSimilarImageUpdater(w);
 		
