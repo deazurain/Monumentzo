@@ -1,10 +1,11 @@
 <h1>Uitloggen</h1>
 <?php echo Form::open('user/logout', array('method' => 'post')); ?>
 <p>
-    <?php echo Form::submit(NULL, 'Uitloggen'); ?>
-    <input type="button" value="Annuleren" class="fancybox" href="#close">
+    <button type="submit" class="btn btn-info">Uitloggen</button>
+    <button type="button" class="btn btn-danger" href="#">Annuleren</button>
 </p>
-<?php if (isset($errors)) echo $errors; ?>
+<div class='error-container alert alert-error'></div>
+<?php if (isset($errors)) echo '<div class="alert alert-error">' . $errors . '</div>'; ?>
 
 <?php echo Form::close(); ?>
 

@@ -9,7 +9,7 @@
         <?php foreach ($scripts as $file) echo HTML::script($file), PHP_EOL ?>
     </head>
 
-    <body>
+    <body data-base="<?php echo url::base(); ?>">
 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -19,25 +19,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="/home">Monumentzo</a>
+                    <?php echo HTML::anchor('/home', 'Monumentzo', array('class' => 'brand')); ?>
+                    <!--<a class="brand" href="/home">Monumentzo</a>-->
                     <div class="nav-collapse">
                         <ul class="nav">
                             <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
                             <?php if (isset($register)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
                             <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>
 														
-							<li><?php echo HTML::anchor('/browse/index', 'Browse'); ?></li>
-                            <li class='dropdown'>
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									Lijsten
-									<b class="caret"></b>
-								</a>
-                                <ul class="dropdown-menu">
-                                	<li><?php echo HTML::anchor('/list/favorite/view', 'Favorieten'); ?></li>
-                                    <li><?php echo HTML::anchor('/list/visited/view', 'Bezochte monumenten'); ?></li>
-                                    <li><?php echo HTML::anchor('/list/wish/view', 'Nog te bezoeken monumenten'); ?></li>
-                                </ul>
-                            </li>
+							<li><?php echo HTML::anchor('/browse/index', 'Bladeren'); ?></li>
+							<?php if ( isset( $list )) echo $list ?>
                         </ul>
                     </div>
                     <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
@@ -66,10 +57,10 @@
             }
         ?>
 
-        <div class="container">
+        <div id="content" class="container">
             <?php echo $content ?>
         </div>
 
-        <script type="text/javascript" src="/assets/js/monumentzo.js"></script>
+		<?php echo HTML::script('assets/js/monumentzo.js'), PHP_EOL ?>
     </body>
 </html>

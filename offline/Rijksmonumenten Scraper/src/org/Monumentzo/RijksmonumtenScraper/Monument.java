@@ -7,6 +7,7 @@ public class Monument {
 	private int monumentID;
 	private String name;
 	private String description;
+	private String category;
 	private float latitude;
 	private float longitude;
 	private String city;
@@ -18,8 +19,9 @@ public class Monument {
 	private String wikiArticle;
 	private URL wikiImageURL;
 	private String imagePath; // website relative path
+	private String thumbnailPath;
 	
-	public Monument(int id, String name, String desc,
+	public Monument(int id, String name, String desc, String cat,
 					float latitude, float longitude,
 					String city, String province, String street, String streetNumber,
 					String foundationDate, int foundationYear,
@@ -27,6 +29,7 @@ public class Monument {
 		this.monumentID = id;
 		this.name = name;
 		this.description = desc;
+		this.category = cat;
 		
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -46,6 +49,7 @@ public class Monument {
 	public int getMonumentID() { return monumentID; }
 	public String getName() { return name; }
 	public String getDescription() { return description; }
+	public String getCategory() { return category; }
 	
 	public float getLatitude() { return latitude; }
 	public float getLongitude() { return longitude; }
@@ -62,4 +66,7 @@ public class Monument {
 	public URL getWikiImageURL() { return wikiImageURL; }
 	public String getImagePath() { return imagePath; }
 	public void setImagePath(String webpath) { imagePath = webpath; }
+
+	public String getThumbnailPath() { return thumbnailPath; }
+	public void setThumbnailPath(String path) { thumbnailPath = path; }
 }

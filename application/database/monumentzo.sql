@@ -30,10 +30,12 @@ CREATE  TABLE IF NOT EXISTS `monumentzo`.`Image` (
   `ImageID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `MonumentID` INT UNSIGNED NOT NULL ,
   `Path` VARCHAR(255) NOT NULL ,
+  `Thumbnail` VARCHAR(255) NOT NULL ,
   PRIMARY KEY (`ImageID`) ,
   INDEX `Monumentzo.Image.MonumentID` (`MonumentID` ASC) ,
   UNIQUE INDEX `ImageID_UNIQUE` (`ImageID` ASC) ,
   UNIQUE INDEX `Path_UNIQUE` (`Path` ASC) ,
+  UNIQUE INDEX `Thumbnail_UNIQUE` (`Thumbnail` ASC) ,
   CONSTRAINT `Monumentzo.Image.MonumentID`
     FOREIGN KEY (`MonumentID` )
     REFERENCES `monumentzo`.`Monument` (`MonumentID` )
@@ -97,11 +99,11 @@ ENGINE = InnoDB;
 -- Table `monumentzo`.`Comment`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `monumentzo`.`Comment` (
-  `CommentID` INT UNSIGNED NOT NULL ,
+  `CommentID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `UserID` INT UNSIGNED NOT NULL ,
   `MonumentID` INT UNSIGNED NOT NULL ,
-  `PlaceDate` DATE NULL ,
-  `Comment` TEXT NULL ,
+  `PlaceDate` DATETIME NOT NULL ,
+  `Comment` TEXT NOT NULL ,
   PRIMARY KEY (`CommentID`) ,
   INDEX `Monumentzo.Comment.UserID` (`UserID` ASC) ,
   INDEX `Monumentzo.Comment.MonumentID` (`MonumentID` ASC) ,
@@ -123,9 +125,10 @@ ENGINE = InnoDB;
 -- Table `monumentzo`.`Category`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `monumentzo`.`Category` (
-  `CategoryID` INT UNSIGNED NOT NULL ,
-  `Category` VARCHAR(45) NOT NULL ,
+  `CategoryID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `Category` VARCHAR(255) NOT NULL ,
   PRIMARY KEY (`CategoryID`) ,
+  UNIQUE INDEX `CategoryID_UNIQUE` (`CategoryID` ASC) ,
   UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) )
 ENGINE = InnoDB;
 
@@ -331,3 +334,12 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `monumentzo`.`Role`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `monumentzo`;
+INSERT INTO `monumentzo`.`Role` (`RoleID`, `Name`, `Description`) VALUES (0, 'login', 'Login privilege');
+
+COMMIT;

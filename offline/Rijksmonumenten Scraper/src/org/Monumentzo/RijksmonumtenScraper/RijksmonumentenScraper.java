@@ -16,6 +16,7 @@ public class RijksmonumentenScraper {
 		String sourceFile = null;
 		String systemDataPath = null;
 		String webDataPath = null;
+		String thumbDataPath = null;
 		
 		// Get the settings from the commandline
 		for(int i = 0; i < args.length - 1; i++) {
@@ -35,6 +36,11 @@ public class RijksmonumentenScraper {
 			case "-w":
 			case "--webpath":
 				webDataPath = args[i + 1];
+				break;
+			
+			case "-t":
+			case "--thumbpath":
+				thumbDataPath = args[i + 1];
 				break;
 			}
 		}
@@ -86,8 +92,11 @@ public class RijksmonumentenScraper {
 			if(monument.getWikiImageURL() != null) {
 				File image = new File(systemDataPath, monument.getMonumentID() + ".jpg");
 				String webPath = webDataPath + monument.getMonumentID() + ".jpg";
+				String thumbPath = thumbDataPath + monument.getMonumentID() + ".jpg";
 				ImageScraper.downloadImage(image, monument.getWikiImageURL());
 				monument.setImagePath(webPath);
+				monument.setThumbnailPath(thumbPath);
+				
 			}
 			
 			dbWriter.StoreMonument(monument);

@@ -53,10 +53,10 @@ DROP TABLE IF EXISTS `Comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Comment` (
-  `CommentID` int(10) unsigned NOT NULL,
+  `CommentID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UserID` int(10) unsigned NOT NULL,
   `MonumentID` int(10) unsigned NOT NULL,
-  `PlaceDate` date DEFAULT NULL,
+  `PlaceDate` datetime DEFAULT NULL,
   `Comment` text,
   PRIMARY KEY (`CommentID`),
   UNIQUE KEY `CommentID_UNIQUE` (`CommentID`),

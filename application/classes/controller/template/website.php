@@ -16,6 +16,9 @@ class Controller_Template_Website extends Controller_Template {
 
         parent::before();
 
+		if ($this->request->is_ajax())
+			$this->auto_render = false;
+
         if ($this->auto_render) {
 					// Initialize empty values
 					$this->template->title = '';
@@ -25,6 +28,7 @@ class Controller_Template_Website extends Controller_Template {
 
 					if (Auth::instance()->logged_in()) {
 						$this->template->logout = View::factory('user/logout');
+						$this->template->list = View::factory('list');
 					}
 					else {
 						$this->template->login = View::factory('user/login');
@@ -53,7 +57,9 @@ class Controller_Template_Website extends Controller_Template {
                 'assets/js/less-1.3.0.min.js',
                 //'assets/fancybox/jquery.mousewheel-3.0.4.pack.js',
                 'assets/fancybox/source/jquery.fancybox.pack.js',
-				'assets/js/bootstrap-dropdown.js'
+				'assets/js/bootstrap-dropdown.js',
+				'assets/js/user.js',
+                'assets/js/comment.js',
             );
             $this->template->styles = array_merge($this->template->styles, $styles);
             $this->template->scripts = array_merge($this->template->scripts, $scripts);

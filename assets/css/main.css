@@ -4,15 +4,41 @@
     Description: Main stylesheet for the Monumentzo application.
 */
 
-body {
-    padding-top: 60px;
+html, body {
+	padding: 0;
+	height:100%;
+}
+
+#content {
+	padding-top: 60px;
+}
+
+/*
+ * Error/Success message containers
+ */
+.error-container , .success-container {
+	display: none;
 }
 
 /*
 Fancybox
 */
+
+/*
+ * Een padding van 20 zorgt bij mij voor dubbele scroll bars
+ * Bij inner of outer zorgt de padding bij mij voor een lelijk
+ * overflow effect dat ik niet met overflow:hidden kan verhelpen
+ * ...
+ */
+.fancybox-iframe {
+	padding: 20px;
+}
+
+.fancybox-outer {
+}
+
 .fancybox-inner {
-    padding: 20px;
+    padding: 0px;
 }
 
 .fancybox-inner form {
@@ -48,6 +74,8 @@ Search
 	max-width:200px;
 }
 
+
+
 #resultsWindow .result{
 	padding:10px;
 }
@@ -58,4 +86,36 @@ Monument
 #monument img{
 	max-height:95%;
 	max-width:95%;
+}
+
+.container {
+	height:100%;
+}
+
+#map_canvas {
+	height:100%;
+}
+
+/*
+Monument comments
+*/
+.comment-header {
+	margin-top: 20px;
+}
+
+.comment-content {
+	margin-top: 0;
+}
+
+.comment-header > h3,
+.comment-content > p {
+	padding: 0 10px;
+}
+
+#comment-buttons button {
+	width: 80px;
+}
+
+#create-comment textarea {
+	width: 100%;
 }

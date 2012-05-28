@@ -1,4 +1,2 @@
-<div class="container-fluid" id="browseWindow">
-	<script src="/assets/js/Three.js"></script>
-	<script src="/assets/js/browse.js"></script>
-</div>
+<?php echo HTML::script('assets/js/three.js'), PHP_EOL ?>
+<?php echo HTML::script('assets/js/browse.js'), PHP_EOL ?>

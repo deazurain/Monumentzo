@@ -8,6 +8,11 @@ class Controller_Search extends Controller_Template_Website {
 	{
 		// Get the query parameters
 		$query = $this->request->post('q');
+		
+		if($this->request->param('id') != ""){
+		    $query = $this->request->param('id');
+	    }
+		
 		$resultSize = $this->request->post('rsz');
 		
 		// Build a vector from the query and get the monuments that contain the query words
