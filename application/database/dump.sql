@@ -25,10 +25,10 @@ USE `monumentzo` ;
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `category`
+-- Tabelstructuur voor tabel `Category`
 --
 
-CREATE TABLE IF NOT EXISTS `category` (
+CREATE TABLE IF NOT EXISTS `Category` (
   `CategoryID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Category` varchar(255) NOT NULL,
   PRIMARY KEY (`CategoryID`),
@@ -37,10 +37,10 @@ CREATE TABLE IF NOT EXISTS `category` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=98 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `category`
+-- Gegevens worden uitgevoerd voor tabel `Category`
 --
 
-INSERT INTO `category` (`CategoryID`, `Category`) VALUES
+INSERT INTO `Category` (`CategoryID`, `Category`) VALUES
 (18, 'Agrarische gebouwen'),
 (3, 'Gebouwen, woonhuizen'),
 (2, 'Kastelen, landh. ed.'),
@@ -55,10 +55,10 @@ INSERT INTO `category` (`CategoryID`, `Category`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `comment`
+-- Tabelstructuur voor tabel `Comment`
 --
 
-CREATE TABLE IF NOT EXISTS `comment` (
+CREATE TABLE IF NOT EXISTS `Comment` (
   `CommentID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UserID` int(10) unsigned NOT NULL,
   `MonumentID` int(10) unsigned NOT NULL,
@@ -73,10 +73,10 @@ CREATE TABLE IF NOT EXISTS `comment` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `favoritelist`
+-- Tabelstructuur voor tabel `FavoriteList`
 --
 
-CREATE TABLE IF NOT EXISTS `favoritelist` (
+CREATE TABLE IF NOT EXISTS `FavoriteList` (
   `UserID` int(10) unsigned NOT NULL,
   `MonumentID` int(10) unsigned NOT NULL,
   PRIMARY KEY (`UserID`,`MonumentID`),
@@ -87,10 +87,10 @@ CREATE TABLE IF NOT EXISTS `favoritelist` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `image`
+-- Tabelstructuur voor tabel `Image`
 --
 
-CREATE TABLE IF NOT EXISTS `image` (
+CREATE TABLE IF NOT EXISTS `Image` (
   `ImageID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `MonumentID` int(10) unsigned NOT NULL,
   `Path` varchar(255) NOT NULL,
@@ -103,10 +103,10 @@ CREATE TABLE IF NOT EXISTS `image` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=96 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `image`
+-- Gegevens worden uitgevoerd voor tabel `Image`
 --
 
-INSERT INTO `image` (`ImageID`, `MonumentID`, `Path`, `Thumbnail`) VALUES
+INSERT INTO `Image` (`ImageID`, `MonumentID`, `Path`, `Thumbnail`) VALUES
 (1, 6880, 'assets/img/monuments/6880.jpg', 'assets/img/monuments/thumb/6880.jpg'),
 (2, 332550, 'assets/img/monuments/332550.jpg', 'assets/img/monuments/thumb/332550.jpg'),
 (3, 4430, 'assets/img/monuments/4430.jpg', 'assets/img/monuments/thumb/4430.jpg'),
@@ -205,10 +205,10 @@ INSERT INTO `image` (`ImageID`, `MonumentID`, `Path`, `Thumbnail`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `monument`
+-- Tabelstructuur voor tabel `Monument`
 --
 
-CREATE TABLE IF NOT EXISTS `monument` (
+CREATE TABLE IF NOT EXISTS `Monument` (
   `MonumentID` int(10) unsigned NOT NULL,
   `ImageID` int(10) unsigned DEFAULT NULL,
   `Name` text NOT NULL,
@@ -229,10 +229,10 @@ CREATE TABLE IF NOT EXISTS `monument` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `monument`
+-- Gegevens worden uitgevoerd voor tabel `Monument`
 --
 
-INSERT INTO `monument` (`MonumentID`, `ImageID`, `Name`, `Description`, `Latitude`, `Longitude`, `City`, `Province`, `Street`, `StreetNumberText`, `FoundationDateText`, `FoundationYear`, `WikiArticle`, `Vector`) VALUES
+INSERT INTO `Monument` (`MonumentID`, `ImageID`, `Name`, `Description`, `Latitude`, `Longitude`, `City`, `Province`, `Street`, `StreetNumberText`, `FoundationDateText`, `FoundationYear`, `WikiArticle`, `Vector`) VALUES
 (437, 4, 'Beurs van Berlage', 'De Beurs (Beursplein 1-3) kwam in 1898-1903 na een prijsvraag tot stand naar een rationalistisch ontwerp van H.P. Berlage ter plaatse van een daartoe in 1883 gedempt gedeelte van het Damrak en ter vervanging van beursgebouwen uit 1608-''11 en 1840-''45. Een hiertoe in 1883 uitgeschreven prijsvraag werd door L.M. Cordonnier gewonnen, maar vanwege een beschuldinging van plagiaat kwam het niet tot uitvoering. Ook pogingen tot renovatie van de oude beurs mislukten, waarna Berlage vanaf 1896 aan een nieuwbouwplan ging werken. Het imposante, langgerekte gebouw wordt geaccentueerd door in hoogte verspringende torenvormige volumes (trappenhuizen). De strakke bakstenen gevels hebben grote vensterreeksen. Zowel uitals inwendig ligt de nadruk op het eerlijk tonen van het bouwmateriaal en de constructie.', 52.3746, 4.89575, 'Amsterdam', 'Noord-Holland', 'Beursplein', '1-387', '1898-1902', 1902, 'Beurs van Berlage', '{"beursgebouwen": 1, "plagiaat": 1, "langgerekte": 1, "maar": 1, "beschuldinging": 1, "gebouw": 1, "door": 2, "amsterdam": 1, "vensterreeksen": 1, "vanaf": 1, "daartoe": 1, "ontwerp": 1, "werd": 1, "1898-1903": 1, "het": 5, "gedeelte": 1, "constructie": 1, "ligt": 1, "waarna": 1, "1608-''11": 1, "vanwege": 1, "gevels": 1, "tonen": 1, "uitgeschreven": 1, "op": 1, "een": 6, "ook": 1, "pogingen": 1, "1896": 1, "berlage": 3, "aan": 1, "hoogte": 1, "h.p": 1, "1840-''45": 1, "torenvormige": 1, "uit": 1, "plaatse": 1, "geaccentueerd": 1, "hiertoe": 1, "uitvoering": 1, "renovatie": 1, "eerlijk": 1, "uitals": 1, "kwam": 2, "ter": 2, "1-3": 1, "imposante": 1, "gewonnen": 1, "van": 8, "naar": 1, "zowel": 1, "volumes": 1, "verspringende": 1, "1883": 2, "de": 5, "gedempt": 1, "damrak": 1, "tot": 3, "grote": 1, "wordt": 1, "nadruk": 1, "bakstenen": 1, "beurs": 3, "hebben": 1, "ging": 1, "nieuwbouwplan": 1, "vervanging": 1, "bouwmateriaal": 1, "oude": 1, "beursplein": 1, "rationalistisch": 1, "in": 4, "niet": 1, "inwendig": 1, "strakke": 1, "na": 1, "l.m": 1, "stand": 1, "trappenhuizen": 1, "werken": 1, "en": 3, "mislukten": 1, "cordonnier": 1, "prijsvraag": 2}'),
 (2249, 6, 'Huis met de Hoofden', NULL, 52.3764, 4.88736, 'Amsterdam', 'Noord-Holland', 'Keizersgracht', '123', NULL, NULL, 'Huis met de Hoofden', '{"de": 1, "met": 1, "huis": 1, "amsterdam": 1, "hoofden": 1, "null": 1}'),
 (2975, 10, 'Trippenhuis', 'Het classicistische herenhuis Kloveniersburgwal 95 kwam in 1642 tot stand voor Joan Poppen naar plannen van Philips Vingboons. Boven het met hardsteen beklede souterrain hebben de twee bouwlagen een gevelbekleding in zandsteen met kolossale corinthische pilasters. Het middenrisaliet wordt bekroond door een driehoekig fronton. De hoofdingang heeft men in 1904 verplaatst van de bel-etage (met stoep) naar het souterrain. Eveneens ontworpen door Philips Vingboons zijn de classicistische herenhuizen De Star (Kloveniersburgwal 77; 1650), gebouwd voor wolhandelaar Nicolaas Bambeeck, en De Ladder Jacobs (OZ Voorburgwal 316; 1655), gebouwd voor Pieter de Mayer bij diens suikerraffinaderij. Beide huizen worden bekroond door een fronton en hebben dorische pilasters bij de bel-etage en kolossale ionische pilasters bij de verdiepingen. Het vier travee&euml;n brede huis &lsquo;De Star&rsquo; is het resultaat van de samenvoeging van twee even brede bestaande panden. Hierdoor is de ingang uit het midden geplaatst en heeft de gevel tegen de regels in een pilaster in het midden (net als het huis Bartolotti). Tot de latere Vingboons-ontwerpen van herenhuizen met pilastergevels behoren Herengracht 386 (1663-''65) en Herengracht 412 (1664-''67). Bij het laatste is de zandstenen voorgevel uitgevoerd door steenhouwer Pieter Pietersz van Kuijck. Het huidige attiek met zoldervensters is begin 19de eeuw toegevoegd. Amsterdam, Herenhuis Kloveniersburgwal 95 Achter dit huis staat een groot tuinhuis in Lodewijk XIV-stijl (circa 1740). Het imposante Trippenhuis (Kloveniersburgwal 29) verrees in 1660-''62 naar ontwerp van Justus Vingboons als dubbelhuis voor de broers Louis en Hendrick Trip, die in Zweden fortuin hadden gemaakt met ijzer- en kopermijnen, smederijen en geschutsgieterijen. De classicistische pilastergevel heeft boven het hoge en vlakke hardstenen basement (met ingangen) twee met zandsteen beklede verdiepingen en een mezzanino voorzien van gecanneleerde kolossale pilasters met corinthische kapitelen. De gevel is rijk gedecoreerd met ranken, bloemen, festoenen en putti. Het bekronend fronton van het middenrisaliet toont het wapenschild van de familie (drie trippen), omringd door kanonskogels en kanonslopen. De hoekschoorstenen hebben de vorm van mortieren (gereconstrueerd 1890). Het beeldhouwwerk is van Jan Gijseling sr. en Hendrick de Keyser de Jonge. Sinds 1814 huisvest het gebouw het Koninklijk Instituut van Wetenschappen, Letteren en Kunst (nu N.W.O.). Na een verbouwing door stadsbouwmeester Abraham van der Hart (1815-''17) was een deel van het gebouw geschikt als Rijksmuseum van Schilderijen (collectie in 1885 naar Rijksmuseum). De toen ontstane samenvoeging van de voor- en achterzalen van beide huizen heeft men ongedaan gemaakt bij een restauratie in 1988-''91. Vanwege de symmetrie van de gevel loopt de scheidingsmuur van de twee huisdelen in afgeschuinde vorm recht op Amsterdam, Trippenhuis het middelste venster aan. Er resteren nog veel originele interieuronderdelen, waaronder in de grote zaal van het linker deel een cassetteplafond met schilderingen van Nicolaas van Helt Stockade. Ook elders in het gebouw zijn plafondschilderingen van hem behouden. In de gangen van de beide delen bevinden zich bovendeurstukken van Allard van Everdingen. Het rechterhuis werd in 1730 in Lodewijk XIV-stijl verbouwd voor Elisabeth van Loon.', 52.3712, 4.89939, 'Amsterdam', 'Noord-Holland', 'Kloveniersburgwal', '29', '1660-1662', 1662, NULL, '{"steenhouwer": 1, "stockade": 1, "1988-''91": 1, "amsterdam": 3, "plafondschilderingen": 1, "n.w.o": 1, "hardstenen": 1, "schilderingen": 1, "voor-": 1, "huizen": 2, "deel": 2, "vanwege": 1, "instituut": 1, "gebouwd": 2, "gereconstrueerd": 1, "verbouwing": 1, "ontworpen": 1, "basement": 1, "bartolotti": 1, "latere": 1, "29": 1, "bekroond": 2, "veel": 1, "1814": 1, "achterzalen": 1, "vier": 1, "bij": 5, "imposante": 1, "wapenschild": 1, "trippen": 1, "huidige": 1, "achter": 1, "316": 1, "voorzien": 1, "jonge": 1, "&lsquo": 1, "hadden": 1, "letteren": 1, "attiek": 1, "hart": 1, "net": 1, "drie": 1, "loopt": 1, "hoofdingang": 1, "eeuw": 1, "de": 33, "twee": 4, "pilastergevels": 1, "pieter": 2, "hebben": 3, "loon": 1, "412": 1, "1815-''17": 1, "worden": 1, "n": 1, "toont": 1, "schilderijen": 1, "dorische": 1, "lodewijk": 2, "fortuin": 1, "trippenhuis": 3, "heeft": 4, "herengracht": 2, "1663-''65": 1, "groot": 1, "zandstenen": 1, "en": 15, "xiv-stijl": 2, "vorm": 2, "er": 1, "star&rsquo": 1, "bevinden": 1, "77": 1, "1660-''62": 1, "gebouw": 3, "verrees": 1, "driehoekig": 1, "vingboons-ontwerpen": 1, "verbouwd": 1, "beeldhouwwerk": 1, "bouwlagen": 1, "gecanneleerde": 1, "ontwerp": 1, "rijk": 1, "pilaster": 1, "justus": 1, "voor": 5, "jan": 1, "circa": 1, "brede": 2, "elisabeth": 1, "dubbelhuis": 1, "een": 10, "sr": 1, "poppen": 1, "kapitelen": 1, "smederijen": 1, "beide": 3, "van": 28, "midden": 2, "laatste": 1, "met": 11, "zich": 1, "tot": 2, "pilasters": 4, "fronton": 3, "als": 3, "beklede": 2, "gevelbekleding": 1, "men": 2, "trip": 1, "everdingen": 1, "ladder": 1, "classicistische": 3, "behoren": 1, "ingang": 1, "vlakke": 1, "plannen": 1, "wolhandelaar": 1, "kopermijnen": 1, "waaronder": 1, "voorgevel": 1, "stand": 1, "putti": 1, "elders": 1, "nu": 1, "middelste": 1, "afgeschuinde": 1, "door": 6, "pietersz": 1, "19de": 1, "helt": 1, "het": 24, "gemaakt": 2, "middenrisaliet": 2, "hem": 1, "zweden": 1, "zaal": 1, "voorburgwal": 1, "nog": 1, "op": 1, "suikerraffinaderij": 1, "kolossale": 3, "ook": 1, "panden": 1, "kanonslopen": 1, "cassetteplafond": 1, "aan": 1, "1904": 1, "scheidingsmuur": 1, "oz": 1, "kunst": 1, "keyser": 1, "broers": 1, "gijseling": 1, "kuijck": 1, "der": 1, "eveneens": 1, "resteren": 1, "rijksmuseum": 2, "naar": 4, "kanonskogels": 1, "bloemen": 1, "omringd": 1, "bel-etage": 2, "delen": 1, "herenhuis": 2, "hierdoor": 1, "allard": 1, "wordt": 1, "stoep": 1, "mezzanino": 1, "regels": 1, "vingboons": 3, "1642": 1, "joan": 1, "louis": 1, "gevel": 3, "herenhuizen": 2, "95": 2, "huisvest": 1, "ontstane": 1, "toen": 1, "star": 1, "huis": 3, "staat": 1, "boven": 2, "travee&euml": 1, "verplaatst": 1, "1664-''67": 1, "kloveniersburgwal": 4, "na": 1, "ionische": 1, "restauratie": 1, "hardsteen": 1, "zandsteen": 2, "ingangen": 1, "koninklijk": 1, "familie": 1, "bestaande": 1, "ijzer-": 1, "toegevoegd": 1, "ongedaan": 1, "werd": 1, "geschikt": 1, "mayer": 1, "behouden": 1, "386": 1, "bambeeck": 1, "ranken": 1, "geschutsgieterijen": 1, "linker": 1, "bovendeurstukken": 1, "geplaatst": 1, "resultaat": 1, "symmetrie": 1, "hoekschoorstenen": 1, "1650": 1, "uit": 1, "hoge": 1, "verdiepingen": 2, "1655": 1, "hendrick": 2, "pilastergevel": 1, "stadsbouwmeester": 1, "even": 1, "kwam": 1, "samenvoeging": 2, "huisdelen": 1, "recht": 1, "1740": 1, "abraham": 1, "mortieren": 1, "philips": 2, "1885": 1, "interieuronderdelen": 1, "zijn": 2, "rechterhuis": 1, "was": 1, "1890": 1, "sinds": 1, "grote": 1, "corinthische": 2, "dit": 1, "die": 1, "jacobs": 1, "gedecoreerd": 1, "1730": 1, "collectie": 1, "originele": 1, "is": 6, "souterrain": 2, "uitgevoerd": 1, "tuinhuis": 1, "zoldervensters": 1, "in": 16, "begin": 1, "festoenen": 1, "nicolaas": 2, "gangen": 1, "venster": 1, "diens": 1, "bekronend": 1, "tegen": 1, "wetenschappen": 1}'),
@@ -278,7 +278,7 @@ INSERT INTO `monument` (`MonumentID`, `ImageID`, `Name`, `Description`, `Latitud
 (17998, 40, 'Nieuwe Kerk', 'De voorm. (Herv.) Nieuwe Kerk (Spui 175) is een compact gebouw met driezijdig gesloten korte zijden en twee driezijdig gesloten apsiden bij de lange zijden. Deze fraaie classicistische kerk met opengewerkte daktoren, zandstenen hoekpilasters en grote vazen met draperie&euml;n op de hoeken kwam in 1649-''56 tot stand naar plannen van Pieter Arentsz Noorwits en Bartholomeus van Bassen. Het ingangsportaal aan de oostzijde is voorzien van wapens en het jaartal 1658. In de daktoren hangen twee door Coenraet Anthonisz gegoten klokken (1656). De kerk is hersteld in 1881-''85 en 1950-''53 (daktoren). Bij een ingrijpende restauratie in 1970-''77, onder leiding van Ph.J.W.C. Bolt en E.A. Canneman, heeft men de kerk ten behoeve van het gebruik voor algemene culturele doeleinden onderkelderd met een nieuwe foyer. De aanbouwen in het midden van de lange zijden, oorspronkelijk dienend als consistorie en hofloge, zijn in de loop van de tijd naar buiten uitgebouwd en weer herbouwd in de oude vorm met hergebruik van frontons en klauwstukken.', 52.0764, 4.31596, '''s-Gravenhage', 'Zuid-Holland', 'Spui', '175', '1649-1656', 1656, 'Nieuwe Kerk (Den Haag)', '{"gegoten": 1, "vazen": 1, "door": 1, "leiding": 1, "klokken": 1, "anthonisz": 1, "behoeve": 1, "e.a": 1, "wapens": 1, "doeleinden": 1, "het": 4, "hergebruik": 1, "draperie&euml": 1, "buiten": 1, "op": 1, "aan": 1, "aanbouwen": 1, "coenraet": 1, "1881-''85": 1, "1970-''77": 1, "bij": 2, "algemene": 1, "naar": 2, "voorzien": 1, "jaartal": 1, "foyer": 1, "oostzijde": 1, "bassen": 1, "1649-''56": 1, "de": 12, "culturele": 1, "twee": 2, "175": 1, "driezijdig": 2, "loop": 1, "opengewerkte": 1, "pieter": 1, "korte": 1, "n": 1, "oude": 1, "hoeken": 1, "weer": 1, "heeft": 1, "hersteld": 1, "zandstenen": 1, "oorspronkelijk": 1, "restauratie": 1, "dienend": 1, "en": 9, "ingangsportaal": 1, "vorm": 1, "apsiden": 1, "ten": 1, "bolt": 1, "consistorie": 1, "gebouw": 1, "gesloten": 2, "kerk": 5, "frontons": 1, "nieuwe": 3, "compact": 1, "noorwits": 1, "herv": 1, "voor": 1, "uitgebouwd": 1, "deze": 1, "een": 3, "arentsz": 1, "1656": 1, "spui": 1, "ph.j.w.c": 1, "1658": 1, "bartholomeus": 1, "tijd": 1, "kwam": 1, "herbouwd": 1, "hofloge": 1, "van": 8, "gebruik": 1, "klauwstukken": 1, "midden": 1, "zijn": 1, "zijden": 3, "met": 5, "tot": 1, "grote": 1, "als": 1, "onderkelderd": 1, "men": 1, "voorm": 1, "classicistische": 1, "canneman": 1, "is": 3, "daktoren": 3, "fraaie": 1, "plannen": 1, "in": 7, "lange": 2, "''s-gravenhage": 1, "1950-''53": 1, "hoekpilasters": 1, "stand": 1, "hangen": 1, "ingrijpende": 1, "onder": 1}'),
 (18113, 39, 'Panorama Mesdag', 'Het Panorama Mesdag (Zeestraat 65b-c) werd in 1880-''81 ingericht voor het tonen van een op rondlopend doek geschilderd panorama van het dorp Scheveningen, vervaardigd door H.W. Mesdag in samenwerking met zijn vrouw S. Mesdag-van Houten, G.H. Breitner, Th. de Bock, B.J. Blommers en de Belgische architectuurschilder A. Nijberck. De tentoonstellingsruimte is een veertienzijdige centraalbouw, die men van onderaf bereikt. De ingangspartij aan de Zeestraat werd ontworpen door G. Klomp. De tussenliggende lange gang heeft men in 1910-''11 vervangen door een zalengalerij voor schilderijen van de Haagse School. Voor zijn eigen schilderijencollectie liet Mesdag in 1886-''87 het Museum Mesdag (Laan van Meerdervoort 7) bouwen naar een eclectisch ontwerp van aannemer-architect H. van Jaarsveld (gerestaureerd 1990-''96). Van het naastgelegen - al in 1869-''70 voor hem gebouwde - dubbele herenhuis Laan van Meerdervoort 9-11 bewoonde Mesdag zelf het rechterdeel (verhoogd 1919).', 52.0847, 4.30328, '''s-Gravenhage', 'Zuid-Holland', 'Zeestraat', '65', '1881', 1881, 'Panorama Mesdag', '{"verhoogd": 1, "vrouw": 1, "houten": 1, "naastgelegen": 1, "door": 3, "breitner": 1, "th": 1, "bereikt": 1, "ontwerp": 1, "werd": 2, "1990-''96": 1, "zalengalerij": 1, "architectuurschilder": 1, "eclectisch": 1, "het": 6, "voor": 4, "mesdag-van": 1, "tussenliggende": 1, "rechterdeel": 1, "1869-''70": 1, "bouwen": 1, "hem": 1, "tonen": 1, "g.h": 1, "meerdervoort": 2, "ontworpen": 1, "op": 1, "een": 4, "eigen": 1, "vervaardigd": 1, "vervangen": 1, "nijberck": 1, "museum": 1, "klomp": 1, "aan": 1, "-": 2, "7": 1, "9-11": 1, "h.w": 1, "onderaf": 1, "samenwerking": 1, "geschilderd": 1, "ingericht": 1, "liet": 1, "van": 9, "naar": 1, "gebouwde": 1, "1886-''87": 1, "doek": 1, "blommers": 1, "herenhuis": 1, "zeestraat": 2, "1910-''11": 1, "zijn": 2, "panorama": 3, "de": 7, "met": 1, "bewoonde": 1, "ingangspartij": 1, "rondlopend": 1, "1919": 1, "die": 1, "mesdag": 6, "laan": 2, "bock": 1, "scheveningen": 1, "dorp": 1, "men": 2, "65b-c": 1, "1880-''81": 1, "centraalbouw": 1, "haagse": 1, "g": 1, "is": 1, "tentoonstellingsruimte": 1, "jaarsveld": 1, "a": 1, "schilderijencollectie": 1, "schilderijen": 1, "dubbele": 1, "veertienzijdige": 1, "lange": 1, "in": 5, "h": 1, "''s-gravenhage": 1, "al": 1, "aannemer-architect": 1, "heeft": 1, "zelf": 1, "school": 1, "s": 1, "belgische": 1, "en": 1, "gang": 1, "gerestaureerd": 1, "b.j": 1}'),
 (18329, 84, 'Rietveld SchrÃ¶derhuis', NULL, 52.0853, 5.14753, 'Utrecht', 'Utrecht', 'Prins Hendriklaan', '50', '1924', 1924, 'Rietveld SchrÃ¶derhuis', '{"rietveld": 1, "utrecht": 1, "null": 1, "schrã¶derhuis": 1}');
-INSERT INTO `monument` (`MonumentID`, `ImageID`, `Name`, `Description`, `Latitude`, `Longitude`, `City`, `Province`, `Street`, `StreetNumberText`, `FoundationDateText`, `FoundationYear`, `WikiArticle`, `Vector`) VALUES
+INSERT INTO `Monument` (`MonumentID`, `ImageID`, `Name`, `Description`, `Latitude`, `Longitude`, `City`, `Province`, `Street`, `StreetNumberText`, `FoundationDateText`, `FoundationYear`, `WikiArticle`, `Vector`) VALUES
 (18415, 46, 'Korenbeurs', 'De voorm. Korenbeurs (Akerkhof 1) , gebouwd in 1863-''65 naar ontwerp van stadsbouwmeester J.G. van Beusekom, is in feite de derde korenbeurs ter plaatse. De eerste (houten) beurs verrees in 1774, de tweede in 1826. Het voorgebouw, met zuilenportiek, is uitgevoerd in neoclassicistische stijl. Beelden aan weerszijden van de ingang en op het fronton symboliseren de pijlers van de Groninger welvaart: scheepvaart (Neptunus), landbouw (Ceres) en handel (Mercurius). De zinken beelden zijn vervaardigd door de firma L.J. Enthoven &amp; Co. uit Den Haag. De erachter gelegen, halfrond gesloten beurshal heeft een driebeukige opzet en een bijzondere gietijzeren draagconstructie met veel glas, voor de bij het keuren noodzakelijke lichtinval. Het ijzerwerk werd geleverd door de Groninger IJzer- en Metaalgieterij. Het in 1990-''91 naar plannen van architectenbureau C. Kalfsbeek gerenoveerde beursgebouw heeft tegenwoordig voornamelijk een horeca-functie.', 53.2168, 6.56359, 'Groningen', 'Groningen', 'Akerkhof', '1', '1862-''65', 1865, 'Korenbeurs (Groningen)', '{"houten": 1, "door": 2, "mercurius": 1, "1990-''91": 1, "weerszijden": 1, "het": 5, "1826": 1, "horeca-functie": 1, "gebouwd": 1, "zinken": 1, "op": 1, "stijl": 1, "vervaardigd": 1, "neptunus": 1, "aan": 1, "opzet": 1, "1": 1, "scheepvaart": 1, "veel": 1, "metaalgieterij": 1, "draagconstructie": 1, "landbouw": 1, "tegenwoordig": 1, "glas": 1, "bij": 1, "naar": 2, "handel": 1, "de": 12, "ijzerwerk": 1, "den": 1, "pijlers": 1, "halfrond": 1, "ceres": 1, "eerste": 1, "c": 1, "&amp": 1, "1774": 1, "haag": 1, "heeft": 2, "architectenbureau": 1, "en": 4, "beelden": 2, "tweede": 1, "gesloten": 1, "ijzer-": 1, "voorgebouw": 1, "verrees": 1, "gelegen": 1, "korenbeurs": 3, "noodzakelijke": 1, "ontwerp": 1, "werd": 1, "voor": 1, "firma": 1, "enthoven": 1, "derde": 1, "een": 3, "bijzondere": 1, "symboliseren": 1, "driebeukige": 1, "groninger": 2, "co": 1, "uit": 1, "beursgebouw": 1, "groningen": 1, "1863-''65": 1, "plaatse": 1, "stadsbouwmeester": 1, "ter": 1, "beusekom": 1, "van": 5, "zuilenportiek": 1, "zijn": 1, "geleverd": 1, "kalfsbeek": 1, "met": 2, "feite": 1, "welvaart:": 1, "fronton": 1, "gietijzeren": 1, "beurs": 1, "neoclassicistische": 1, "voorm": 1, "j.g": 1, "is": 2, "ingang": 1, "keuren": 1, "uitgevoerd": 1, "plannen": 1, "voornamelijk": 1, "in": 6, "l.j": 1, "akerkhof": 1, "beurshal": 1, "gerenoveerde": 1, "erachter": 1, "lichtinval": 1}'),
 (19043, 48, 'Paviljoen Welgelegen', 'Paviljoen Welgelegen (Dreef 3) . De uit Schotland afkomstige koopman-bankier Henry Hope liet dit L-vormige neoclassicistische buitenhuis in 1786-''89 bouwen ter plaatse van de door hem in 1769 gekochte hofstede Welgelegen. Het ontwerp is waarschijnlijk van Michel Triquetti, marineconsul van Sardini&euml;, en de bouw werd geleid door Jean Baptiste Dubois. Dit buiten werd in 1808 door koning Lodewijk Napoleon in gebruik genomen (tot 1810) en later door koning Willem I ter beschikking gesteld van zijn moeder, de prinses douairi&egrave;re Frederika Sophia Wilhelmina. Vanaf 1838 herbergde het enkele musea, waaronder vanaf 1871 de koloniale collectie van de Nederlandse Maatschappij tot bevordering van Nijverheid (in 1926 naar Amsterdam overgebracht). Sinds 1930 is hier het provinciehuis van Noord-Holland gevestigd (gerestaureerd circa 1989).', 52.372, 4.63039, 'Haarlem', 'Noord-Holland', 'Dreef', '3', '1785/8', 1785, 'Paviljoen Welgelegen', '{"michel": 1, "jean": 1, "nijverheid": 1, "beschikking": 1, "schotland": 1, "baptiste": 1, "door": 4, "amsterdam": 1, "koning": 2, "1769": 1, "1786-''89": 1, "1930": 1, "nederlandse": 1, "paviljoen": 2, "vanaf": 2, "gekochte": 1, "douairi&egrave": 1, "ontwerp": 1, "marineconsul": 1, "werd": 2, "noord-holland": 1, "bevordering": 1, "l-vormige": 1, "het": 3, "circa": 1, "moeder": 1, "bouwen": 1, "enkele": 1, "hem": 1, "buiten": 1, "genomen": 1, "afkomstige": 1, "triquetti": 1, "bouw": 1, "herbergde": 1, "3": 1, "uit": 1, "gevestigd": 1, "maatschappij": 1, "1810": 1, "plaatse": 1, "buitenhuis": 1, "sophia": 1, "waarschijnlijk": 1, "hier": 1, "1989": 1, "ter": 2, "welgelegen": 3, "hope": 1, "van": 7, "liet": 1, "haarlem": 1, "naar": 1, "gebruik": 1, "frederika": 1, "provinciehuis": 1, "hofstede": 1, "re": 1, "zijn": 1, "de": 6, "1808": 1, "sinds": 1, "tot": 2, "geleid": 1, "henry": 1, "dit": 2, "dreef": 1, "willem": 1, "neoclassicistische": 1, "musea": 1, "collectie": 1, "dubois": 1, "is": 2, "wilhelmina": 1, "napoleon": 1, "koopman-bankier": 1, "later": 1, "1926": 1, "lodewijk": 1, "in": 5, "1871": 1, "sardini&euml": 1, "waaronder": 1, "i": 1, "gesteld": 1, "overgebracht": 1, "prinses": 1, "1838": 1, "koloniale": 1, "en": 2, "gerestaureerd": 1}'),
 (19918, 49, 'Gemaal De Cruquius', NULL, 52.3382, 4.63813, 'Cruquius', 'Noord-Holland', 'Cruquiusdijk', '27', '1849', 1849, 'Gemaal De Cruquius', '{"de": 1, "cruquius": 2, "gemaal": 1, "null": 1}'),
@@ -329,17 +329,17 @@ INSERT INTO `monument` (`MonumentID`, `ImageID`, `Name`, `Description`, `Latitud
 (46887, 24, 'Agnetapark, arbeiderskolonie met in kleine blokjes gegroepeerde woningen, elk vo', NULL, 52.0156, 4.34654, 'Delft', 'Zuid-Holland', 'Frederik Matthesstraat', '1-50', '1890', 1890, 'Agnetapark', '{"agnetapark": 1, "met": 1, "gegroepeerde": 1, "elk": 1, "arbeiderskolonie": 1, "blokjes": 1, "woningen": 1, "kleine": 1, "in": 1, "null": 1, "delft": 1, "vo": 1}'),
 (47014, 73, 'De Meesterkok', NULL, 51.9813, 6.79396, 'Winterswijk', 'Gelderland', 'Moezebrinkweg', '2', 'laat 16e eeuw', 1600, 'De Meesterkok E 96', '{"de": 1, "winterswijk": 1, "null": 1, "meesterkok": 1}'),
 (47067, NULL, 'Zeeuwse hoeve aan de Binnendijk 3', NULL, 51.4709, 3.66836, 'Middelburg', 'Zeeland', 'Binnendijk', '3', '1676', 1676, 'Binnendijk 3', '{"3": 1, "de": 1, "binnendijk": 1, "zeeuwse": 1, "middelburg": 1, "aan": 1, "null": 1, "hoeve": 1}');
-INSERT INTO `monument` (`MonumentID`, `ImageID`, `Name`, `Description`, `Latitude`, `Longitude`, `City`, `Province`, `Street`, `StreetNumberText`, `FoundationDateText`, `FoundationYear`, `WikiArticle`, `Vector`) VALUES
+INSERT INTO `Monument` (`MonumentID`, `ImageID`, `Name`, `Description`, `Latitude`, `Longitude`, `City`, `Province`, `Street`, `StreetNumberText`, `FoundationDateText`, `FoundationYear`, `WikiArticle`, `Vector`) VALUES
 (332550, 2, 'Kasteel Amerongen', 'Kasteel Amerongen (Drostestraat 20) is een vrijwel vierkant bouwwerk uit 1674-''80. Gelegen in de uiterwaarden van de Nederrijn wordt het terrein afgesloten door een kade. Binnen die kade wordt het huis omringd door een binnen- en een buitengracht. Het staat op de plaats van een in 1286 door Borre en Diederic van Amerongen gesticht kasteel, dat door de Fransen in 1673 werd verwoest. Godard van Reede en zijn vrouw Margaretha Turnor lieten in 1673 het huidige huis bouwen op de oude fundamenten en een deel van het muurwerk van de zuidwesttoren. De architect is niet bekend. Meester-timmerman Hendrick Geurtsz. Schut moet als uitvoerend bouwmeester worden beschouwd.', 51.9954, 5.45853, 'Amerongen', 'Utrecht', 'Drostestraat', '20', '1674-1679', 1679, 'Kasteel Amerongen', '{"uitvoerend": 1, "vrouw": 1, "muurwerk": 1, "door": 4, "gelegen": 1, "lieten": 1, "werd": 1, "beschouwd": 1, "het": 5, "deel": 1, "bouwwerk": 1, "vrijwel": 1, "terrein": 1, "bouwen": 1, "een": 6, "op": 2, "1286": 1, "godard": 1, "amerongen": 4, "architect": 1, "dat": 1, "zuidwesttoren": 1, "uit": 1, "hendrick": 1, "moet": 1, "schut": 1, "kade": 2, "margaretha": 1, "van": 6, "plaats": 1, "huidige": 1, "turnor": 1, "bekend": 1, "omringd": 1, "binnen-": 1, "nederrijn": 1, "vierkant": 1, "buitengracht": 1, "zijn": 1, "drostestraat": 1, "reede": 1, "de": 7, "geurtsz": 1, "20": 1, "verwoest": 1, "als": 1, "wordt": 2, "die": 1, "1674-''80": 1, "worden": 1, "is": 2, "meester-timmerman": 1, "afgesloten": 1, "huis": 2, "oude": 1, "borre": 1, "staat": 1, "binnen": 1, "in": 4, "gesticht": 1, "uiterwaarden": 1, "kasteel": 3, "niet": 1, "fransen": 1, "fundamenten": 1, "diederic": 1, "1673": 2, "bouwmeester": 1, "en": 4}'),
 (334003, 77, 'Witte Huis', NULL, 51.9188, 4.49181, 'Rotterdam', 'Zuid-Holland', 'Wijnhaven', '1-3', '1897-1898', 1898, 'Witte Huis (Rotterdam)', '{"rotterdam": 1, "huis": 1, "null": 1, "witte": 1}');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `monument_category`
+-- Tabelstructuur voor tabel `Monument_Category`
 --
 
-CREATE TABLE IF NOT EXISTS `monument_category` (
+CREATE TABLE IF NOT EXISTS `Monument_Category` (
   `MonumentID` int(10) unsigned NOT NULL,
   `CategoryID` int(10) unsigned NOT NULL,
   PRIMARY KEY (`MonumentID`,`CategoryID`),
@@ -348,10 +348,10 @@ CREATE TABLE IF NOT EXISTS `monument_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `monument_category`
+-- Gegevens worden uitgevoerd voor tabel `Monument_Category`
 --
 
-INSERT INTO `monument_category` (`MonumentID`, `CategoryID`) VALUES
+INSERT INTO `Monument_Category` (`MonumentID`, `CategoryID`) VALUES
 (437, 3),
 (2249, 3),
 (2975, 3),
@@ -452,10 +452,10 @@ INSERT INTO `monument_category` (`MonumentID`, `CategoryID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `monument_texttag`
+-- Tabelstructuur voor tabel `Monument_TextTag`
 --
 
-CREATE TABLE IF NOT EXISTS `monument_texttag` (
+CREATE TABLE IF NOT EXISTS `Monument_TextTag` (
   `MonumentID` int(10) unsigned NOT NULL,
   `TextTagID` int(10) unsigned NOT NULL,
   `TermFrequencyInverseDocumentFrequency` double DEFAULT NULL,
@@ -466,10 +466,10 @@ CREATE TABLE IF NOT EXISTS `monument_texttag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `monument_texttag`
+-- Gegevens worden uitgevoerd voor tabel `Monument_TextTag`
 --
 
-INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
+INSERT INTO `Monument_TextTag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
 (437, 86, 0.00818559360866307, 0.008333333333333333),
 (437, 118, 0.016518926941996404, 0.008333333333333333),
 (437, 127, 0.010694176905862914, 0.008333333333333333),
@@ -1364,7 +1364,7 @@ INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverse
 (5499, 2209, 0.0025685153213650274, 0.0017064846416382253),
 (5499, 2221, 0.0023741840946843733, 0.005119453924914676),
 (5499, 2232, 0.0020548122570920218, 0.0017064846416382253);
-INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
+INSERT INTO `Monument_TextTag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
 (5499, 2238, 0.002513188767262606, 0.005119453924914676),
 (5499, 2242, 0.0047106185723945595, 0.0034129692832764505),
 (5499, 2250, 0.006034214758087616, 0.011945392491467578),
@@ -2261,7 +2261,7 @@ INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverse
 (8564, 1762, 0.004733176032452535, 0.0031446540880503146),
 (8564, 1811, 0.006233557336602417, 0.0031446540880503146),
 (8564, 1821, 0.005286922130111909, 0.0031446540880503146);
-INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
+INSERT INTO `Monument_TextTag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
 (8564, 1876, 0.004340286923621402, 0.0031446540880503146),
 (8564, 1885, 0.004733176032452535, 0.0031446540880503146),
 (8564, 1907, 0.006233557336602417, 0.0031446540880503146),
@@ -3147,7 +3147,7 @@ INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverse
 (14985, 64, 0.0035299520248378673, 0.0025575447570332483),
 (14985, 68, 0.005520108675435422, 0.005115089514066497),
 (14985, 71, 0.003845638422819921, 0.005115089514066497);
-INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
+INSERT INTO `Monument_TextTag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
 (14985, 73, 0.0042998497119580235, 0.0025575447570332483),
 (14985, 89, 0.010139494798156361, 0.005115089514066497),
 (14985, 124, 0.0050697473990781805, 0.0025575447570332483),
@@ -4051,7 +4051,7 @@ INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverse
 (19043, 390, 0.00932109174610911, 0.00819672131147541),
 (19043, 396, 0.008845747918423155, 0.00819672131147541),
 (19043, 437, 0.01624812486098007, 0.00819672131147541);
-INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
+INSERT INTO `Monument_TextTag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
 (19043, 542, 0.0487443745829402, 0.02459016393442623),
 (19043, 598, 0.02103772506071393, 0.01639344262295082),
 (19043, 600, 0.013780665880127765, 0.00819672131147541),
@@ -4939,7 +4939,7 @@ INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverse
 (27382, 1027, 0.006302334437039296, 0.0045662100456621),
 (27382, 1046, 0.009051466817532276, 0.0045662100456621),
 (27382, 1051, 0.009051466817532276, 0.0045662100456621);
-INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
+INSERT INTO `Monument_TextTag` (`MonumentID`, `TextTagID`, `TermFrequencyInverseDocumentFrequency`, `TermFrequency`) VALUES
 (27382, 1058, 0.006872830951232447, 0.0045662100456621),
 (27382, 1088, 0.009051466817532276, 0.0045662100456621),
 (27382, 1098, 0.006872830951232447, 0.0045662100456621),
@@ -5783,10 +5783,10 @@ INSERT INTO `monument_texttag` (`MonumentID`, `TextTagID`, `TermFrequencyInverse
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `readlist`
+-- Tabelstructuur voor tabel `ReadList`
 --
 
-CREATE TABLE IF NOT EXISTS `readlist` (
+CREATE TABLE IF NOT EXISTS `ReadList` (
   `UserID` int(10) unsigned NOT NULL,
   `Book` text NOT NULL,
   PRIMARY KEY (`UserID`),
@@ -5796,10 +5796,10 @@ CREATE TABLE IF NOT EXISTS `readlist` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `role`
+-- Tabelstructuur voor tabel `Role`
 --
 
-CREATE TABLE IF NOT EXISTS `role` (
+CREATE TABLE IF NOT EXISTS `Role` (
   `RoleID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Description` varchar(255) NOT NULL,
@@ -5809,19 +5809,19 @@ CREATE TABLE IF NOT EXISTS `role` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `role`
+-- Gegevens worden uitgevoerd voor tabel `Role`
 --
 
-INSERT INTO `role` (`RoleID`, `Name`, `Description`) VALUES
+INSERT INTO `Role` (`RoleID`, `Name`, `Description`) VALUES
 (1, 'login', 'Login privilege');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `similarimage`
+-- Tabelstructuur voor tabel `SimilarImage`
 --
 
-CREATE TABLE IF NOT EXISTS `similarimage` (
+CREATE TABLE IF NOT EXISTS `SimilarImage` (
   `ImageID` int(10) unsigned NOT NULL,
   `SimilarImageID` int(10) unsigned NOT NULL,
   `Similarity` float DEFAULT NULL,
@@ -5830,10 +5830,10 @@ CREATE TABLE IF NOT EXISTS `similarimage` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `similarimage`
+-- Gegevens worden uitgevoerd voor tabel `SimilarImage`
 --
 
-INSERT INTO `similarimage` (`ImageID`, `SimilarImageID`, `Similarity`) VALUES
+INSERT INTO `SimilarImage` (`ImageID`, `SimilarImageID`, `Similarity`) VALUES
 (1, 93, 0.13119),
 (1, 52, 0.126871),
 (1, 57, 0.117933),
@@ -6043,10 +6043,10 @@ INSERT INTO `similarimage` (`ImageID`, `SimilarImageID`, `Similarity`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `texttag`
+-- Tabelstructuur voor tabel `TextTag`
 --
 
-CREATE TABLE IF NOT EXISTS `texttag` (
+CREATE TABLE IF NOT EXISTS `TextTag` (
   `TextTagID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `TextTag` varchar(45) NOT NULL,
   `InverseDocumentFrequency` double unsigned DEFAULT NULL,
@@ -6055,10 +6055,10 @@ CREATE TABLE IF NOT EXISTS `texttag` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2772 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `texttag`
+-- Gegevens worden uitgevoerd voor tabel `TextTag`
 --
 
-INSERT INTO `texttag` (`TextTagID`, `TextTag`, `InverseDocumentFrequency`) VALUES
+INSERT INTO `TextTag` (`TextTagID`, `TextTag`, `InverseDocumentFrequency`) VALUES
 (1, 'blokken', 1.9822712330395684),
 (2, 'zoon', 1.9822712330395684),
 (3, 'dwarsvleugel', 1.9822712330395684),
@@ -7390,7 +7390,7 @@ INSERT INTO `texttag` (`TextTagID`, `TextTag`, `InverseDocumentFrequency`) VALUE
 (1329, 'spaans', 1.9822712330395684),
 (1330, 'opkamer', 1.9822712330395684),
 (1331, 'noordmuur', 1.9822712330395684);
-INSERT INTO `texttag` (`TextTagID`, `TextTag`, `InverseDocumentFrequency`) VALUES
+INSERT INTO `TextTag` (`TextTagID`, `TextTag`, `InverseDocumentFrequency`) VALUES
 (1332, 'geleed', 1.9822712330395684),
 (1333, 'steen', 1.9822712330395684),
 (1334, 'dubbele', 1.380211241711606),
@@ -8696,7 +8696,7 @@ INSERT INTO `texttag` (`TextTagID`, `TextTag`, `InverseDocumentFrequency`) VALUE
 (2634, 'moet', 1.9822712330395684),
 (2635, 'uitingen', 1.9822712330395684),
 (2636, 'asmus', 1.9822712330395684);
-INSERT INTO `texttag` (`TextTagID`, `TextTag`, `InverseDocumentFrequency`) VALUES
+INSERT INTO `TextTag` (`TextTagID`, `TextTag`, `InverseDocumentFrequency`) VALUES
 (2637, 'uitals', 1.9822712330395684),
 (2638, '1910', 1.9822712330395684),
 (2639, 'der', 0.9408785478813433),
@@ -8836,10 +8836,10 @@ INSERT INTO `texttag` (`TextTagID`, `TextTag`, `InverseDocumentFrequency`) VALUE
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user`
+-- Tabelstructuur voor tabel `User`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `User` (
   `UserID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `HashedPassword` varchar(64) NOT NULL,
@@ -8855,10 +8855,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `usertoken`
+-- Tabelstructuur voor tabel `UserToken`
 --
 
-CREATE TABLE IF NOT EXISTS `usertoken` (
+CREATE TABLE IF NOT EXISTS `UserToken` (
   `UserTokenID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UserID` int(10) unsigned NOT NULL,
   `Agent` varchar(64) NOT NULL,
@@ -8875,10 +8875,10 @@ CREATE TABLE IF NOT EXISTS `usertoken` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user_role`
+-- Tabelstructuur voor tabel `User_Role`
 --
 
-CREATE TABLE IF NOT EXISTS `user_role` (
+CREATE TABLE IF NOT EXISTS `User_Role` (
   `UserID` int(10) unsigned NOT NULL,
   `RoleID` int(10) unsigned NOT NULL,
   KEY `fk_User_Role_UserID` (`UserID`),
@@ -8888,10 +8888,10 @@ CREATE TABLE IF NOT EXISTS `user_role` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `visitedlist`
+-- Tabelstructuur voor tabel `VisitedList`
 --
 
-CREATE TABLE IF NOT EXISTS `visitedlist` (
+CREATE TABLE IF NOT EXISTS `VisitedList` (
   `UserID` int(10) unsigned NOT NULL,
   `MonumentID` int(10) unsigned NOT NULL,
   PRIMARY KEY (`UserID`,`MonumentID`),
@@ -8902,10 +8902,10 @@ CREATE TABLE IF NOT EXISTS `visitedlist` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `wishlist`
+-- Tabelstructuur voor tabel `WishList`
 --
 
-CREATE TABLE IF NOT EXISTS `wishlist` (
+CREATE TABLE IF NOT EXISTS `WishList` (
   `UserID` int(10) unsigned NOT NULL,
   `MonumentID` int(10) unsigned NOT NULL,
   PRIMARY KEY (`UserID`,`MonumentID`),
@@ -8918,84 +8918,84 @@ CREATE TABLE IF NOT EXISTS `wishlist` (
 --
 
 --
--- Beperkingen voor tabel `comment`
+-- Beperkingen voor tabel `Comment`
 --
-ALTER TABLE `comment`
-  ADD CONSTRAINT `Monumentzo.Comment.UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.Comment.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `Comment`
+  ADD CONSTRAINT `Monumentzo.Comment.UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Monumentzo.Comment.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `favoritelist`
+-- Beperkingen voor tabel `FavoriteList`
 --
-ALTER TABLE `favoritelist`
-  ADD CONSTRAINT `Monumentzo.FavoriteList.UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.FavoriteList.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `FavoriteList`
+  ADD CONSTRAINT `Monumentzo.FavoriteList.UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Monumentzo.FavoriteList.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `image`
+-- Beperkingen voor tabel `Image`
 --
-ALTER TABLE `image`
-  ADD CONSTRAINT `Monumentzo.Image.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `Image`
+  ADD CONSTRAINT `Monumentzo.Image.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `monument`
+-- Beperkingen voor tabel `Monument`
 --
-ALTER TABLE `monument`
-  ADD CONSTRAINT `Monumentzo.Monument.ImageID` FOREIGN KEY (`ImageID`) REFERENCES `image` (`ImageID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `Monument`
+  ADD CONSTRAINT `Monumentzo.Monument.ImageID` FOREIGN KEY (`ImageID`) REFERENCES `Image` (`ImageID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `monument_category`
+-- Beperkingen voor tabel `Monument_Category`
 --
-ALTER TABLE `monument_category`
-  ADD CONSTRAINT `Monumentzo.Monument_Category.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.Monument_Category.CategoryID` FOREIGN KEY (`CategoryID`) REFERENCES `category` (`CategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `Monument_Category`
+  ADD CONSTRAINT `Monumentzo.Monument_Category.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Monumentzo.Monument_Category.CategoryID` FOREIGN KEY (`CategoryID`) REFERENCES `Category` (`CategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `monument_texttag`
+-- Beperkingen voor tabel `Monument_Texttag`
 --
-ALTER TABLE `monument_texttag`
-  ADD CONSTRAINT `Monumentzo.Monument_TextTag.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.Monument_TextTag.TextTag` FOREIGN KEY (`TextTagID`) REFERENCES `texttag` (`TextTagID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `Monument_TextTag`
+  ADD CONSTRAINT `Monumentzo.Monument_TextTag.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Monumentzo.Monument_TextTag.TextTag` FOREIGN KEY (`TextTagID`) REFERENCES `TextTag` (`TextTagID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `readlist`
+-- Beperkingen voor tabel `ReadList`
 --
-ALTER TABLE `readlist`
-  ADD CONSTRAINT `Monumentzo.ReadList.UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `ReadList`
+  ADD CONSTRAINT `Monumentzo.ReadList.UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `similarimage`
+-- Beperkingen voor tabel `SimilarImage`
 --
-ALTER TABLE `similarimage`
-  ADD CONSTRAINT `Monumentzo.Image_Image.ImageID` FOREIGN KEY (`ImageID`) REFERENCES `image` (`ImageID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.Image_Image.SimilarImageID` FOREIGN KEY (`SimilarImageID`) REFERENCES `image` (`ImageID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `SimilarImage`
+  ADD CONSTRAINT `Monumentzo.Image_Image.ImageID` FOREIGN KEY (`ImageID`) REFERENCES `Image` (`ImageID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Monumentzo.Image_Image.SimilarImageID` FOREIGN KEY (`SimilarImageID`) REFERENCES `Image` (`ImageID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `usertoken`
+-- Beperkingen voor tabel `UserToken`
 --
-ALTER TABLE `usertoken`
-  ADD CONSTRAINT `fk_UserToken_UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `UserToken`
+  ADD CONSTRAINT `fk_UserToken_UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `user_role`
+-- Beperkingen voor tabel `User_Role`
 --
-ALTER TABLE `user_role`
-  ADD CONSTRAINT `fk_User_Role_UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_User_Role_RoleID` FOREIGN KEY (`RoleID`) REFERENCES `role` (`RoleID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `User_Role`
+  ADD CONSTRAINT `fk_User_Role_UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_User_Role_RoleID` FOREIGN KEY (`RoleID`) REFERENCES `Role` (`RoleID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `visitedlist`
+-- Beperkingen voor tabel `VisitedList`
 --
-ALTER TABLE `visitedlist`
-  ADD CONSTRAINT `Monumentzo.VisitedList.UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.VisitedList.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `VisitedList`
+  ADD CONSTRAINT `Monumentzo.VisitedList.UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Monumentzo.VisitedList.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Beperkingen voor tabel `wishlist`
+-- Beperkingen voor tabel `WishList`
 --
-ALTER TABLE `wishlist`
-  ADD CONSTRAINT `Monumentzo.WishList.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Monumentzo.WishList.UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `WishList`
+  ADD CONSTRAINT `Monumentzo.WishList.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Monumentzo.WishList.UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
