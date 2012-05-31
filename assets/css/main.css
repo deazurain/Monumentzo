@@ -104,6 +104,7 @@ Monument comments
  * views/model/comment.php
 */
 
+#comment-list,
 .comment-list {
     margin: 0;
     padding: 0;

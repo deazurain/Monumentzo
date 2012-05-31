@@ -73,7 +73,7 @@
             	<h1>Commentaar</h1>
             </div>
 
-					<ul class='comment-list'>
+					<ul id='comment-list'>
 						<?php
 							foreach($comments as $comment) {
 								$v = View::factory('model/comment');
@@ -81,6 +81,7 @@
 								$v->set('name', $comment['Name']);
 								$v->set('placeDate', $comment['PlaceDate']);
 								$v->set('comment', $comment['Comment']);
+								$v->set('owner', ($user && ($user->UserID === $comment['UserID'])) ? true : false);
 								echo $v;
 							}
 						?>

@@ -1,7 +1,14 @@
 <?php
 /*
+ * expects
+ * id - Comment ID
+ * name - Username
+ * placeDate - Date that the comment was placed
+ * comment - The comment itself
+ * owner - Whether or not the currently logged in user is the owner of the comment
+ *
  * Comments are placed inside of a list:
- * 		<ul class="comment-list">
+ * 		<ul id="comment-list">
  */
 ?>
 
@@ -28,9 +35,11 @@
 
 			<div class="span2 actions">
 
-				<div class="btn-toolbar pull-right">
+				<?php if($owner) { ?>
+				<div class="pull-right">
 					<button class="btn btn-danger">Verwijder</button>
 				</div>
+				<?php } ?>
 
 			</div>
 
