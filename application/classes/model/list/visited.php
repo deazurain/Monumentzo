@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 
-class Model_List_Visited implements Model_List {
+class Model_List_Visited extends Model_Database {
 	
-	public static function add($monumentID, $userID) {
+	public function add($monumentID, $userID) {
 		DB::query(Database::INSERT, 
 					'INSERT INTO monumentzo.VisitedList VALUES (:userID, :monumentID)')
 					->bind(':userID', $userID)
@@ -10,7 +10,7 @@ class Model_List_Visited implements Model_List {
 					->execute();
 	}
 	
-	public static function remove($monumentID, $userID) {
+	public function remove($monumentID, $userID) {
 		DB::query(Database::DELETE, 
 					'DELETE FROM monumentzo.VisitedList WHERE MonumentID = :monumentID AND UserID = :userID')
 					->bind(':userID', $userID)
