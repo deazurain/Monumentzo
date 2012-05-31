@@ -6,6 +6,9 @@ class Controller_List_Favorite extends Controller_List {
 		$monumentId = $this->request->param('id');
 		$user = Auth::instance()->get_user();
 		
+		echo '<pre>' . Debug::dump($monumentId) . '</pre>';
+		echo '<pre>' . Debug::dump($user) . '</pre>';
+		
 		$favoriteList = new Model_List_Favorite();
 		
 		echo 'Hello World';
