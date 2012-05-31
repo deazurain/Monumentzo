@@ -33,6 +33,8 @@ $(document).ready(function () {
 				if(data.status == "success") {
 					// successfully logged in
 					form.find('.success-container').html('Uw commentaar is succesvol geplaatst').show();
+                    console.log($('#comment-container'));
+                    $('#comment-container').append(data.result);
 				}
 				else if(data.status == "fail") {
 					// failed to log in

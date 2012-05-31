@@ -72,25 +72,20 @@
         	<div class="page-header">
             	<h1>Commentaar</h1>
             </div>
-        
-        	<?php foreach($comments as $comment): ?>
-            <div>
-            	<div class="comment-header">
-                	<h3>
-					<?php echo htmlspecialchars($comment['Name']); ?>
-                        <small class="pull-right">
-						<?php echo htmlspecialchars($comment['PlaceDate']); ?>
-                        </small>
-					</h3>
-				</div>
-                <div class="comment-content">
-                	<p>
-                	<?php echo htmlspecialchars($comment['Comment']); ?>
-                    </p>
-                </div>
-            </div>
-            <hr />
-			<?php endforeach; ?>
+
+					<ul class='comment-list'>
+						<?php
+							foreach($comments as $comment) {
+								$v = View::factory('model/comment');
+								$v->set('id', $comment['CommentID']);
+								$v->set('name', $comment['Name']);
+								$v->set('placeDate', $comment['PlaceDate']);
+								$v->set('comment', $comment['Comment']);
+								echo $v;
+							}
+						?>
+					</ul>
+
         </div>
     </div>
     <?php endif; ?>

@@ -43,10 +43,15 @@ Class Controller_Ajax_Comment extends Controller_Template_Ajax {
             $c->save();
 
             // return place date, comment and username
-            $result= $c->get(array('PlaceDate', 'Comment'));
-            $result['User'] = $user->Name;
+            $result= $c->get(array('CommentID', 'PlaceDate', 'Comment'));
 
-            $this->json_success($result);
+						$commentView = View::factory('model/comment');
+						$commentView->set('id', $result['CommentID']);
+						$commentView->set('name', $user->Name);
+						$commentView->set('placeDate', $result['PlaceDate']);
+						$commentView->set('comment', $result['Comment']);
+
+            $this->json_success((string)$commentView);
 
         }
     }

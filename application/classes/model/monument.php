@@ -47,7 +47,7 @@ class Model_Monument extends Model_Database {
 	public function getAllImages(){}
 	
 	public function getPostedComments() {
-		$result = DB::query(Database::SELECT, 'SELECT Name, Comment, PlaceDate 
+		$result = DB::query(Database::SELECT, 'SELECT CommentID, Name, Comment, PlaceDate
 												FROM monumentzo.Comment, monumentzo.User 
 												WHERE User.UserID = Comment.UserID 
 												 AND MonumentID = :id')
