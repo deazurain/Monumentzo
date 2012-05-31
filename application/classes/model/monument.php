@@ -56,6 +56,10 @@ class Model_Monument extends Model_Database {
 		
 		return $result->as_array();
 	}
+	
+	public function getLatLong() {
+		return array('Lat' => $this->monument['Latitude'], 'Long' => $this->monument['Longitude']);
+	}
 }
 
 ?>
