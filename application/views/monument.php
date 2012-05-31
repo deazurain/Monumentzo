@@ -42,6 +42,8 @@
             <?php if($user): ?>
             <div class="row">
             	<div class="btn-toolbar">
+                	
+                    <?php if(!$inList['inFavorite'] || !$inList['inVisited'] || !$inList['inWish']): ?>
                     <div class="btn-group">
                         <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="icon-list icon-white"></i> Toevoegen aan... 
@@ -61,7 +63,9 @@
                             <?php endif; ?>
                         </ul>
                     </div>
+                    <?php endif; ?>
                     
+                    <?php if($inList['inFavorite'] || $inList['inVisited'] || $inList['inWish']): ?>
                     <div class="btn-group">
                         <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="icon-list icon-white"></i> Verwijderen van...
@@ -81,6 +85,7 @@
                             <?php endif; ?>
                         </ul>
                     </div>
+                    <?php endif; ?>
                 </div><!--/btn-toolbar-->
             </div><!--/row-->
             <?php endif; ?>
