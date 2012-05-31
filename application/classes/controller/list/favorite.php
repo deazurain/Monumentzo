@@ -7,6 +7,9 @@ class Controller_List_Favorite extends Controller_List {
 		$user = Auth::instance()->get_user();
 		
 		$favoriteList = new Model_List_Favorite();
+		
+		echo 'Hello World';
+		
 		$favoriteList->add($monumentId, $user->UserID);
 	}
 	
