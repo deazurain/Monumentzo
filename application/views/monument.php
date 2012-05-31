@@ -39,29 +39,31 @@
 				</table>
 			</div><!--/row-->
             <div class="row">
-                <div class="btn-group">
-                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="icon-list icon-white"></i> Toevoegen aan... 
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Favorieten'); ?></li>
-                        <li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
-                        <li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
-                    </ul>
-                </div><!--/btn-group-->
-                
-                <div class="btn-group">
-                	<a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
-                    	<i class="icon-list icon-white"></i> Verwijderen van...
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                    	<li><?php echo HTML::anchor('/list/favorite/remove/' . $monument['MonumentID'], 'Favorieten'); ?></li>
-                        <li><?php echo HTML::anchor('/list/visited/remove/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
-                        <li><?php echo HTML::anchor('/list/wish/remove/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
-                    </ul>
-                </div>
+            	<div class="btn-toolbar">
+                    <div class="btn-group">
+                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-list icon-white"></i> Toevoegen aan... 
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Favorieten'); ?></li>
+                            <li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
+                            <li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-list icon-white"></i> Verwijderen van...
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><?php echo HTML::anchor('/list/favorite/remove/' . $monument['MonumentID'], 'Favorieten'); ?></li>
+                            <li><?php echo HTML::anchor('/list/visited/remove/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
+                            <li><?php echo HTML::anchor('/list/wish/remove/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
+                        </ul>
+                    </div>
+                </div><!--/btn-toolbar-->
             </div><!--/row-->
 			<div class="row">
 				<h2>Beschrijving</h2>
