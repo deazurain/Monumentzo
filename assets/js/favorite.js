@@ -1,10 +1,8 @@
-var myOptions = {
-	center: new google.maps.LatLng(52.3700, 4.8900),
+var googleMap = new google.maps.Map($('#map_canvas').get(0), {
+	center: new google.maps.LatLng(52.3700, 4.8900),	// Coordinates of Amsterdam
 	zoom: 8,
 	mapTypeId: google.maps.MapTypeId.ROADMAP
-};
-
-var googleMap = new google.maps.Map($('#map_canvas').get(0), myOptions);
+});
 var markers = [];
 
 // Get the monuments that the user wants to display
