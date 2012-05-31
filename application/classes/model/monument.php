@@ -60,6 +60,16 @@ class Model_Monument extends Model_Database {
 	public function getLatLong() {
 		return array('Lat' => $this->monument['Latitude'], 'Long' => $this->monument['Longitude']);
 	}
+	
+	public function isInList($userID, $list) {
+		
+		$result = DB::query(Database::SELECT, 'SELECT * FROM monumentzo.' . $list . 'List WHERE MonumentID = :monumentID AND UserID = :userID')
+						->bind(':monumentID', $this->monument['MonumentID'])
+						->bind(':userID', $userID)
+						->execute();
+		
+		return count($result->as_array()) > 0;
+	}
 }
 
 ?>

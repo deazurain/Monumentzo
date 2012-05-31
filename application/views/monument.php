@@ -38,6 +38,8 @@
 					</tr>
 				</table>
 			</div><!--/row-->
+            
+            <?php if($user): ?>
             <div class="row">
             	<div class="btn-toolbar">
                     <div class="btn-group">
@@ -46,9 +48,17 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
+                        	<?php if(!inList['inFavorite']): ?>
                             <li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Favorieten'); ?></li>
+                            <?php endif; ?>
+                            
+                            <?php if(!inList['inVisited']): ?>
                             <li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
+                            <?php endif; ?>
+                            
+                            <?php if(!inList['inWish']): ?>
                             <li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                     
@@ -58,16 +68,26 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
+                        	<?php if(inList['inFavorite']): ?>
                             <li><?php echo HTML::anchor('/list/favorite/remove/' . $monument['MonumentID'], 'Favorieten'); ?></li>
+                            <?php endif; ?>
+                            
+                            <?php if(inList['inVisited']): ?>
                             <li><?php echo HTML::anchor('/list/visited/remove/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
+                            <?php endif; ?>
+                            
+                            <?php if(inList['inWish']): ?>
                             <li><?php echo HTML::anchor('/list/wish/remove/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div><!--/btn-toolbar-->
             </div><!--/row-->
+            <?php endif; ?>
+            
 			<div class="row">
 				<h2>Beschrijving</h2>
-				<p><?php echo isset($monument) ? $monument['Description'] : 'Undefined' ?></p>
+				<p><?php echo isset($monument) ? $monument['Description'] : 'Geen informatie beschikbaar' ?></p>
 			</div><!--/row-->
 			<div class="row">
 			    <p>
