@@ -6,13 +6,16 @@ class Controller_List_Favorite extends Controller_List {
 		$monumentId = $this->request->param('id');
 		$user = Auth::instance()->get_user();
 		
-		Model_List_Favorite::add( $monumentId, $user->UserID);
+		$favoriteList = new Model_List_Favorite();
+		$favoriteList->add($monumentId, $user->UserID);
 	}
 	
 	public function action_remove(){
-		$id = $this->request->param('id');
+		$monumentId = $this->request->param('id');
+		$user = Auth::instance()->get_user();
 		
-		Model_List_Favorite::remove($id);
+		$favoriteList = new Model_List_Favorite();
+		$favoriteList->remove($monumentId, $user->UserID);
 	}
 	
 	public function action_markers() {
