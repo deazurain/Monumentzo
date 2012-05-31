@@ -12,11 +12,9 @@ $.getJSON($('body').attr('data-base') + 'list/favorite/markers', function(data, 
 	
 	// Add the monuments as markers to the map
 	$.each(data, function(key, monument) {
-		var markerOptions = {
+		markers.push(new google.maps.Marker({
 			map : googleMap,
-			LatLng : new google.maps.LatLng(parseFloat(monument.Lat), parseFloat(monument.Long))
-		};
-		
-		markers.push(new google.maps.Marker(markerOptions));
+			position : new google.maps.LatLng(parseFloat(monument.Lat), parseFloat(monument.Long))
+		}));
 	});
 });
