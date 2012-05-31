@@ -4,9 +4,7 @@ var myOptions = {
 	mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 
-var map_canvas = $('#map_canvas');/*.width($(this).parent().width())
-									.height($(this).parent().height());*/
-var googleMap = new google.maps.Map(map_canvas.get(0), myOptions);
+var googleMap = new google.maps.Map($('#map_canvas').get(0), myOptions);
 var markers = [];
 
 // Get the monuments that the user wants to display
@@ -22,9 +20,3 @@ $.getJSON($('body').attr('data-base') + 'list/favorite/markers', function(data, 
 		var marker = new google.maps.Marker(markerOptions);
 	});
 });
-
-/*$(window).resize(function() {
-	map_canvas.width($(this).parent().width())
-				.height($(this).parent().height());
-}).resize();*/
-
