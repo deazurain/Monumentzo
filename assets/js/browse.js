@@ -12,6 +12,17 @@ var windowHalfY = window.innerHeight / 2;
 
 var infoUrl = $('body').attr('data-base') + 'browse/info'; 
 
+var mouseX = 0, mouseY = 0;
+
+document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
+function onDocumentMouseMove(event) {
+
+	mouseX = ( event.clientX - windowHalfX ) * 10;
+	mouseY = ( event.clientY - windowHalfY ) * 10;
+
+};
+
 $.getJSON(infoUrl, function(data, textStatus) {
 	
 	(function init() {
@@ -72,31 +83,71 @@ $.getJSON(infoUrl, function(data, textStatus) {
 		container.append( renderer.domElement );
 	})();
 	
+	
 	(function animate() {
 	
 		requestAnimationFrame( animate );
 		render();
+		stats.update();
 	})();
 	
+	
+	
 	function render() {
+		var time = Date.now() * 0.001;
+
+		var rx = Math.sin( time * 0.7 ) * 0.5,
+			ry = Math.sin( time * 0.3 ) * 0.5,
+			rz = Math.sin( time * 0.2 ) * 0.5;
+
+		camera.position.x += ( mouseX - camera.position.x ) * .05;
+		camera.position.y += ( - mouseY - camera.position.y ) * .05;
+
+		camera.lookAt( scene.position );
+
+		group.rotation.x = rx;
+		group.rotation.y = ry;
+		group.rotation.z = rz;
+			
 		renderer.render( scene, camera );
 	}
 	
 	$(document).mousedown(function(event) {
 		event.preventDefault();
-
+		
+		
 		var vector = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
 		projector.unprojectVector( vector, camera );
 
 		var ray = new THREE.Ray( camera.position, vector.subSelf( camera.position ).normalize() );
 
 		var intersects = ray.intersectObjects( blocks );
+		
+		if ( intersects.length > 0 ) {
 
+            SELECTED = intersects[ 0 ].object;
+			
+			for(var i=0; i<objects.length; i++) { 
+		    	if(SELECTED.position.x == objects[i].position.x){
+					thisObject = i;
+					//var blockIndex = blocks.indexOf(i);
+					
+					window.alert("The monument number of the clicked monument is: " + monumentNumbers[i]);
+		 		}	
+		    }
+			
+            var intersects = ray.intersectObject( plane );
+            offset.copy( intersects[ 0 ].point ).subSelf( plane.position );
+
+            container.style.cursor = 'move';
+
+        }
+		
 		if ( intersects.length > 0 ) {
 			var clickedBlock = intersects[0].object;
-			var blockIndex = blocks.indexOf(clickedBlock);
 			
-			window.alert("The monument number of the clicked monument is: " + monumentNumbers[blockIndex]);
+			var blockIndex = blocks.indexOf(clickedBlock);
+
 		}
 	});
 });

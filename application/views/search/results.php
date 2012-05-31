@@ -18,7 +18,7 @@ foreach($results as $monument) {
 	
 	<a href="<?php echo url::base(); ?>monument/view/<?php echo $id;?>" class="span3">
 		<div class="well result">
-			<div class="row-fluid"><div class="span12"><img src="<?php echo $image;?>"/></div></div>
+			<div class="row-fluid"><div class="span12"><img src="<?php echo '/assets/img/monuments/thumb/'.$id.'.jpg';?>"/></div></div>
 			<div class="row-fluid"><div class="span12"><p><?php echo $name;?></p></div></div>
 			<div class="row-fluid"><div class="span12"><p><?php echo $place;?></p></div></div>
 		</div>
