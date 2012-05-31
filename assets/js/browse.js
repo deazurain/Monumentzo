@@ -88,7 +88,6 @@ $.getJSON(infoUrl, function(data, textStatus) {
 	
 		requestAnimationFrame( animate );
 		render();
-		stats.update();
 	})();
 	
 	
