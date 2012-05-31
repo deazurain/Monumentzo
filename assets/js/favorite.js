@@ -17,6 +17,6 @@ $.getJSON($('body').attr('data-base') + 'list/favorite/markers', function(data, 
 			LatLng : new google.maps.LatLng(monument.Lat, monument.Long)
 		};
 		
-		var marker = new google.maps.Marker(markerOptions);
+		markers.push(new google.maps.Marker(markerOptions));
 	});
 });
