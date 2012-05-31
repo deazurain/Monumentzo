@@ -14,7 +14,7 @@ $.getJSON($('body').attr('data-base') + 'list/favorite/markers', function(data, 
 	$.each(data, function(key, monument) {
 		var markerOptions = {
 			map : googleMap,
-			LatLng : new google.maps.LatLng(monument.Lat, monument.Long)
+			LatLng : new google.maps.LatLng(parseFloat(monument.Lat), parseFloat(monument.Long))
 		};
 		
 		markers.push(new google.maps.Marker(markerOptions));
