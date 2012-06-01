@@ -155,5 +155,5 @@ $.getJSON(infoUrl, function(data, textStatus) {
  * Browse menu
  */
 $('.browse-menu-body button:contains(\'Reset\')').click(function() {
-	$('.browse-menu-body button.active').removeClass('selected');
+	$('.browse-menu-body button.active').removeClass('active');
 });
