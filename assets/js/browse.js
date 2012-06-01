@@ -57,7 +57,7 @@ function highlightBlock() {
 		}
 
 		if(last_hovered_scale < 1.2) {
-			last_hovered_scale += 0.1;
+			last_hovered_scale += 0.02;
 		}
 
 		hovered.scale.x = last_hovered_scale;

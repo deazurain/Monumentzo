@@ -39,7 +39,31 @@ Class Controller_User extends Controller_Template_Plain {
 			$user->Name = $this->request->post('username');
 			$user->HashedPassword = Auth::instance()->hash($this->request->post('password'));
 			$user->EmailAddress = $this->request->post('email');
-			$user->save();
+
+			$extra = Validation::factory($user->as_array());
+			$extra->rule('Name',
+				array($user, 'unique_field'), array(':field', ':value'));
+			$extra->rule('EmailAddress',
+				array($user, 'unique_field'), array(':field', ':value'));
+
+			try {
+				if(!$extra->check()) {
+					if($this->request->is_ajax()) {
+						$this->json_fail(array_keys($extra->errors()));
+						return;
+					}
+				}
+				$user->save();
+			}
+			catch (ORM_Validation_Exception $e) {
+
+				if($this->request->is_ajax()) {
+					$this->json_fail(array_keys($e->errors()));
+					return;
+				}
+
+			}
+
 
 			// add login role to the user
 			$login_role = ORM::factory('Role')->where('Name', '=', 'login')->find();
@@ -94,6 +118,7 @@ Class Controller_User extends Controller_Template_Plain {
 			->rule('password', 'not_empty');
 
 		if ($post->check()) {
+
 			$success = Auth::instance()->login($this->request->post('username'), $this->request->post('password'));
 
 			if ($success) {
