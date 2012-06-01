@@ -1,14 +1,14 @@
-<div id="browse-menu">
-	<div class="menu-header">
+<div id="browse-menu span4 offset2">
+	<div class="browse-menu-header">
     	<h2>Bladeren</h2>
     </div>
-    <div class="menu-body">
+    <div class="browse-menu-body">
     	<label class="checkbox"><input type="checkbox" />Plaats</label>
         <label class="checkbox"><input type="checkbox" />Tijd</label>
         <label class="checkbox"><input type="checkbox" />Categorie</label>
         <label class="checkbox"><input type="checkbox" />Attribuut</label>
     </div>
-    <div class="menu-footer"></div>
+    <div class="browse-menu-footer"></div>
 </div>
 
 <?php echo HTML::script('assets/js/three.js'), PHP_EOL ?>

@@ -63,15 +63,23 @@ Browse
 
 #browseWindow {
 	padding-top: 0px;
+	
+	position: absolute;
+	top: 40px;
+	left: 0;
 }
+
+.browse-menu-header { }
+.browse-menu-body { }
+.browse-menu-footer { }
 
 /*
 Search
 */
 
 #resultsWindow img{
-	max-height:100px;
-	max-width:200px;
+	max-height: 100px;
+	max-width: 200px;
 }
 
 
