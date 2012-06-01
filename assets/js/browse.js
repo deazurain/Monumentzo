@@ -154,8 +154,20 @@ $.getJSON(infoUrl, function(data, textStatus) {
 /*
  * Browse menu
  */
+var selectedCount = 0;
 function toggleButton(eventObject) {
-	eventObject.stopPropagation();
+	
+	// Check if the button is being toggled or being untoggled
+	// This function is called before the bootstrap library is called so,
+	// if this hasClass that means it is being untoggled, if it hasn't
+	// got this class that means it is being toggled.
+	if($(this).hasClass('active')) {
+		selectedCount -= 1;
+	} else {
+		selectedCount += 1;
+	}
+	
+	alert(selectedCount);
 }
  
 $('.browse-menu-body button:contains(\'Plaats\')').click( toggleButton );
