@@ -185,5 +185,36 @@ $.getJSON(infoUrl, function(data, textStatus) {
 		}
 
 	});
+});
 
+/*
+ * Browse menu
+ */
+var selectedCount = 0;
+function toggleButton(eventObject) {
+	
+	// Check if the button is being toggled or being untoggled
+	// This function is called before the bootstrap library is called so,
+	// if this hasClass that means it is being untoggled, if it hasn't
+	// got this class that means it is being toggled.
+	if($(this).hasClass('active')) {
+		selectedCount -= 1;
+	} else {
+		selectedCount += 1;
+		
+		if(selectedCount > 3) {
+			eventObject.stopPropagation();
+			selectedCount = 3;
+		}
+	}
+}
+ 
+$('.browse-menu-body button:contains(\'Plaats\')').click( toggleButton );
+$('.browse-menu-body button:contains(\'Tijd\')').click( toggleButton );
+$('.browse-menu-body button:contains(\'Categorie\')').click( toggleButton );
+$('.browse-menu-body button:contains(\'Attribuut\')').click( toggleButton );
+ 
+$('.browse-menu-body button:contains(\'Reset\')').click(function() {
+	$('.browse-menu-body button.active').removeClass('active');
+	selectedCount = 0;
 });
