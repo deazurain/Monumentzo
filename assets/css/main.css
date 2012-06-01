@@ -72,6 +72,7 @@ Browse
 }
 
 #browse-menu {
+	position: absolute;
 	z-index: 100;
 }
 #browse-menu .browse-menu-header { }
