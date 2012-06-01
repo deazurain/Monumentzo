@@ -7,19 +7,72 @@ var monumentNumbers = [];
 
 window.innerHeight = 800;
 
-var windowHalfX = window.innerWidth / 2;
-var windowHalfY = window.innerHeight / 2;
+var infoUrl = $('body').attr('data-base') + 'browse/info';
 
-var infoUrl = $('body').attr('data-base') + 'browse/info'; 
-
-var mouseX = 0, mouseY = 0;
+var mouse = {x:0, y:0};
+var last_hovered = null;
+var last_hovered_scale = 1.0;
 
 document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
+function getHoveredBlock() {
+
+	var vector = new THREE.Vector3(mouse.x, mouse.y, 0);
+	projector.unprojectVector(vector, camera);
+
+	var ray = new THREE.Ray(camera.position, vector.subSelf(camera.position).normalize());
+
+	var intersects = ray.intersectObjects(blocks);
+
+	if(intersects.length > 0) {
+		return intersects[0].object;
+	}
+
+	return null;
+
+}
+
+function highlightBlock() {
+
+	var hovered = getHoveredBlock();
+
+	if (hovered) {
+
+		if(!last_hovered) {
+			last_hovered = hovered;
+		}
+
+		else if(last_hovered != hovered) {
+
+			// reset scale
+			last_hovered_scale = 1.0;
+
+			// reset last_highlighted
+			last_hovered.scale.x = 1;
+			last_hovered.scale.y = 1;
+			last_hovered.scale.z = 1;
+			last_hovered.updateMatrix();
+
+			last_hovered = hovered;
+		}
+
+		if(last_hovered_scale < 1.2) {
+			last_hovered_scale += 0.1;
+		}
+
+		hovered.scale.x = last_hovered_scale;
+		hovered.scale.y = last_hovered_scale;
+		hovered.scale.z = last_hovered_scale;
+		hovered.updateMatrix();
+
+	}
+
+}
+
 function onDocumentMouseMove(event) {
 
-	mouseX = ( event.clientX - windowHalfX ) * 10;
-	mouseY = ( event.clientY - windowHalfY ) * 10;
+	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+	mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
 };
 
@@ -93,60 +146,75 @@ $.getJSON(infoUrl, function(data, textStatus) {
 	
 	
 	function render() {
+		/*
 		var time = Date.now() * 0.001;
 
 		var rx = Math.sin( time * 0.7 ) * 0.5,
 			ry = Math.sin( time * 0.3 ) * 0.5,
 			rz = Math.sin( time * 0.2 ) * 0.5;
 
-		camera.position.x += ( mouseX - camera.position.x ) * .05;
-		camera.position.y += ( - mouseY - camera.position.y ) * .05;
+		 group.rotation.x = rx;
+		 group.rotation.y = ry;
+		 group.rotation.z = rz;
+		 */
+
+		camera.position.x = mouse.x * 100;
+		camera.position.y = mouse.y * 100;
 
 		camera.lookAt( scene.position );
 
-		group.rotation.x = rx;
-		group.rotation.y = ry;
-		group.rotation.z = rz;
+		highlightBlock();
+
+
 			
 		renderer.render( scene, camera );
 	}
 	
 	$(document).mousedown(function(event) {
-		event.preventDefault();
-		
-		
-		var vector = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
-		projector.unprojectVector( vector, camera );
 
-		var ray = new THREE.Ray( camera.position, vector.subSelf( camera.position ).normalize() );
+		var clicked = getHoveredBlock();
 
-		var intersects = ray.intersectObjects( blocks );
-		
-		if ( intersects.length > 0 ) {
+		if(clicked) {
 
-            SELECTED = intersects[ 0 ].object;
-			
-			for(var i=0; i<objects.length; i++) { 
-		    	if(SELECTED.position.x == objects[i].position.x){
-					thisObject = i;
-					//var blockIndex = blocks.indexOf(i);
-					
-					window.alert("The monument number of the clicked monument is: " + monumentNumbers[i]);
-		 		}	
-		    }
-			
-            var intersects = ray.intersectObject( plane );
-            offset.copy( intersects[ 0 ].point ).subSelf( plane.position );
+			var i = blocks.indexOf(clicked);
 
-            container.style.cursor = 'move';
+			var monument = monumentNumbers[i];
 
-        }
-		
-		if ( intersects.length > 0 ) {
-			var clickedBlock = intersects[0].object;
-			
-			var blockIndex = blocks.indexOf(clickedBlock);
+			window.location = '/monument/view/' + monument;
 
 		}
+
 	});
+});
+
+/*
+ * Browse menu
+ */
+var selectedCount = 0;
+function toggleButton(eventObject) {
+	
+	// Check if the button is being toggled or being untoggled
+	// This function is called before the bootstrap library is called so,
+	// if this hasClass that means it is being untoggled, if it hasn't
+	// got this class that means it is being toggled.
+	if($(this).hasClass('active')) {
+		selectedCount -= 1;
+	} else {
+		selectedCount += 1;
+		
+		if(selectedCount > 3) {
+			eventObject.stopPropagation();
+			selectedCount = 3;
+		}
+	}
+}
+ 
+$('.browse-menu-body button:contains(\'Plaats\')').click( toggleButton );
+$('.browse-menu-body button:contains(\'Tijd\')').click( toggleButton );
+$('.browse-menu-body button:contains(\'Categorie\')').click( toggleButton );
+$('.browse-menu-body button:contains(\'Attribuut\')').click( toggleButton );
+ 
+$('.browse-menu-body button:contains(\'Reset\')').click(function() {
+	$('.browse-menu-body button.active').removeClass('active');
+	selectedCount = 0;
 });
