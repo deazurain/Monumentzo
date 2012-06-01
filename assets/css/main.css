@@ -67,11 +67,16 @@ Browse
 	position: absolute;
 	top: 40px;
 	left: 0;
+	
+	z-index: 0;
 }
 
-.browse-menu-header { }
-.browse-menu-body { }
-.browse-menu-footer { }
+#browse-menu {
+	z-index: 100;
+}
+#browse-menu .browse-menu-header { }
+#browse-menu .browse-menu-body { }
+#browse-menu .browse-menu-footer { }
 
 /*
 Search
