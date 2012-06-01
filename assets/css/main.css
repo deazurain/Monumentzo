@@ -63,15 +63,30 @@ Browse
 
 #browseWindow {
 	padding-top: 0px;
+	
+	position: absolute;
+	top: 40px;
+	left: 0;
+	
+	z-index: 0;
 }
+
+#browse-menu {
+	position: absolute;
+	z-index: 100;
+	width: 320px;
+}
+#browse-menu .browse-menu-header { }
+#browse-menu .browse-menu-body { }
+#browse-menu .browse-menu-footer { }
 
 /*
 Search
 */
 
 #resultsWindow img{
-	max-height:100px;
-	max-width:200px;
+	max-height: 100px;
+	max-width: 200px;
 }
 
 
@@ -99,17 +114,33 @@ Monument
 /*
 Monument comments
 */
-.comment-header {
+
+/* comment build up:
+ * views/model/comment.php
+*/
+
+#comment-list,
+.comment-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.comment {
 	margin-top: 20px;
 }
 
-.comment-content {
+.comment-container .content {
 	margin-top: 0;
 }
 
-.comment-header > h3,
-.comment-content > p {
-	padding: 0 10px;
+/*.comment-container .content h3,*/
+.comment-container .content p {
+	padding: 0 12px;
+}
+
+.comment-container .actions {
+    display:none;
 }
 
 #comment-buttons button {

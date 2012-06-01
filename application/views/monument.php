@@ -38,22 +38,61 @@
 					</tr>
 				</table>
 			</div><!--/row-->
+            
+            <?php if($user): ?>
             <div class="row">
-                <div class="btn-group">
-                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="icon-list icon-white"></i> Toevoegen aan... 
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Favorieten'); ?></li>
-                        <li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
-                        <li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
-                    </ul>
-                </div><!--/btn-group-->
+            	<div class="btn-toolbar">
+                	
+                    <?php if(!$inList['inFavorite'] || !$inList['inVisited'] || !$inList['inWish']): ?>
+                    <div class="btn-group">
+                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-list icon-white"></i> Toevoegen aan... 
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                        	<?php if(!$inList['inFavorite']): ?>
+                            <li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Favorieten'); ?></li>
+                            <?php endif; ?>
+                            
+                            <?php if(!$inList['inVisited']): ?>
+                            <li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
+                            <?php endif; ?>
+                            
+                            <?php if(!$inList['inWish']): ?>
+                            <li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+                    <?php endif; ?>
+                    
+                    <?php if($inList['inFavorite'] || $inList['inVisited'] || $inList['inWish']): ?>
+                    <div class="btn-group">
+                        <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-list icon-white"></i> Verwijderen van...
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                        	<?php if($inList['inFavorite']): ?>
+                            <li><?php echo HTML::anchor('/list/favorite/remove/' . $monument['MonumentID'], 'Favorieten'); ?></li>
+                            <?php endif; ?>
+                            
+                            <?php if($inList['inVisited']): ?>
+                            <li><?php echo HTML::anchor('/list/visited/remove/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
+                            <?php endif; ?>
+                            
+                            <?php if($inList['inWish']): ?>
+                            <li><?php echo HTML::anchor('/list/wish/remove/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+                    <?php endif; ?>
+                </div><!--/btn-toolbar-->
             </div><!--/row-->
+            <?php endif; ?>
+            
 			<div class="row">
 				<h2>Beschrijving</h2>
-				<p><?php echo isset($monument) ? $monument['Description'] : 'Undefined' ?></p>
+				<p><?php echo isset($monument) ? $monument['Description'] : 'Geen informatie beschikbaar' ?></p>
 			</div><!--/row-->
 			<div class="row">
 			    <p>
@@ -72,25 +111,21 @@
         	<div class="page-header">
             	<h1>Commentaar</h1>
             </div>
-        
-        	<?php foreach($comments as $comment): ?>
-            <div>
-            	<div class="comment-header">
-                	<h3>
-					<?php echo htmlspecialchars($comment['Name']); ?>
-                        <small class="pull-right">
-						<?php echo htmlspecialchars($comment['PlaceDate']); ?>
-                        </small>
-					</h3>
-				</div>
-                <div class="comment-content">
-                	<p>
-                	<?php echo htmlspecialchars($comment['Comment']); ?>
-                    </p>
-                </div>
-            </div>
-            <hr />
-			<?php endforeach; ?>
+
+					<ul id='comment-list'>
+						<?php
+							foreach($comments as $comment) {
+								$v = View::factory('model/comment');
+								$v->set('id', $comment['CommentID']);
+								$v->set('name', $comment['Name']);
+								$v->set('placeDate', $comment['PlaceDate']);
+								$v->set('comment', $comment['Comment']);
+								$v->set('owner', ($user && ($user->UserID === $comment['UserID'])) ? true : false);
+								echo $v;
+							}
+						?>
+					</ul>
+
         </div>
     </div>
     <?php endif; ?>

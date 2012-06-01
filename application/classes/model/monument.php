@@ -47,7 +47,7 @@ class Model_Monument extends Model_Database {
 	public function getAllImages(){}
 	
 	public function getPostedComments() {
-		$result = DB::query(Database::SELECT, 'SELECT Name, Comment, PlaceDate 
+		$result = DB::query(Database::SELECT, 'SELECT CommentID, Comment.UserID, Name, Comment, PlaceDate
 												FROM monumentzo.Comment, monumentzo.User 
 												WHERE User.UserID = Comment.UserID 
 												 AND MonumentID = :id')
@@ -55,6 +55,20 @@ class Model_Monument extends Model_Database {
 						->execute();
 		
 		return $result->as_array();
+	}
+	
+	public function getLatLong() {
+		return array('Lat' => $this->monument['Latitude'], 'Long' => $this->monument['Longitude']);
+	}
+	
+	public function isInList($userID, $list) {
+		
+		$result = DB::query(Database::SELECT, 'SELECT * FROM monumentzo.' . $list . 'List WHERE MonumentID = :monumentID AND UserID = :userID')
+						->bind(':monumentID', $this->monument['MonumentID'])
+						->bind(':userID', $userID)
+						->execute();
+		
+		return count($result->as_array()) > 0;
 	}
 }
 
