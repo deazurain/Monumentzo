@@ -180,4 +180,5 @@ $('.browse-menu-body button:contains(\'Attribuut\')').click( toggleButton );
  
 $('.browse-menu-body button:contains(\'Reset\')').click(function() {
 	$('.browse-menu-body button.active').removeClass('active');
+	selectedCount = 0;
 });
