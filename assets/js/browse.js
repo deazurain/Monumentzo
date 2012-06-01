@@ -155,7 +155,7 @@ $.getJSON(infoUrl, function(data, textStatus) {
  * Browse menu
  */
 function toggleButton(eventObject) {
-	alert(eventObject.target);
+	eventObject.stopPropagation();
 }
  
 $('.browse-menu-body button:contains(\'Plaats\')').click( toggleButton );
