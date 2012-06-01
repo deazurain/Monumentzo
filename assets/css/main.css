@@ -7,6 +7,8 @@
 html, body {
 	padding: 0;
 	height:100%;
+
+	background-color: #EBEBEB;
 }
 
 #content {
@@ -69,7 +71,6 @@ Browse
 	left: 0;
 	
 	z-index: 0;
-	background-color: #EBEBEB;
 }
 
 #browse-menu {
