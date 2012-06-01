@@ -1,6 +1,6 @@
 <div id="browse-menu" class="span3">
 	<div class="browse-menu-header">
-    	<h2>Bladeren</h2>
+    	<!--<h2>Bladeren</h2>-->
     </div>
     <div class="browse-menu-body">
     	<div class="btn-group" data-toggle="buttons-checkbox">
@@ -8,9 +8,7 @@
             <button class="btn">Tijd</button>
             <button class="btn">Categorie</button>
             <button class="btn">Attribuut</button>
-        </div>
-        <div class="btn-group">
-        	<button class="btn btn-danger">Reset</button>
+            <button class="btn btn-danger">Reset</button>
         </div>
     </div>
     <div class="browse-menu-footer"></div>
