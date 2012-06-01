@@ -165,9 +165,12 @@ function toggleButton(eventObject) {
 		selectedCount -= 1;
 	} else {
 		selectedCount += 1;
+		
+		if(selectedCount > 3) {
+			eventObject.stopPropagation();
+			selectedCount = 3;
+		}
 	}
-	
-	alert(selectedCount);
 }
  
 $('.browse-menu-body button:contains(\'Plaats\')').click( toggleButton );
