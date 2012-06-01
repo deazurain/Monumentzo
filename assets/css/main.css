@@ -74,16 +74,11 @@ Browse
 #browse-menu {
 	position: absolute;
 	z-index: 100;
+	width: 320px;
 }
-#browse-menu .browse-menu-header {
-	padding: 5px;
-}
-#browse-menu .browse-menu-body {
-	padding: 5px;
-}
-#browse-menu .browse-menu-footer {
-	padding: 5px;
-}
+#browse-menu .browse-menu-header { }
+#browse-menu .browse-menu-body { }
+#browse-menu .browse-menu-footer { }
 
 /*
 Search
