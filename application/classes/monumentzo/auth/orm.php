@@ -74,6 +74,7 @@ class Monumentzo_Auth_ORM extends Auth {
 			// Load the user
 			$user = ORM::factory('User');
 			$user->where($user->unique_key($username), '=', $username)->find();
+
 		}
 
 		if (is_string($password))

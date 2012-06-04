@@ -41,13 +41,10 @@ class Model_Monumentzo_User extends ORM {
 	 */
 	public function rules()
 	{
-		return array();
-
 		return array(
 			'Name' => array(
 				array('not_empty'),
 				array('max_length', array(':value', 32)),
-				array(array($this, 'unique'), array('Name', ':value')),
 			),
 			'HashedPassword' => array(
 				array('not_empty'),
@@ -56,7 +53,6 @@ class Model_Monumentzo_User extends ORM {
 				array('not_empty'),
 				array('max_length', array(':value', 255)),
 				array('email'),
-				array(array($this, 'unique'), array('EmailAddress', ':value')),
 			),
 		);
 	}
@@ -106,6 +102,19 @@ class Model_Monumentzo_User extends ORM {
 			// Save the user
 			$this->update();
 		}
+	}
+
+	public function unique_field($field, $value) {
+
+		$q = DB::select(array(DB::expr("COUNT(`$field`)"), 'total'))
+			->from($this->table_name())
+			->where($field, '=', $value);
+
+		$r = $q->execute();
+
+		// Check if the username already exists in the database
+		return $r->get('total') === '0';
+
 	}
 
 	/**
