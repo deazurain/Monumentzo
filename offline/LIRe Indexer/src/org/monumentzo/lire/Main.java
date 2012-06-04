@@ -5,7 +5,7 @@ import net.semanticmetadata.lire.ImageSearchHits;
 
 /**
  * 
- * @author mick
+ * @author Monumentzo
  *
  */
 
@@ -117,8 +117,8 @@ public class Main {
 	try {
 		String databaseURL = "jdbc:mysql://localhost/";
 		String schema = "monumentzo";
-		String user = ;
-		String password = ;
+		String user = "";
+		String password = "";
 		DatabaseWriter w = new DatabaseWriter(databaseURL, schema, user, password);
 		DatabaseSimilarImageUpdater up = new DatabaseSimilarImageUpdater(w);
 		
