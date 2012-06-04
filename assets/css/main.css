@@ -63,14 +63,18 @@ Fancybox
 Browse
 */
 
-#browseWindow {
-	padding-top: 0px;
-	
-	position: absolute;
-	top: 40px;
-	left: 0;
-	
+#browse-window {
+
 	z-index: 0;
+}
+
+#browse-window canvas {
+	border: 1px solid black;
+	background-color: white;
+
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
 }
 
 #browse-menu {

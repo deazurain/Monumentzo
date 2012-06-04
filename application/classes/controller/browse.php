@@ -14,7 +14,7 @@ class Controller_Browse extends Controller_Template_Website {
 		$result = DB::query(Database::SELECT, 'SELECT monumentzo.Monument.MonumentID, monumentzo.Image.Path AS Image
 												FROM monumentzo.Monument, monumentzo.Image 
 												WHERE monumentzo.Monument.MonumentID = monumentzo.Image.MonumentID
-												LIMIT 20')->execute();
+												LIMIT 100')->execute();
 		$result = $result->as_array();
 		
 		if($this->request->is_ajax()) {

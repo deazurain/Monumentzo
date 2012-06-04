@@ -52,7 +52,7 @@ class Controller_Template_Website extends Controller_Template {
                 'assets/css/main.css' => 'screen, projection',
             );
             $scripts = array(
-                'http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js',
+                'assets/js/jquery-1.7.2.min.js',
                 'assets/js/bootstrap.js',
                 'assets/js/less-1.3.0.min.js',
                 //'assets/fancybox/jquery.mousewheel-3.0.4.pack.js',

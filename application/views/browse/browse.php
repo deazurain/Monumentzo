@@ -11,6 +11,7 @@
     </div>
     <div class="browse-menu-footer"></div>
 </div>
-
+<div id="mouse" class="pull-right"></div>
+<div id="browse-window"></div>
 <?php echo HTML::script('assets/js/three.js'), PHP_EOL ?>
 <?php echo HTML::script('assets/js/browse.js'), PHP_EOL ?>
