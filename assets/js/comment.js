@@ -51,7 +51,7 @@ $(document).ready(function () {
 
 	}
 
-	var initializeComment = function(key, comment) {
+	var comment_initialize = function(key, comment) {
 
 		comment = $(comment);
 
@@ -72,7 +72,7 @@ $(document).ready(function () {
 	}
 
 	// apply comment button registering to all comments on the page.
-	$('#comment-list .comment').each(initializeComment);
+	$('#comment-list .comment').each(comment_initialize);
 
 	$('form#create-comment .btn-danger').click(cancelOnClick);
 
@@ -93,8 +93,16 @@ $(document).ready(function () {
 					// successfully logged in
 					form.find('.success-container').html('Uw commentaar is succesvol geplaatst').show();
 
-					$('#comment-list').append(data.result);
-					initializeComment(null, $('#comment-list .comment').last());
+					var comment_list = $('#comment-list');
+					var comments = comment_list.find('.comment');
+					var comment = $(data.result);
+
+					if(comments.length === 0) {
+						comment_list.empty();
+					}
+
+					comment_list.append(data.result);
+					comment_initialize(null, comment);
 				}
 				else if(data.status == "fail") {
 					// failed to log in

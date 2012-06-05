@@ -105,31 +105,33 @@
 	</div><!--/row-->
     
     <!-- Start of the comments -->
-    <?php if(count($comments) > 0): ?>
     <div class="row">
-        <div class="span8 offset2">
-        	<div class="page-header">
-            	<h1>Commentaar</h1>
-            </div>
+			<div class="span8 offset2">
+				<div class="page-header">
+					<h1>Commentaar</h1>
+				</div>
 
-					<ul id='comment-list'>
-						<?php
-							foreach($comments as $comment) {
-								$v = View::factory('model/comment');
-								$v->set('id', $comment['CommentID']);
-								$v->set('name', $comment['Name']);
-								$v->set('placeDate', $comment['PlaceDate']);
-								$v->set('comment', $comment['Comment']);
-								$v->set('owner', ($user && ($user->UserID === $comment['UserID'])) ? true : false);
-								echo $v;
-							}
-						?>
-					</ul>
 
-        </div>
+				<ul id='comment-list'>
+					<?php if(count($comments) == 0): ?>
+						<p>Er is nog geen commentaar geplaatst bij dit monument, wees de eerste! </p>
+					<?php else: ?>
+					<?php
+						foreach($comments as $comment) {
+							$v = View::factory('model/comment');
+							$v->set('id', $comment['CommentID']);
+							$v->set('name', $comment['Name']);
+							$v->set('placeDate', $comment['PlaceDate']);
+							$v->set('comment', $comment['Comment']);
+							$v->set('owner', ($user && ($user->UserID === $comment['UserID'])) ? true : false);
+							echo $v;
+						}
+					?>
+					<?php endif; ?>
+				</ul>
+			</div>
     </div>
-    <?php endif; ?>
-    
+
     <!-- Start of comment typing section -->
     <div class="row">
 		<?php if($user): ?>
