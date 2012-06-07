@@ -21,7 +21,7 @@ class Controller_Search extends Controller_Template_Website {
 		foreach(explode(' ', $query) as $word) {
 			$result = DB::query(Database::SELECT, 'SELECT TextTagID, InverseDocumentFrequency
 													FROM monumentzo.TextTag 
-													WHERE TextTag LIKE %:word%')->param(':word', $word)->execute();
+													WHERE TextTag LIKE :word')->param(':word', '%' . $word . '%')->execute();
 			$result = $result->as_array();
 
 			// If the query words of the user can't be found skip
