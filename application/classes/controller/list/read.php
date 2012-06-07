@@ -7,7 +7,7 @@ class Controller_List_Read extends Controller_List {
 		$user = Auth::instance()->get_user();
 		
 		$modelListRead = new Model_List_Read();
-		$modelListRead->add($id, $user->UserID);
+		$modelListRead->add($monumentId, $user->UserID);
 		
 		// Redirect the user back to the monument page
 		$this->request->redirect('monument/view/' . $monumentId);
@@ -18,7 +18,7 @@ class Controller_List_Read extends Controller_List {
 		$user = Auth::instance()->get_user();
 		
 		$modelListRead = new Model_List_Read();
-		$modelListRead->remove($id, $user->UserID);
+		$modelListRead->remove($monumentId, $user->UserID);
 		
 		// Redirect the user back to the monument page
 		$this->request->redirect('monument/view/' . $monumentId);

@@ -7,7 +7,7 @@ class Controller_List_Wish extends Controller_List {
 		$user = Auth::instance()->get_user();
 		
 		$modelListWish = new Model_List_Wish();
-		$modelListWish->add($id, $user->UserID);
+		$modelListWish->add($monumentId, $user->UserID);
 		
 		// Redirect the user back to the monument page
 		$this->request->redirect('monument/view/' . $monumentId);
@@ -18,7 +18,7 @@ class Controller_List_Wish extends Controller_List {
 		$user = Auth::instance()->get_user();
 		
 		$modelListWish = new Model_List_Wish();
-		$modelListWish->remove($id, $user->UserID);
+		$modelListWish->remove($monumentId, $user->UserID);
 		
 		// Redirect the user back to the monument page
 		$this->request->redirect('monument/view/' . $monumentId);

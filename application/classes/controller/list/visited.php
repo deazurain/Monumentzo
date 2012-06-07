@@ -7,7 +7,7 @@ class Controller_List_Visited extends Controller_List {
 		$user = Auth::instance()->get_user();
 		
 		$modelListVisited = new Model_List_Visited();
-		$modelListVisited->add($id, $user->UserID);
+		$modelListVisited->add($monumentId, $user->UserID);
 		
 		// Redirect the user back to the monument page
 		$this->request->redirect('monument/view/' . $monumentId);
@@ -18,7 +18,7 @@ class Controller_List_Visited extends Controller_List {
 		$user = Auth::instance()->get_user();
 		
 		$modelListVisited = new Model_List_Visited();
-		$modelListVisited->remove($id, $user->UserID);
+		$modelListVisited->remove($monumentId, $user->UserID);
 		
 		// Redirect the user back to the monument page
 		$this->request->redirect('monument/view/' . $monumentId);
