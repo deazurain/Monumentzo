@@ -32,10 +32,6 @@ Class Controller_Monument extends Controller_Template_Website
 		$this->template->content->inList = array('inFavorite' => $isInFavorite, 'inVisited' => $isInVisited, 'inWish' => $isInWish);
 		$this->template->content->user = Auth::instance()->get_user();
 	}
-	
-	public function action_test(){
-		$this->action_view(437);
-	}
 }
 
 ?>
