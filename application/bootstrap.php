@@ -119,12 +119,6 @@ Route::set('ajax', 'ajax/(<controller>(/<action>(/<id>)))')
         'action'        => 'index',
 	));
 	
-Route::set('list/view', 'list/view')
-	->defaults(array(
-		'controller' => 'list',
-		'action' => 'view'
-	));
-	
 Route::set('list', 'list/(<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'directory' => 'list',
