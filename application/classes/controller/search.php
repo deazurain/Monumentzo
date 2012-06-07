@@ -19,10 +19,10 @@ class Controller_Search extends Controller_Template_Website {
 		$queryVector = array();
 		$monuments = array();
 		foreach(explode(' ', $query) as $word) {
-			$result = DB::query(Database::SELECT, 'SELECT TextTagID, InverseDocumentFrequency
+			$results = DB::query(Database::SELECT, 'SELECT TextTagID, InverseDocumentFrequency
 													FROM monumentzo.TextTag 
 													WHERE TextTag LIKE :word')->param(':word', '%' . $word . '%')->execute();
-			$result = $result->as_array();
+			$results = $results->as_array();
 
 			// If the query words of the user can't be found skip
 			if(count($result) <= 0) {
@@ -30,21 +30,22 @@ class Controller_Search extends Controller_Template_Website {
 			}
 
 			// Only use words that have a relatively high inverse document frequency
-			if($result[0]['InverseDocumentFrequency'] > self::idfThreshold) {			
-				$queryVector[$word] = isset($queryVector[$word])
-										? $queryVector[$word]['frequency'] + 1
-										: array('frequency' => 1);
-				
-				// Get the monuments associated with the current word
-				$monumentResult = DB::query(Database::SELECT, 'SELECT MonumentID
-														FROM monumentzo.Monument_TextTag
-														WHERE TextTagID = :tagID')->param(':tagID', $result[0]['TextTagID'])->execute();
-				
-				$monumentResult = $monumentResult->as_array();
-
-				// Store each MonumentID associated to this word														
-				for($i = 0; $i < count($monumentResult); $i++) {
-					array_push($monuments, $monumentResult[$i]['MonumentID']);
+			foreach($results as $result) {
+				if($result['InverseDocumentFrequency'] > self::idfThreshold) {			
+					$queryVector[$word] = isset($queryVector[$word])
+											? $queryVector[$word]['frequency'] + 1
+											: array('frequency' => 1);
+					
+					// Get the monuments associated with the current word
+					$monumentResult = DB::query(Database::SELECT, 'SELECT MonumentID
+															FROM monumentzo.Monument_TextTag
+															WHERE TextTagID = :tagID')->param(':tagID', $result['TextTagID'])->execute();
+					$monumentResult = $monumentResult->as_array();
+	
+					// Store each MonumentID associated to this word														
+					for($i = 0; $i < count($monumentResult); $i++) {
+						array_push($monuments, $monumentResult[$i]['MonumentID']);
+					}
 				}
 			}
 		}
@@ -104,9 +105,11 @@ class Controller_Search extends Controller_Template_Website {
 		$dot = 0;
 
 		// Calculate the angle between the vectors (dot product)
-		foreach($vector1 as $word => $value1) {
-			$value2 = isset($vector2[$word]) ? $vector2[$word] : 0;
-			$dot += doubleval($value1) * doubleval($value2);
+		foreach($vector1 as $word1 => $value1) {
+			foreach($vector2 as $word2 => $value2) {
+				if(stristr($word2, $word1) !== false)
+					$dot += doubleval($value1) * doubleval($value2);
+			}
 		}
 		
 		return $dot;
