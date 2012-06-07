@@ -54,7 +54,7 @@ class Controller_List_Favorite extends Controller_List {
 		}
 	}
 	
-	public function action_view() {
+	/*public function action_view() {
 		
 		// Get the user that is currently logged in
 		$user = Auth::instance()->get_user();
@@ -66,5 +66,5 @@ class Controller_List_Favorite extends Controller_List {
 		$favorites = $user->getFavoritesList();
 		$this->template->title = 'Favoriete monumenten';
 		$this->template->content = View::factory('lists/favorites', array('favorites' => $favorites));
-	}
+	}*/
 }

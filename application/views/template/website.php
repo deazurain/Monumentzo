@@ -20,7 +20,6 @@
                         <span class="icon-bar"></span>
                     </a>
                     <?php echo HTML::anchor('/home', 'Monumentzo', array('class' => 'brand')); ?>
-                    <!--<a class="brand" href="/home">Monumentzo</a>-->
                     <div class="nav-collapse">
                         <ul class="nav">
                             <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
@@ -28,7 +27,7 @@
                             <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>
 														
 							<li><?php echo HTML::anchor('/browse/index', 'Bladeren'); ?></li>
-							<?php if ( isset( $list )) echo $list ?>
+							<li><?php echo HTML::anchor('/list/view', 'Lijsten'); ?></li>
                         </ul>
                     </div>
                     <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
