@@ -25,7 +25,7 @@ class Controller_Search extends Controller_Template_Website {
 			$results = $results->as_array();
 
 			// If the query words of the user can't be found skip
-			if(count($result) <= 0) {
+			if(count($results) <= 0) {
 				continue;
 			}
 
@@ -89,8 +89,11 @@ class Controller_Search extends Controller_Template_Website {
 								AND monumentzo.Monument.MonumentID = :monumentID')->param(':monumentID', $monumentID)->execute();
 			$result = $result->as_array();
 
+			if(count($result) < 1)
+				continue;
+
 			$results[$monumentID] = array('MonumentID' => $monumentID,
-			        'Name' => $result[0]['Name'],
+			        		'Name' => $result[0]['Name'],
 							'Place' => $result[0]['City'],
 							'Image' => $result[0]['Image']);
 		}
