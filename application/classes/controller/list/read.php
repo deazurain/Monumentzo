@@ -8,6 +8,9 @@ class Controller_List_Read extends Controller_List {
 		
 		$modelListRead = new Model_List_Read();
 		$modelListRead->add($id, $user->UserID);
+		
+		// Redirect the user back to the monument page
+		$this->request->redirect('monument/view/' . $monumentId);
 	}
 	
 	public function action_remove(){
@@ -16,6 +19,9 @@ class Controller_List_Read extends Controller_List {
 		
 		$modelListRead = new Model_List_Read();
 		$modelListRead->remove($id, $user->UserID);
+		
+		// Redirect the user back to the monument page
+		$this->request->redirect('monument/view/' . $monumentId);
 	}
 	
 	public function action_view() {
