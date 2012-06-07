@@ -1,3 +1,8 @@
+// force reloading the javascript application
+$(window).unload(function(){
+	//doZoomBlockReset();
+});
+
 var container;
 var camera, scene, renderer, projector;
 var geometry, group;
@@ -14,6 +19,10 @@ var mouse = {x:0, y:0};
 var last_hovered = null;
 var last_hovered_scale = 1.0;
 var last_hovered_rotation = 0.0;
+
+var zoom_block_start_position = null;
+var zoom_block_last = null;
+var zoom_block = null;
 
 function getHoveredBlock() {
 
@@ -75,6 +84,39 @@ function highlightBlock() {
 	last_hovered = hovered;
 }
 
+function doZoomBlockReset() {
+	zoom_block = null;
+	doZoomBlock();
+}
+
+function doZoomBlock() {
+
+	if(zoom_block != zoom_block_last) {
+		if(zoom_block_last) {
+			zoom_block_last.position.copy(zoom_block_start_position);
+			zoom_block_last.updateMatrix();
+		}
+		if(zoom_block) {
+			zoom_block_start_position = zoom_block.position.clone();
+		}
+		zoom_block_last = zoom_block;
+	}
+
+	if(zoom_block) {
+
+		var p = camera.position.clone();
+		p.subSelf(zoom_block.position);
+
+		if(p.length() > 160) {
+			p.normalize().multiplyScalar(30);
+		 	zoom_block.position.addSelf(p);
+			zoom_block.updateMatrix();
+		}
+
+	}
+
+}
+
 $(document).ready(function() {
 
 	var resize_canvas = function() {
@@ -118,7 +160,6 @@ $(document).ready(function() {
 	$.getJSON(infoUrl, function(data, textStatus) {
 
 		(function init() {
-			console.log(data);
 
 			scene = new THREE.Scene();
 			scene.fog = new THREE.Fog( 0xffffff, 1, 10000 );
@@ -192,7 +233,6 @@ $(document).ready(function() {
 
 
 		(function animate() {
-
 			requestAnimationFrame( animate );
 			render();
 		})();
@@ -218,11 +258,12 @@ $(document).ready(function() {
 			camera.lookAt( scene.position );
 
 			highlightBlock();
+			doZoomBlock();
 
 			renderer.render( scene, camera );
 		}
 
-		$(document).mousedown(function(event) {
+		$("#browse-window canvas").mousedown(function(event) {
 
 			var clicked = getHoveredBlock();
 
@@ -232,7 +273,11 @@ $(document).ready(function() {
 
 				var monument = monuments[i].MonumentID;
 
-				window.location = '/monument/view/' + monument;
+				zoom_block = clicked;
+
+				setTimeout(function() {
+					window.location = '/monument/view/' + monument;
+				}, 500);
 
 			}
 
