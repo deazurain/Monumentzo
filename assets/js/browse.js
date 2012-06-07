@@ -3,7 +3,7 @@ var camera, scene, renderer, projector;
 var geometry, group;
 
 var blocks = [];
-var monumentNumbers = [];
+var monuments = [];
 
 var width = 800;
 var height = 600;
@@ -17,10 +17,11 @@ var last_hovered_rotation = 0.0;
 
 function getHoveredBlock() {
 
-	var vector = new THREE.Vector3(mouse.x, mouse.y, 0.5);
+	var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
 	projector.unprojectVector(vector, camera);
 
-	var ray = new THREE.Ray(camera.position, vector.subSelf(camera.position).normalize());
+	var v = vector.subSelf(camera.position).normalize();
+	var ray = new THREE.Ray(camera.position, v);
 
 	var intersects = ray.intersectObjects(blocks);
 
@@ -45,30 +46,75 @@ function highlightBlock() {
 		last_hovered_rotation = 0.0;
 
 		// reset last_highlighted
-		last_hovered.scale.x = 1;
-		last_hovered.scale.y = 1;
-		last_hovered.scale.z = 1;
+		last_hovered.scale.x = last_hovered_scale;
+		last_hovered.scale.y = last_hovered_scale;
+		last_hovered.scale.z = last_hovered_scale;
 		last_hovered.rotation.y = last_hovered_rotation;
 		last_hovered.updateMatrix();
 	}
 
 	if(hovered) {
-		if(last_hovered_scale < 1.2) {
-			last_hovered_scale += 0.02;
-		}
-		last_hovered_rotation += 0.02;
 
 		hovered.scale.x = last_hovered_scale;
 		hovered.scale.y = last_hovered_scale;
 		hovered.scale.z = last_hovered_scale;
 		hovered.rotation.y = last_hovered_rotation;
 		hovered.updateMatrix();
+
+		if(last_hovered_scale < 1.2) {
+			last_hovered_scale += 0.02;
+		}
+		last_hovered_rotation += 0.02;
+
+		var monument_index = blocks.indexOf(hovered);
+		var monument = monuments[monument_index];
+		var link = "<a href=\"/monument/view/" + monument.MonumentID + "\">" + monument.Name + "</a>";
+		$('#browse-window .hud-title').html(link);
 	}
 
 	last_hovered = hovered;
 }
 
 $(document).ready(function() {
+
+	var resize_canvas = function() {
+
+		var aspect = width/height;
+		var w = $(window).width() - 80;
+		var h = $(window).height() - 100;
+		if(w < 320) { w = 320; }
+		if(h < 200) { h = 200; }
+		if(h != 0) {
+			if(aspect > w/h) {
+				//width limits height
+				width = w;
+				height = w/aspect;
+			}
+			else {
+				//height limits width
+				height = h;
+				width = h*aspect;
+			}
+		}
+
+		if(camera) {
+			scene.remove(camera);
+		}
+		camera = new THREE.PerspectiveCamera(60, width/height, 1, 10000);
+		camera.position.z = 700;
+		scene.add(camera);
+
+		renderer.setSize(width, height);
+
+		$("#browse-window")
+			.css("width", width + "px")
+			.css("height", height + "px")
+			.css("margin", "0 auto");
+
+	}
+
+	$(window).resize(resize_canvas);
+
 	$.getJSON(infoUrl, function(data, textStatus) {
 
 		(function init() {
@@ -77,49 +123,45 @@ $(document).ready(function() {
 			scene = new THREE.Scene();
 			scene.fog = new THREE.Fog( 0xffffff, 1, 10000 );
 
-			camera = new THREE.PerspectiveCamera( 60, width / height, 1, 10000 );
-			camera.position.z = 750;
-			scene.add( camera );
-
 			var geometry = new THREE.CubeGeometry( 100, 100, 100 );
 			var material = new THREE.MeshNormalMaterial();
 
 			group = new THREE.Object3D();
 
-			var nx = 5, ny = 4, nz = 5;
-			var x = -(nx + 1)/2, y = -(ny + 1)/2, z = -(nz + 1)/2;
+			var nx = 6, ny = 5, nz = 6;
+			var x = 0, y = 0, z = 0;
 			$.each(data, function(index, monument) {
 
 				material = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( $('body').attr('data-base') +
 					"assets/img/monuments/thumb/" + monument.MonumentID + ".jpg" ) });
 				var mesh = new THREE.Mesh(geometry, material);
-				mesh.position.x = x * 120;
-				mesh.position.y = y * 120;
-				mesh.position.z = z * 120;
 
-				// Increase the x position
-				x += 1;
+				mesh.position.x = (x - (nx - 1)/2) * 120;
+				mesh.position.y = (y - (ny - 1)/2) * 120;
+				mesh.position.z = (z - (nz - 1)/2) * 120;
 
-				// Make the cube in a nice little square
-				if(x >= (nx + 1)/2) {
-					x = -nx/2;
-					y += 1;
-				}
-
-				if(y >= (ny + 1)/2) {
-					y = -ny/2;
-					z += 1;
-				}
-
-				mesh.rotation.x = 0;
-				mesh.rotation.y = 0;
 				mesh.matrixAutoUpdate = false;
 				mesh.updateMatrix();
 
 				group.add(mesh);
 
 				blocks.push(mesh);
-				monumentNumbers.push(monument.MonumentID);
+				monuments.push(monument);
+
+				// Increase the x position
+				x += 1;
+
+				// Make the cube in a nice little square
+				if(x >= nx) {
+					x = 0;
+					y += 1;
+				}
+
+				if(y >= ny) {
+					y = 0;
+					z += 1;
+				}
+
 			});
 
 			scene.add( group );
@@ -127,25 +169,23 @@ $(document).ready(function() {
 			projector = new THREE.Projector();
 
 			renderer = new THREE.WebGLRenderer();
-			renderer.setSize(width, height);
 			renderer.sortObjects = true;
 
-			$("#browse-window")
-				.attr("width", width + "px")
-				.attr("height", height + "px")
-				.attr("margin", "0 auto")
-				.append( renderer.domElement );
+			resize_canvas();
+
+			$("#browse-window").append(renderer.domElement);
 
 			$("#browse-window canvas").mousemove(function (event) {
 				var o = $(this).offset();
 				var x = event.pageX - o.left;
 				var y = event.pageY - o.top;
-				/*
-				$('#mouse').html("<div>event (" + event.pageX + ", " + event.pageY + ")</div>" +
-					"<div>this (" + x + ", " + y + ")</div>");
-					*/
-				mouse.x = (x / width) * 2 - 1;
-				mouse.y = (-y / height) * 2 + 1;
+
+				if(x >= 0 && x < width) {
+					mouse.x = (x * 2.0) / width - 1;
+				}
+				if(y >= 0 && y < height) {
+					mouse.y = (-y * 2.0) / height + 1;
+				}
 			});
 
 		})();
@@ -172,14 +212,12 @@ $(document).ready(function() {
 			 group.rotation.z = rz;
 			 */
 
-			camera.position.x = mouse.x * 100;
-			camera.position.y = mouse.y * 100;
+			camera.position.x = mouse.x * 200;
+			camera.position.y = mouse.y * 200;
 
 			camera.lookAt( scene.position );
 
 			highlightBlock();
-
-
 
 			renderer.render( scene, camera );
 		}
@@ -192,7 +230,7 @@ $(document).ready(function() {
 
 				var i = blocks.indexOf(clicked);
 
-				var monument = monumentNumbers[i];
+				var monument = monuments[i].MonumentID;
 
 				window.location = '/monument/view/' + monument;
 

@@ -11,10 +11,13 @@ class Controller_Browse extends Controller_Template_Website {
 	public function action_info() {
 		
 		// Get the information of the monuments out of the database
-		$result = DB::query(Database::SELECT, 'SELECT monumentzo.Monument.MonumentID, monumentzo.Image.Path AS Image
-												FROM monumentzo.Monument, monumentzo.Image 
-												WHERE monumentzo.Monument.MonumentID = monumentzo.Image.MonumentID
-												LIMIT 100')->execute();
+		$q = DB::query(Database::SELECT, '
+			SELECT Monument.MonumentID, Monument.Name, Path AS Image
+			FROM Monument, Image
+			WHERE Monument.MonumentID = Image.MonumentID
+			LIMIT 100');
+		$result = $q->execute();
+
 		$result = $result->as_array();
 		
 		if($this->request->is_ajax()) {
