@@ -7,6 +7,10 @@ var container;
 var camera, scene, renderer, projector;
 var geometry, group;
 
+var camera_angle_current = Math.PI;
+var camera_angle_desired = 0;
+var camera_angle_speed = Math.PI/60;
+
 var blocks = [];
 var monuments = [];
 
@@ -117,13 +121,51 @@ function doZoomBlock() {
 
 }
 
+var asdf = 0;
+
+function doCameraUpdate() {
+
+	var wrap = function(radians) {
+		while(radians < -Math.PI) { radians += Math.PI*2; }
+		while(radians >= Math.PI) { radians -= Math.PI*2; }
+		return radians;
+	}
+
+	var clamp = function(value, min, max) {
+		if(value < min) { return min; }
+		if(value > max) { return max; }
+		return value;
+	}
+
+	var diff = wrap(camera_angle_desired - camera_angle_current);
+	var rot = clamp(diff, -camera_angle_speed, camera_angle_speed);
+
+	camera_angle_current += rot;
+
+	var m = new THREE.Matrix4()
+		.rotateY(camera_angle_current)
+		.translate(new THREE.Vector3(mouse.x*200, mouse.y*200, -1000));
+/*
+	blocks[blocks.length - 1].position.getPositionFromMatrix(m);
+	blocks[blocks.length - 1].updateMatrix();
+*/
+	if(asdf++ >= 60) {
+		asdf = 0;
+	}
+
+	camera.position.getPositionFromMatrix(m);
+	camera.lookAt(scene.position);
+
+}
+
 $(document).ready(function() {
 
 	var resize_canvas = function() {
 
 		var aspect = width/height;
 		var w = $(window).width() - 80;
-		var h = $(window).height() - 100;
+		var h = $(window).height() - $("#browse-window").offset().top - 10;
+
 		if(w < 320) { w = 320; }
 		if(h < 200) { h = 200; }
 		if(h != 0) {
@@ -139,12 +181,16 @@ $(document).ready(function() {
 			}
 		}
 
-		if(camera) {
-			scene.remove(camera);
+		if(!camera) {
+			camera = new THREE.PerspectiveCamera(60, width/height, 1, 10000);
+			camera.position.z = 700;
+			scene.add(camera);
 		}
-		camera = new THREE.PerspectiveCamera(60, width/height, 1, 10000);
-		camera.position.z = 700;
-		scene.add(camera);
+		else {
+			camera.aspect = width/height;
+			camera.updateProjectionMatrix();
+			camera.position.z = 700;
+		}
 
 		renderer.setSize(width, height);
 
@@ -216,8 +262,8 @@ $(document).ready(function() {
 
 			$("#browse-window").append(renderer.domElement);
 
-			$("#browse-window canvas").mousemove(function (event) {
-				var o = $(this).offset();
+			$(window).mousemove(function (event) {
+				var o = $("#browse-window canvas").offset();
 				var x = event.pageX - o.left;
 				var y = event.pageY - o.top;
 
@@ -231,6 +277,15 @@ $(document).ready(function() {
 
 		})();
 
+		var doRotateRight = function() {
+			camera_angle_desired += Math.PI/2;
+		}
+		var doRotateLeft = function() {
+			camera_angle_desired -= Math.PI/2;
+		}
+
+		$("#browse-window .hud-right").click(doRotateRight);
+		$("#browse-window .hud-left").click(doRotateLeft);
 
 		(function animate() {
 			requestAnimationFrame( animate );
@@ -251,12 +306,7 @@ $(document).ready(function() {
 			 group.rotation.y = ry;
 			 group.rotation.z = rz;
 			 */
-
-			camera.position.x = mouse.x * 200;
-			camera.position.y = mouse.y * 200;
-
-			camera.lookAt( scene.position );
-
+			doCameraUpdate();
 			highlightBlock();
 			doZoomBlock();
 

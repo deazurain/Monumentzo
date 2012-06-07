@@ -13,11 +13,11 @@
 </div>
 
 <div id="browse-window">
-	<h3 class="hud-title"></div>
+	<h3 class="hud-title"></h3>
 	<div class="hud-top"></div>
-	<div class="hud-right"></div>
+	<div class="hud-right"><button>&gt;</button></div>
 	<div class="hud-bottom"></div>
-	<div class="hud-left"></div>
+	<div class="hud-left"><button>&lt;</button></div>
 </div>
 
 <?php echo HTML::script('assets/js/three.js'), PHP_EOL ?>

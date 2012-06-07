@@ -83,6 +83,20 @@ Browse
 	text-align: center;
 }
 
+#browse-window .hud-left {
+	top: 46%;
+	left: 0;
+	width: 20px;
+	height: 20px;
+}
+
+#browse-window .hud-right {
+	top: 46%;
+	right:0;
+	width: 20px;
+	height: 20px;
+}
+
 #browse-window canvas {
 	border: 1px solid black;
 
