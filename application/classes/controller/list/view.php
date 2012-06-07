@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_View extends Controller_Template_Website {
+class Controller_List_View extends Controller_Template_Website {
 	
 	public function action_index() {
 		// Get the user that is currently logged in
