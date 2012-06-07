@@ -64,13 +64,27 @@ Browse
 */
 
 #browse-window {
+	position: relative;
+	margin: 0 auto;
+}
 
-	z-index: 0;
+#browse-window .hud-title,
+#browse-window .hud-top,
+#browse-window .hud-right,
+#browse-window .hud-bottom,
+#browse-window .hud-left {
+	position: absolute;
+	width: 30px;
+	z-index: 10;
+}
+
+#browse-window .hud-title {
+	width: 100%;
+	text-align: center;
 }
 
 #browse-window canvas {
 	border: 1px solid black;
-	background-color: white;
 
 	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
 	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);

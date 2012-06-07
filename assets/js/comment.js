@@ -101,7 +101,7 @@ $(document).ready(function () {
 						comment_list.empty();
 					}
 
-					comment_list.append(data.result);
+					comment_list.append(comment);
 					comment_initialize(null, comment);
 				}
 				else if(data.status == "fail") {
