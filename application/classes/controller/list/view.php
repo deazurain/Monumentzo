@@ -15,6 +15,6 @@ class Controller_List_View extends Controller_Template_Website {
 		$visitedList = $user->getVisitedList();
 		
 		$this->template->title = 'Favoriete monumenten';
-		$this->template->content = View::factory('lists/favorites', array('favorites' => $favorites, 'visited' => $visitedList, 'wish' => $wishList));
+		$this->template->content = View::factory('lists/view', array('favorites' => $favorites, 'visited' => $visitedList, 'wish' => $wishList));
 	}
 }
