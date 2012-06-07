@@ -4,6 +4,7 @@ class Controller_List_Wish extends Controller_List {
 	
 	public function action_add(){
 		$id = $this->request->param('id');
+		$user = Auth::instance()->get_user();
 		
 		$modelListWish = new Model_List_Wish();
 		$modelListWish->add($id, $user->UserID);
@@ -11,6 +12,7 @@ class Controller_List_Wish extends Controller_List {
 	
 	public function action_remove(){
 		$id = $this->request->param('id');
+		$user = Auth::instance()->get_user();
 		
 		$modelListWish = new Model_List_Wish();
 		$modelListWish->remove($id, $user->UserID);
