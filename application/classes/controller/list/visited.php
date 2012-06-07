@@ -5,13 +5,15 @@ class Controller_List_Visited extends Controller_List {
 	public function action_add(){
 		$id = $this->request->param('id');
 		
-		Model_List_Favorite::add($id);
+		$modelListVisited = new Model_List_Visited();
+		$modelListVisited->add($id, $user->UserID);
 	}
 	
 	public function action_remove(){
 		$id = $this->request->param('id');
 		
-		Model_List_Favorite::remove($id);
+		$modelListVisited = new Model_List_Visited();
+		$modelListVisited->remove($id, $user->UserID);
 	}
 	
 	public function action_view() {

@@ -5,13 +5,15 @@ class Controller_List_Wish extends Controller_List {
 	public function action_add(){
 		$id = $this->request->param('id');
 		
-		Model_List_Favorite::add($id);
+		$modelListWish = new Model_List_Wish();
+		$modelListWish->add($id, $user->UserID);
 	}
 	
 	public function action_remove(){
 		$id = $this->request->param('id');
 		
-		Model_List_Favorite::remove($id);
+		$modelListWish = new Model_List_Wish();
+		$modelListWish->remove($id, $user->UserID);
 	}
 	
 	public function action_view() {

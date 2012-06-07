@@ -5,13 +5,15 @@ class Controller_List_Read extends Controller_List {
 	public function action_add(){
 		$id = $this->request->param('id');
 		
-		Model_List_Read::add($id);
+		$modelListRead = new Model_List_Read();
+		$modelListRead->add($id, $user->UserID);
 	}
 	
 	public function action_remove(){
 		$id = $this->request->param('id');
 		
-		Model_List_Read::remove($id);
+		$modelListRead = new Model_List_Read();
+		$modelListRead->remove($id, $user->UserID);
 	}
 	
 	public function action_view() {
