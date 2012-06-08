@@ -2,6 +2,7 @@
 	
     <!-- Favorite list -->
     <div class="row">
+    	<div class="page-header"><h3>Favorieten</h3></div>
     	<table class="table striped-table">
             <tr>
                 <th>#</th>
@@ -18,6 +19,7 @@
     
     <!-- Visited list -->
     <div class="row">
+	    <div class="page-header"><h3>Bezochte monumenten</h3></div>
     	<table class="table striped-table">
             <tr>
                 <th>#</th>
@@ -28,6 +30,7 @@
     
     <!-- Wish list -->
     <div class="row">
+	    <div class="page-header"><h3>Te bezoeken monumenten</h3></div>
     	<table class="table striped-table">
             <tr>
                 <th>#</th>
