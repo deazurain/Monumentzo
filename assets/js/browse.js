@@ -1,7 +1,5 @@
 // force reloading the javascript application
-$(window).unload(function(){
-	//doZoomBlockReset();
-});
+$(window).unload(function(){});
 
 var container;
 var camera, scene, renderer, projector;
@@ -121,8 +119,6 @@ function doZoomBlock() {
 
 }
 
-var asdf = 0;
-
 function doCameraUpdate() {
 
 	var wrap = function(radians) {
@@ -137,25 +133,19 @@ function doCameraUpdate() {
 		return value;
 	}
 
+	camera_angle_desired = wrap(camera_angle_desired);
+
 	var diff = wrap(camera_angle_desired - camera_angle_current);
 	var rot = clamp(diff, -camera_angle_speed, camera_angle_speed);
 
-	camera_angle_current += rot;
+	camera_angle_current = wrap(camera_angle_current + rot);
 
 	var m = new THREE.Matrix4()
 		.rotateY(camera_angle_current)
-		.translate(new THREE.Vector3(mouse.x*200, mouse.y*200, -1000));
-/*
-	blocks[blocks.length - 1].position.getPositionFromMatrix(m);
-	blocks[blocks.length - 1].updateMatrix();
-*/
-	if(asdf++ >= 60) {
-		asdf = 0;
-	}
+		.translate(new THREE.Vector3(-mouse.x*200, mouse.y*200, -1000));
 
 	camera.position.getPositionFromMatrix(m);
 	camera.lookAt(scene.position);
-
 }
 
 $(document).ready(function() {
