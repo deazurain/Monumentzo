@@ -59,7 +59,7 @@
             }
         ?>
 
-        <div id="content">
+        <div id="content" class="container">
             <?php echo $content ?>
         </div>
 
