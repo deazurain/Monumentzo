@@ -1,5 +1,5 @@
 <div id="list-view">
-    <div class="span4">
+    <div class="span3">
         
         <!-- Favorite list -->
         <div class="row">
