@@ -1,7 +1,7 @@
 <div class="span4">
 	
     <!-- Favorite list -->
-    <div class="row-fluid">
+    <div class="row">
     	<table class="table striped-table">
             <tr>
                 <th>#</th>
@@ -17,7 +17,7 @@
     </div>
     
     <!-- Visited list -->
-    <div class="row-fluid">
+    <div class="row">
     	<table class="table striped-table">
             <tr>
                 <th>#</th>
@@ -27,7 +27,7 @@
     </div>
     
     <!-- Wish list -->
-    <div class="row-fluid">
+    <div class="row">
     	<table class="table striped-table">
             <tr>
                 <th>#</th>
