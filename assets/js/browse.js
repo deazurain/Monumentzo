@@ -142,7 +142,7 @@ function doCameraUpdate() {
 
 	var m = new THREE.Matrix4()
 		.rotateY(camera_angle_current)
-		.translate(new THREE.Vector3(-mouse.x*200, mouse.y*200, -1000));
+		.translate(new THREE.Vector3(-mouse.x*200, mouse.y*1000, -1000));
 
 	camera.position.getPositionFromMatrix(m);
 	camera.lookAt(scene.position);
@@ -205,7 +205,7 @@ $(document).ready(function() {
 
 			group = new THREE.Object3D();
 
-			var nx = 6, ny = 5, nz = 6;
+			var nx = 10, ny = 1, nz = 10;
 			var x = 0, y = 0, z = 0;
 			$.each(data, function(index, monument) {
 
@@ -240,6 +240,21 @@ $(document).ready(function() {
 				}
 
 			});
+
+
+			// sort blocks by time
+			for(var i in blocks) {
+				var year = monuments[i].Year;
+				if(year === null) {
+					year = 2000;
+				}
+				else {
+					year = THREE.Math.clamp(year, 1000, 2000) - 1000;
+				}
+				blocks[i].position.y = (year-500)/1.5
+				blocks[i].updateMatrix();
+			}
+
 
 			scene.add( group );
 

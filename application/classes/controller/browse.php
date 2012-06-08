@@ -12,7 +12,7 @@ class Controller_Browse extends Controller_Template_Website {
 		
 		// Get the information of the monuments out of the database
 		$q = DB::query(Database::SELECT, '
-			SELECT Monument.MonumentID, Monument.Name, Path AS Image
+			SELECT Monument.MonumentID, Monument.Name, Path AS Image, Monument.FoundationYear AS Year
 			FROM Monument, Image
 			WHERE Monument.MonumentID = Image.MonumentID
 			LIMIT 100');
