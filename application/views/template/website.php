@@ -27,7 +27,10 @@
                             <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>
 														
 							<li><?php echo HTML::anchor('/browse/index', 'Bladeren'); ?></li>
+                            
+                            <?php if(Auth::instance()->logged_in()): ?>
 							<li><?php echo HTML::anchor('/list/view', 'Lijsten'); ?></li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                     <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
