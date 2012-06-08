@@ -1,5 +1,5 @@
 var googleMap = new google.maps.Map($('#map_canvas').get(0), {
-	center: new google.maps.LatLng(52.3700, 4.8900),	// Coordinates of Amsterdam
+	center: new google.maps.LatLng(52.0900, 5.110),	// Coordinates of Utrecht
 	zoom: 8,
 	mapTypeId: google.maps.MapTypeId.ROADMAP
 });
