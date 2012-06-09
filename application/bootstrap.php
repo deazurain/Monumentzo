@@ -114,16 +114,16 @@ Kohana::modules(array(
  */
 Route::set('ajax', 'ajax/(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-        'directory'     => 'ajax',
-		'controller'    => 'default',
-        'action'        => 'index',
+		'directory' => 'ajax',
+		'controller' => 'default',
+		'action' => 'index'
 	));
 	
 Route::set('list', 'list/(<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'directory' => 'list',
-		'controller' => 'test',
-		'action'     => 'index',
+		'controller' => 'view',
+		'action' => 'index'
 	));
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')

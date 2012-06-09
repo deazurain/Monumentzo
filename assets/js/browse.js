@@ -79,7 +79,7 @@ function highlightBlock() {
 
 		var monument_index = blocks.indexOf(hovered);
 		var monument = monuments[monument_index];
-		var link = "<a href=\"/monument/view/" + monument.MonumentID + "\">" + monument.Name + "</a>";
+		var link = '<a href="' + $('body').attr('data-base') + 'monument/view/' + monument.MonumentID + '">' + monument.Name + '</a>';
 		$('#browse-window .hud-title').html(link);
 	}
 
@@ -331,7 +331,7 @@ $(document).ready(function() {
 				zoom_block = clicked;
 
 				setTimeout(function() {
-					window.location = '/monument/view/' + monument;
+					window.location = $('body').attr('data-base') + 'monument/view/' + monument;
 				}, 500);
 
 			}

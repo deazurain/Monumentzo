@@ -24,7 +24,7 @@ $(document).ready(function () {
 			data : form.serialize(),
 			dataType : 'json',
 			cache: false,  
-			url: "/user/login",   
+			url: $('body').attr('data-base') + "/user/login",   
 			success: function(data) {
 				if(data.status == "success") {
 					// successfully logged in
@@ -59,7 +59,7 @@ $(document).ready(function () {
 			data : form.serialize(),
 			dataType : 'json',
 			cache: false,  
-			url: "/user/register",   
+			url: $('body').attr('data-base') + "/user/register",   
 			success: function(data) {
 				if(data.status == "success") {
 					// successfully registered
