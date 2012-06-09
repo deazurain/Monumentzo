@@ -1,5 +1,13 @@
 package org.Monumentzo.StopwordFilterer;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 public class Program {
 	
 	public static void main(String[] args) {
@@ -47,14 +55,33 @@ public class Program {
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			
+			System.out.println("Reading the word list...");
+			
+			//Read File Line By Line
 			String word;
+			Set<String> wordList = new HashSet<String>();
+			while ((word = br.readLine()) != null)   {
+				wordList.add(word);
+			}
+			
+			System.out.println("Done reading the wordlist!");
+			
+			// If the word list is empty there is no reason to continue
+			if(wordList.size() <= 0)
+				return;
 			
 			DatabaseUpdater updater = new DatabaseUpdater(host, database, user, password);
 			
-			//Read File Line By Line
-			while ((word = br.readLine()) != null)   {
+			// Iterate over the words and remove them from the database
+			Iterator<String> itr = wordList.iterator();
+			while(itr.hasNext()) {
+				word = itr.next();
+				
+				System.out.println("Removing '" + word + "' from the tags...");
 				updater.UpdateDatabase(word);
 			}
+			
+			System.out.println("Done removing tags!!!");
 			
 			// Close the input stream
 			in.close();

@@ -1,6 +1,7 @@
 package org.Monumentzo.StopwordFilterer;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
@@ -39,10 +40,9 @@ public class DatabaseUpdater {
 		int textTagId = -1;
 		try {
 			PreparedStatement tagIdSelect = 
-					(PreparedStatement) dbConnection.prepareStatement("SELECT TextTagID FROM ?.TextTag WHERE TextTag = ?");
-			tagIdSelect.setString(1, currentDatabase);
-			tagIdSelect.setString(2, word);
-			ResultSet rs = tagIdSelect.execute();
+					(PreparedStatement) dbConnection.prepareStatement("SELECT TextTagID FROM " + this.currentDatabase + ".TextTag WHERE TextTag = ?");
+			tagIdSelect.setString(1, word);
+			ResultSet rs = tagIdSelect.executeQuery();
 			
 			if(!rs.next())
 				return;
@@ -57,9 +57,8 @@ public class DatabaseUpdater {
 		// that was previously taken from the database
 		try {
 			PreparedStatement removeMonumentTextTags = 
-					(PreparedStatement) dbConnection.prepareStatement("DELETE FROM ?.Monument_TextTag WHERE TextTagID = ?");
-			removeMonumentTextTags.setString(1, currentDatabase);
-			removeMonumentTextTags.setInt(2, textTagId);
+					(PreparedStatement) dbConnection.prepareStatement("DELETE FROM " + this.currentDatabase + ".Monument_TextTag WHERE TextTagID = ?");
+			removeMonumentTextTags.setInt(1, textTagId);
 			removeMonumentTextTags.execute();
 			
 		} catch (SQLException e) {
@@ -69,9 +68,8 @@ public class DatabaseUpdater {
 		// Remove the text tag from the TextTag table
 		try {
 			PreparedStatement removeMonumentTextTags = 
-					(PreparedStatement) dbConnection.prepareStatement("DELETE FROM ?.TextTag WHERE TextTagID = ?");
-			removeMonumentTextTags.setString(1, currentDatabase);
-			removeMonumentTextTags.setInt(2, textTagId);
+					(PreparedStatement) dbConnection.prepareStatement("DELETE FROM " + this.currentDatabase + ".TextTag WHERE TextTagID = ?");
+			removeMonumentTextTags.setInt(1, textTagId);
 			removeMonumentTextTags.execute();
 			
 		} catch (SQLException e) {

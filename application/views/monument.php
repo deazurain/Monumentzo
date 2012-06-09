@@ -97,7 +97,7 @@
 			<div class="row">
 			    <p>
 				<?php foreach($monument['TextTag'] as $tag) {
-					echo "<a href='/search/query/".$tag['TextTag']."'>".$tag['TextTag']."</a>, ";
+					echo "<a href='" . url::base() . "search/query/".$tag['TextTag']."'>".$tag['TextTag']."</a>, ";
 				}?>
     			</p>
 			</div><!--/row-->
