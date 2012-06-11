@@ -2,6 +2,7 @@
 	<div class="row">
 
 		<div class="span5">
+<<<<<<< HEAD
 			<?php echo isset($monument) ? "<img src='" . url::base() . $monument['Image'] . "' />" : 'Undefined' ?>
 
 			<section id="similar-images">
@@ -21,6 +22,29 @@
 					<a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
 				</div>
 			</section>
+=======
+		    <div class="row-fluid">
+		        <div class="span12">
+    		        <?php echo isset( $monument ) ? "<img src='" . url::base() . $monument['Image'] . "' />" : 'Undefined' ?>
+    		    </div>
+    		</div>
+    		<div class="row-fluid">
+    		    <div class="span12">
+    		        <div id="carousel" class="carousel slide">
+                    	<!-- Carousel items -->
+                        <div class="carousel-inner">
+							<?php foreach( $similarImages as $image ): ?>
+                            <div class="item"><img src="<?php echo url::base() . $image['Path']; ?>" /></div>
+                            <?php endforeach; ?>
+                    	</div>
+                        
+                        <!-- Carousel controls -->
+                        <a class="carousel-control left" href="#carousel" data-slide="prev">&lsaquo;</a>
+                        <a class="carousel-control right" href="#carousel" data-slide="next">&rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+>>>>>>> 2b51baa1a1cfa17399a4ccbe077109b8af7b5a5c
 		</div><!--/span-->
 
 		<div class="span7">
@@ -129,9 +153,32 @@
 			</div>
 			<!--/row-->
 		</div>
-		<!--/span-->
+		
+    <!-- Some more information (related persons and events) -->
+    <div class="row">
+    	<!-- Related events -->
+    	<div class="span7">
+        	<div class="page-header">
+            	<h3>Gerelateerde gebeurtenissen</h3>
+            </div>
+            <div>
+            	<table class="table table-striped">
+                	<tr>
+                    	<th>Jaartal</th>
+                        <th>Gebeurtenis</th>
+                    </tr>
+					<?php foreach($events as $event): ?>
+                    <tr>
+                    	<td><?php echo $event['Year']; ?></td>
+                        <td><?php echo $event['Name']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        </div>
+    </div>
 	</div>
-	<!--/row-->
+    
 
 	<!-- Start of the comments -->
 	<div class="row">

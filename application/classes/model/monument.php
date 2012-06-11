@@ -97,7 +97,7 @@ class Model_Monument extends Model_Database {
 	
 	public function getRelatedEvents() {
 		
-		$result = DB::query(Database::SELECT, 'SELECT Name 
+		$result = DB::query(Database::SELECT, 'SELECT Name, Year
 												FROM Event, Monument_Event 
 												WHERE Event.EventID = Monument_Event.EventID 
 												AND MonumentID = :monumentID')
