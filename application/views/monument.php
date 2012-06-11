@@ -1,7 +1,29 @@
 <div id="monument" class="container">
 	<div class="row">
 		<div class="span5">
-    		<?php echo isset($monument) ? "<img src='" . url::base() . $monument['Image'] . "' />" : 'Undefined' ?>
+		    <div class="row-fluid">
+		        <div class="span12">
+    		        <?php echo isset( $monument ) ? "<img src='" . url::base() . $monument['Image'] . "' />" : 'Undefined' ?>
+    		    </div>
+    		</div>
+    		<?php echo " 
+    		<div class='row-fluid'>
+    		    <div class='span12'>
+    		        <div id='carousel' class='carousel slide'>
+                        <!-- Carousel items -->
+                        <div class='carousel-inner'>
+                        ";
+                        foreach( $similarImages as $image ) {
+                            echo "<div class='item'><img src='" . url::base() . $image['Path'] . "' /></div>";
+                        }
+                        echo "
+                    </div>
+                        <a class='carousel-control left' href='#myCarousel' data-slide='prev'>&lsaquo;</a>
+                        <a class='carousel-control right' href='#myCarousel' data-slide='next'>&rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+    		"; ?>
 		</div><!--/span-->
 		<div class="span7">
 			<div class="row">

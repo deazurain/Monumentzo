@@ -21,12 +21,14 @@ Class Controller_Monument extends Controller_Template_Website
 			$isInVisited = $monument->isInList($userID, 'Visited');
 			$isInWish = $monument->isInList($userID, 'Wish');
 		}
-
+        $this->template->content = View::factory('monument');
+		
 		$comments = $monument->getPostedComments();
+		$this->template->content->similarImages = $monument->getAllImages();
+		
 		$monument = $monument->viewMonument();
 		
 		$this->template->title = $monument['Name'];
-		$this->template->content = View::factory('monument');
 		$this->template->content->monument = $monument;
 		$this->template->content->comments = $comments;
 		$this->template->content->inList = array('inFavorite' => $isInFavorite, 'inVisited' => $isInVisited, 'inWish' => $isInWish);

@@ -34,4 +34,10 @@ $(document).ready(function() {
     */
     $('.dropdown-toggle').dropdown()
 	
+	/*
+	carousel
+	*/
+	$('#carousel').carousel({
+		interval: 3000
+	})
 });
