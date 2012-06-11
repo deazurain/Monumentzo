@@ -81,10 +81,16 @@ public class ResponseParser {
 				break;
 				
 			case "cit_tekst":			// Description
-				descr = child.getFirstChild().getFirstChild().getNodeValue();
+				if(descr == null || descr.isEmpty())
+					descr = child.getFirstChild().getFirstChild().getNodeValue();
 				break;
 				
-			case "rce_categorie":
+			case "rce_omschrijving_internationaal":		// Alternative description
+				if(descr == null || descr.isEmpty())
+					descr = child.getFirstChild().getNodeValue();
+				break;
+				
+			case "rce_categorie":		// Monument category
 				cat = child.getFirstChild().getNodeValue();
 				break;
 				

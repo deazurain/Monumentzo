@@ -12,19 +12,19 @@
 					<!-- Carousel items -->
 					<div class='carousel-inner'>
 						<?php foreach( $similarImages as $image ) { ?>
-							<div class='item'><img src='" . url::base() . $image[' Path'] . "' /></div>
-						";
-						}
-						echo "
+							<div class='item'>
+								<img src="<?php echo url::base().$image['Path']; ?>">
+							</div>
+						<?php } ?>
 					</div>
-					<a class='carousel-control left' href='#myCarousel' data-slide='prev'>&lsaquo;</a>
-					<a class='carousel-control right' href='#myCarousel' data-slide='next'>&rsaquo;</a>
+					<a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
+					<a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
 				</div>
 			</section>
 		</div><!--/span-->
 
 		<div class="span7">
-			<div class="row">
+			<div>
 				<h1><?php echo isset($monument) ? $monument['Name'] : 'Undefined' ?></h1>
 				<table class="table">
 					<tr>
@@ -112,17 +112,19 @@
 			</div><!--/row-->
 			<?php endif; ?>
 
-			<div class="row">
+			<div>
 				<h2>Beschrijving</h2>
 
 				<p><?php echo isset($monument) ? $monument['Description'] : 'Geen informatie beschikbaar' ?></p>
 			</div>
-			<!--/row-->
-			<div class="row">
+
+			<div>
 				<p>
-					<?php foreach ($monument['TextTag'] as $tag) {
-					echo "<a href='" . url::base() . "search/query/" . $tag['TextTag'] . "'>" . $tag['TextTag'] . "</a>, ";
-				}?>
+					<?php foreach($monument['TextTag'] as $tag) {
+						$href = url::base().'search/query/'.$tag['TextTag'];
+						$text = $tag['TextTag'];?>
+						<a href="<?php echo $href; ?>"><?php echo $text; ?></a>
+					<?php } ?>
 				</p>
 			</div>
 			<!--/row-->

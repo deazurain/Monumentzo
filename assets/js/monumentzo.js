@@ -38,6 +38,6 @@ $(document).ready(function() {
 	carousel
 	*/
 	$('#carousel').carousel({
-		interval: 3000
+		interval: 8000
 	})
 });
