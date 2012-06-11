@@ -181,3 +181,20 @@ Monument comments
 #create-comment textarea {
 	width: 100%;
 }
+
+
+/* carousel */
+#carousel {
+	height:400px;
+}
+
+#carousel img {
+	margin-left:auto;
+	margin-right:auto;
+	height:100%;
+}
+
+
+
+
+
