@@ -130,6 +130,7 @@
 			<!--/row-->
             
             <!-- Related events -->
+            <?php if(count($events) > 0): ?>
             <div id="related-events">
                 <div class="page-header">
                     <h3>Gerelateerde gebeurtenissen</h3>
@@ -149,8 +150,10 @@
                     </table>
                 </div>
             </div>
+            <?php endif; ?>
             
             <!-- Related people -->
+            <?php if(count($persons) > 0): ?>
             <div id="related-people">
                 <div class="page-header">
                     <h3>Gerelateerde personen</h3>
@@ -165,6 +168,8 @@
                     </table>
                 </div>
             </div>
+            <?php endif; ?>
+            
 		</div>
 	</div>
     
