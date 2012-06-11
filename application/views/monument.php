@@ -128,47 +128,44 @@
 				</p>
 			</div>
 			<!--/row-->
+            
+            <!-- Related events -->
+            <div id="related-events">
+                <div class="page-header">
+                    <h3>Gerelateerde gebeurtenissen</h3>
+                </div>
+                <div>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Jaartal</th>
+                            <th>Gebeurtenis</th>
+                        </tr>
+                        <?php foreach($events as $event): ?>
+                        <tr>
+                            <td><?php echo $event['Year']; ?></td>
+                            <td><?php echo $event['Name']; ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Related people -->
+            <div id="related-people">
+                <div class="page-header">
+                    <h3>Gerelateerde personen</h3>
+                </div>
+                <div>
+                    <table class="table table-striped">
+                        <?php foreach($persons as $person): ?>
+                        <tr>
+                            <td><?php echo $person['Name']; ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
 		</div>
-		
-    <!-- Some more information (related persons and events) -->
-    <div class="row">
-    	<!-- Related events -->
-    	<div class="span7">
-        	<div class="page-header">
-            	<h3>Gerelateerde gebeurtenissen</h3>
-            </div>
-            <div>
-            	<table class="table table-striped">
-                	<tr>
-                    	<th>Jaartal</th>
-                        <th>Gebeurtenis</th>
-                    </tr>
-					<?php foreach($events as $event): ?>
-                    <tr>
-                    	<td><?php echo $event['Year']; ?></td>
-                        <td><?php echo $event['Name']; ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </table>
-            </div>
-        </div>
-        
-        <!-- Related people -->
-        <div class="span7">
-        	<div class="page-header">
-            	<h3>Gerelateerde personen</h3>
-            </div>
-            <div>
-            	<table class="table table-striped">
-					<?php foreach($persons as $person): ?>
-                    <tr>
-                    	<td><?php echo $person['Name']; ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </table>
-            </div>
-        </div>
-    </div>
 	</div>
     
 
