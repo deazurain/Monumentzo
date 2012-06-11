@@ -25,6 +25,8 @@ Class Controller_Monument extends Controller_Template_Website
 		
 		$comments = $monument->getPostedComments();
 		$this->template->content->similarImages = $monument->getAllImages();
+		$this->template->content->events = $monument->getRelatedEvents();
+		$this->template->content->persons = $monuments->getRelatedMonuments();
 		
 		$monument = $monument->viewMonument();
 		

@@ -6,24 +6,22 @@
     		        <?php echo isset( $monument ) ? "<img src='" . url::base() . $monument['Image'] . "' />" : 'Undefined' ?>
     		    </div>
     		</div>
-    		<?php echo " 
-    		<div class='row-fluid'>
-    		    <div class='span12'>
-    		        <div id='carousel' class='carousel slide'>
-                        <!-- Carousel items -->
-                        <div class='carousel-inner'>
-                        ";
-                        foreach( $similarImages as $image ) {
-                            echo "<div class='item'><img src='" . url::base() . $image['Path'] . "' /></div>";
-                        }
-                        echo "
-                    </div>
-                        <a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
-                        <a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
+    		<div class="row-fluid">
+    		    <div class="span12">
+    		        <div id="carousel" class="carousel slide">
+                    	<!-- Carousel items -->
+                        <div class="carousel-inner">
+							<?php foreach( $similarImages as $image ): ?>
+                            <div class="item"><img src="<?php echo url::base() . $image['Path']; ?>" /></div>
+                            <?php endforeach; ?>
+                    	</div>
+                        
+                        <!-- Carousel controls -->
+                        <a class="carousel-control left" href="#carousel" data-slide="prev">&lsaquo;</a>
+                        <a class="carousel-control right" href="#carousel" data-slide="next">&rsaquo;</a>
                     </div>
                 </div>
             </div>
-    		"; ?>
 		</div><!--/span-->
 		<div class="span7">
 			<div class="row">
@@ -125,6 +123,30 @@
 			</div><!--/row-->
 		</div><!--/span-->
 	</div><!--/row-->
+    
+    <!-- Some more information (related persons and events) -->
+    <div class="row">
+    	<!-- Related events -->
+    	<div class="span7">
+        	<div class="page-header">
+            	<h3>Gerelateerde gebeurtenissen</h3>
+            </div>
+            <div>
+            	<table class="table table-striped">
+                	<tr>
+                    	<th>Jaartal</th>
+                        <th>Gebeurtenis</th>
+                    </tr>
+					<?php foreach($events as $event): ?>
+                    <tr>
+                    	<td><?php echo $event['Year']; ?></td>
+                        <td><?php echo $event['Name']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        </div>
+    </div>
     
     <!-- Start of the comments -->
     <div class="row">
