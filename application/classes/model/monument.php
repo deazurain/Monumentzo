@@ -44,7 +44,19 @@ class Model_Monument extends Model_Database {
 		return $result[0]['Path'];
 	}
 	
-	public function getAllImages(){}
+	public function getAllImages(){
+		$result = DB::query(Database::SELECT, 'SELECT Path 
+												FROM Image 
+												WHERE ImageID IN (
+													SELECT SimilarImageID 
+													FROM SimilarImage 
+													WHERE SimilarImage.ImageID = :imageID
+												)')
+						->bind(':imageID', $this->monument['ImageID'])
+						->execute();
+		
+		return $result->as_array();
+	}
 	
 	public function getPostedComments() {
 		$result = DB::query(Database::SELECT, 'SELECT CommentID, Comment.UserID, Name, Comment, PlaceDate
