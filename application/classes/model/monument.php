@@ -82,6 +82,30 @@ class Model_Monument extends Model_Database {
 		
 		return count($result->as_array()) > 0;
 	}
+	
+	public function getRelatedPersons() {
+		
+		$result = DB::query(Database::SELECT, 'SELECT Name 
+												FROM Person, Monument_Person 
+												WHERE Person.PersonID = Monument_Person.PersonID 
+												AND MonumentID = :monumentID')
+						->bind(':monumentID', $this->monument['MonumentID'])
+						->execute();
+		
+		return $result->as_array();
+	}
+	
+	public function getRelatedEvents() {
+		
+		$result = DB::query(Database::SELECT, 'SELECT Name 
+												FROM Event, Monument_Event 
+												WHERE Event.EventID = Monument_Event.EventID 
+												AND MonumentID = :monumentID')
+						->bind(':monumentID', $this->monument['MonumentID'])
+						->execute();
+		
+		return $result->as_array();
+	}
 }
 
 ?>
