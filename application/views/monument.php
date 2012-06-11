@@ -18,15 +18,15 @@
                         }
                         echo "
                     </div>
-                        <a class='carousel-control left' href='#myCarousel' data-slide='prev'>&lsaquo;</a>
-                        <a class='carousel-control right' href='#myCarousel' data-slide='next'>&rsaquo;</a>
+                        <a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
+                        <a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
                     </div>
                 </div>
             </div>
     		"; ?>
 		</div><!--/span-->
 		<div class="span7">
-			<div class="row">
+			<div>
 				<h1><?php echo isset($monument) ? $monument['Name'] : 'Undefined' ?></h1>
 				<table class="table">
 					<tr>
@@ -62,7 +62,7 @@
 			</div><!--/row-->
             
             <?php if($user): ?>
-            <div class="row">
+            <div>
             	<div class="btn-toolbar">
                 	
                     <?php if(!$inList['inFavorite'] || !$inList['inVisited'] || !$inList['inWish']): ?>
@@ -112,11 +112,11 @@
             </div><!--/row-->
             <?php endif; ?>
             
-			<div class="row">
+			<div>
 				<h2>Beschrijving</h2>
 				<p><?php echo isset($monument) ? $monument['Description'] : 'Geen informatie beschikbaar' ?></p>
 			</div><!--/row-->
-			<div class="row">
+			<div>
 			    <p>
 				<?php foreach($monument['TextTag'] as $tag) {
 					echo "<a href='" . url::base() . "search/query/".$tag['TextTag']."'>".$tag['TextTag']."</a>, ";
