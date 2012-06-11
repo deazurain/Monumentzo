@@ -96,7 +96,7 @@ Class Controller_User extends Controller_Template_Plain {
 
 	/**
 	* Logs in a user. If the login is successful the user will be
-	* redirected. If the login was insuccessful, the previous view
+	* redirected. If the login was unsuccessful, the previous view
 	* will be loaded with an error message.
 	*/
 	public function action_login() {
