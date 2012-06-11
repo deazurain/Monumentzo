@@ -161,6 +161,11 @@ Monument comments
  * views/model/comment.php
 */
 
+#similar-images .page-header {
+	margin: 40px 0 0 0;
+	padding-bottom: 5px;
+}
+
 #related-events .page-header,
 #related-people .page-header {
 	margin: 20px 0 0 0;

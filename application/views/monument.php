@@ -6,7 +6,7 @@
 
 			<section id="similar-images">
 				<div class="page-header">
-					<h1>Visueel gelijkende monumenten</h1>
+					<h2>Visueel gelijkende monumenten</h2>
 				</div>
 				<div id='carousel' class='carousel slide'>
 					<!-- Carousel items -->
