@@ -1,7 +1,7 @@
 <div id="monument" class="container">
 	<div class="row">
 		<div class="span5">
-    		<?php echo isset($monument) ? "<img src='" . url::base() . "/" . $monument['Image'] . "' />" : 'Undefined' ?>
+    		<?php echo isset($monument) ? "<img src='" . url::base() . $monument['Image'] . "' />" : 'Undefined' ?>
 		</div><!--/span-->
 		<div class="span7">
 			<div class="row">
