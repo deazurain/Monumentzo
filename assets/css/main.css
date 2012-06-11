@@ -133,13 +133,24 @@ Search
 /*
 Monument
 */
-#monument img{
-	max-height:95%;
-	max-width:95%;
-}
+
 
 #list-view .page-header {
 	margin: 20px 0 0 0;
+}
+
+/*
+Monument carousel
+*/
+
+#carousel {
+	height:400px;
+}
+
+#carousel img {
+	margin-left:auto;
+	margin-right:auto;
+	height:100%;
 }
 
 /*
@@ -183,16 +194,6 @@ Monument comments
 }
 
 
-/* carousel */
-#carousel {
-	height:400px;
-}
-
-#carousel img {
-	margin-left:auto;
-	margin-right:auto;
-	height:100%;
-}
 
 
 
