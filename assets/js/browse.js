@@ -142,7 +142,7 @@ function doCameraUpdate() {
 
 	var m = new THREE.Matrix4()
 		.rotateY(camera_angle_current)
-		.translate(new THREE.Vector3(-mouse.x*200, mouse.y*1000, -1000));
+		.translate(new THREE.Vector3(-mouse.x*200, mouse.y*1000 + 500, 1000));
 
 	camera.position.getPositionFromMatrix(m);
 	camera.lookAt(scene.position);
@@ -242,6 +242,34 @@ $(document).ready(function() {
 			});
 
 
+			for(var i in blocks) {
+				// right bound 7.46
+				// left bound 3.19
+				// upper bound 53.57
+				// lower bound 50.70
+				var lat_upper = 53.75;
+				var lat_lower = 50.70;
+				var long_upper = 7.46;
+				var long_lower = 3.19;
+
+				var lat = parseFloat(monuments[i].Latitude);
+				var long = parseFloat(monuments[i].Longitude);
+
+				console.log('lat: ' + lat);
+
+				var lat_rel = (THREE.Math.clamp(lat, lat_lower, lat_upper) - lat_lower)/(lat_upper - lat_lower) - 0.5;
+				var long_rel = (THREE.Math.clamp(long, long_lower, long_upper) - long_lower)/(long_upper - long_lower) - 0.5;
+
+				console.log(lat_rel);
+
+				var block = blocks[i];
+
+				block.position.x = long_rel * 6000;
+				block.position.z = -lat_rel * 6000;
+
+				block.updateMatrix();
+			}
+
 			// sort blocks by time
 			for(var i in blocks) {
 				var year = monuments[i].Year;
@@ -255,8 +283,17 @@ $(document).ready(function() {
 				blocks[i].updateMatrix();
 			}
 
+			scene.add(group);
 
-			scene.add( group );
+			geometry = new THREE.PlaneGeometry(6000, 6000, 1, 1);
+			material = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('/assets/img/netherlands.jpg')});
+			var plane = new THREE.Mesh(geometry, material);
+			plane.matrixAutoUpdate = false;
+			plane.position.set(0, -500, 0);
+			plane.updateMatrix();
+			plane.doubleSided = true;
+
+			scene.add(plane);
 
 			projector = new THREE.Projector();
 
