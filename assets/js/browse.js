@@ -8,6 +8,8 @@ var geometry, group;
 var camera_angle_current = Math.PI;
 var camera_angle_desired = 0;
 var camera_angle_speed = Math.PI/60;
+var camera_offset_x = 0;
+var camera_offset_z = 0;
 
 var blocks = [];
 var monuments = [];
@@ -110,7 +112,7 @@ function doZoomBlock() {
 		p.subSelf(zoom_block.position);
 
 		if(p.length() > 160) {
-			p.normalize().multiplyScalar(30);
+			p.multiplyScalar(0.1);
 		 	zoom_block.position.addSelf(p);
 			zoom_block.updateMatrix();
 		}
@@ -142,7 +144,8 @@ function doCameraUpdate() {
 
 	var m = new THREE.Matrix4()
 		.rotateY(camera_angle_current)
-		.translate(new THREE.Vector3(-mouse.x*200, mouse.y*1000 + 500, 1000));
+		.translate(new THREE.Vector3(camera_offset_x, 0, camera_offset_z))
+		.translate(new THREE.Vector3(mouse.x*300, mouse.y*1000 + 500, 1000));
 
 	camera.position.getPositionFromMatrix(m);
 	camera.lookAt(scene.position);
@@ -314,6 +317,31 @@ $(document).ready(function() {
 				}
 				if(y >= 0 && y < height) {
 					mouse.y = (-y * 2.0) / height + 1;
+				}
+			});
+
+			$(window).keydown(function(event) {
+				switch(event.keyCode) {
+					case 87:
+					case 38:
+						if(camera_offset_z >= 50) {
+							camera_offset_z += -50;
+						}
+						break;
+					case 83:
+					case 40:
+						if(camera_offset_z < 4000) {
+							camera_offset_z += 50;
+						}
+						break;
+					case 65:
+					case 37:
+						camera_angle_desired -= Math.PI/2;
+						break;
+					case 68:
+					case 39:
+						camera_angle_desired += Math.PI/2;
+						break;
 				}
 			});
 
