@@ -150,7 +150,7 @@ Monument carousel
 #carousel img {
 	margin-left:auto;
 	margin-right:auto;
-	height:100%;
+	height:400px;
 }
 
 /*
@@ -160,6 +160,17 @@ Monument comments
 /* comment build up:
  * views/model/comment.php
 */
+
+#similar-images .page-header {
+	margin: 40px 0 0 0;
+	padding-bottom: 5px;
+}
+
+#related-events .page-header,
+#related-people .page-header {
+	margin: 20px 0 0 0;
+	padding-bottom: 5px;
+}
 
 #comment-list,
 .comment-list {

@@ -6,7 +6,7 @@
 
 			<section id="similar-images">
 				<div class="page-header">
-					<h1>Visueel gelijkende monumenten</h1>
+					<h2>Visueel gelijkende monumenten</h2>
 				</div>
 				<div id='carousel' class='carousel slide'>
 					<!-- Carousel items -->
@@ -61,7 +61,7 @@
 			<!--/row-->
 
 			<?php if ($user): ?>
-			<div class="row">
+			<div>
 				<div class="btn-toolbar">
 
 					<?php if (!$inList['inFavorite'] || !$inList['inVisited'] || !$inList['inWish']): ?>
@@ -128,47 +128,49 @@
 				</p>
 			</div>
 			<!--/row-->
+            
+            <!-- Related events -->
+            <?php if(count($events) > 0): ?>
+            <div id="related-events">
+                <div class="page-header">
+                    <h3>Gerelateerde gebeurtenissen</h3>
+                </div>
+                <div>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Jaartal</th>
+                            <th>Gebeurtenis</th>
+                        </tr>
+                        <?php foreach($events as $event): ?>
+                        <tr>
+                            <td><?php echo $event['Year']; ?></td>
+                            <td><?php echo $event['Name']; ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+            <?php endif; ?>
+            
+            <!-- Related people -->
+            <?php if(count($persons) > 0): ?>
+            <div id="related-people">
+                <div class="page-header">
+                    <h3>Gerelateerde personen</h3>
+                </div>
+                <div>
+                    <table class="table table-striped">
+                        <?php foreach($persons as $person): ?>
+                        <tr>
+                            <td><a href="http://nl.wikipedia.org/wiki/<?php echo $person['Name']; ?>"><?php echo $person['Name']; ?></a></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+            <?php endif; ?>
+            
 		</div>
-		
-    <!-- Some more information (related persons and events) -->
-    <div class="row">
-    	<!-- Related events -->
-    	<div class="span7">
-        	<div class="page-header">
-            	<h3>Gerelateerde gebeurtenissen</h3>
-            </div>
-            <div>
-            	<table class="table table-striped">
-                	<tr>
-                    	<th>Jaartal</th>
-                        <th>Gebeurtenis</th>
-                    </tr>
-					<?php foreach($events as $event): ?>
-                    <tr>
-                    	<td><?php echo $event['Year']; ?></td>
-                        <td><?php echo $event['Name']; ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </table>
-            </div>
-        </div>
-        
-        <!-- Related people -->
-        <div class="span7">
-        	<div class="page-header">
-            	<h3>Gerelateerde personen</h3>
-            </div>
-            <div>
-            	<table class="table table-striped">
-					<?php foreach($persons as $person): ?>
-                    <tr>
-                    	<td><?php echo $person['Name']; ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </table>
-            </div>
-        </div>
-    </div>
 	</div>
     
 
