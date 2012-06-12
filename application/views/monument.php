@@ -61,7 +61,7 @@
 			<!--/row-->
 
 			<?php if ($user): ?>
-			<div class="row">
+			<div>
 				<div class="btn-toolbar">
 
 					<?php if (!$inList['inFavorite'] || !$inList['inVisited'] || !$inList['inWish']): ?>
