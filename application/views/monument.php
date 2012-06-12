@@ -162,7 +162,7 @@
                     <table class="table table-striped">
                         <?php foreach($persons as $person): ?>
                         <tr>
-                            <td><?php echo $person['Name']; ?></td>
+                            <td><a href="http://nl.wikipedia.org/wiki/<?php echo $person['Name']; ?>"><?php echo $person['Name']; ?></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>
