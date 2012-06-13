@@ -13,7 +13,12 @@
 					<div class='carousel-inner'>
 						<?php foreach( $similarImages as $image ) { ?>
 							<div class='item'>
-								<img src="<?php echo url::base().$image['Path']; ?>">
+							    <a class="imgLink" href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
+								    <img src="<?php echo url::base().$image['Path']; ?>">
+								</a>
+								<div class="carousel-caption">
+								    <h4><?php echo $image['Name']; ?></h4>
+								</div>
 							</div>
 						<?php } ?>
 					</div>

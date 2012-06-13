@@ -145,6 +145,13 @@ Monument carousel
 
 #carousel {
 	height:400px;
+	width:100%;
+}
+
+#carousel .imgLink {
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
 }
 
 #carousel img {
