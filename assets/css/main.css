@@ -148,15 +148,14 @@ Monument carousel
 	width:100%;
 }
 
-#carousel .imgLink {
+#carousel .item {
 	margin-left:auto;
 	margin-right:auto;
-	display:block;
+	text-align:center;
 }
 
 #carousel img {
-	margin-left:auto;
-	margin-right:auto;
+
 	height:400px;
 }
 
