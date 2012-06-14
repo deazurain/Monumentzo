@@ -8,12 +8,49 @@ class Controller_Search extends Controller_Template_Website {
 	{
 		// Get the query parameters
 		$query = $this->request->post('q');
+		$resultSize = $this->request->post('rsz');
 		
 		if($this->request->param('id') != ""){
 		    $query = $this->request->param('id');
 	    }
+
+		$geo_monuments = $this->fetch_geo_results($query, $resultSize);
+		$relevance_results = $this->fetch_relevant_results($query, $resultSize);
+		$results = array_merge($geo_results, $relevance_results);
+
+		$this->template->title = 'Search results';
+		$this->template->content = View::factory('search/results')->set('results', $results);
+	}
+	
+	private function fetch_geo_results($query, $resultSize) {
 		
-		$resultSize = $this->request->post('rsz');
+		$monuments = array();
+		foreach(explode(' ', $query) as $word) {
+			$results = DB::query(Database::SELECT, 'SELECT MonumentID, Name, City, Path as Image 
+													FROM monumentzo.Monument, monumentzo.Image 
+													WHERE monumentzo.Monument.MonumentID = monumentzo.Image.MonumentID
+													AND (City LIKE :city OR Province LIKE :province)')
+							->bind(':city', '%' . $word . '%')
+							->bind(':province', '%' . $word . '%')
+							->execute();
+			$results = $results->as_array();
+			
+			foreach($results as $result) {
+				$monuments[$result['MonumentID']] = array('Name' => $result['Name'],
+															'Place' => $result['City'],
+															'Image' => $result['Image']);
+			}
+		}
+		
+		// Get the correct number of search results
+		if(count($monuments) > $resultSize) {
+			$monuments = array_slice($monuments, 0, $resultSize, true);
+		}
+		
+		return $monuments;
+	}
+	
+	private function fetch_relevant_results($query, $resultSize) {
 		
 		// Build a vector from the query and get the monuments that contain the query words
 		$queryVector = array();
@@ -97,10 +134,8 @@ class Controller_Search extends Controller_Template_Website {
 							'Place' => $result[0]['City'],
 							'Image' => $result[0]['Image']);
 		}
-
-
-		$this->template->title = 'Search results';
-		$this->template->content = View::factory('search/results')->set('results', $results);
+		
+		return $results;
 	}
 	
 	private function calculate_angle($vector1, $vector2) {
