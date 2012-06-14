@@ -35,7 +35,7 @@
                     </div>
                     <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
                     <?php echo Form::input('q', NULL, array('type' => 'text', 'class' => 'search-query', 'placeholder' => 'Search')); ?>
-		    		<?php echo Form::hidden('rsz', '10'); ?>
+		    		<?php echo Form::hidden('rsz', '20'); ?>
                     <?php echo Form::close(); ?>
                 </div>
             </div>
