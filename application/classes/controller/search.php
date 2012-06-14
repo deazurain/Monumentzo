@@ -13,8 +13,8 @@ class Controller_Search extends Controller_Template_Website {
 		if($this->request->param('id') != ""){
 		    $query = $this->request->param('id');
 	    }
-
-		$geo_monuments = $this->fetch_geo_results($query, $resultSize);
+        
+		$geo_results = $this->fetch_geo_results($query, $resultSize);
 		$relevance_results = $this->fetch_relevant_results($query, $resultSize);
 		$results = array_merge($geo_results, $relevance_results);
 
@@ -36,7 +36,8 @@ class Controller_Search extends Controller_Template_Website {
 			$results = $results->as_array();
 			
 			foreach($results as $result) {
-				$monuments[$result['MonumentID']] = array('Name' => $result['Name'],
+				$monuments['ID'.$result['MonumentID']] = array('MonumentID' => $result['MonumentID'],
+				                                            'Name' => $result['Name'],
 															'Place' => $result['City'],
 															'Image' => $result['Image']);
 			}
@@ -129,7 +130,7 @@ class Controller_Search extends Controller_Template_Website {
 			if(count($result) < 1)
 				continue;
 
-			$results[$monumentID] = array('MonumentID' => $monumentID,
+			$results['ID'.$monumentID] = array('MonumentID' => $monumentID,
 			        		'Name' => $result[0]['Name'],
 							'Place' => $result[0]['City'],
 							'Image' => $result[0]['Image']);
