@@ -45,8 +45,8 @@ class Model_Monument extends Model_Database {
 	}
 	
 	public function getAllImages(){
-		$result = DB::query(Database::SELECT, 'SELECT Path 
-												FROM Image 
+		$result = DB::query(Database::SELECT, 'SELECT Path, MonumentID, Name
+												FROM Image NATURAL JOIN Monument
 												WHERE ImageID IN (
 													SELECT SimilarImageID 
 													FROM SimilarImage 

@@ -145,11 +145,17 @@ Monument carousel
 
 #carousel {
 	height:400px;
+	width:100%;
+}
+
+#carousel .item {
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
 }
 
 #carousel img {
-	margin-left:auto;
-	margin-right:auto;
+
 	height:400px;
 }
 
