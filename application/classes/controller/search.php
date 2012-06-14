@@ -2,7 +2,7 @@
 
 class Controller_Search extends Controller_Template_Website {
 
-	const idfThreshold = 0.90;
+	const idfThreshold = 0.80;
 
 	public function action_query()
 	{
