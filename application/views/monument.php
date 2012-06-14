@@ -61,6 +61,14 @@
 						<td>Breedtegraad</td>
 						<td><?php echo isset($monument) ? $monument['Latitude'] : 'Undefined' ?></td>
 					</tr>
+					<tr>
+						<td>Wikipedia artikel</td>
+						<td>
+						    <a href="http://nl.wikipedia.org/wiki/<?php echo isset($monument) ? $monument['WikiArticle'] : 'Undefined' ?>">
+						        http://nl.wikipedia.org/wiki/<?php echo isset($monument) ? $monument['WikiArticle'] : 'Undefined' ?>
+						    </a>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<!--/row-->
