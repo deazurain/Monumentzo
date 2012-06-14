@@ -2,7 +2,7 @@
 	<div class="row">
 
 		<div class="span5">
-			<?php echo isset($monument) ? "<img src='" . url::base() . $monument['Image'] . "' />" : 'Undefined' ?>
+			<?php echo "<img src='" . url::base() . $monument['Image'] . "' />" ?>
             <section>
 				<div class="page-header">
 					<h2>Kaart</h2>
@@ -10,14 +10,14 @@
 				<!-- Google Maps -->
                 <div class="map">
                     <div id="map_canvas" 
-                        data-latitude="<?php echo isset($monument) ? $monument['Latitude'] : 'Undefined' ?>"
-                        data-longitude="<?php echo isset($monument) ? $monument['Longitude'] : 'Undefined' ?>">
+                        data-latitude="<?php echo $monument['Latitude'] ?>"
+                        data-longitude="<?php echo $monument['Longitude'] ?>">
                     </div>
                 </div>
 				<?php echo HTML::script('http://maps.googleapis.com/maps/api/js?key=AIzaSyArtULnydU1gg4DjNfCvhXZx5Sq49p1ktg&sensor=false'), PHP_EOL ?>
 				<?php echo HTML::script('assets/js/map.js'), PHP_EOL ?>
 			</section>
-			<section id="similar-images">
+			<section>
 				<div class="page-header">
 					<h2>Visueel gelijkende monumenten</h2>
 				</div>
@@ -43,43 +43,53 @@
 
 		<div class="span7">
 			<div>
-				<h1><?php echo isset($monument) ? $monument['Name'] : 'Undefined' ?></h1>
+				<h1><?php echo $monument['Name'] ?></h1>
 				<table class="table">
 					<tr>
 						<td>Monumentnummer</td>
-						<td><?php echo isset($monument) ? $monument['MonumentID'] : 'Undefined' ?></td>
+						<td><?= $monument['MonumentID'] ?></td>
 					</tr>
 					<tr>
 						<td>Plaats</td>
-						<td><?php echo isset($monument) ? $monument['City'] : 'Undefined' ?></td>
+						<td><?= $monument['City'] ?></td>
 					</tr>
 					<tr>
 						<td>Straat</td>
-						<td><?php echo isset($monument) ? $monument['Street'] : 'Undefined' ?>
-							<?php echo isset($monument) ? $monument['StreetNumberText'] : 'Undefined' ?></td>
+						<td><?= $monument['Street'] ?>
+							<?= $monument['StreetNumberText'] ?></td>
 					</tr>
 					<tr>
 						<td>Provincie</td>
-						<td><?php echo isset($monument) ? $monument['Province'] : 'Undefined' ?></td>
+						<td><?= $monument['Province'] ?></td>
 					</tr>
 					<tr>
 						<td>Gebouwd in</td>
-						<td><?php echo isset($monument) ? $monument['FoundationDateText'] : 'Undefined' ?></td>
+						<td>
+						    <?php if (!($monument['WikiArticle'] == NULL)) :?>
+						        <?= $monument['FoundationDateText'] ?>
+						    <?php else:?>
+    						    Geen jaar beschikbaar
+						    <?php endif; ?>
+						</td>
 					</tr>
 					<tr>
 						<td>Lengtegraad</td>
-						<td><?php echo isset($monument) ? $monument['Longitude'] : 'Undefined' ?></td>
+						<td><?php echo $monument['Longitude'] ?></td>
 					</tr>
 					<tr>
 						<td>Breedtegraad</td>
-						<td><?php echo isset($monument) ? $monument['Latitude'] : 'Undefined' ?></td>
+						<td><?php echo $monument['Latitude'] ?></td>
 					</tr>
 					<tr>
 						<td>Wikipedia artikel</td>
 						<td>
-						    <a href="http://nl.wikipedia.org/wiki/<?php echo isset($monument) ? $monument['WikiArticle'] : 'Undefined' ?>">
-						        http://nl.wikipedia.org/wiki/<?php echo isset($monument) ? $monument['WikiArticle'] : 'Undefined' ?>
+						<?php if (!($monument['WikiArticle'] == NULL)) :?>
+						    <a href="http://nl.wikipedia.org/wiki/<?= $monument['WikiArticle'] ?>">
+						         http://nl.wikipedia.org/wiki/<?= $monument['WikiArticle'] ?>
 						    </a>
+						<?php else:?>
+						    Geen artikel beschikbaar
+						<?php endif; ?>
 						</td>
 					</tr>
 				</table>
@@ -141,7 +151,7 @@
 			<div>
 				<h2>Beschrijving</h2>
 
-				<p><?php echo isset($monument) ? $monument['Description'] : 'Geen informatie beschikbaar' ?></p>
+				<p><?php echo !($monument['Description'] == NULL) ? $monument['Description'] : 'Geen informatie beschikbaar'; ?></p>
 			</div>
 
 			<div>
