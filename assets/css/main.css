@@ -137,12 +137,16 @@ Monument
 	margin: 20px 0 0 0;
 }
 
+#header-buttons {
+	font-size:12px;
+}
+
 /*
 Monument carousel
 */
 
 #carousel {
-	height:400px;
+	height:380px;
 	width:100%;
 }
 
@@ -216,6 +220,13 @@ monument map
 	width:100%;
 }
 
+/*
+monument tabs
+*/
+.tab-content {
+	height:400px;
+	overflow:scroll;
+}
 
 
 
