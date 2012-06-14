@@ -30,8 +30,8 @@ class Controller_Search extends Controller_Template_Website {
 													FROM monumentzo.Monument, monumentzo.Image 
 													WHERE monumentzo.Monument.MonumentID = monumentzo.Image.MonumentID
 													AND (City LIKE :city OR Province LIKE :province)')
-							->bind(':city', '%' . $word . '%')
-							->bind(':province', '%' . $word . '%')
+							->param(':city', '%' . $word . '%')
+							->param(':province', '%' . $word . '%')
 							->execute();
 			$results = $results->as_array();
 			
