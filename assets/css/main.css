@@ -210,6 +210,14 @@ Monument comments
 	width: 100%;
 }
 
+/*
+monument map
+*/
+.map #map_canvas {
+	height:400px;
+	width:100%;
+}
+
 
 
 

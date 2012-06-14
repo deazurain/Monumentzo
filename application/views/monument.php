@@ -3,7 +3,20 @@
 
 		<div class="span5">
 			<?php echo isset($monument) ? "<img src='" . url::base() . $monument['Image'] . "' />" : 'Undefined' ?>
-
+            <section>
+				<div class="page-header">
+					<h2>Kaart</h2>
+				</div>
+				<!-- Google Maps -->
+                <div class="map">
+                    <div id="map_canvas" 
+                        data-latitude="<?php echo isset($monument) ? $monument['Latitude'] : 'Undefined' ?>"
+                        data-longitude="<?php echo isset($monument) ? $monument['Longitude'] : 'Undefined' ?>">
+                    </div>
+                </div>
+				<?php echo HTML::script('http://maps.googleapis.com/maps/api/js?key=AIzaSyArtULnydU1gg4DjNfCvhXZx5Sq49p1ktg&sensor=false'), PHP_EOL ?>
+				<?php echo HTML::script('assets/js/map.js'), PHP_EOL ?>
+			</section>
 			<section id="similar-images">
 				<div class="page-header">
 					<h2>Visueel gelijkende monumenten</h2>
