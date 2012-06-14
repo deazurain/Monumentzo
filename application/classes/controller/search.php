@@ -26,9 +26,9 @@ class Controller_Search extends Controller_Template_Website {
 		
 		$monuments = array();
 		foreach(explode(' ', $query) as $word) {
-			$results = DB::query(Database::SELECT, 'SELECT MonumentID, Name, City, Path as Image 
-													FROM monumentzo.Monument, monumentzo.Image 
-													WHERE monumentzo.Monument.MonumentID = monumentzo.Image.MonumentID
+			$results = DB::query(Database::SELECT, 'SELECT Monument.MonumentID, Name, City, Path as Image 
+													FROM Monument, Image 
+													WHERE Monument.MonumentID = Image.MonumentID
 													AND (City LIKE :city OR Province LIKE :province)')
 							->param(':city', '%' . $word . '%')
 							->param(':province', '%' . $word . '%')
