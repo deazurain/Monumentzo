@@ -56,6 +56,8 @@
 
         				</div>
         				<!--/btn-toolbar-->
+        			</div>
+        			<?php endif; ?>
 	            </h1>
 	        </div>
         </div>
@@ -127,9 +129,6 @@
 						</td>
 					</tr>
 				</table>
-			</div>
-			<!--/row-->
-
 			
 				<!-- Tags -->
                 <div class="tab-pane" id="tags">
@@ -142,7 +141,7 @@
     				</p>
     			</div>
 			</div>
-			<?php endif; ?>
+
 		</div>
 	</div>
 	<div class="row">
