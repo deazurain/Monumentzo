@@ -21,13 +21,11 @@
                     </a>
                     <?php echo HTML::anchor('/home', 'Monumentzo', array('class' => 'brand')); ?>
                     <div class="nav-collapse">
-                        <ul class="nav">
-                            <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
-                            <?php if (isset($register)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>						
+                        <ul class="nav">					
 							<li><?php echo HTML::anchor('/browse/index', 'Bladeren'); ?></li>
                         </ul>
                     </div>
-                    <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search')); ?>
+                    <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
                     <?php echo Form::input('q', NULL, array('type' => 'text', 'class' => 'search-query', 'placeholder' => 'Zoeken')); ?>
 		    		<?php echo Form::hidden('rsz', '20'); ?>
                     <?php echo Form::close(); ?>
@@ -46,6 +44,17 @@
                                 <li><a class='fancybox' href='#logout'>Uitloggen</a></li>
                             </ul>
                         </li>
+                         <? endif; ?>
+                         <?php if (isset($login)) : ?>
+                         <li id="fat-menu" class="dropdown">
+                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                 <i class="icon-user icon-white"></i> Inloggen <b class="caret"></b>
+                             </a>
+                             <ul class="dropdown-menu">
+                                 <li><a class='fancybox' href='#login'>Inloggen</a></li>
+                                 <li><a class='fancybox' href='#register'>Registreren</a></li>
+                             </ul>
+                         </li>
                          <? endif; ?>
                     </ul>
                     
