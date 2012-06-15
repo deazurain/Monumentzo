@@ -125,6 +125,8 @@ Route::set('list', 'list/(<controller>(/<action>(/<id>)))')
 		'controller' => 'view',
 		'action' => 'index'
 	));
+	
+Route::set('read', 'list/read/add/<monument>/<book>');
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
