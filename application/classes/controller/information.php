@@ -182,7 +182,7 @@ class Controller_Information {
                         ->execute()
                         ->as_array();
 
-                if ($test[0]['BookID'] > 0) {
+                if (isset($test[0]['BookID'])) {
                     $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Book (MonumentID, BookID) VALUES(:monumentID, (SELECT BookID FROM Book WHERE GoogleID = :id))')
                             ->bind(':monumentID', $monument['MonumentID'])
                             ->bind(':id', $googleID)
