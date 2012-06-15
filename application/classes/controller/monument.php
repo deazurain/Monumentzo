@@ -12,7 +12,7 @@ Class Controller_Monument extends Controller_Template_Website
 		$isInFavorite = NULL;
 		$isInVisited = NULL;
 		$isInWish = NULL;
-		$userBooks = NULL;
+		$userBooks = array();
 	
 		if(Auth::instance()->logged_in()) {
 			$userID = Auth::instance()->get_user()->UserID;
@@ -21,7 +21,7 @@ Class Controller_Monument extends Controller_Template_Website
 			$isInFavorite = $monument->isInList($userID, 'Favorite');
 			$isInVisited = $monument->isInList($userID, 'Visited');
 			$isInWish = $monument->isInList($userID, 'Wish');
-			$userBooks = $user->getReadList();
+			$userBooks = $user->getReadListIDs();
 		}
         $this->template->content = View::factory('monument');
 		
