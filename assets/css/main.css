@@ -5,13 +5,13 @@
 */
 
 html, body {
-	padding: 0;
-	height:100%;
+    padding: 0;
+    height:100%;
 }
 
 #content {
-	padding-top: 60px;
-	height: auto;
+    padding-top: 60px;
+    height: auto;
 }
 
 /*
@@ -19,38 +19,38 @@ Home
 */
 
 .hero-unit {
-	background: url('/assets/img/satelite_netherlands.jpg') center;
-	color:white;
+    background: url('/assets/img/satelite_netherlands.jpg') center;
+    color:white;
 }
 
 .black {
-	background-color:#0074CC;
-	background-color: rgba(0, 116, 221, 0.7);
-	padding:10px;
-	margin-top:10px;
+    background-color:#0074CC;
+    background-color: rgba(0, 116, 221, 0.7);
+    padding:10px;
+    margin-top:10px;
 }
 
 .overflow p{
-	overflow:hidden;
-	height:200px;
+    overflow:hidden;
+    height:200px;
 }
 
 .black p {
-	opacity:1.0 !important;
-	color:white !important;
+    opacity:1.0 !important;
+    color:white !important;
 }
 
 .preview-monument img{
-	float:left;
-	margin:5px;
-	height:150px;
+    float:left;
+    margin:5px;
+    height:150px;
 }
 
 /*
  * Error/Success message containers
- */
+*/
 .error-container , .success-container {
-	display: none;
+    display: none;
 }
 
 /*
@@ -62,9 +62,9 @@ Fancybox
  * Bij inner of outer zorgt de padding bij mij voor een lelijk
  * overflow effect dat ik niet met overflow:hidden kan verhelpen
  * ...
- */
+*/
 .fancybox-iframe {
-	padding: 20px;
+    padding: 20px;
 }
 
 .fancybox-outer {
@@ -95,9 +95,9 @@ Browse
 */
 
 #browse-window {
-	position: relative;
-	margin: 0 auto;
-	top: 40px;
+    position: relative;
+    margin: 0 auto;
+    top: 40px;
 }
 
 #browse-window .hud-title,
@@ -107,53 +107,53 @@ Browse
 #browse-window .hud-left,
 #browse-window .hud-zoomin,
 #browse-window .hud-zoomout {
-	position: absolute;
-	width: 30px;
-	height: 30px;
-	z-index: 10;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    z-index: 10;
 }
 
 #browse-window button {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 #browse-window .hud-title {
-	width: 100%;
-	text-align: center;
+    width: 100%;
+    text-align: center;
 }
 
 #browse-window .hud-left {
-	top: 50px;
-	left: 15px;
+    top: 50px;
+    left: 15px;
 }
 
 #browse-window .hud-right {
-	top: 50px;
-	left: 85px;
+    top: 50px;
+    left: 85px;
 }
 
 #browse-window .hud-zoomin {
-	top: 15px;
-	left: 50px;
+    top: 15px;
+    left: 50px;
 }
 
 #browse-window .hud-zoomout {
-	top: 85px;
-	left: 50px;
+    top: 85px;
+    left: 50px;
 }
 
 #browse-window .hud-help {
-	top: 50px;
-	left: 50px;
+    top: 50px;
+    left: 50px;
 }
 /*
 #browse-window canvas {
-	border: 1px solid black;
+        border: 1px solid black;
 
-	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
-	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
-	box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
 }
 */
 
@@ -162,14 +162,14 @@ Search
 */
 
 #resultsWindow img{
-	max-height: 100px;
-	max-width: 200px;
+    max-height: 100px;
+    max-width: 200px;
 }
 
 
 
 #resultsWindow .result{
-	padding:10px;
+    padding:10px;
 }
 
 /*
@@ -178,19 +178,19 @@ Monument
 
 
 #list-view .page-header {
-	margin: 20px 0 0 0;
-	padding-bottom: 27px;
+    margin: 20px 0 0 0;
+    padding-bottom: 27px;
 }
 
 #header-buttons {
-	font-size:12px;
-	font-weight:normal;
+    font-size:12px;
+    font-weight:normal;
 }
 
 #monument img {
-	max-height:700px;
-	margin-left:auto;
-	margin-right:auto;
+    max-height:700px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 /*
@@ -198,19 +198,19 @@ Monument carousel
 */
 
 #carousel {
-	height:380px;
-	width:100%;
+    height:380px;
+    width:100%;
 }
 
 #carousel .item {
-	margin-left:auto;
-	margin-right:auto;
-	text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
 }
 
 #carousel img {
 
-	height:400px;
+    height:400px;
 }
 
 /*
@@ -222,14 +222,14 @@ Monument comments
 */
 
 #similar-images .page-header {
-	margin: 40px 0 0 0;
-	padding-bottom: 5px;
+    margin: 40px 0 0 0;
+    padding-bottom: 5px;
 }
 
 #related-events .page-header,
 #related-people .page-header {
-	margin: 20px 0 0 0;
-	padding-bottom: 5px;
+    margin: 20px 0 0 0;
+    padding-bottom: 5px;
 }
 
 #comment-list,
@@ -240,16 +240,16 @@ Monument comments
 }
 
 .comment {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 .comment-container .content {
-	margin-top: 0;
+    margin-top: 0;
 }
 
 /*.comment-container .content h3,*/
 .comment-container .content p {
-	padding: 0 12px;
+    padding: 0 12px;
 }
 
 .comment-container .actions {
@@ -257,27 +257,27 @@ Monument comments
 }
 
 #comment-buttons button {
-	width: 80px;
+    width: 80px;
 }
 
 #create-comment textarea {
-	width: 100%;
+    width: 100%;
 }
 
 /*
 monument map
 */
 .map #map_canvas {
-	height:400px;
-	width:100%;
+    height:400px;
+    width:100%;
 }
 
 /*
 monument tabs
 */
 .tab-content {
-	height:auto;
-	overflow:auto;
+    height:auto;
+    overflow:auto;
 }
 
 #books img { height: 100px; }
@@ -287,12 +287,17 @@ Read list
 */
 .book img { max-width: 200px; }
 .book .book-info h4 {
-	color: #999999;
-	margin-bottom: 10px;
-	padding: 0 4px;
+    color: #999999;
+    margin-bottom: 10px;
+    padding: 0 4px;
 }
 .book .book-info p { padding: 0 4px; }
 
 .hero-unit h1 {
     color: black;
+}
+
+.ytplayer {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }

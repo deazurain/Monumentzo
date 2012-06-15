@@ -155,7 +155,7 @@
     <h1>Uitgebreide informatie</h1>
     <hr>
     <div class="row">
-        <div class="span10 offset1 well">
+        <div class="span10 offset1">
 
             <ul class="nav nav-tabs" id="myTab">
                 <li class="active"><a href="#description">Beschrijving</a></li>
