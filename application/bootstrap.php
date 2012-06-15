@@ -139,3 +139,13 @@ Route::set('default', '(<controller>(/<action>(/<id>)))')
  */
 Cookie::$salt = '23WQES28t0CwLRrDc9OPQBSuBlYjPoCuGyzlROpNd1y9CuvNl24QsMoXM55Lnd6';
 
+/**
+ * Enable Zend Framework autoloading
+ */
+if ($path = Kohana::find_file('vendor', 'ZendGdata-1.11.11/library/Zend/Loader'))
+{
+    ini_set('include_path',
+    ini_get('include_path').PATH_SEPARATOR.dirname(dirname($path)));
+ 
+    require_once 'Zend/Loader.php';
+}
