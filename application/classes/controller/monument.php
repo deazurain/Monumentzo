@@ -8,14 +8,15 @@ Class Controller_Monument extends Controller_Template_Website
 	public function action_view(){
 		$id = $this->request->param('id');
 		$monument = new Model_Monument($id);
-
+        $user = Auth::instance()->get_user();
+        
 		$isInFavorite = NULL;
 		$isInVisited = NULL;
 		$isInWish = NULL;
 		$userBooks = array();
 	
 		if(Auth::instance()->logged_in()) {
-			$userID = Auth::instance()->get_user()->UserID;
+			$userID = $user->UserID;
 			
 			// Check if the monument is in a list of the current user
 			$isInFavorite = $monument->isInList($userID, 'Favorite');
