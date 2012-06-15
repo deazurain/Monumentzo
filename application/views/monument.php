@@ -249,7 +249,7 @@
             </div>
         </div>
     </div>
-
+    <hr>
     <!-- Similar images and videos -->
     <div class="row">
         <!-- If there are both images and videos show both next to each other -->
