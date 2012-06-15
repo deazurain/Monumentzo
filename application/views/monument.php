@@ -306,7 +306,7 @@
         <!-- Start videos -->
         <div class="span6">
             <?php foreach ($videos as $video) { ?>
-                <p><?php echo $video[0]['YouTubeID'] ?></p>
+                <p><?php echo $video['YouTubeID'] ?></p>
             <?php } ?>
         </div>
         
