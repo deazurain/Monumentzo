@@ -174,6 +174,9 @@ $(document).ready(function() {
 			delay: {show: 10, hide: 100},
 			placement: 'right',
 			trigger: 'hover',
+			title: function() {
+				return $("#browse-window .hud-help .popover-title").html();
+			},
 			content: function() {
 				return $("#browse-window .hud-help .popover-content").html();
 			}
@@ -342,6 +345,7 @@ $(document).ready(function() {
             $(window).mousemove(function (event) {
                 var o = $("#browse-window canvas").offset();
                 var x = event.pageX - o.left;
+								var y = event.pageY - o.top;
 
                 if(x >= 0 && x < width) {
                     mouse.x = (x * 2.0) / width - 1;
