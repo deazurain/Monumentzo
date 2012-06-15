@@ -305,7 +305,14 @@
 
             <!-- Start videos -->
             <div class="span6">
-                <div id="myytplayer"></div>
+                <div class="row" id="myytplayer"></div>
+                <div class="row">
+                    <a class="btn" href="javascript:ytplayer.previousVideo()"><i class="icon-backward"></i></a> 
+                    <a class="btn" href="javascript:ytplayer.playVideo()"><i class="icon-play"></i></a> 
+                    <a class="btn" href="javascript:ytplayer.pauseVideo()"><i class="icon-pause"></i></a> 
+                    <a class="btn" href="javascript:ytplayer.nextVideo()"><i class="icon-forward"></i></a> 
+                    <a class="btn" href=""><i class="icon-volume-off"></i></a>
+                </div>
             </div>
         <?php endif; ?>
 
@@ -331,7 +338,7 @@
                 </div>
             </div>
         <?php endif; ?>
-            
+
         <!-- If there are only videos then only show them -->
         <?php if ((count($similarImages) <= 0) && (count($videos) > 0)): ?>
             <div class="span8 offset2"></div>
