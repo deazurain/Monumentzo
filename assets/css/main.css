@@ -118,23 +118,23 @@ Browse
 }
 
 #browse-window .hud-left {
-	top: 15px;
+	top: 25px;
 	left: 0;
 }
 
 #browse-window .hud-right {
-	top: 15px;
-	left: 65px;
+	top: 25px;
+	left: 75px;
 }
 
 #browse-window .hud-zoomin {
 	top: 5px;
-	left: 30px;
+	left: 35px;
 }
 
 #browse-window .hud-zoomout {
-	top: 35px;
-	left: 30px;
+	top: 45px;
+	left: 35px;
 }
 
 /*

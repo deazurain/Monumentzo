@@ -379,8 +379,7 @@ $(document).ready(function() {
             if(camera_offset_z >= 50) {
                 camera_offset_z += -50;
             }   
-        }
-                
+        }                
         var doZoomOut = function() {
             if(camera_offset_z < 4000) {
                 camera_offset_z += 50;
