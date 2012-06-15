@@ -23,6 +23,29 @@ Home
 	color:white;
 }
 
+.black {
+	background-color:#0074CC;
+	background-color: rgba(0, 116, 221, 0.7);
+	padding:10px;
+	margin-top:10px;
+}
+
+.overflow p{
+	overflow:hidden;
+	height:200px;
+}
+
+.black p {
+	opacity:1.0 !important;
+	color:white !important;
+}
+
+.preview-monument img{
+	float:left;
+	margin:5px;
+	height:150px;
+}
+
 /*
  * Error/Success message containers
  */
