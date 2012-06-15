@@ -172,7 +172,7 @@ $(document).ready(function() {
 		$("#browse-window .hud-help").popover({
 			animation: true,
 			delay: {show: 10, hide: 100},
-			placement: 'right',
+			placement: 'bottom-right',
 			trigger: 'hover',
 			title: function() {
 				return $("#browse-window .hud-help .popover-title").html();
