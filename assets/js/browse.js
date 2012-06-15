@@ -168,6 +168,17 @@ $(document).ready(function() {
     $("#browse-window").appendTo($("body"));
     $("#content").remove();
 
+		// POPOVER
+		$("#browse-window .hud-help").popover({
+			animation: true,
+			delay: {show: 10, hide: 100},
+			placement: 'right',
+			trigger: 'hover',
+			content: function() {
+				return $("#browse-window .hud-help .popover-content").html();
+			}
+		});
+
     var resize_canvas = function() {
 
         var aspect = width/height;
