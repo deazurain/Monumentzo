@@ -27,7 +27,7 @@ class Controller_Information {
         $service = new apiBooksService($client);
 
         // Retrieve monument id's with the given limit and offset
-        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument LIMIT 20')->execute()->as_array();
+        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument LIMIT 3,20')->execute()->as_array();
 
         echo "Number of monuments to search books for: " . count($monuments) . ".\n";
 
