@@ -137,6 +137,11 @@ Browse
 	left: 45px;
 }
 
+#browse-window .hud-bottom {
+	bottom: 0px;
+	right: 0px;
+	width: auto;
+}
 /*
 #browse-window canvas {
 	border: 1px solid black;
