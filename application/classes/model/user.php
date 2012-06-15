@@ -11,9 +11,7 @@ class Model_User extends Model_Monumentzo_User {
 												FROM FavoriteList, Monument 
 												WHERE FavoriteList.MonumentID = Monument.MonumentID 
 												AND UserID = :id')->param(':id', $this->UserID)->execute();
-		$result = $result->as_array();
-		
-		return $result;
+		return $result->as_array();
 	}
 	
 	public function getVisitedList(){
@@ -21,9 +19,7 @@ class Model_User extends Model_Monumentzo_User {
 												FROM VisitedList, Monument 
 												WHERE VisitedList.MonumentID = Monument.MonumentID 
 												AND UserID = :id')->param(':id', $this->UserID)->execute();
-		$result = $result->as_array();
-		
-		return $result;
+		return $result->as_array();
 	}
 	
 	public function getWishList(){
@@ -31,8 +27,14 @@ class Model_User extends Model_Monumentzo_User {
 												FROM WishList, Monument 
 												WHERE WishList.MonumentID = Monument.MonumentID 
 												AND UserID = :id')->param(':id', $this->UserID)->execute();
-		$result = $result->as_array();
+		return $result->as_array();
+	}
+	
+	public function getReadList() {
+		$result = DB::query(Database::SELECT, 'SELECT * 
+												FROM ReadList 
+												WHERE UserID = :id')->param(':id', $this->UserID)->execute();
 		
-		return $result;
+		return $result->as_array();
 	}
 }

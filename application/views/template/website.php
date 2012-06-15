@@ -29,6 +29,7 @@
 							<li><?php echo HTML::anchor('/browse/index', 'Bladeren'); ?></li>
                             
                             <?php if(Auth::instance()->logged_in()): ?>
+                            <li><?= HTML::anchor('/list/read/view', 'Leeslijst') ?></li>
 							<li><?php echo HTML::anchor('/list/view', 'Lijsten'); ?></li>
                             <?php endif; ?>
                         </ul>
