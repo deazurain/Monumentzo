@@ -27,7 +27,7 @@ class Controller_Information {
         $service = new apiBooksService($client);
 
         // Set the limit and offset for the query
-        $offset = 9;
+        $offset = 10;
         $limit = 25;
         
         // Retrieve monument id's with the given limit and offset
@@ -127,6 +127,7 @@ class Controller_Information {
             foreach ($books as $book) {
                 $googleID = $book['id'];
                 $title = $book['volumeInfo']['title'];
+                $title = utf8_encode($title);
 
                 // Check that the book is not already in the database.
                 $query = DB::query(Database::SELECT, 'SELECT BookID FROM Book WHERE Title = :title')
