@@ -248,12 +248,12 @@
                                 <?php if($user): ?>
                                	    <?php if(in_array($book['BookID'], $userBooks)): ?>
                                     <a class="btn btn-danger pull-right" 
-                                        href="<?= url::base() ?>list/read/remove/<?= $monument['MonumentID'] ?>/<?= $book['BookID'] ?>">
+                                        href="<?= url::base() ?>list/read/remove/<?= $book['BookID'] ?>">
                                         <i class="icon-remove icon-white"></i>
                                     </a>
                                    	<?php else: ?>
                                     <a class="btn btn-primary pull-right" 
-                                        href="<?= url::base() ?>list/read/add/<?= $monument['MonumentID'] ?>/<?= $book['BookID'] ?>">
+                                        href="<?= url::base() ?>list/read/add/<?= $book['BookID'] ?>">
                                         <i class="icon-plus icon-white"></i>
                                     </a>
                                     <?php endif; ?>

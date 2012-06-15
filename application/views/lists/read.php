@@ -15,6 +15,10 @@
             <h4><?= ($book['Author'] == NULL) ? 'Geen schrijver bekend' : $book['Author'] ?></h4>
             <p><?= ($book['Description'] == NULL) ? 'Geen beschrijving beschikbaar' : $book['Description'] ?></p>
             <a href="<?= $book['Link'] ?>">Meer informatie via Google Books</a>
+            <a class="btn btn-danger pull-right" 
+                href="<?= url::base() ?>list/read/remove/<?= $book['BookID'] ?>">
+                <i class="icon-remove icon-white"></i>
+            </a>
         </div>
     </div><hr />
     <?php endforeach; ?>
