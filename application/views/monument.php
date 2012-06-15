@@ -1,180 +1,235 @@
 <div id="monument" class="container">
 	<div class="row">
+        <div class="span12">
+            <div class="page-header">
+	            <h1>
+	                <?php echo $monument['Name'] ?>
+	                
+	                <?php if ($user): ?>
+        			<div class="pull-right">
+        				<div id="header-buttons" class="btn-toolbar">
 
-		<div class="span5">
-			<?php echo isset($monument) ? "<img src='" . url::base() . $monument['Image'] . "' />" : 'Undefined' ?>
+        					<?php if (!$inList['inFavorite'] || !$inList['inVisited'] || !$inList['inWish']): ?>
+        					<div class="btn-group">
+        						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+        							<i class="icon-list icon-white"></i> Toevoegen aan...
+        							<span class="caret"></span>
+        						</a>
+        						<ul class="dropdown-menu">
+        							<?php if (!$inList['inFavorite']): ?>
+        							<li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Favorieten'); ?></li>
+        							<?php endif; ?>
 
-			<section id="similar-images">
-				<div class="page-header">
-					<h2>Visueel gelijkende monumenten</h2>
-				</div>
-				<div id='carousel' class='carousel slide'>
-					<!-- Carousel items -->
-					<div class='carousel-inner'>
-						<?php foreach( $similarImages as $image ) { ?>
-							<div class='item'>
-							    <a href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
-								    <img src="<?php echo url::base().$image['Path']; ?>">
-								</a>
-								<div class="carousel-caption">
-								    <h4><?php echo $image['Name']; ?></h4>
-								</div>
-							</div>
-						<?php } ?>
-					</div>
-					<a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
-					<a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
-				</div>
-			</section>
+        							<?php if (!$inList['inVisited']): ?>
+        							<li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
+        							<?php endif; ?>
+
+        							<?php if (!$inList['inWish']): ?>
+        							<li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
+        							<?php endif; ?>
+        						</ul>
+        					</div>
+        					<?php endif; ?>
+
+        					<?php if ($inList['inFavorite'] || $inList['inVisited'] || $inList['inWish']): ?>
+        					<div class="btn-group">
+        						<a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+        							<i class="icon-list icon-white"></i> Verwijderen van...
+        							<span class="caret"></span>
+        						</a>
+        						<ul class="dropdown-menu">
+        							<?php if ($inList['inFavorite']): ?>
+        							<li><?php echo HTML::anchor('/list/favorite/remove/' . $monument['MonumentID'], 'Favorieten'); ?></li>
+        							<?php endif; ?>
+
+        							<?php if ($inList['inVisited']): ?>
+        							<li><?php echo HTML::anchor('/list/visited/remove/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
+        							<?php endif; ?>
+
+        							<?php if ($inList['inWish']): ?>
+        							<li><?php echo HTML::anchor('/list/wish/remove/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
+        							<?php endif; ?>
+        						</ul>
+        					</div>
+        					<?php endif; ?>
+
+
+        				</div>
+        				<!--/btn-toolbar-->
+        			</div>
+        			<?php endif; ?>
+	            </h1>
+	        </div>
+        </div>
+    </div>
+    <div class="row">
+		<div class="span7">
+		    
+			<img src="<?= url::base() . $monument['Image'] ?>" />
+			
 		</div><!--/span-->
 
-		<div class="span7">
+		<div class="span5">
 			<div>
-				<h1><?php echo isset($monument) ? $monument['Name'] : 'Undefined' ?></h1>
+    			<!-- Google Maps -->
+                <div class="map">
+                    <div id="map_canvas" 
+                        data-latitude="<?php echo $monument['Latitude'] ?>"
+                        data-longitude="<?php echo $monument['Longitude'] ?>">
+                    </div>
+                </div>
+				<?php echo HTML::script('http://maps.googleapis.com/maps/api/js?key=AIzaSyArtULnydU1gg4DjNfCvhXZx5Sq49p1ktg&sensor=false'), PHP_EOL ?>
+				<?php echo HTML::script('assets/js/map.js'), PHP_EOL ?>
 				<table class="table">
 					<tr>
 						<td>Monumentnummer</td>
-						<td><?php echo isset($monument) ? $monument['MonumentID'] : 'Undefined' ?></td>
+						<td><?= $monument['MonumentID'] ?></td>
 					</tr>
 					<tr>
 						<td>Plaats</td>
-						<td><?php echo isset($monument) ? $monument['City'] : 'Undefined' ?></td>
+						<td><?= $monument['City'] ?></td>
 					</tr>
 					<tr>
 						<td>Straat</td>
-						<td><?php echo isset($monument) ? $monument['Street'] : 'Undefined' ?>
-							<?php echo isset($monument) ? $monument['StreetNumberText'] : 'Undefined' ?></td>
+						<td><?= $monument['Street'] ?>
+							<?= $monument['StreetNumberText'] ?></td>
 					</tr>
 					<tr>
 						<td>Provincie</td>
-						<td><?php echo isset($monument) ? $monument['Province'] : 'Undefined' ?></td>
+						<td><?= $monument['Province'] ?></td>
 					</tr>
 					<tr>
 						<td>Gebouwd in</td>
-						<td><?php echo isset($monument) ? $monument['FoundationDateText'] : 'Undefined' ?></td>
+						<td>
+						    <?php if (!($monument['WikiArticle'] == NULL)) :?>
+						        <?= $monument['FoundationDateText'] ?>
+						    <?php else:?>
+    						    Geen jaar beschikbaar
+						    <?php endif; ?>
+						</td>
 					</tr>
 					<tr>
 						<td>Lengtegraad</td>
-						<td><?php echo isset($monument) ? $monument['Longitude'] : 'Undefined' ?></td>
+						<td><?php echo $monument['Longitude'] ?></td>
 					</tr>
 					<tr>
 						<td>Breedtegraad</td>
-						<td><?php echo isset($monument) ? $monument['Latitude'] : 'Undefined' ?></td>
+						<td><?php echo $monument['Latitude'] ?></td>
+					</tr>
+					<tr>
+						<td>Wikipedia artikel</td>
+						<td>
+						<?php if (!($monument['WikiArticle'] == NULL)) :?>
+						    <a href="http://nl.wikipedia.org/wiki/<?= $monument['WikiArticle'] ?>">
+						         http://nl.wikipedia.org/wiki/<?= $monument['WikiArticle'] ?>
+						    </a>
+						<?php else:?>
+						    Geen artikel beschikbaar
+						<?php endif; ?>
+						</td>
 					</tr>
 				</table>
-			</div>
-			<!--/row-->
-
-			<?php if ($user): ?>
-			<div>
-				<div class="btn-toolbar">
-
-					<?php if (!$inList['inFavorite'] || !$inList['inVisited'] || !$inList['inWish']): ?>
-					<div class="btn-group">
-						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-list icon-white"></i> Toevoegen aan...
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<?php if (!$inList['inFavorite']): ?>
-							<li><?php echo HTML::anchor('/list/favorite/add/' . $monument['MonumentID'], 'Favorieten'); ?></li>
-							<?php endif; ?>
-
-							<?php if (!$inList['inVisited']): ?>
-							<li><?php echo HTML::anchor('/list/visited/add/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
-							<?php endif; ?>
-
-							<?php if (!$inList['inWish']): ?>
-							<li><?php echo HTML::anchor('/list/wish/add/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
-							<?php endif; ?>
-						</ul>
-					</div>
-					<?php endif; ?>
-
-					<?php if ($inList['inFavorite'] || $inList['inVisited'] || $inList['inWish']): ?>
-					<div class="btn-group">
-						<a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-list icon-white"></i> Verwijderen van...
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<?php if ($inList['inFavorite']): ?>
-							<li><?php echo HTML::anchor('/list/favorite/remove/' . $monument['MonumentID'], 'Favorieten'); ?></li>
-							<?php endif; ?>
-
-							<?php if ($inList['inVisited']): ?>
-							<li><?php echo HTML::anchor('/list/visited/remove/' . $monument['MonumentID'], 'Bezochte monumenten'); ?></li>
-							<?php endif; ?>
-
-							<?php if ($inList['inWish']): ?>
-							<li><?php echo HTML::anchor('/list/wish/remove/' . $monument['MonumentID'], 'Nog te bezoeken'); ?></li>
-							<?php endif; ?>
-						</ul>
-					</div>
-					<?php endif; ?>
-				</div>
-				<!--/btn-toolbar-->
-			</div><!--/row-->
-			<?php endif; ?>
-
-			<div>
-				<h2>Beschrijving</h2>
-
-				<p><?php echo isset($monument) ? $monument['Description'] : 'Geen informatie beschikbaar' ?></p>
+			
+				<!-- Tags -->
+                <div class="tab-pane" id="tags">
+    				<p>
+    					<?php foreach($monument['TextTag'] as $tag) {
+    						$href = url::base().'search/query/'.$tag['TextTag'];
+    						$text = $tag['TextTag'];?>
+    						<a href="<?php echo $href; ?>"><?php echo $text; ?></a>
+    					<?php } ?>
+    				</p>
+    			</div>
 			</div>
 
-			<div>
-				<p>
-					<?php foreach($monument['TextTag'] as $tag) {
-						$href = url::base().'search/query/'.$tag['TextTag'];
-						$text = $tag['TextTag'];?>
-						<a href="<?php echo $href; ?>"><?php echo $text; ?></a>
-					<?php } ?>
-				</p>
-			</div>
-			<!--/row-->
+		</div>
+	</div>
+	<div class="row">
+	    <div class="span8 offset2">
+
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#description">Beschrijving</a></li>
+                <?php if(count($events) > 0): ?>
+                    <li><a href="#related-events">Gerelateerde gebeurtenissen</a></li>
+                <?php endif; ?>
+                <?php if(count($persons) > 0): ?>
+                    <li><a href="#related-people">Gerelateerde personen</a></li>
+                <?php endif; ?>
+                <?php if(count($similarImages) != 0): ?>
+                    <li><a href="#similar-images">Visueel gelijkende monumenten</a></li>
+                <?php endif; ?>
+            </ul>
+
+            <div class="tab-content">
+                
+                <!-- Description -->
+			    <div class="tab-pane active" id="description">
+    				<p><?php echo !($monument['Description'] == NULL) ? $monument['Description'] : 'Geen informatie beschikbaar'; ?></p>
+    			</div>
+
             
-            <!-- Related events -->
-            <?php if(count($events) > 0): ?>
-            <div id="related-events">
-                <div class="page-header">
-                    <h3>Gerelateerde gebeurtenissen</h3>
+                <!-- Related events -->
+                <?php if(count($events) > 0): ?>
+                <div class="tab-pane" id="related-events">
+                    <div>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Jaartal</th>
+                                <th>Gebeurtenis</th>
+                            </tr>
+                            <?php foreach($events as $event): ?>
+                            <tr>
+                                <td><?php echo $event['Year']; ?></td>
+                                <td><?php echo $event['Name']; ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
                 </div>
-                <div>
-                    <table class="table table-striped">
-                        <tr>
-                            <th>Jaartal</th>
-                            <th>Gebeurtenis</th>
-                        </tr>
-                        <?php foreach($events as $event): ?>
-                        <tr>
-                            <td><?php echo $event['Year']; ?></td>
-                            <td><?php echo $event['Name']; ?></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
+                <?php endif; ?>
+            
+                <!-- Related people -->
+                <?php if(count($persons) > 0): ?>
+                <div class="tab-pane" id="related-people">
+                    <div>
+                        <table class="table table-striped">
+                            <?php foreach($persons as $person): ?>
+                            <tr>
+                                <td><a href="http://nl.wikipedia.org/wiki/<?php echo $person['Name']; ?>"><?php echo $person['Name']; ?></a></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
                 </div>
+                <?php endif; ?>
+                
+                
+    			
+    			<!-- Similar Images -->
+    			<?php if(count($similarImages) != 0): ?>
+    			<div class="tab-pane" id="similar-images">
+    				<div id='carousel' class='carousel slide'>
+    					<!-- Carousel items -->
+    					<div class='carousel-inner'>
+    						<?php foreach( $similarImages as $image ) { ?>
+    							<div class='item'>
+    							    <a href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
+    								    <img src="<?php echo url::base().$image['Path']; ?>">
+    								</a>
+    								<div class="carousel-caption">
+    								    <h4><?php echo $image['Name']; ?></h4>
+    								</div>
+    							</div>
+    						<?php } ?>
+    					</div>
+    					<a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
+    					<a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
+    				</div>
+    			</div>
+    			<?php endif;?>
+    			
+    			
             </div>
-            <?php endif; ?>
-            
-            <!-- Related people -->
-            <?php if(count($persons) > 0): ?>
-            <div id="related-people">
-                <div class="page-header">
-                    <h3>Gerelateerde personen</h3>
-                </div>
-                <div>
-                    <table class="table table-striped">
-                        <?php foreach($persons as $person): ?>
-                        <tr>
-                            <td><a href="http://nl.wikipedia.org/wiki/<?php echo $person['Name']; ?>"><?php echo $person['Name']; ?></a></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-            </div>
-            <?php endif; ?>
-            
 		</div>
 	</div>
     

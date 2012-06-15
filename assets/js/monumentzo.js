@@ -40,4 +40,12 @@ $(document).ready(function() {
 	$('#carousel').carousel({
 		interval: 8000
 	})
+	
+	/*
+	tabs
+	*/
+	$('#myTab a').click(function (e) {
+	  e.preventDefault();
+	  $(this).tab('show');
+	})
 });

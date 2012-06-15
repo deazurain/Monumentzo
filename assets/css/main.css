@@ -7,8 +7,6 @@
 html, body {
 	padding: 0;
 	height:100%;
-
-	background-color: #EBEBEB;
 }
 
 #content {
@@ -139,12 +137,17 @@ Monument
 	margin: 20px 0 0 0;
 }
 
+#header-buttons {
+	font-size:12px;
+	font-weight:normal;
+}
+
 /*
 Monument carousel
 */
 
 #carousel {
-	height:400px;
+	height:380px;
 	width:100%;
 }
 
@@ -210,6 +213,21 @@ Monument comments
 	width: 100%;
 }
 
+/*
+monument map
+*/
+.map #map_canvas {
+	height:400px;
+	width:100%;
+}
+
+/*
+monument tabs
+*/
+.tab-content {
+	height:400px;
+	overflow:scroll;
+}
 
 
 
