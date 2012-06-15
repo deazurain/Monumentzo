@@ -235,17 +235,19 @@
     			<!-- Related books -->
                 <?php if(count($books) > 0): ?>
                 <div class="tab-pane" id="books">
-                	<?php foreach($books as $book): ?>
-                    <div class="row">
-                    	<div class="span1">
-                        	<img src="<?= $book['ImgUrl'] ?>" alt="Boek cover" />
-                        </div>
-                        <div class="span5">
-                        	<h3><?= $book['Title'] ?></h3>
-                            <h4><?= $book['Author'] ?></h4>
-                        </div>
-                    </div><hr />
-                    <?php endforeach; ?>
+					<table>
+						<?php foreach($books as $book): ?>
+                        <tr>
+                            <td class="span1">
+                                <img src="<?= $book['ImgUrl'] ?>" alt="Boek cover" />
+                            </td>
+                            <td class="span5">
+                                <h3><?= $book['Title'] ?></h3>
+                                <h4><?= $book['Author'] ?></h4>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
                 </div>
                 <?php endif; ?>
                 
