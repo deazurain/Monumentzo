@@ -32,8 +32,9 @@ class Model_User extends Model_Monumentzo_User {
 	
 	public function getReadList() {
 		$result = DB::query(Database::SELECT, 'SELECT * 
-												FROM ReadList 
-												WHERE UserID = :id')->param(':id', $this->UserID)->execute();
+												FROM Book, ReadList 
+												WHERE Book.BookID = ReadList.BookID 
+												AND UserID = :id')->param(':id', $this->UserID)->execute();
 		
 		return $result->as_array();
 	}
