@@ -8,6 +8,8 @@ var geometry, group;
 var camera_angle_current = Math.PI;
 var camera_angle_desired = 0;
 var camera_angle_speed = Math.PI/60;
+var camera_offset_x = 0;
+var camera_offset_z = 0;
 
 var blocks = [];
 var monuments = [];
@@ -15,7 +17,7 @@ var monuments = [];
 var width = 800;
 var height = 600;
 
-var infoUrl = $('body').attr('data-base') + 'browse/info';
+var infoUrl = '/browse/info';
 
 var mouse = {x:0, y:0};
 var last_hovered = null;
@@ -110,7 +112,7 @@ function doZoomBlock() {
 		p.subSelf(zoom_block.position);
 
 		if(p.length() > 160) {
-			p.normalize().multiplyScalar(30);
+			p.multiplyScalar(0.1);
 		 	zoom_block.position.addSelf(p);
 			zoom_block.updateMatrix();
 		}
@@ -142,7 +144,8 @@ function doCameraUpdate() {
 
 	var m = new THREE.Matrix4()
 		.rotateY(camera_angle_current)
-		.translate(new THREE.Vector3(-mouse.x*200, mouse.y*1000 + 500, 1000));
+		.translate(new THREE.Vector3(camera_offset_x, 0, camera_offset_z))
+		.translate(new THREE.Vector3(mouse.x*300, mouse.y*1000 + 500, 1000));
 
 	camera.position.getPositionFromMatrix(m);
 	camera.lookAt(scene.position);
@@ -317,6 +320,31 @@ $(document).ready(function() {
 				}
 			});
 
+			$(window).keydown(function(event) {
+				switch(event.keyCode) {
+					case 87:
+					case 38:
+						if(camera_offset_z >= 50) {
+							camera_offset_z += -50;
+						}
+						break;
+					case 83:
+					case 40:
+						if(camera_offset_z < 4000) {
+							camera_offset_z += 50;
+						}
+						break;
+					case 65:
+					case 37:
+						camera_angle_desired -= Math.PI/2;
+						break;
+					case 68:
+					case 39:
+						camera_angle_desired += Math.PI/2;
+						break;
+				}
+			});
+
 		})();
 
 		var doRotateRight = function() {
@@ -374,39 +402,6 @@ $(document).ready(function() {
 			}
 
 		});
-	});
-
-	/*
-	 * Browse menu
-	 */
-	var selectedCount = 0;
-	function toggleButton(eventObject) {
-
-		// Check if the button is being toggled or being untoggled
-		// This function is called before the bootstrap library is called so,
-		// if this hasClass that means it is being untoggled, if it hasn't
-		// got this class that means it is being toggled.
-		if($(this).hasClass('active')) {
-			selectedCount -= 1;
-		} else {
-			selectedCount += 1;
-
-			if(selectedCount > 3) {
-				eventObject.stopPropagation();
-				selectedCount = 3;
-			}
-		}
-
-	}
-
-	$('.browse-menu-body button:contains(\'Plaats\')').click( toggleButton );
-	$('.browse-menu-body button:contains(\'Tijd\')').click( toggleButton );
-	$('.browse-menu-body button:contains(\'Categorie\')').click( toggleButton );
-	$('.browse-menu-body button:contains(\'Attribuut\')').click( toggleButton );
-
-	$('.browse-menu-body button:contains(\'Reset\')').click(function() {
-		$('.browse-menu-body button.active').removeClass('active');
-		selectedCount = 0;
 	});
 
 })

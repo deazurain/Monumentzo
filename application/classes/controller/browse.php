@@ -1,11 +1,13 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Browse extends Controller_Template_Website {
-	
-	public function action_index()
-	{
+
+	public function action_index() {
+		$this->template->scripts[] = 'assets/js/three.js';
+		$this->template->scripts[] = 'assets/js/browse.js';
+
 		$this->template->title = 'Browse';
-      	$this->template->content = View::factory('browse/browse');
+    $this->template->content = View::factory('browse/browse');
 	}
 	
 	public function action_info() {

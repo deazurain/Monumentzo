@@ -28,6 +28,7 @@ class Controller_Template_Website extends Controller_Template {
 
 					if (Auth::instance()->logged_in()) {
 						$this->template->logout = View::factory('user/logout');
+						$this->template->user = Auth::instance()->get_user();
 					}
 					else {
 						$this->template->login = View::factory('user/login');
@@ -60,8 +61,8 @@ class Controller_Template_Website extends Controller_Template {
 				'assets/js/user.js',
                 'assets/js/comment.js',
             );
-            $this->template->styles = array_merge($this->template->styles, $styles);
-            $this->template->scripts = array_merge($this->template->scripts, $scripts);
+            $this->template->styles = array_merge($styles, $this->template->styles);
+            $this->template->scripts = array_merge($scripts, $this->template->scripts);
         }
         parent::after();
     }

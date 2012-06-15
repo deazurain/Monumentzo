@@ -142,6 +142,12 @@ Monument
 	font-weight:normal;
 }
 
+#monument img {
+	max-height:700px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
 /*
 Monument carousel
 */
@@ -226,7 +232,11 @@ monument tabs
 */
 .tab-content {
 	height:400px;
-	overflow:scroll;
+	overflow:auto;
+}
+
+.tab-content #description {
+	
 }
 
 
