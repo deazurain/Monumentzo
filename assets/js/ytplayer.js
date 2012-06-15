@@ -27,7 +27,6 @@ function onYouTubePlayerReady(playerId) {
 function onytplayerStateChange(newState) {
     console.log("Player's new state: " + newState);
     if(newState == 3 || newState == 5) {
-        document.getElementById('ytname').html(ytplayer.getDuration());
     }
 }
  
