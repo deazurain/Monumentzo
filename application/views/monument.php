@@ -159,6 +159,9 @@
                 <?php if(count($similarImages) != 0): ?>
                     <li><a href="#similar-images">Visueel gelijkende monumenten</a></li>
                 <?php endif; ?>
+                <?php if(count($books) > 0): ?>
+                    <li><a href="#books">Gerelateerde boeken</a></li>
+                <?php endif; ?>
             </ul>
 
             <div class="tab-content">
@@ -229,7 +232,12 @@
     			</div>
     			<?php endif;?>
     			
-    			
+    			<!-- Related books -->
+                <?php if(count($books) > 0): ?>
+                <div class="tab-pane" id="books">
+                </div>
+                <?php endif; ?>
+                
             </div>
 		</div>
 	</div>
