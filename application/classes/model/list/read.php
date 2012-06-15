@@ -12,7 +12,7 @@ class Model_List_Read extends Model_Database {
 	
 	public function remove($book, $userID) {
 		DB::query(Database::DELETE, 
-					'DELETE FROM monumentzo.FavoriteList WHERE Book = :book AND UserID = :userID')
+					'DELETE FROM monumentzo.FavoriteList WHERE BookID = :book AND UserID = :userID')
 					->bind(':userID', $userID)
 					->bind(':book', $book)
 					->execute();
