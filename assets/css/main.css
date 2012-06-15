@@ -106,8 +106,7 @@ Browse
 #browse-window .hud-bottom,
 #browse-window .hud-left,
 #browse-window .hud-zoomin,
-#browse-window .hud-zoomout,
-#browse-window .hud-help{
+#browse-window .hud-zoomout {
 	position: absolute;
 	width: 30px;
 	z-index: 10;
@@ -119,28 +118,23 @@ Browse
 }
 
 #browse-window .hud-left {
-	top: 25px;
-	left: 0;
+	top: 35px;
+	left: 10;
 }
 
 #browse-window .hud-right {
-	top: 25px;
-	left: 70px;
+	top: 35px;
+	left: 85px;
 }
 
 #browse-window .hud-zoomin {
 	top: 5px;
-	left: 35px;
+	left: 45px;
 }
 
 #browse-window .hud-zoomout {
-	top: 45px;
-	left: 35px;
-}
-
-#browse-window .hud-help {
-	top: 70px;
-	left: 10px;
+	top: 65px;
+	left: 45px;
 }
 
 /*

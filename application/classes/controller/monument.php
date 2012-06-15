@@ -31,6 +31,7 @@ Class Controller_Monument extends Controller_Template_Website
 		$this->template->content->events = $monument->getRelatedEvents();
 		$this->template->content->persons = $monument->getRelatedPersons();
 		$this->template->content->books = $monument->getBooks();
+                $this->template->content->videos = $monument->getVideos();
 		$this->template->content->userBooks = $userBooks;
 		
 		$monument = $monument->viewMonument();
