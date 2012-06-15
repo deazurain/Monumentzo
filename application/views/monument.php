@@ -237,7 +237,7 @@
                 <div class="tab-pane" id="books">
                 	<?php foreach($books as $book): ?>
                     <div class="row">
-                    	<div class="span2">
+                    	<div class="span1">
                         	<img src="<?= $book['ImgUrl'] ?>" alt="Boek cover" />
                         </div>
                         <div class="span5">
