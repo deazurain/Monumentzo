@@ -127,7 +127,7 @@ class Controller_Information {
                         ->execute()
                         ->as_array();
 
-                if ($query[0]['BookID'] > 0) {
+                if (isset($query[0]['BookID'])) {
                     echo "Book is already in database.";
                 } else {                    
                     if (isset($book['volumeInfo']['authors'][0])) {
