@@ -235,7 +235,7 @@
     			<!-- Related books -->
                 <?php if(count($books) > 0): ?>
                 <div class="tab-pane" id="books">
-					<table>
+					<table class="table">
 						<?php foreach($books as $book): ?>
                         <tr>
                             <td class="span1">
