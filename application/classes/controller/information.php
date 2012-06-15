@@ -27,7 +27,7 @@ class Controller_Information {
         $service = new apiBooksService($client);
 
         // Set the limit and offset for the query
-        $offset = 70;
+        $offset = 71;
         $limit = 40;
 
         // Retrieve monument id's with the given limit and offset
@@ -60,12 +60,13 @@ class Controller_Information {
                     ->as_array();
             echo "Number of related people: " . count($people) . ".\n";
 
-//            // Get the event associated with this monument
-//            $events = DB::query(Database::SELECT, 'SELECT Year FROM Event JOIN Monument_Event ON Event.EventID = Monument_Event.EventID WHERE Monument_Event.MonumentID = :id')
-//                    ->bind(':id', $monument['MonumentID'])
-//                    ->execute()
-//                    ->as_array();
-//            echo "Number of related events: " . count($events) . ".\n";
+            // Get the event associated with this monument
+            $events = DB::query(Database::SELECT, 'SELECT Year FROM Event JOIN Monument_Event ON Event.EventID = Monument_Event.EventID WHERE Monument_Event.MonumentID = :id')
+                    ->bind(':id', $monument['MonumentID'])
+                    ->execute()
+                    ->as_array();
+            echo "Number of related events: " . count($events) . ".\n";
+            
             // Set the parameters for the query
             $optParams = array('langRestrict' => 'nl', 'orderBy' => 'relevance');
             // Set parameters with maximum number of books allowed
@@ -105,22 +106,23 @@ class Controller_Information {
                 }
             }
 
-//            // Get books related to the events of this monument
-//            echo "Books based on query with related event: \n";
-//            foreach ($events as $event) {
-//                echo "{{" . $event['Year'] . "}}\n";
-//                $results = $service->volumes->listVolumes($event['Year'], $optParamsWithMax);
-//
-//                if (isset($results['items'])) {
-//                    foreach ($results['items'] as $item) {
-//                        if (!in_array($item['id'], $resultsID)) {
-//                            $resultsID[] = $item['id'];
-//                            $books[] = $item;
-//                            echo "[ID: " . $item['id'] . " - " . $item['volumeInfo']['title'] . "]\n";
-//                        }
-//                    }
-//                }
-//            }
+            // Get books related to the events of this monument
+            echo "Books based on query with related event: \n";
+            foreach ($events as $event) {
+                echo "{{" . $event['Year'] . "}}\n";
+                $results = $service->volumes->listVolumes($event['Year'], $optParamsWithMax);
+
+                if (isset($results['items'])) {
+                    foreach ($results['items'] as $item) {
+                        if (!in_array($item['id'], $resultsID)) {
+                            $resultsID[] = $item['id'];
+                            $books[] = $item;
+                            echo "[ID: " . $item['id'] . " - " . $item['volumeInfo']['title'] . "]\n";
+                        }
+                    }
+                }
+            }
+            
             // Save books to the databases
             foreach ($books as $book) {
                 $googleID = $book['id'];
