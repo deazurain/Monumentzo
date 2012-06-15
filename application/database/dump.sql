@@ -19,11 +19,9 @@
 -- Current Database: `monumentzo`
 --
 
-DROP DATABASE IF EXISTS `monumentzo`;
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `monumentzo` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `monumentzo`;
+DROP SCHEMA IF EXISTS `monumentzo` ;
+CREATE SCHEMA IF NOT EXISTS `monumentzo` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `monumentzo` ;
 
 --
 -- Table structure for table `Book`

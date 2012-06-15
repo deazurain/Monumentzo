@@ -71,7 +71,7 @@
                 <div class="span7">
                     <!-- Tags -->
                     <div class="tab-pane" id="tags">
-                        <h2><i class="icon-tags"></i>Trefwoorden</h2>
+                        <h2><i class="icon-tags"></i> Trefwoorden</h2>
                         <p>
                             <?php
                             foreach ($monument['TextTag'] as $tag) {
@@ -151,7 +151,7 @@
 
         </div>
     </div>
-    
+
     <h1>Uitgebreide informatie</h1>
     <hr>
     <div class="row">
@@ -282,34 +282,61 @@
     <div class="row">
         <!-- If there are both images and videos show both next to each other -->
         <?php if ((count($similarImages) > 0) && (count($videos) > 0)): ?>
-        <!-- Start similar images -->
-        <div class="span6">
-            <div id='carousel' class='carousel slide'>
-                            <!-- Carousel items -->
-                            <div class='carousel-inner'>
-                                <?php foreach ($similarImages as $image) { ?>
-                                    <div class='item'>
-                                        <a href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
-                                            <img src="<?php echo url::base() . "assets/img/monuments/carousel/" . $image['MonumentID'] . ".jpg"; ?>">
-                                        </a>
-                                        <div class="carousel-caption">
-                                            <h4><?php echo $image['Name']; ?></h4>
-                                        </div>
-                                    </div>
-                                <?php } ?>
+            <!-- Start similar images -->
+            <div class="span6">
+                <div id='carousel' class='carousel slide'>
+                    <!-- Carousel items -->
+                    <div class='carousel-inner'>
+                        <?php foreach ($similarImages as $image) { ?>
+                            <div class='item'>
+                                <a href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
+                                    <img src="<?php echo url::base() . "assets/img/monuments/carousel/" . $image['MonumentID'] . ".jpg"; ?>">
+                                </a>
+                                <div class="carousel-caption">
+                                    <h4><?php echo $image['Name']; ?></h4>
+                                </div>
                             </div>
-                            <a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
-                            <a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
-                        </div>
-        </div>
-        
-        <!-- Start videos -->
-        <div class="span6">
-            <?php foreach ($videos as $video) { ?>
-                <p><?php echo $video['YouTubeID'] ?></p>
-            <?php } ?>
-        </div>
-        
+                        <?php } ?>
+                    </div>
+                    <a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
+                    <a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
+                </div>
+            </div>
+
+            <!-- Start videos -->
+            <div class="span6">
+                <?php foreach ($videos as $video) { ?>
+                    <p><?php echo $video['YouTubeID'] ?></p>
+                <?php } ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- If there are only similar images then only show them -->
+        <?php if ((count($similarImages) > 0) && (count($videos) <= 0)): ?>
+            <div class="span8 offset2">
+                <div id='carousel' class='carousel slide'>
+                    <!-- Carousel items -->
+                    <div class='carousel-inner'>
+                        <?php foreach ($similarImages as $image) { ?>
+                            <div class='item'>
+                                <a href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
+                                    <img src="<?php echo url::base() . "assets/img/monuments/carousel/" . $image['MonumentID'] . ".jpg"; ?>">
+                                </a>
+                                <div class="carousel-caption">
+                                    <h4><?php echo $image['Name']; ?></h4>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
+                    <a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
+                </div>
+            </div>
+        <?php endif; ?>
+            
+        <!-- If there are only videos then only show them -->
+        <?php if ((count($similarImages) <= 0) && (count($videos) > 0)): ?>
+            <div class="span8 offset2"></div>
         <?php endif; ?>
 
     </div>
