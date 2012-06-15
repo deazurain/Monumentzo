@@ -27,7 +27,7 @@ class Controller_Information {
         $service = new apiBooksService($client);
 
         // Set the limit and offset for the query
-        $offset = 45;
+        $offset = 53;
         $limit = 30;
 
         // Retrieve monument id's with the given limit and offset
@@ -208,17 +208,71 @@ class Controller_Information {
         Zend_Loader::loadClass('Zend_Gdata_YouTube');
         $yt = new Zend_Gdata_YouTube();
 
-        $searchTerms = "Delft";
-        $query = $yt->newVideoQuery();
-        $query->setVideoQuery($searchTerms);
-
-        $videoFeed = $yt->getVideoFeed($query->getQueryUrl(2));
-
-        foreach ($videoFeed as $videoEntry) {
-            echo $videoEntry->getVideoTitle() . "\n";
-        }
-
         Zend_Loader::loadClass('Zend_Gdata_AuthSub');
+
+        // Set the limit and offset for the query
+        $offset = 0;
+        $limit = 0;
+
+        // Retrieve monument id's with the given limit and offset
+        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument ORDER BY MonumentID LIMIT 1')
+                //->bind(':offset', $offset)
+                //->bind(':limit', $limit)
+                ->execute()
+                ->as_array();
+
+        echo "Number of monuments to search videos for: " . count($monuments) . ".\n";
+
+        $i = 1; // + $offset;
+        // 
+        // Get videos for each of the retrieved monuments
+        foreach ($monuments as $monument) {
+            $monumentInfo = DB::query(Database::SELECT, 'SELECT * FROM Monument WHERE MonumentID = :id')
+                    ->bind(':id', $monument['MonumentID'])
+                    ->execute()
+                    ->as_array();
+
+            // Set the serchterms to be name + city of the monument
+            $searchTerms = $monumentInfo[0]['Name'] . "+" . $monumentInfo[0]['City'];
+            echo "Searching for: " . $monumentInfo[0]['Name'] . " + " . $monumentInfo[0]['City'];
+
+            $query = $yt->newVideoQuery();
+            $query->setOrderBy('relevance');
+            $query->setMaxResults('10');
+            $query->setVideoQuery($searchTerms);
+
+            $videoFeed = $yt->getVideoFeed($query->getQueryUrl(2));
+
+            // Save each video in the datbase
+            foreach ($videoFeed as $videoEntry) {
+                echo $videoEntry->getVideoTitle() . " - " . $videoEntry->getVideoID() . "\n";
+
+                $videoID = $videoEntry->getVideoID();
+                
+                $query = DB::query(Database::SELECT, 'SELECT VideoID FROM Video WHERE YouTubeID = :id')
+                        ->bind(':id', $videoID)
+                        ->execute();
+
+                if (isset($query[0]['VideoID'])) {
+                    echo "Video already in database.";
+                } else {
+                    $toSave = DB::query(Database::INSERT, 'INSERT INTO Video (YouTubeID) VALUES(:id)')
+                            ->bind(':id', $videoID)
+                            ->execute();
+                }
+                
+                $getID = DB::query(Database::SELECT, 'SELECT VideoID FROM Video WHERE YouTubeID = :id')
+                        ->bind(':id', $videoID)
+                        ->execute();
+                
+                if(isset($getID[0]['VideoID'])){
+                    $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Video (MonumentID, VideoID) VALUES(:monumentID, :videoID)')
+                            ->bind(':monumentID', $monument['MonumentID'])
+                            ->bind(':videoID', $getID[0]['VideoID'])
+                            ->execute();
+                }
+            }
+        }
     }
 
     public function after() {
