@@ -389,7 +389,6 @@ $(document).ready(function() {
         $("#browse-window .hud-left").click(doRotateLeft);
         $("#browse-window .hud-zoomin").click(doZoomIn);
         $("#browse-window .hud-zoomout").click(doZoomOut);
-        $("#browse-window .hud-help").click();
 
         (function animate() {
             requestAnimationFrame( animate );
