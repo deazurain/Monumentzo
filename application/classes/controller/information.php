@@ -26,12 +26,20 @@ class Controller_Information {
         $client->setApplicationName("Monumentzo");
         $service = new apiBooksService($client);
 
+        // Set the limit and offset for the query
+        $offset = 9;
+        $limit = 25;
+        
         // Retrieve monument id's with the given limit and offset
-        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument ORDER BY MonumentID LIMIT 20')->execute()->as_array();
+        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument ORDER BY MonumentID LIMIT :offset, :limit')
+                ->bind(':offset', $offset)
+                ->bind(':limit', $limit)
+                ->execute()
+                ->as_array();
 
         echo "Number of monuments to search books for: " . count($monuments) . ".\n";
 
-        $i = 1;
+        $i = 1 + $offset;
 
         // Get books for each of the retrieved monuments
         foreach ($monuments as $monument) {
