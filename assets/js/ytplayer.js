@@ -3,13 +3,15 @@ $(document).ready(function() {
     var atts = { id: "myytplayer" };
     swfobject.embedSWF("http://www.youtube.com/apiplayer?enablejsapi=1&version=3&playerapiid=ytplayer",
                        "myytplayer", "550", "398", "8", null, null, params, atts);
+                       
+    
 });
 
 function onYouTubePlayerReady(playerId) {
     ytplayer = document.getElementById("myytplayer");
     ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
     ytplayer.addEventListener("onError", "onPlayerError");
-    playlist = document.getElementById('videos');
+    playlist = JSON.parse(phpout);
     ytplayer.cuePlaylist(playlist);
 }
 
