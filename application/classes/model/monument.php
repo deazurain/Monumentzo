@@ -106,6 +106,17 @@ class Model_Monument extends Model_Database {
 		
 		return $result->as_array();
 	}
+	
+	public function getBooks() {
+		$results = DB::query(Database::SELECT, 'SELECT Title, Author, ImgUrl 
+												FROM Book, Monument_Book 
+												WHERE Book.BookID = Monument_Book.BookID 
+												AND MonumentID = :monumentID')
+						->param(':monumentID', $this->monument['MonumentID'])
+						->execute();
+						
+		return $results->as_array();
+	}
 }
 
 ?>

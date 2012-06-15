@@ -159,6 +159,9 @@
                 <?php if(count($similarImages) != 0): ?>
                     <li><a href="#similar-images">Visueel gelijkende monumenten</a></li>
                 <?php endif; ?>
+                <?php if(count($books) > 0): ?>
+                    <li><a href="#books">Gerelateerde boeken</a></li>
+                <?php endif; ?>
             </ul>
 
             <div class="tab-content">
@@ -229,7 +232,25 @@
     			</div>
     			<?php endif;?>
     			
-    			
+    			<!-- Related books -->
+                <?php if(count($books) > 0): ?>
+                <div class="tab-pane" id="books">
+					<table class="table">
+						<?php foreach($books as $book): ?>
+                        <tr>
+                            <td class="span1">
+                                <img src="<?= $book['ImgUrl'] ?>" alt="Boek cover" />
+                            </td>
+                            <td class="span5">
+                                <h3><?= $book['Title'] ?></h3>
+                                <h4><?= $book['Author'] ?></h4>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+                
             </div>
 		</div>
 	</div>

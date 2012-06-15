@@ -12,8 +12,9 @@
     
         <div class="book-info span9">
             <h2><?= $book['Title'] ?></h2>
-            <h4><?= $book['Author'] ?></h4>
-            <p><?= $book['Description'] ?></p>
+            <h4><?= ($book['Author'] == NULL) ? 'Geen schrijver bekend' : $book['Author'] ?></h4>
+            <p><?= ($book['Description'] == NULL) ? 'Geen beschrijving beschikbaar' : $book['Description'] ?></p>
+            <a href="<?= $book['Link'] ?>">Meer informatie via Google Books</a>
         </div>
     </div><hr />
     <?php endforeach; ?>
