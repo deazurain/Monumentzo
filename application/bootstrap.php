@@ -126,7 +126,10 @@ Route::set('list', 'list/(<controller>(/<action>(/<id>)))')
 		'action' => 'index'
 	));
 	
-Route::set('read', 'list/<controller>/<action>/<monument>/<book>');
+Route::set('read', 'list/<controller>/<action>/<monument>/<book>')
+	->defaults(array(
+		'directory' => 'list'
+	));
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
