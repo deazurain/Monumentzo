@@ -60,8 +60,8 @@ class Controller_Template_Website extends Controller_Template {
 				'assets/js/user.js',
                 'assets/js/comment.js',
             );
-            $this->template->styles = array_merge($this->template->styles, $styles);
-            $this->template->scripts = array_merge($this->template->scripts, $scripts);
+            $this->template->styles = array_merge($styles, $this->template->styles);
+            $this->template->scripts = array_merge($scripts, $this->template->scripts);
         }
         parent::after();
     }
