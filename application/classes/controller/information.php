@@ -154,16 +154,13 @@ class Controller_Information {
 
                     if (isset($book['volumeInfo']['previewLink'])) {
                         $link = $book['volumeInfo']['previewLink'];
-                        $link = parse_url($link);
                     } else if (isset($book['volumeInfo']['infoLink'])) {
                         $link = $book['volumeInfo']['infoLink'];
-                        $link = parse_url($link);
                     } else {
                         $link = null;
                     }
-
+                    
                     $img = null;
-                    $link = null;
 
                     $toSaveBook = DB::query(Database::INSERT, 'INSERT INTO Book (GoogleID, Title, Author, ImgUrl, Description, Link) VALUES(:googleID, :title, :author, :img, :des, :link)')
                             ->bind(':bookID', $bookID)
@@ -172,7 +169,7 @@ class Controller_Information {
                             ->bind(':author', $author)
                             ->bind(':img', $img)
                             ->bind(':des', $des)
-                            ->bind(':link', $link)
+                            ->bind(':link', "" . $link . "")
                             ->execute();
                     echo "Saved book for monument: " . $monument['MonumentID'] . "\n";
                 }
