@@ -82,11 +82,16 @@
         ?>
 
         <div id="content" class="container">
+        	<div class="row">
             <?php echo $content ?>
-            <hr>
-            <footer>
-            <p>© Monumentzo 2012</p>
-            </footer>
+            </div>
+            
+            <div class="row">
+                <hr>
+                <footer>
+                <p>© Monumentzo 2012</p>
+                </footer>
+            </div>
         </div>
         
         
