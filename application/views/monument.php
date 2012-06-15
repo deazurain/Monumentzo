@@ -277,7 +277,8 @@
 
             <!-- Start videos -->
             <div class="span6">
-                <?php foreach($videos as $video) { addToPlaylist($video['YouTubeID']); } ?>
+                <?php foreach($videos as $video) { echo '<script type="text/javascript"> addToPlaylist(' . $video['YouTubeID'] . ');
+                </script>'; } ?>
                 <div id="myytplayer"></div>
                 <div class="row">
                     <div class="span4">
