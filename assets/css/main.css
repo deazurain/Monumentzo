@@ -236,5 +236,10 @@ monument tabs
 /*
 Read list
 */
-.book .book-info .h4 { color: #999; }
-.book .book-info .p { padding: 0 10px; }
+.book img { max-width: 200px; }
+.book .book-info h4 {
+	color: #999999;
+	margin-bottom: 10px;
+	padding: 0 4px;
+}
+.book .book-info p { padding: 0 4px; }
