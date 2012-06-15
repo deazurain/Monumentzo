@@ -377,12 +377,12 @@ $(document).ready(function() {
                 
         var doZoomIn = function() {
             if(camera_offset_z >= 50) {
-                camera_offset_z += -50;
+                camera_offset_z += -100;
             }   
         }                
         var doZoomOut = function() {
             if(camera_offset_z < 4000) {
-                camera_offset_z += 50;
+                camera_offset_z += 100;
             }    
         }
 
@@ -390,6 +390,7 @@ $(document).ready(function() {
         $("#browse-window .hud-left").click(doRotateLeft);
         $("#browse-window .hud-zoomin").click(doZoomIn);
         $("#browse-window .hud-zoomout").click(doZoomOut);
+        $("#browse-window .hud-help").click(document.getElementById('browse-help').style.display = "inline");
 
         (function animate() {
             requestAnimationFrame( animate );
