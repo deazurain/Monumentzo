@@ -12,9 +12,6 @@ class Controller_Information {
     public function before() {
         if (PHP_SAPI !== "cli")
             exit("Execute this from command line.");
-
-        require_once 'google-api-php-client/src/apiClient.php';
-        require_once 'google-api-php-client/src/contrib/apiBooksService.php';
     }
 
     public function __construct() {
@@ -22,14 +19,17 @@ class Controller_Information {
     }
 
     public function action_get_googlebooks() {
+        require_once 'offline/google-api-php-client/src/apiClient.php';
+        require_once 'offline/google-api-php-client/src/contrib/apiBooksService.php';
+
         $client = new apiClient();
         $client->setApplicationName("Monumentzo");
         $service = new apiBooksService($client);
 
         // Set the limit and offset for the query
-        $offset = 22;
+        $offset = 27;
         $limit = 25;
-        
+
         // Retrieve monument id's with the given limit and offset
         $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument ORDER BY MonumentID LIMIT :offset, :limit')
                 ->bind(':offset', $offset)
@@ -138,7 +138,7 @@ class Controller_Information {
                 // If the book is already in the database then do nothing. Otherwise save it to the database.
                 if (isset($query[0]['BookID'])) {
                     echo "Book is already in database.";
-                } else {                    
+                } else {
                     if (isset($book['volumeInfo']['authors'][0])) {
                         $author = $book['volumeInfo']['authors'][0];
                     } else {
@@ -166,7 +166,7 @@ class Controller_Information {
                     } else {
                         $link = null;
                     }
-                   
+
                     $toSaveBook = DB::query(Database::INSERT, 'INSERT INTO Book (GoogleID, Title, Author, ImgUrl, Description, Link) VALUES(:googleID, :title, :author, :img, :des, :link)')
                             ->bind(':bookID', $bookID)
                             ->bind(':googleID', $googleID)
@@ -201,6 +201,15 @@ class Controller_Information {
         }
 
         echo "Number of monuments handled: " . ($i--) . ".\n";
+    }
+
+    public function action_get_videos() {
+        require_once 'offline/ZendGdata-1.11.11/ZendGdata-1.11.11/library/Zend/Loader.php'; 
+        Zend_Loader::loadClass('Zend_Gdata_YouTube');
+        $yt = new Zend_Gdata_YouTube();
+
+        Zend_Loader::loadClass('Zend_Gdata_AuthSub');
+        Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
     }
 
     public function after() {
