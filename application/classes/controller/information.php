@@ -138,10 +138,8 @@ class Controller_Information {
 
                     if (isset($book['volumeInfo']['imageLinks']['thumbnail'])) {
                         $img = $book['volumeInfo']['imageLinks']['thumbnail'];
-                        $img = parse_url($img);
                     } else if (isset($book['volumeInfo']['imageLinks']['small'])) {
                         $img = $book['volumeInfo']['imageLinks']['small'];
-                        $img = parse_url($img);
                     } else {
                         $img = "assets/img/default_book.jpg";
                     }
@@ -159,9 +157,7 @@ class Controller_Information {
                     } else {
                         $link = null;
                     }
-                    
-                    $img = null;
-
+                   
                     $toSaveBook = DB::query(Database::INSERT, 'INSERT INTO Book (GoogleID, Title, Author, ImgUrl, Description, Link) VALUES(:googleID, :title, :author, :img, :des, :link)')
                             ->bind(':bookID', $bookID)
                             ->bind(':googleID', $googleID)
@@ -169,7 +165,7 @@ class Controller_Information {
                             ->bind(':author', $author)
                             ->bind(':img', $img)
                             ->bind(':des', $des)
-                            ->bind(':link', "" . $link . "")
+                            ->bind(':link', $link)
                             ->execute();
                     echo "Saved book for monument: " . $monument['MonumentID'] . "\n";
                 }
