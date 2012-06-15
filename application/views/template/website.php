@@ -94,7 +94,11 @@
         </div>
 
         <footer>
-            <p>© Monumentzo 2012</p>
+            <div class="row">
+                <div class="span12">
+                    <p>© Monumentzo 2012</p>
+                </div>
+            </div>
         </footer>
 
 

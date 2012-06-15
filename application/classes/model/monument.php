@@ -116,6 +116,17 @@ class Model_Monument extends Model_Database {
 
         return $results->as_array();
     }
+    
+    public function getVideos() {
+        $results = DB::query(Database::SELECT, 'SELECT Video.BookID, Video.YouTubeID
+												FROM Video, Monument_Video 
+												WHERE Video.VideoID = Monument_Video.VideoID 
+												AND MonumentID = :monumentID')
+                ->param(':monumentID', $this->monument['MonumentID'])
+                ->execute();
+
+        return $results->as_array();
+    }
 
 }
 

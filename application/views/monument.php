@@ -71,7 +71,7 @@
                 <div class="span7">
                     <!-- Tags -->
                     <div class="tab-pane" id="tags">
-                        <h2>Wat moet hier ..?</h2>
+                        <h2><i class="icon-tags"></i>Trefwoorden</h2>
                         <p>
                             <?php
                             foreach ($monument['TextTag'] as $tag) {
@@ -151,6 +151,8 @@
 
         </div>
     </div>
+    
+    <h1>Uitgebreide informatie</h1>
     <hr>
     <div class="row">
         <div class="span10 offset1">
@@ -276,71 +278,107 @@
         </div>
     </div>
 
-
-    <!-- Start of the comments -->
+    <!-- Similar images and videos -->
     <div class="row">
+        <!-- If there are both images and videos show both next to each other -->
+        <?php if ((count($similarImages) > 0) && (count($videos) > 0)): ?>
+        <!-- Start similar images -->
+        <div class="span6">
+            <div id='carousel' class='carousel slide'>
+                            <!-- Carousel items -->
+                            <div class='carousel-inner'>
+                                <?php foreach ($similarImages as $image) { ?>
+                                    <div class='item'>
+                                        <a href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
+                                            <img src="<?php echo url::base() . "assets/img/monuments/carousel/" . $image['MonumentID'] . ".jpg"; ?>">
+                                        </a>
+                                        <div class="carousel-caption">
+                                            <h4><?php echo $image['Name']; ?></h4>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
+                            <a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
+                        </div>
+        </div>
+        
+        <!-- Start videos -->
+        <div class="span6">
+            <?php foreach ($videos as $video) { ?>
+                <p><?php echo $video[0]['YouTubeID'] ?></p>
+            <?php } ?>
+        </div>
+        
+        <?php endif; ?>
+
+    </div>
+</div>
+
+<!-- Start of the comments -->
+<div class="row">
+    <div class="span8 offset2">
+        <div class="page-header">
+            <h1>Commentaar</h1>
+        </div>
+
+
+        <ul id='comment-list'>
+            <?php if (count($comments) == 0): ?>
+                <p>Er is nog geen commentaar geplaatst bij dit monument, wees de eerste! </p>
+            <?php else: ?>
+                <?php
+                foreach ($comments as $comment) {
+                    $v = View::factory('model/comment');
+                    $v->set('id', $comment['CommentID']);
+                    $v->set('name', $comment['Name']);
+                    $v->set('placeDate', $comment['PlaceDate']);
+                    $v->set('comment', $comment['Comment']);
+                    $v->set('owner', ($user && ($user->UserID === $comment['UserID'])) ? true : false);
+                    echo $v;
+                }
+                ?>
+            <?php endif; ?>
+        </ul>
+    </div>
+</div>
+
+<!-- Start of comment typing section -->
+<div class="row">
+    <?php if ($user): ?>
         <div class="span8 offset2">
             <div class="page-header">
-                <h1>Commentaar</h1>
+                <h1>Plaats commentaar</h1>
             </div>
 
+            <div>
+                <?php echo Form::open('comment/create', array('id' => 'create-comment', 'method' => 'post')); ?>
 
-            <ul id='comment-list'>
-                <?php if (count($comments) == 0): ?>
-                    <p>Er is nog geen commentaar geplaatst bij dit monument, wees de eerste! </p>
-                <?php else: ?>
-                    <?php
-                    foreach ($comments as $comment) {
-                        $v = View::factory('model/comment');
-                        $v->set('id', $comment['CommentID']);
-                        $v->set('name', $comment['Name']);
-                        $v->set('placeDate', $comment['PlaceDate']);
-                        $v->set('comment', $comment['Comment']);
-                        $v->set('owner', ($user && ($user->UserID === $comment['UserID'])) ? true : false);
-                        echo $v;
-                    }
-                    ?>
-                <?php endif; ?>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Start of comment typing section -->
-    <div class="row">
-        <?php if ($user): ?>
-            <div class="span8 offset2">
-                <div class="page-header">
-                    <h1>Plaats commentaar</h1>
-                </div>
-
-                <div>
-                    <?php echo Form::open('comment/create', array('id' => 'create-comment', 'method' => 'post')); ?>
-
-                    <div class="row">
-                        <div class="span7">
-                            <dl>
-                                <dt><?php echo Form::hidden('MonumentID', $monument['MonumentID']); ?></dt>
-                                <dd><?php echo Form::textarea('Comment', '', array('rows' => 7, 'placeholder' => 'Commentaar over het monument...')); ?></dd>
-                            </dl>
+                <div class="row">
+                    <div class="span7">
+                        <dl>
+                            <dt><?php echo Form::hidden('MonumentID', $monument['MonumentID']); ?></dt>
+                            <dd><?php echo Form::textarea('Comment', '', array('rows' => 7, 'placeholder' => 'Commentaar over het monument...')); ?></dd>
+                        </dl>
+                    </div>
+                    <div id="comment-buttons" class="pull-right">
+                        <div class="btn-toolbar">
+                            <button type="submit" class="btn btn-info">Plaats</button>
                         </div>
-                        <div id="comment-buttons" class="pull-right">
-                            <div class="btn-toolbar">
-                                <button type="submit" class="btn btn-info">Plaats</button>
-                            </div>
-                            <div class="btn-toolbar">
-                                <button type="reset" class="btn btn-danger" href="#">Annuleer</button>
-                            </div>
+                        <div class="btn-toolbar">
+                            <button type="reset" class="btn btn-danger" href="#">Annuleer</button>
                         </div>
                     </div>
-                    <div class='error-container alert alert-error'></div>
-                    <div class='success-container alert alert-success'></div>
-
-                    <?php echo Form::close(); ?>
                 </div>
+                <div class='error-container alert alert-error'></div>
+                <div class='success-container alert alert-success'></div>
+
+                <?php echo Form::close(); ?>
             </div>
-        <?php else: ?>
-            <div class="span8 offset2">
-            </div>
-        <?php endif; ?>
-    </div>
+        </div>
+    <?php else: ?>
+        <div class="span8 offset2">
+        </div>
+    <?php endif; ?>
+</div>
 </div><!--/container-->
