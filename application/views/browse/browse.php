@@ -7,7 +7,4 @@
     <div class="hud-zoomin"><button class="btn btn-inverse"><i class="icon-plus icon-white"></i></button></div>
     <div class="hud-zoomout"><button class="btn btn-inverse"><i class="icon-minus icon-white"></i></button></div>
     <div class="hud-help"><a class="btn btn-info" href="#helpbrowse"><i class="icon-info-sign icon-white"></i></button></div>
-
-    <div class="alert alert-info" id="browse-help">   
-    </div>
 </div>
