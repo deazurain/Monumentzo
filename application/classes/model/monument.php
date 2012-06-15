@@ -108,7 +108,7 @@ class Model_Monument extends Model_Database {
 	}
 	
 	public function getBooks() {
-		$results = DB::query(Database::SELECT, 'SELECT Book.BookID, Title, Author, ImgUrl 
+		$results = DB::query(Database::SELECT, 'SELECT Book.BookID, Title, Author, ImgUrl , Link
 												FROM Book, Monument_Book 
 												WHERE Book.BookID = Monument_Book.BookID 
 												AND MonumentID = :monumentID')

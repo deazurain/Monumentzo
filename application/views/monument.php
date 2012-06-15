@@ -244,7 +244,10 @@
                             <td class="span5">
                                 <h3><?= $book['Title'] ?></h3>
                                 <h4><?= $book['Author'] ?></h4>
-                                <a class="btn btn-primary" href="<?= url::base() ?>list/read/add/<?= $monument['MonumentID'] ?>/<?= $book['BookID'] ?>">Toegevoegen aan leeslijst</a>
+                                <a href="<?= $book['Link'] ?>">Meer informatie via Google Books</a>
+                                <a class="btn pull-right" href="<?= url::base() ?>list/read/add/<?= $monument['MonumentID'] ?>/<?= $book['BookID'] ?>">
+                                	<i class="icon-plus"></i>
+                                </a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
