@@ -25,7 +25,7 @@
             <img src="/assets/img/monuments/thumb/<?= $monument['MonumentID']?>.jpg" align="left" />
             <?= $monument['Description']?>
         </p>
-        <p><a class="btn" href="/monument/view/<?= $monument['MonumentID'] ?>">Bekijk <i class="icon-chevron-right"></i></a></p>
+        <p><a class="btn" href="/monument/view/<?= $monument['MonumentID'] ?>">Bekijken <i class="icon-chevron-right"></i></a></p>
     </div>
     <?php } ?>
 </div>

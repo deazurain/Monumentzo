@@ -91,14 +91,11 @@
             <div class="row">
                 <?php echo $content ?>
             </div>
-
-            <div class="row">
-                <hr>
-                    <footer>
-                        <p>© Monumentzo 2012</p>
-                    </footer>
-            </div>
         </div>
+
+        <footer>
+            <p>© Monumentzo 2012</p>
+        </footer>
 
 
         <?php echo HTML::script('assets/js/monumentzo.js'), PHP_EOL ?>

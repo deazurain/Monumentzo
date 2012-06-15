@@ -118,13 +118,13 @@ Browse
 }
 
 #browse-window .hud-left {
-	top: 30px;
+	top: 35px;
 	left: 10;
 }
 
 #browse-window .hud-right {
-	top: 30px;
-	left: 80px;
+	top: 35px;
+	left: 85px;
 }
 
 #browse-window .hud-zoomin {
@@ -133,7 +133,7 @@ Browse
 }
 
 #browse-window .hud-zoomout {
-	top: 60px;
+	top: 65px;
 	left: 45px;
 }
 
