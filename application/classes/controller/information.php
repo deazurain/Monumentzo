@@ -27,8 +27,8 @@ class Controller_Information {
         $service = new apiBooksService($client);
 
         // Set the limit and offset for the query
-        $offset = 27;
-        $limit = 25;
+        $offset = 38;
+        $limit = 30;
 
         // Retrieve monument id's with the given limit and offset
         $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument ORDER BY MonumentID LIMIT :offset, :limit')
@@ -204,12 +204,21 @@ class Controller_Information {
     }
 
     public function action_get_videos() {
-        require_once 'offline/ZendGdata-1.11.11/ZendGdata-1.11.11/library/Zend/Loader.php'; 
+        require_once 'application/vendor/ZendGdata-1.11.11/library/Zend/Loader.php';
         Zend_Loader::loadClass('Zend_Gdata_YouTube');
         $yt = new Zend_Gdata_YouTube();
 
+        $searchTerms = "Delft";
+        $query = $yt->newVideoQuery();
+        $query->setVideoQuery($searchTerms);
+
+        $videoFeed = $yt->getVideoFeed($query->getQueryUrl(2));
+
+        foreach ($videoFeed as $videoEntry) {
+            echo $videoEntry->getVideoTitle() . "\n";
+        }
+
         Zend_Loader::loadClass('Zend_Gdata_AuthSub');
-        Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
     }
 
     public function after() {
