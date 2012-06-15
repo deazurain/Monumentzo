@@ -245,9 +245,15 @@
                                 <h3><?= $book['Title'] ?></h3>
                                 <h4><?= $book['Author'] ?></h4>
                                 <a href="<?= $book['Link'] ?>">Meer informatie via Google Books</a>
-                                <a class="btn pull-right" href="<?= url::base() ?>list/read/add/<?= $monument['MonumentID'] ?>/<?= $book['BookID'] ?>">
-                                	<i class="icon-plus"></i>
+                               	<?php if(in_array($book['BookID'], $userBooks)): ?>
+                                <a class="btn btn-primary pull-right" href="<?= url::base() ?>list/read/add/<?= $monument['MonumentID'] ?>/<?= $book['BookID'] ?>">
+                                    <i class="icon-remove icon-white"></i>
                                 </a>
+                               	<?php else: ?>
+                                <a class="btn btn-danger pull-right" href="<?= url::base() ?>list/read/add/<?= $monument['MonumentID'] ?>/<?= $book['BookID'] ?>">
+                                    <i class="icon-plus icon-white"></i>
+                                </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

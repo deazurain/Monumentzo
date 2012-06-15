@@ -35,7 +35,6 @@ class Model_User extends Model_Monumentzo_User {
 												FROM Book, ReadList 
 												WHERE Book.BookID = ReadList.Book 
 												AND UserID = :id')->param(':id', $this->UserID)->execute();
-		
 		return $result->as_array();
 	}
 }
