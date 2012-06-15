@@ -83,8 +83,13 @@
 
         <div id="content" class="container">
             <?php echo $content ?>
+            <hr>
+            <footer>
+            <p>© Monumentzo 2012</p>
+            </footer>
         </div>
-
+        
+        
 		<?php echo HTML::script('assets/js/monumentzo.js'), PHP_EOL ?>
     </body>
 </html>
