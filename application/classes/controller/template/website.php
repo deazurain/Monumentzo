@@ -60,6 +60,8 @@ class Controller_Template_Website extends Controller_Template {
 				'assets/js/bootstrap-dropdown.js',
 				'assets/js/user.js',
                 'assets/js/comment.js',
+                'assets/js/swfobject.js',
+                'assets/js/ytplayer.js',
             );
             $this->template->styles = array_merge($styles, $this->template->styles);
             $this->template->scripts = array_merge($scripts, $this->template->scripts);
