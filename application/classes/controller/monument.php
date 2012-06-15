@@ -12,7 +12,7 @@ Class Controller_Monument extends Controller_Template_Website
 		$isInFavorite = NULL;
 		$isInVisited = NULL;
 		$isInWish = NULL;
-		$userBooks = NULL;
+		$userBooks = array();
 	
 		if(Auth::instance()->logged_in()) {
 			$userID = Auth::instance()->get_user()->UserID;
