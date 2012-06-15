@@ -42,6 +42,12 @@ class Model_User extends Model_Monumentzo_User {
 		$result = DB::query(Database::SELECT, 'SELECT BookID 
 												FROM ReadList 
 												WHERE UserID = :id')->param(':id', $this->UserID)->execute();
-		return $result->as_array();
+		$result = $result->as_array();
+		
+		$res = array();
+		foreach($result as $row)
+			$res[] = $row['BookID'];
+			
+		return $res;
 	}
 }
