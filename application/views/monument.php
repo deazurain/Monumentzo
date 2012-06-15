@@ -78,7 +78,8 @@
                         data-longitude="<?php echo $monument['Longitude'] ?>">
                     </div>
                 </div>
-				
+				<?php echo HTML::script('http://maps.googleapis.com/maps/api/js?key=AIzaSyArtULnydU1gg4DjNfCvhXZx5Sq49p1ktg&sensor=false'), PHP_EOL ?>
+				<?php echo HTML::script('assets/js/map.js'), PHP_EOL ?>
 				<table class="table">
 					<tr>
 						<td>Monumentnummer</td>
@@ -224,14 +225,6 @@
     					<a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
     					<a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
     				</div>
-    				<script type="text/javascript">
-    				    /*
-                    	carousel
-                    	*/
-                    	$('#carousel').carousel({
-                    		interval: 8000
-                    	})
-    				</script>
     			</div>
     			<?php endif;?>
     			
@@ -308,5 +301,3 @@
 		<?php endif; ?>
 	</div>
 </div><!--/container-->
-<?php echo HTML::script('http://maps.googleapis.com/maps/api/js?key=AIzaSyArtULnydU1gg4DjNfCvhXZx5Sq49p1ktg&sensor=false'), PHP_EOL ?>
-<?php echo HTML::script('assets/js/map.js'), PHP_EOL ?>

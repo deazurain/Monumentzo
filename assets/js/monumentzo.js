@@ -34,7 +34,15 @@ $(document).ready(function() {
     */
     $('.dropdown-toggle').dropdown()
 	
-
+	/*
+	carousel
+	*/
+	$('.carousel-inner').children(':first-child').addClass('active');
+	
+	$('#carousel').carousel({
+		interval: 8000
+	})
+	
 	/*
 	tabs
 	*/
