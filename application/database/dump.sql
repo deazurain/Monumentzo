@@ -3,12 +3,14 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 15, 2012 at 03:03 PM
+-- Generation Time: Jun 15, 2012 at 03:29 PM
 -- Server version: 5.1.62-0ubuntu0.11.10.1
 -- PHP Version: 5.3.6-13ubuntu3.7
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -6047,17 +6049,18 @@ DROP TABLE IF EXISTS `ReadList`;
 CREATE TABLE IF NOT EXISTS `ReadList` (
   `UserID` int(10) unsigned NOT NULL,
   `Book` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`UserID`),
+  `ReadID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ReadID`),
   KEY `Monumentzo.ReadList.UserID` (`UserID`),
   KEY `Book` (`Book`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `ReadList`
 --
 
-INSERT INTO `ReadList` (`UserID`, `Book`) VALUES
-(2, 465);
+INSERT INTO `ReadList` (`UserID`, `Book`, `ReadID`) VALUES
+(2, 465, 1);
 
 -- --------------------------------------------------------
 
@@ -8240,7 +8243,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 
 INSERT INTO `User` (`UserID`, `Name`, `HashedPassword`, `EmailAddress`, `LoginAttempts`, `LastLoginAttempt`) VALUES
 (1, 'bojana', 'c9fc6d45abdd6a742aa8e890a306cbfc2e33db99535dd041ef6c7274cf167c64', 'test@test.com', 2, 1339405766),
-(2, 'test', 'c9fc6d45abdd6a742aa8e890a306cbfc2e33db99535dd041ef6c7274cf167c64', 'test@mail.com', 10, 1339765225),
+(2, 'test', 'c9fc6d45abdd6a742aa8e890a306cbfc2e33db99535dd041ef6c7274cf167c64', 'test@mail.com', 12, 1339766463),
 (3, 'noah', 'c9fc6d45abdd6a742aa8e890a306cbfc2e33db99535dd041ef6c7274cf167c64', 'test@thearc.com', 2, 1339253606);
 
 -- --------------------------------------------------------
