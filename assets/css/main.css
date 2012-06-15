@@ -116,23 +116,23 @@ Browse
 }
 
 #browse-window .hud-left {
-	top: 10px;
+	top: 15px;
 	left: 0;
 }
 
 #browse-window .hud-right {
-	top: 10px;
-	left: 40px;
+	top: 15px;
+	left: 65px;
 }
 
-#browse-window .hud-top {
-	top: 0;
-	left: 20px;
+#browse-window .hud-zoomin {
+	top: 5px;
+	left: 30px;
 }
 
-#browse-window .hud-bottom {
-	top: 20px;
-	left: 20px;
+#browse-window .hud-zoomout {
+	top: 35px;
+	left: 30px;
 }
 
 /*
