@@ -28,6 +28,7 @@ class Controller_Template_Website extends Controller_Template {
 
 					if (Auth::instance()->logged_in()) {
 						$this->template->logout = View::factory('user/logout');
+						$this->template->user = Auth::instance()->get_user();
 					}
 					else {
 						$this->template->login = View::factory('user/login');

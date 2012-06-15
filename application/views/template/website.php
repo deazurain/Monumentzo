@@ -23,20 +23,33 @@
                     <div class="nav-collapse">
                         <ul class="nav">
                             <?php if (isset($login)) echo "<li><a class='fancybox' href='#login'>Inloggen</a></li>" ?>
-                            <?php if (isset($register)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>
-                            <?php if (isset($logout)) echo "<li><a class='fancybox' href='#logout'>Uitloggen</a></li>" ?>
-														
+                            <?php if (isset($register)) echo "<li><a class='fancybox' href='#register'>Registreren</a></li>" ?>						
 							<li><?php echo HTML::anchor('/browse/index', 'Bladeren'); ?></li>
-                            
-                            <?php if(Auth::instance()->logged_in()): ?>
-							<li><?php echo HTML::anchor('/list/view', 'Lijsten'); ?></li>
-                            <?php endif; ?>
                         </ul>
                     </div>
-                    <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search pull-right')); ?>
+                    <?php echo Form::open('search/query', array('method' => 'post', 'class' => 'navbar-search')); ?>
                     <?php echo Form::input('q', NULL, array('type' => 'text', 'class' => 'search-query', 'placeholder' => 'Zoeken')); ?>
 		    		<?php echo Form::hidden('rsz', '20'); ?>
                     <?php echo Form::close(); ?>
+                
+                    
+                    <ul class="nav pull-right">
+                        <?php if(isset($user)) :?>
+                        <li id="fat-menu" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-user icon-white"></i> <?= $user->Name ?> <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><?php echo HTML::anchor('/list/view', 'Mijn monumenten'); ?></li>
+                                <li><?php echo HTML::anchor('/list/read/view', 'Leeslijst'); ?></li>
+                                <li class="divider"></li>
+                                <li><a class='fancybox' href='#logout'>Uitloggen</a></li>
+                            </ul>
+                        </li>
+                         <? endif; ?>
+                    </ul>
+                    
+                   
                 </div>
             </div>
         </div>
