@@ -37,6 +37,8 @@ $(document).ready(function() {
 	/*
 	carousel
 	*/
+	$('.carousel-inner').children(':first-child').addClass('active');
+	
 	$('#carousel').carousel({
 		interval: 8000
 	})

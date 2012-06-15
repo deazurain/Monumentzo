@@ -214,7 +214,7 @@
     						<?php foreach( $similarImages as $image ) { ?>
     							<div class='item'>
     							    <a href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
-    								    <img src="<?php echo url::base().$image['Path']; ?>">
+    								    <img src="<?php echo url::base()."assets/img/monuments/carousel/".$image['MonumentID'].".jpg"; ?>">
     								</a>
     								<div class="carousel-caption">
     								    <h4><?php echo $image['Name']; ?></h4>

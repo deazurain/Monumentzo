@@ -26,8 +26,8 @@ class Controller_Information {
         $client->setApplicationName("Monumentzo");
         $service = new apiBooksService($client);
 
-        // Retrieve monument id's
-        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument LIMIT 1')->execute()->as_array();
+        // Retrieve monument id's with the given limit and offset
+        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument LIMIT 20')->execute()->as_array();
 
         echo "Number of monuments to search books for: " . count($monuments) . ".\n";
 
@@ -37,8 +37,6 @@ class Controller_Information {
         foreach ($monuments as $monument) {
             $resultsID = array();
             $books = array();
-
-            $monument['MonumentID'] = 3403;
 
             echo "Monument " . $i . " : " . $monument['MonumentID'] . "\n";
             // Get information about the current monumnet
@@ -94,7 +92,7 @@ class Controller_Information {
                         if (!in_array($item['id'], $resultsID)) {
                             $resultsID[] = $item['id'];
                             $books[] = $item;
-                            //echo "[ID: " . $item['id'] . " - " . $item['volumeInfo']['title'] . "]\n";
+                            echo "[ID: " . $item['id'] . " - " . $item['volumeInfo']['title'] . "]\n";
                         }
                     }
                 }
@@ -120,67 +118,72 @@ class Controller_Information {
             // Save books to the databases
             foreach ($books as $book) {
                 $googleID = $book['id'];
+                $title = $book['volumeInfo']['title'];
 
-                $query = DB::query(Database::SELECT, 'SELECT COUNT(*) FROM Book WHERE GoogleID = :id')
+                // Check that the book is not already in the database.
+                $query = DB::query(Database::SELECT, 'SELECT BookID FROM Book WHERE Title = :title')
+                        ->bind(':title', $title)
+                        ->execute()
+                        ->as_array();
+
+                // If the book is already in the database then do nothing. Otherwise save it to the database.
+                if (isset($query[0]['BookID'])) {
+                    echo "Book is already in database.";
+                } else {                    
+                    if (isset($book['volumeInfo']['authors'][0])) {
+                        $author = $book['volumeInfo']['authors'][0];
+                    } else {
+                        $author = null;
+                    }
+
+                    if (isset($book['volumeInfo']['imageLinks']['thumbnail'])) {
+                        $img = $book['volumeInfo']['imageLinks']['thumbnail'];
+                    } else if (isset($book['volumeInfo']['imageLinks']['small'])) {
+                        $img = $book['volumeInfo']['imageLinks']['small'];
+                    } else {
+                        $img = "assets/img/default_book.jpg";
+                    }
+
+                    if (isset($book['volumeInfo']['description'])) {
+                        $des = $book['volumeInfo']['description'];
+                    } else {
+                        $des = null;
+                    }
+
+                    if (isset($book['volumeInfo']['previewLink'])) {
+                        $link = $book['volumeInfo']['previewLink'];
+                    } else if (isset($book['volumeInfo']['infoLink'])) {
+                        $link = $book['volumeInfo']['infoLink'];
+                    } else {
+                        $link = null;
+                    }
+                   
+                    $toSaveBook = DB::query(Database::INSERT, 'INSERT INTO Book (GoogleID, Title, Author, ImgUrl, Description, Link) VALUES(:googleID, :title, :author, :img, :des, :link)')
+                            ->bind(':bookID', $bookID)
+                            ->bind(':googleID', $googleID)
+                            ->bind(':title', $title)
+                            ->bind(':author', $author)
+                            ->bind(':img', $img)
+                            ->bind(':des', $des)
+                            ->bind(':link', $link)
+                            ->execute();
+                    echo "Saved book for monument: " . $monument['MonumentID'] . "\n";
+                }
+
+                // Check if the book was saved.
+                $test = DB::query(Database::SELECT, 'SELECT BookID FROM Book WHERE GoogleID = :id')
                         ->bind(':id', $googleID)
                         ->execute()
                         ->as_array();
 
-
-                $title = $book['volumeInfo']['title'];
-
-                if (isset($book['volumeInfo']['authors'][0])) {
-                    $author = $book['volumeInfo']['authors'][0];
-                } else {
-                    $author = null;
+                // If the book was saved then add a link between the book and the monument
+                if (isset($test[0]['BookID'])) {
+                    $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Book (MonumentID, BookID) VALUES(:monumentID, (SELECT BookID FROM Book WHERE GoogleID = :id))')
+                            ->bind(':monumentID', $monument['MonumentID'])
+                            ->bind(':id', $googleID)
+                            ->execute();
+                    echo "Saved link for monument: " . $monument['MonumentID'] . "\n";
                 }
-
-                if (isset($book['volumeInfo']['imageLinks']['thumbnail'])) {
-                    $img = $book['volumeInfo']['imageLinks']['thumbnail'];
-                    $img = parse_url($img);
-                } else if (isset($book['volumeInfo']['imageLinks']['small'])) {
-                    $img = $book['volumeInfo']['imageLinks']['small'];
-                    $img = parse_url($img);
-                } else {
-                    $img = "assets/img/default_book.jpg";
-                }
-
-                if (isset($book['volumeInfo']['description'])) {
-                    $des = $book['volumeInfo']['description'];
-                } else {
-                    $des = null;
-                }
-
-                if (isset($book['volumeInfo']['previewLink'])) {
-                    $link = $book['volumeInfo']['previewLink'];
-                    $link = parse_url($link);
-                } else if (isset($book['volumeInfo']['infoLink'])) {
-                    $link = $book['volumeInfo']['infoLink'];
-                    $link = parse_url($link);
-                } else {
-                    $link = null;
-                }
-
-                $img = null;
-                $link = null;
-
-                $toSaveBook = DB::query(Database::INSERT, 'INSERT IGNORE INTO Book (GoogleID, Title, Author, ImgUrl, Description, Link) VALUES(:googleID, :title, :author, :img, :des, :link)')
-                        ->bind(':bookID', $bookID)
-                        ->bind(':googleID', $googleID)
-                        ->bind(':title', $title)
-                        ->bind(':author', $author)
-                        ->bind(':img', $img)
-                        ->bind(':des', $des)
-                        ->bind(':link', $link)
-                        ->execute();
-                echo "saved book" . $monument['MonumentID'] . "\n";
-                
-                
-                $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Book (MonumentID, BookID) VALUES(:monumentID, (SELECT BookID FROM Book WHERE GoogleID = :id))')
-                        ->bind(':monumentID', $monument['MonumentID'])
-                        ->bind(':id', $googleID)
-                        ->execute();
-                echo "saved link for " . $monument['MonumentID'] . "\n";
             }
 
             echo "Number of books found: " . count($books) . ".\n";
