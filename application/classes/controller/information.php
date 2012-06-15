@@ -127,7 +127,7 @@ class Controller_Information {
                         ->execute()
                         ->as_array();
 
-                if ($query[0]['BookID'] <= 0) {
+                if (!$query[0]['BookID']) {
                     if (isset($book['volumeInfo']['authors'][0])) {
                         $author = $book['volumeInfo']['authors'][0];
                     } else {
