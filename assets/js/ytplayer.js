@@ -1,3 +1,5 @@
+var playlist = [];
+
 $(document).ready(function() {
     var params = { allowScriptAccess: "always" };
     var atts = { id: "myytplayer" };
@@ -11,7 +13,7 @@ function onYouTubePlayerReady(playerId) {
     ytplayer = document.getElementById("myytplayer");
     ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
     ytplayer.addEventListener("onError", "onPlayerError");
-    playlist = JSON.parse(phpout);
+    
     ytplayer.cuePlaylist(playlist);
 }
 
@@ -24,4 +26,9 @@ function onytplayerStateChange(newState) {
  
 function onPlayerError(error) {
     console.log("Error occured: " + error);
+}
+
+function addToPlaylist(id) {
+    playlist.push(id);
+    console.log("Added: " + id);
 }

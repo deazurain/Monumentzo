@@ -277,7 +277,7 @@
 
             <!-- Start videos -->
             <div class="span6">
-                <?php $out = json_encode($videos) ?>
+                <?php foreach($videos as $video) { addToPlaylist($video['YouTubeID']); } ?>
                 <div id="myytplayer"></div>
                 <div class="row">
                     <div class="span4">
@@ -285,7 +285,7 @@
                         <a class="btn" href="javascript:ytplayer.playVideo()"><i class="icon-play"></i></a> 
                         <a class="btn" href="javascript:ytplayer.pauseVideo()"><i class="icon-pause"></i></a> 
                         <a class="btn" href="javascript:ytplayer.nextVideo()"><i class="icon-forward"></i></a> 
-                        <a class="btn" href=""><i class="icon-volume-off"></i></a>
+                        <a class="btn" href="javascript:ytplayer.mute() "><i class="icon-volume-off"></i></a>
                     </div>
                 </div>
             </div>

@@ -292,3 +292,7 @@ Read list
 	padding: 0 4px;
 }
 .book .book-info p { padding: 0 4px; }
+
+.hero-unit h1 {
+    color: black;
+}
