@@ -115,7 +115,7 @@ class Model_Monument extends Model_Database {
 						->param(':monumentID', $this->monument['MonumentID'])
 						->execute();
 						
-		return $results->as_assry();
+		return $results->as_array();
 	}
 }
 
