@@ -28,7 +28,7 @@ class Controller_Information {
 
         // Set the limit and offset for the query
         $offset = 70;
-        $limit = 1;
+        $limit = 40;
 
         // Retrieve monument id's with the given limit and offset
         $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument ORDER BY MonumentID LIMIT :offset, :limit')

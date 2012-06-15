@@ -390,7 +390,7 @@ $(document).ready(function() {
         $("#browse-window .hud-left").click(doRotateLeft);
         $("#browse-window .hud-zoomin").click(doZoomIn);
         $("#browse-window .hud-zoomout").click(doZoomOut);
-        $("#browse-window .hud-help").click(document.getElementById('browse-help').style.display = "inline");
+        //$("#browse-window .hud-help").click(document.getElementById('browse-help').innerHTML(<a class="close" data-dismiss="alert" href="#"><i class="icon-remove"></i></a><h4 class="alert-heading">Bladerinstructies</h4>Bla bla.));
 
         (function animate() {
             requestAnimationFrame( animate );
