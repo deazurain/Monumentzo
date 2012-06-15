@@ -261,7 +261,7 @@ monument tabs
 	overflow:auto;
 }
 
-#books .row:hover { background-color: #CCC; }
+#books img { height: 100px; }
 
 /*
 Read list
