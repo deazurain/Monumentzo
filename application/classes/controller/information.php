@@ -27,7 +27,7 @@ class Controller_Information {
         $service = new apiBooksService($client);
 
         // Set the limit and offset for the query
-        $offset = 53;
+        $offset = 65;
         $limit = 30;
 
         // Retrieve monument id's with the given limit and offset
