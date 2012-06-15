@@ -1,3 +1,6 @@
+<div class="page-header">
+	<h1>Leeslijst</h1>
+</div>
 <div id="list-read">
 	<!-- Book information -->
     <?php foreach($readList as $book): ?>
