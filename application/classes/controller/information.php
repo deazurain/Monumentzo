@@ -247,28 +247,28 @@ class Controller_Information {
             foreach ($videoFeed as $videoEntry) {
                 echo $videoEntry->getVideoTitle() . " - " . $videoEntry->getVideoID() . "\n";
 
-                $videoID = $videoEntry->getVideoID();
+                $ytID = $videoEntry->getVideoID();
                 
                 $query = DB::query(Database::SELECT, 'SELECT VideoID FROM Video WHERE YouTubeID = :id')
-                        ->bind(':id', $videoID)
+                        ->bind(':id', $ytID)
                         ->execute();
 
                 if (isset($query[0]['VideoID'])) {
                     echo "Video already in database.";
                 } else {
                     $toSave = DB::query(Database::INSERT, 'INSERT INTO Video (YouTubeID) VALUES(:id)')
-                            ->bind(':id', $videoID)
+                            ->bind(':id', $ytID)
                             ->execute();
                 }
                 
                 $getID = DB::query(Database::SELECT, 'SELECT VideoID FROM Video WHERE YouTubeID = :id')
-                        ->bind(':id', $videoID)
+                        ->bind(':id', $ytID)
                         ->execute();
                 
                 if(isset($getID[0]['VideoID'])){
-                    $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Video (MonumentID, VideoID) VALUES(:monumentID, :videoID)')
+                    $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Video (MonumentID, VideoID) VALUES(:monumentID, (SELECT VideoID FROM Video WHERE YouTubeID = :ytID))')
                             ->bind(':monumentID', $monument['MonumentID'])
-                            ->bind(':videoID', $getID[0]['VideoID'])
+                            ->bind(':ytID', $ytID)
                             ->execute();
                 }
             }
