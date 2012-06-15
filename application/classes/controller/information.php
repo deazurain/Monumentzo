@@ -127,6 +127,7 @@ class Controller_Information {
             foreach ($books as $book) {
                 $googleID = $book['id'];
                 $title = $book['volumeInfo']['title'];
+                $title = utf8_encode($title);
 
                 // Check that the book is not already in the database.
                 $query = DB::query(Database::SELECT, 'SELECT BookID FROM Book WHERE Title = :title')
