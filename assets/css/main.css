@@ -239,8 +239,8 @@ monument tabs
 	
 }
 
-
-
-
-
-
+/*
+Read list
+*/
+.book .book-info .h4 { color: #999; }
+.book .book-info .p { padding: 0 10px; }
