@@ -74,6 +74,7 @@ Browse
 #browse-window {
 	position: relative;
 	margin: 0 auto;
+	top: 40px;
 }
 
 #browse-window .hud-title,
@@ -105,6 +106,7 @@ Browse
 	height: 20px;
 }
 
+/*
 #browse-window canvas {
 	border: 1px solid black;
 
@@ -112,15 +114,7 @@ Browse
 	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
 }
-
-#browse-menu {
-	position: absolute;
-	z-index: 100;
-	width: 320px;
-}
-#browse-menu .browse-menu-header { }
-#browse-menu .browse-menu-body { }
-#browse-menu .browse-menu-footer { }
+*/
 
 /*
 Search

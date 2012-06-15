@@ -153,14 +153,19 @@ function doCameraUpdate() {
 
 $(document).ready(function() {
 
+	// HACK THAT ASS
+	$("#browse-window").appendTo($("body"));
+	$("#content").remove();
+
 	var resize_canvas = function() {
 
 		var aspect = width/height;
-		var w = $(window).width() - 80;
-		var h = $(window).height() - $("#browse-window").offset().top - 10;
+		var w = $(window).width() - 8;
+		var h = $(window).height() - 40; // $("#browse-window").offset().top;
 
 		if(w < 320) { w = 320; }
 		if(h < 200) { h = 200; }
+		/*
 		if(h != 0) {
 			if(aspect > w/h) {
 				//width limits height
@@ -173,16 +178,17 @@ $(document).ready(function() {
 				width = h*aspect;
 			}
 		}
+		*/
+		width = w;
+		height = h;
 
 		if(!camera) {
 			camera = new THREE.PerspectiveCamera(60, width/height, 1, 10000);
-			camera.position.z = 700;
 			scene.add(camera);
 		}
 		else {
 			camera.aspect = width/height;
 			camera.updateProjectionMatrix();
-			camera.position.z = 700;
 		}
 
 		renderer.setSize(width, height);
@@ -258,12 +264,8 @@ $(document).ready(function() {
 				var lat = parseFloat(monuments[i].Latitude);
 				var long = parseFloat(monuments[i].Longitude);
 
-				console.log('lat: ' + lat);
-
 				var lat_rel = (THREE.Math.clamp(lat, lat_lower, lat_upper) - lat_lower)/(lat_upper - lat_lower) - 0.5;
 				var long_rel = (THREE.Math.clamp(long, long_lower, long_upper) - long_lower)/(long_upper - long_lower) - 0.5;
-
-				console.log(lat_rel);
 
 				var block = blocks[i];
 
