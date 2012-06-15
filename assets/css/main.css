@@ -103,11 +103,19 @@ Browse
 #browse-window .hud-title,
 #browse-window .hud-top,
 #browse-window .hud-right,
-#browse-window .hud-bottom,
-#browse-window .hud-left {
+#browse-window .hud-help,
+#browse-window .hud-left,
+#browse-window .hud-zoomin,
+#browse-window .hud-zoomout {
 	position: absolute;
 	width: 30px;
+	height: 30px;
 	z-index: 10;
+}
+
+#browse-window button {
+	width: 100%;
+	height: 100%;
 }
 
 #browse-window .hud-title {
@@ -116,19 +124,29 @@ Browse
 }
 
 #browse-window .hud-left {
-	top: 46%;
-	left: 0;
-	width: 20px;
-	height: 20px;
+	top: 50px;
+	left: 15px;
 }
 
 #browse-window .hud-right {
-	top: 46%;
-	right:0;
-	width: 20px;
-	height: 20px;
+	top: 50px;
+	left: 85px;
 }
 
+#browse-window .hud-zoomin {
+	top: 15px;
+	left: 50px;
+}
+
+#browse-window .hud-zoomout {
+	top: 85px;
+	left: 50px;
+}
+
+#browse-window .hud-help {
+	top: 50px;
+	left: 50px;
+}
 /*
 #browse-window canvas {
 	border: 1px solid black;
@@ -161,6 +179,7 @@ Monument
 
 #list-view .page-header {
 	margin: 20px 0 0 0;
+	padding-bottom: 27px;
 }
 
 #header-buttons {
@@ -257,7 +276,7 @@ monument map
 monument tabs
 */
 .tab-content {
-	height:400px;
+	height:auto;
 	overflow:auto;
 }
 
@@ -273,3 +292,7 @@ Read list
 	padding: 0 4px;
 }
 .book .book-info p { padding: 0 4px; }
+
+.hero-unit h1 {
+    color: black;
+}
