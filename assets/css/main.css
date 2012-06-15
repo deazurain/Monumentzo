@@ -15,6 +15,15 @@ html, body {
 }
 
 /*
+Home
+*/
+
+.hero-unit {
+	background: url('/assets/img/satelite_netherlands.jpg') center;
+	color:white;
+}
+
+/*
  * Error/Success message containers
  */
 .error-container , .success-container {
