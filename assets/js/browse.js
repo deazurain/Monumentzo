@@ -331,7 +331,6 @@ $(document).ready(function() {
             $(window).mousemove(function (event) {
                 var o = $("#browse-window canvas").offset();
                 var x = event.pageX - o.left;
-                var y = event.pageY - o.top;
 
                 if(x >= 0 && x < width) {
                     mouse.x = (x * 2.0) / width - 1;
