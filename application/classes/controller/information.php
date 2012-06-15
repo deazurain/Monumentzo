@@ -127,7 +127,9 @@ class Controller_Information {
                         ->execute()
                         ->as_array();
 
-                if (!$query[0]['BookID']) {
+                if ($query[0]['BookID'] > 0) {
+                    echo "Book is already in database.";
+                } else {                    
                     if (isset($book['volumeInfo']['authors'][0])) {
                         $author = $book['volumeInfo']['authors'][0];
                     } else {
@@ -173,8 +175,6 @@ class Controller_Information {
                             ->bind(':link', $link)
                             ->execute();
                     echo "Saved book for monument: " . $monument['MonumentID'] . "\n";
-                } else {
-                    echo "Book already in database.";
                 }
 
                 $test = DB::query(Database::SELECT, 'SELECT BookID FROM Book WHERE GoogleID = :id')
