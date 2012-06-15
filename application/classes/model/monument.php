@@ -118,7 +118,7 @@ class Model_Monument extends Model_Database {
     }
     
     public function getVideos() {
-        $results = DB::query(Database::SELECT, 'SELECT Video.BookID, Video.YouTubeID
+        $results = DB::query(Database::SELECT, 'SELECT Video.YouTubeID
 												FROM Video, Monument_Video 
 												WHERE Video.VideoID = Monument_Video.VideoID 
 												AND MonumentID = :monumentID')
