@@ -71,6 +71,7 @@
                 <div class="span7">
                     <!-- Tags -->
                     <div class="tab-pane" id="tags">
+                        <h2>Wat moet hier ..?</h2>
                         <p>
                             <?php
                             foreach ($monument['TextTag'] as $tag) {
@@ -157,16 +158,16 @@
             <ul class="nav nav-tabs" id="myTab">
                 <li class="active"><a href="#description">Beschrijving</a></li>
                 <?php if (count($events) > 0): ?>
-                    <li><a href="#related-events">Gerelateerde gebeurtenissen</a></li>
+                    <li><a href="#related-events">Gebeurtenissen</a></li>
                 <?php endif; ?>
                 <?php if (count($persons) > 0): ?>
-                    <li><a href="#related-people">Gerelateerde personen</a></li>
+                    <li><a href="#related-people">Personen</a></li>
                 <?php endif; ?>
                 <?php if (count($similarImages) != 0): ?>
                     <li><a href="#similar-images">Visueel gelijkende monumenten</a></li>
                 <?php endif; ?>
                 <?php if (count($books) > 0): ?>
-                    <li><a href="#books">Gerelateerde boeken</a></li>
+                    <li><a href="#books">Boeken</a></li>
                 <?php endif; ?>
             </ul>
 
