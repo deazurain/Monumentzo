@@ -280,6 +280,7 @@
 
     <!-- Similar images and videos -->
     <div class="row">
+        <div id="videos" style="display: hidden"><?php echo $videos ?></div>
         <!-- If there are both images and videos show both next to each other -->
         <?php if ((count($similarImages) > 0) && (count($videos) > 0)): ?>
             <!-- Start similar images -->
