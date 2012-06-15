@@ -1,15 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.5.0
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 12, 2012 at 08:17 PM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Generation Time: Jun 15, 2012 at 09:47 AM
+-- Server version: 5.1.62-0ubuntu0.11.10.1
+-- PHP Version: 5.3.6-13ubuntu3.7
 
-SET FOREIGN_KEY_CHECKS=0;
+SET foreign_key_checks = 0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -31,7 +30,6 @@ USE `monumentzo` ;
 -- Table structure for table `Book`
 --
 
-DROP TABLE IF EXISTS `Book`;
 CREATE TABLE IF NOT EXISTS `Book` (
   `BookID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `GoogleID` varchar(255) NOT NULL,
@@ -43,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `Book` (
   PRIMARY KEY (`BookID`),
   UNIQUE KEY `GoogleID` (`GoogleID`),
   UNIQUE KEY `Title` (`Title`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `Book`
@@ -52,12 +50,7 @@ CREATE TABLE IF NOT EXISTS `Book` (
 INSERT INTO `Book` (`BookID`, `GoogleID`, `Title`, `Author`, `ImgUrl`, `Description`, `Link`) VALUES
 (1, 'a8Z5N_3Rv5kC', 'Sterren kijken', 'S. Dunlop', NULL, NULL, ''),
 (2, '1AFy0hupT0IC', 'De Kampioen', NULL, NULL, 'De Kampioen is the magazine of The Royal Dutch Touring Club ANWB in The Netherlands. It''s published 10 times a year with a circulation of approximately 3,5 million copies.', ''),
-(3, 'MuZPAAAAMAAJ', 'Architectura', 'Manfred Bock', NULL, NULL, ''),
-(5, 'PYInAQAAMAAJ', 'Historische gids van Amsterdam', 'Hendrik Fredrik Wijnman', NULL, NULL, ''),
-(6, 'uAjN5Ewju-MC', 'Amsterdam', 'S. Voller', NULL, NULL, ''),
-(7, 'bD1QAAAAMAAJ', 'From neo-Renaissance to post-modernism', 'Ellinoor Bergvelt', NULL, NULL, ''),
-(9, 'EZz9QL87UmEC', 'Vergaderaccommodatiegids', NULL, NULL, NULL, ''),
-(10, 'LI3A6fS7X08C', 'De liefde en de vrijheid, natuurlijk!', 'Frederica Johanna Uildriks', NULL, 'Frederike van Uildriks is een fascinerende Groningse vrouw en een tijdgenote van Aletta Jacobs. Van een welopgevoed meisje ontwikkelt zij zich tot een financieel onafhankelijke natuuronderzoekster en schrijfster die op haar manier op de bres staat voor vrouwenemancipatie. In 1877 is ze onderwijzeres en begint een dagboek bij te houden. Het dagboek van Frederike van Uildriks is door de Groningse hoogleraar Moderne Geschiedenis Mineke Bosch toegankelijk gemaakt. Met een uitgave van het geannoteerde dagboek, tentoonstellingen, een educatief pakket en een wandelingen-, lezingen- en filmprogramma komt Frederike van Uildriks en haar tijd tot leven.', '');
+(3, 'MuZPAAAAMAAJ', 'Architectura', 'Manfred Bock', NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -65,7 +58,6 @@ INSERT INTO `Book` (`BookID`, `GoogleID`, `Title`, `Author`, `ImgUrl`, `Descript
 -- Table structure for table `Category`
 --
 
-DROP TABLE IF EXISTS `Category`;
 CREATE TABLE IF NOT EXISTS `Category` (
   `CategoryID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Category` varchar(255) NOT NULL,
@@ -94,7 +86,6 @@ INSERT INTO `Category` (`CategoryID`, `Category`) VALUES
 -- Table structure for table `Comment`
 --
 
-DROP TABLE IF EXISTS `Comment`;
 CREATE TABLE IF NOT EXISTS `Comment` (
   `CommentID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UserID` int(10) unsigned NOT NULL,
@@ -120,7 +111,6 @@ INSERT INTO `Comment` (`CommentID`, `UserID`, `MonumentID`, `PlaceDate`, `Commen
 -- Table structure for table `Event`
 --
 
-DROP TABLE IF EXISTS `Event`;
 CREATE TABLE IF NOT EXISTS `Event` (
   `EventID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text NOT NULL,
@@ -449,7 +439,6 @@ INSERT INTO `Event` (`EventID`, `Name`, `Year`) VALUES
 -- Table structure for table `FavoriteList`
 --
 
-DROP TABLE IF EXISTS `FavoriteList`;
 CREATE TABLE IF NOT EXISTS `FavoriteList` (
   `UserID` int(10) unsigned NOT NULL,
   `MonumentID` int(10) unsigned NOT NULL,
@@ -474,7 +463,6 @@ INSERT INTO `FavoriteList` (`UserID`, `MonumentID`) VALUES
 -- Table structure for table `Image`
 --
 
-DROP TABLE IF EXISTS `Image`;
 CREATE TABLE IF NOT EXISTS `Image` (
   `ImageID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `MonumentID` int(10) unsigned NOT NULL,
@@ -594,7 +582,6 @@ INSERT INTO `Image` (`ImageID`, `MonumentID`, `Path`, `Thumbnail`) VALUES
 -- Table structure for table `Monument`
 --
 
-DROP TABLE IF EXISTS `Monument`;
 CREATE TABLE IF NOT EXISTS `Monument` (
   `MonumentID` int(10) unsigned NOT NULL,
   `ImageID` int(10) unsigned DEFAULT NULL,
@@ -726,7 +713,6 @@ INSERT INTO `Monument` (`MonumentID`, `ImageID`, `Name`, `Description`, `Latitud
 -- Table structure for table `Monument_Book`
 --
 
-DROP TABLE IF EXISTS `Monument_Book`;
 CREATE TABLE IF NOT EXISTS `Monument_Book` (
   `MonumentID` int(10) unsigned NOT NULL,
   `BookID` int(10) unsigned NOT NULL,
@@ -734,6 +720,14 @@ CREATE TABLE IF NOT EXISTS `Monument_Book` (
   KEY `BookID` (`BookID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `Monument_Book`
+--
+
+INSERT INTO `Monument_Book` (`MonumentID`, `BookID`) VALUES
+(3403, 1),
+(3403, 2),
+(3403, 3);
 
 -- --------------------------------------------------------
 
@@ -741,7 +735,6 @@ CREATE TABLE IF NOT EXISTS `Monument_Book` (
 -- Table structure for table `Monument_Category`
 --
 
-DROP TABLE IF EXISTS `Monument_Category`;
 CREATE TABLE IF NOT EXISTS `Monument_Category` (
   `MonumentID` int(10) unsigned NOT NULL,
   `CategoryID` int(10) unsigned NOT NULL,
@@ -858,7 +851,6 @@ INSERT INTO `Monument_Category` (`MonumentID`, `CategoryID`) VALUES
 -- Table structure for table `Monument_Event`
 --
 
-DROP TABLE IF EXISTS `Monument_Event`;
 CREATE TABLE IF NOT EXISTS `Monument_Event` (
   `MonumentID` int(10) unsigned NOT NULL,
   `EventID` int(10) unsigned NOT NULL,
@@ -1187,7 +1179,6 @@ INSERT INTO `Monument_Event` (`MonumentID`, `EventID`) VALUES
 -- Table structure for table `Monument_Person`
 --
 
-DROP TABLE IF EXISTS `Monument_Person`;
 CREATE TABLE IF NOT EXISTS `Monument_Person` (
   `MonumentID` int(10) unsigned NOT NULL,
   `PersonID` int(11) NOT NULL,
@@ -1423,7 +1414,6 @@ INSERT INTO `Monument_Person` (`MonumentID`, `PersonID`) VALUES
 -- Table structure for table `Monument_TextTag`
 --
 
-DROP TABLE IF EXISTS `Monument_TextTag`;
 CREATE TABLE IF NOT EXISTS `Monument_TextTag` (
   `MonumentID` int(10) unsigned NOT NULL,
   `TextTagID` int(10) unsigned NOT NULL,
@@ -3903,7 +3893,6 @@ INSERT INTO `Monument_TextTag` (`MonumentID`, `TextTagID`, `TermFrequencyInverse
 -- Table structure for table `Person`
 --
 
-DROP TABLE IF EXISTS `Person`;
 CREATE TABLE IF NOT EXISTS `Person` (
   `PersonID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
@@ -4093,7 +4082,6 @@ INSERT INTO `Person` (`PersonID`, `Name`) VALUES
 -- Table structure for table `ReadList`
 --
 
-DROP TABLE IF EXISTS `ReadList`;
 CREATE TABLE IF NOT EXISTS `ReadList` (
   `UserID` int(10) unsigned NOT NULL,
   `Book` text NOT NULL,
@@ -4107,7 +4095,6 @@ CREATE TABLE IF NOT EXISTS `ReadList` (
 -- Table structure for table `Role`
 --
 
-DROP TABLE IF EXISTS `Role`;
 CREATE TABLE IF NOT EXISTS `Role` (
   `RoleID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
@@ -4130,7 +4117,6 @@ INSERT INTO `Role` (`RoleID`, `Name`, `Description`) VALUES
 -- Table structure for table `SimilarImage`
 --
 
-DROP TABLE IF EXISTS `SimilarImage`;
 CREATE TABLE IF NOT EXISTS `SimilarImage` (
   `ImageID` int(10) unsigned NOT NULL,
   `SimilarImageID` int(10) unsigned NOT NULL,
@@ -4356,7 +4342,6 @@ INSERT INTO `SimilarImage` (`ImageID`, `SimilarImageID`, `Similarity`) VALUES
 -- Table structure for table `TextTag`
 --
 
-DROP TABLE IF EXISTS `TextTag`;
 CREATE TABLE IF NOT EXISTS `TextTag` (
   `TextTagID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `TextTag` varchar(45) NOT NULL,
@@ -6263,7 +6248,6 @@ INSERT INTO `TextTag` (`TextTagID`, `TextTag`, `InverseDocumentFrequency`) VALUE
 -- Table structure for table `User`
 --
 
-DROP TABLE IF EXISTS `User`;
 CREATE TABLE IF NOT EXISTS `User` (
   `UserID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
@@ -6291,7 +6275,6 @@ INSERT INTO `User` (`UserID`, `Name`, `HashedPassword`, `EmailAddress`, `LoginAt
 -- Table structure for table `UserToken`
 --
 
-DROP TABLE IF EXISTS `UserToken`;
 CREATE TABLE IF NOT EXISTS `UserToken` (
   `UserTokenID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UserID` int(10) unsigned NOT NULL,
@@ -6312,7 +6295,6 @@ CREATE TABLE IF NOT EXISTS `UserToken` (
 -- Table structure for table `User_Role`
 --
 
-DROP TABLE IF EXISTS `User_Role`;
 CREATE TABLE IF NOT EXISTS `User_Role` (
   `UserID` int(10) unsigned NOT NULL,
   `RoleID` int(10) unsigned NOT NULL,
@@ -6335,7 +6317,6 @@ INSERT INTO `User_Role` (`UserID`, `RoleID`) VALUES
 -- Table structure for table `VisitedList`
 --
 
-DROP TABLE IF EXISTS `VisitedList`;
 CREATE TABLE IF NOT EXISTS `VisitedList` (
   `UserID` int(10) unsigned NOT NULL,
   `MonumentID` int(10) unsigned NOT NULL,
@@ -6358,7 +6339,6 @@ INSERT INTO `VisitedList` (`UserID`, `MonumentID`) VALUES
 -- Table structure for table `WishList`
 --
 
-DROP TABLE IF EXISTS `WishList`;
 CREATE TABLE IF NOT EXISTS `WishList` (
   `UserID` int(10) unsigned NOT NULL,
   `MonumentID` int(10) unsigned NOT NULL,
@@ -6405,18 +6385,19 @@ ALTER TABLE `Monument`
   ADD CONSTRAINT `Monumentzo.Monument.ImageID` FOREIGN KEY (`ImageID`) REFERENCES `Image` (`ImageID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `Monument_Book`
+--
+ALTER TABLE `Monument_Book`
+  ADD CONSTRAINT `Monument_Book_ibfk_2` FOREIGN KEY (`BookID`) REFERENCES `Book` (`BookID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Monument_Book_ibfk_1` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `Monument_Category`
 --
 ALTER TABLE `Monument_Category`
   ADD CONSTRAINT `Monumentzo.Monument_Category.CategoryID` FOREIGN KEY (`CategoryID`) REFERENCES `Category` (`CategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `Monumentzo.Monument_Category.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
---
--- Constraints for table `Monument_Book`
---
-ALTER TABLE `Monument_Book`
-    ADD CONSTRAINT `Monumentzo.Monument_Category.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO CASCADE ON UPDATE NO CASCADE,
-  ADD CONSTRAINT `Monumentzo.Monument_Category.BookID` FOREIGN KEY (`BookID`) REFERENCES `Book` (`BookID`) ON DELETE NO CASCADE ON UPDATE NO CASCADE;
-  
+
 --
 -- Constraints for table `Monument_Person`
 --
@@ -6470,7 +6451,6 @@ ALTER TABLE `VisitedList`
 ALTER TABLE `WishList`
   ADD CONSTRAINT `Monumentzo.WishList.MonumentID` FOREIGN KEY (`MonumentID`) REFERENCES `Monument` (`MonumentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `Monumentzo.WishList.UserID` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

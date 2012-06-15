@@ -164,7 +164,7 @@ class Controller_Information {
                 $img = null;
                 $link = null;
 
-                $toSaveBook = DB::query(Database::INSERT, 'INSERT IGNORE INTO Book (GoogleID, Title, Author, ImgUrl, Description, Link) VALUES(:googleID, :title, :author, :img, :des, :link)')
+                $toSaveBook = DB::query(Database::INSERT, 'INSERT INTO Book (GoogleID, Title, Author, ImgUrl, Description, Link) VALUES(:googleID, :title, :author, :img, :des, :link)')
                         ->bind(':bookID', $bookID)
                         ->bind(':googleID', $googleID)
                         ->bind(':title', $title)
@@ -173,14 +173,22 @@ class Controller_Information {
                         ->bind(':des', $des)
                         ->bind(':link', $link)
                         ->execute();
-                echo "saved book" . $monument['MonumentID'] . "\n";
-                
-                
-                $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Book (MonumentID, BookID) VALUES(:monumentID, (SELECT BookID FROM Book WHERE GoogleID = :id))')
-                        ->bind(':monumentID', $monument['MonumentID'])
+                echo "saved book for " . $monument['MonumentID'] . "\n";
+
+                $test = DB::query(Database::SELECT, 'SELECT BookID FROM Book WHERE GoogleID = :id')
                         ->bind(':id', $googleID)
-                        ->execute();
-                echo "saved link for " . $monument['MonumentID'] . "\n";
+                        ->execute()
+                        ->as_array();
+                echo "not null?";
+                echo $test[0]['BookID'];
+                
+                if($test[0]['BookID']) {
+                    $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Book (MonumentID, BookID) VALUES(:monumentID, (SELECT BookID FROM Book WHERE GoogleID = :id))')
+                            ->bind(':monumentID', $monument['MonumentID'])
+                            ->bind(':id', $googleID)
+                            ->execute();
+                    echo "saved link for " . $monument['MonumentID'] . "\n";
+                }
             }
 
             echo "Number of books found: " . count($books) . ".\n";
