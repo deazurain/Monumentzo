@@ -146,7 +146,7 @@
 	</div>
 	<hr>
 	<div class="row">
-	    <div class="span8 offset2">
+	    <div class="span10 offset1">
 
             <ul class="nav nav-tabs" id="myTab">
                 <li class="active"><a href="#description">Beschrijving</a></li>

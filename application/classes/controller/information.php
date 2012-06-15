@@ -261,6 +261,7 @@ class Controller_Information {
                     $toSave = DB::query(Database::INSERT, 'INSERT INTO Video (YouTubeID) VALUES(:id)')
                             ->bind(':id', $ytID)
                             ->execute();
+                    echo "Saved video for monument: " . $monument['MonumentID'];
                 }
                 
                 // Get the video id from the database
@@ -274,6 +275,7 @@ class Controller_Information {
                             ->bind(':monumentID', $monument['MonumentID'])
                             ->bind(':ytID', $ytID)
                             ->execute();
+                    echo "Saved link for monument: " . $monument['MonumentID'];
                 }
             }
         }
