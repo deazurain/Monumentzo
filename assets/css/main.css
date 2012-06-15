@@ -138,6 +138,11 @@ Browse
 	left: 35px;
 }
 
+#browse-window .hud-help {
+	top: 70px;
+	left: 10px;
+}
+
 /*
 #browse-window canvas {
 	border: 1px solid black;
