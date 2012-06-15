@@ -276,7 +276,7 @@ monument map
 monument tabs
 */
 .tab-content {
-	height:400px;
+	height:auto;
 	overflow:auto;
 }
 

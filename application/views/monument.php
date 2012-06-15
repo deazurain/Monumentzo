@@ -165,9 +165,6 @@
                 <?php if (count($persons) > 0): ?>
                     <li><a href="#related-people">Personen</a></li>
                 <?php endif; ?>
-                <?php if (count($similarImages) != 0): ?>
-                    <li><a href="#similar-images">Visueel gelijkende monumenten</a></li>
-                <?php endif; ?>
                 <?php if (count($books) > 0): ?>
                     <li><a href="#books">Boeken</a></li>
                 <?php endif; ?>
@@ -214,32 +211,7 @@
                             </table>
                         </div>
                     </div>
-                <?php endif; ?>
-
-
-
-                <!-- Similar Images -->
-                <?php if (count($similarImages) != 0): ?>
-                    <div class="tab-pane" id="similar-images">
-                        <div id='carousel' class='carousel slide'>
-                            <!-- Carousel items -->
-                            <div class='carousel-inner'>
-                                <?php foreach ($similarImages as $image) { ?>
-                                    <div class='item'>
-                                        <a href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
-                                            <img src="<?php echo url::base() . "assets/img/monuments/carousel/" . $image['MonumentID'] . ".jpg"; ?>">
-                                        </a>
-                                        <div class="carousel-caption">
-                                            <h4><?php echo $image['Name']; ?></h4>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                            <a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
-                            <a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
-                        </div>
-                    </div>
-                <?php endif; ?>
+                <?php endif; ?>         
 
                 <!-- Related books -->
                 <?php if (count($books) > 0): ?>
@@ -280,7 +252,6 @@
 
     <!-- Similar images and videos -->
     <div class="row">
-        <div id="videos" style="display: hidden"><?php echo $videos ?></div>
         <!-- If there are both images and videos show both next to each other -->
         <?php if ((count($similarImages) > 0) && (count($videos) > 0)): ?>
             <!-- Start similar images -->
@@ -306,13 +277,16 @@
 
             <!-- Start videos -->
             <div class="span6">
-                <div class="row" id="myytplayer"></div>
+                <?php $out = json_encode($videos) ?>
+                <div id="myytplayer"></div>
                 <div class="row">
-                    <a class="btn" href="javascript:ytplayer.previousVideo()"><i class="icon-backward"></i></a> 
-                    <a class="btn" href="javascript:ytplayer.playVideo()"><i class="icon-play"></i></a> 
-                    <a class="btn" href="javascript:ytplayer.pauseVideo()"><i class="icon-pause"></i></a> 
-                    <a class="btn" href="javascript:ytplayer.nextVideo()"><i class="icon-forward"></i></a> 
-                    <a class="btn" href=""><i class="icon-volume-off"></i></a>
+                    <div class="span4">
+                        <a class="btn" href="javascript:ytplayer.previousVideo()"><i class="icon-backward"></i></a> 
+                        <a class="btn" href="javascript:ytplayer.playVideo()"><i class="icon-play"></i></a> 
+                        <a class="btn" href="javascript:ytplayer.pauseVideo()"><i class="icon-pause"></i></a> 
+                        <a class="btn" href="javascript:ytplayer.nextVideo()"><i class="icon-forward"></i></a> 
+                        <a class="btn" href=""><i class="icon-volume-off"></i></a>
+                    </div>
                 </div>
             </div>
         <?php endif; ?>

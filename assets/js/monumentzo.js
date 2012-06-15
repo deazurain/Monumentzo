@@ -3,8 +3,8 @@ var variables = {
     user: this.user
 };
 
-$(document).ready(function() {
-    
+$(document).ready(function() {  
+   
 	$("#loginlink").fancybox({
 		width : '35%',
 		height : 'auto',
