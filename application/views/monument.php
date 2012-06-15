@@ -249,7 +249,7 @@
             </div>
         </div>
     </div>
-
+    <hr>
     <!-- Similar images and videos -->
     <div class="row">
         <!-- If there are both images and videos show both next to each other -->
@@ -277,17 +277,20 @@
 
             <!-- Start videos -->
             <div class="span6">
-                <?php foreach($videos as $video) { echo '<script type="text/javascript"> addToPlaylist("' . $video['YouTubeID'] . '");
-                </script>'; } ?>
+                <?php
+                foreach ($videos as $video) {
+                    echo '<script type="text/javascript"> addToPlaylist("' . $video['YouTubeID'] . '");
+                </script>';
+                }
+                ?>
                 <div id="myytplayer"></div>
                 <div class="row">
-                    
+                    <div class="span4">
                         <a class="btn" href="javascript:ytplayer.previousVideo()"><i class="icon-backward"></i></a> 
                         <a class="btn" href="javascript:ytplayer.playVideo()"><i class="icon-play"></i></a> 
                         <a class="btn" href="javascript:ytplayer.pauseVideo()"><i class="icon-pause"></i></a> 
                         <a class="btn" href="javascript:ytplayer.nextVideo()"><i class="icon-forward"></i></a> 
-                        <div id="mute"><a class="btn" href="javascript:ytplayer.mute() "><i class="icon-volume-off"></i></a></div>
-                        <div id="ytname"></div>
+                    </div>
                 </div>
             </div>
         <?php endif; ?>
@@ -317,10 +320,27 @@
 
         <!-- If there are only videos then only show them -->
         <?php if ((count($similarImages) <= 0) && (count($videos) > 0)): ?>
-            <div class="span8 offset2"></div>
-        <?php endif; ?>
+            <div class="span8 offset2">
+                <?php
+                foreach ($videos as $video) {
+                    echo '<script type="text/javascript"> addToPlaylist("' . $video['YouTubeID'] . '");
+                </script>';
+                }
+                ?>
+                <div id="myytplayer"></div>
+                <div class="row">
+                    <div class="span4">
+                        <a class="btn" href="javascript:ytplayer.previousVideo()"><i class="icon-backward"></i></a> 
+                        <a class="btn" href="javascript:ytplayer.playVideo()"><i class="icon-play"></i></a> 
+                        <a class="btn" href="javascript:ytplayer.pauseVideo()"><i class="icon-pause"></i></a> 
+                        <a class="btn" href="javascript:ytplayer.nextVideo()"><i class="icon-forward"></i></a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+<?php endif; ?>
 
-    </div>
+</div>
 </div>
 
 <!-- Start of the comments -->
@@ -346,21 +366,21 @@
                     echo $v;
                 }
                 ?>
-            <?php endif; ?>
+<?php endif; ?>
         </ul>
     </div>
 </div>
 
 <!-- Start of comment typing section -->
 <div class="row">
-    <?php if ($user): ?>
+<?php if ($user): ?>
         <div class="span8 offset2">
             <div class="page-header">
                 <h1>Plaats commentaar</h1>
             </div>
 
             <div>
-                <?php echo Form::open('comment/create', array('id' => 'create-comment', 'method' => 'post')); ?>
+    <?php echo Form::open('comment/create', array('id' => 'create-comment', 'method' => 'post')); ?>
 
                 <div class="row">
                     <div class="span7">
@@ -381,12 +401,12 @@
                 <div class='error-container alert alert-error'></div>
                 <div class='success-container alert alert-success'></div>
 
-                <?php echo Form::close(); ?>
+        <?php echo Form::close(); ?>
             </div>
         </div>
     <?php else: ?>
         <div class="span8 offset2">
         </div>
-    <?php endif; ?>
+<?php endif; ?>
 </div>
 </div><!--/container-->
