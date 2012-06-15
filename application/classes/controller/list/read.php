@@ -10,8 +10,7 @@ class Controller_List_Read extends Controller_List {
 	}
 	
 	public function action_add(){
-		$monumentId = $this->request->param('monument');
-		$bookID = $this->request->param('book');
+		$bookID = $this->request->param('id');
 		
 		$user = Auth::instance()->get_user();
 		
@@ -19,12 +18,11 @@ class Controller_List_Read extends Controller_List {
 		$modelListRead->add($bookID, $user->UserID);
 		
 		// Redirect the user back to the monument page
-		$this->request->redirect('monument/view/' . $monumentId);
+		$this->request->redirect($this->request->referrer());
 	}
 	
 	public function action_remove(){
-		$monumentId = $this->request->param('monument');
-		$bookID = $this->request->param('book');
+		$bookID = $this->request->param('id');
 		
 		$user = Auth::instance()->get_user();
 		
@@ -32,6 +30,6 @@ class Controller_List_Read extends Controller_List {
 		$modelListRead->remove($bookID, $user->UserID);
 		
 		// Redirect the user back to the monument page
-		$this->request->redirect('monument/view/' . $monumentId);
+		$this->request->redirect($this->request->referrer());
 	}
 }

@@ -146,7 +146,7 @@
 	</div>
 	<hr>
 	<div class="row">
-	    <div class="span8 offset2">
+	    <div class="span10 offset1">
 
             <ul class="nav nav-tabs" id="myTab">
                 <li class="active"><a href="#description">Beschrijving</a></li>
@@ -246,15 +246,17 @@
                                 <h4><?= $book['Author'] ?></h4>
                                 <a href="<?= $book['Link'] ?>">Meer informatie via Google Books</a>
                                 <?php if($user): ?>
-                               	<?php if(in_array($book['BookID'], $userBooks)): ?>
-                                <a class="btn btn-primary pull-right" href="<?= url::base() ?>list/read/add/<?= $monument['MonumentID'] ?>/<?= $book['BookID'] ?>">
-                                    <i class="icon-remove icon-white"></i>
-                                </a>
-                               	<?php else: ?>
-                                <a class="btn btn-danger pull-right" href="<?= url::base() ?>list/read/add/<?= $monument['MonumentID'] ?>/<?= $book['BookID'] ?>">
-                                    <i class="icon-plus icon-white"></i>
-                                </a>
-                                <?php endif; ?>
+                               	    <?php if(in_array($book['BookID'], $userBooks)): ?>
+                                    <a class="btn btn-danger pull-right" 
+                                        href="<?= url::base() ?>list/read/remove/<?= $book['BookID'] ?>">
+                                        <i class="icon-remove icon-white"></i>
+                                    </a>
+                                   	<?php else: ?>
+                                    <a class="btn btn-primary pull-right" 
+                                        href="<?= url::base() ?>list/read/add/<?= $book['BookID'] ?>">
+                                        <i class="icon-plus icon-white"></i>
+                                    </a>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             </td>
                         </tr>

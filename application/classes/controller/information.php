@@ -27,8 +27,8 @@ class Controller_Information {
         $service = new apiBooksService($client);
 
         // Set the limit and offset for the query
-        $offset = 53;
-        $limit = 30;
+        $offset = 70;
+        $limit = 1;
 
         // Retrieve monument id's with the given limit and offset
         $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument ORDER BY MonumentID LIMIT :offset, :limit')
@@ -60,12 +60,12 @@ class Controller_Information {
                     ->as_array();
             echo "Number of related people: " . count($people) . ".\n";
 
-            // Get the event associated with this monument
-            $events = DB::query(Database::SELECT, 'SELECT Year FROM Event JOIN Monument_Event ON Event.EventID = Monument_Event.EventID WHERE Monument_Event.MonumentID = :id')
-                    ->bind(':id', $monument['MonumentID'])
-                    ->execute()
-                    ->as_array();
-            echo "Number of related events: " . count($events) . ".\n";
+//            // Get the event associated with this monument
+//            $events = DB::query(Database::SELECT, 'SELECT Year FROM Event JOIN Monument_Event ON Event.EventID = Monument_Event.EventID WHERE Monument_Event.MonumentID = :id')
+//                    ->bind(':id', $monument['MonumentID'])
+//                    ->execute()
+//                    ->as_array();
+//            echo "Number of related events: " . count($events) . ".\n";
 
             // Set the parameters for the query
             $optParams = array('langRestrict' => 'nl', 'orderBy' => 'relevance');
@@ -106,22 +106,22 @@ class Controller_Information {
                 }
             }
 
-            // Get books related to the events of this monument
-            echo "Books based on query with related event: \n";
-            foreach ($events as $event) {
-                echo "{{" . $event['Year'] . "}}\n";
-                $results = $service->volumes->listVolumes($event['Year'], $optParamsWithMax);
-
-                if (isset($results['items'])) {
-                    foreach ($results['items'] as $item) {
-                        if (!in_array($item['id'], $resultsID)) {
-                            $resultsID[] = $item['id'];
-                            $books[] = $item;
-                            echo "[ID: " . $item['id'] . " - " . $item['volumeInfo']['title'] . "]\n";
-                        }
-                    }
-                }
-            }
+//            // Get books related to the events of this monument
+//            echo "Books based on query with related event: \n";
+//            foreach ($events as $event) {
+//                echo "{{" . $event['Year'] . "}}\n";
+//                $results = $service->volumes->listVolumes($event['Year'], $optParamsWithMax);
+//
+//                if (isset($results['items'])) {
+//                    foreach ($results['items'] as $item) {
+//                        if (!in_array($item['id'], $resultsID)) {
+//                            $resultsID[] = $item['id'];
+//                            $books[] = $item;
+//                            echo "[ID: " . $item['id'] . " - " . $item['volumeInfo']['title'] . "]\n";
+//                        }
+//                    }
+//                }
+//            }
 
             // Save books to the databases
             foreach ($books as $book) {
@@ -215,7 +215,7 @@ class Controller_Information {
         $limit = 0;
 
         // Retrieve monument id's with the given limit and offset
-        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument ORDER BY MonumentID LIMIT 1')
+        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument ORDER BY MonumentID')
                 //->bind(':offset', $offset)
                 //->bind(':limit', $limit)
                 ->execute()
@@ -247,29 +247,35 @@ class Controller_Information {
             foreach ($videoFeed as $videoEntry) {
                 echo $videoEntry->getVideoTitle() . " - " . $videoEntry->getVideoID() . "\n";
 
-                $videoID = $videoEntry->getVideoID();
+                $ytID = $videoEntry->getVideoID();
                 
+                // Check that the video is not in the database
                 $query = DB::query(Database::SELECT, 'SELECT VideoID FROM Video WHERE YouTubeID = :id')
-                        ->bind(':id', $videoID)
+                        ->bind(':id', $ytID)
                         ->execute();
 
+                // Add video only if it was not already in the database.
                 if (isset($query[0]['VideoID'])) {
                     echo "Video already in database.";
                 } else {
                     $toSave = DB::query(Database::INSERT, 'INSERT INTO Video (YouTubeID) VALUES(:id)')
-                            ->bind(':id', $videoID)
+                            ->bind(':id', $ytID)
                             ->execute();
+                    echo "Saved video for monument: " . $monument['MonumentID'];
                 }
                 
+                // Get the video id from the database
                 $getID = DB::query(Database::SELECT, 'SELECT VideoID FROM Video WHERE YouTubeID = :id')
-                        ->bind(':id', $videoID)
+                        ->bind(':id', $ytID)
                         ->execute();
                 
+                // Add only if id is found
                 if(isset($getID[0]['VideoID'])){
-                    $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Video (MonumentID, VideoID) VALUES(:monumentID, :videoID)')
+                    $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Video (MonumentID, VideoID) VALUES(:monumentID, (SELECT VideoID FROM Video WHERE YouTubeID = :ytID))')
                             ->bind(':monumentID', $monument['MonumentID'])
-                            ->bind(':videoID', $getID[0]['VideoID'])
+                            ->bind(':ytID', $ytID)
                             ->execute();
+                    echo "Saved link for monument: " . $monument['MonumentID'];
                 }
             }
         }
