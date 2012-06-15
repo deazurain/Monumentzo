@@ -26,8 +26,8 @@ class Controller_Information {
         $client->setApplicationName("Monumentzo");
         $service = new apiBooksService($client);
 
-        // Retrieve monument id's
-        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument LIMIT 1')->execute()->as_array();
+        // Retrieve monument id's with the given limit and offset
+        $monuments = DB::query(Database::SELECT, 'SELECT MonumentID FROM Monument LIMIT 20')->execute()->as_array();
 
         echo "Number of monuments to search books for: " . count($monuments) . ".\n";
 
@@ -37,8 +37,6 @@ class Controller_Information {
         foreach ($monuments as $monument) {
             $resultsID = array();
             $books = array();
-
-            $monument['MonumentID'] = 3403;
 
             echo "Monument " . $i . " : " . $monument['MonumentID'] . "\n";
             // Get information about the current monumnet
@@ -94,7 +92,7 @@ class Controller_Information {
                         if (!in_array($item['id'], $resultsID)) {
                             $resultsID[] = $item['id'];
                             $books[] = $item;
-                            //echo "[ID: " . $item['id'] . " - " . $item['volumeInfo']['title'] . "]\n";
+                            echo "[ID: " . $item['id'] . " - " . $item['volumeInfo']['title'] . "]\n";
                         }
                     }
                 }
@@ -122,11 +120,13 @@ class Controller_Information {
                 $googleID = $book['id'];
                 $title = $book['volumeInfo']['title'];
 
+                // Check that the book is not already in the database.
                 $query = DB::query(Database::SELECT, 'SELECT BookID FROM Book WHERE Title = :title')
                         ->bind(':title', $title)
                         ->execute()
                         ->as_array();
 
+                // If the book is already in the database then do nothing. Otherwise save it to the database.
                 if (isset($query[0]['BookID'])) {
                     echo "Book is already in database.";
                 } else {                    
@@ -170,11 +170,13 @@ class Controller_Information {
                     echo "Saved book for monument: " . $monument['MonumentID'] . "\n";
                 }
 
+                // Check if the book was saved.
                 $test = DB::query(Database::SELECT, 'SELECT BookID FROM Book WHERE GoogleID = :id')
                         ->bind(':id', $googleID)
                         ->execute()
                         ->as_array();
 
+                // If the book was saved then add a link between the book and the monument
                 if (isset($test[0]['BookID'])) {
                     $toSaveLink = DB::query(Database::INSERT, 'INSERT INTO Monument_Book (MonumentID, BookID) VALUES(:monumentID, (SELECT BookID FROM Book WHERE GoogleID = :id))')
                             ->bind(':monumentID', $monument['MonumentID'])
