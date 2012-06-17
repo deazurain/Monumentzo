@@ -149,7 +149,7 @@
                         <td>Categorie</td>
                         <td>
                             <?php if (!isset($monument['Category'])): ?>
-                                Geen
+                                Geen categorie beschikbaar
                             <?php
                             else :
                                 foreach ($monument['Category'] as $cat) {
