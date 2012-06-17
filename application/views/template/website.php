@@ -50,7 +50,7 @@
                                     <li><a class='fancybox' href='#logout'>Uitloggen</a></li>
                                 </ul>
                             </li>
-                        <? endif; ?>
+                        <?php endif; ?>
                         <?php if (isset($login)) : ?>
                             <li id="fat-menu" class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -61,7 +61,7 @@
                                     <li><a class='fancybox' href='#register'>Registreren</a></li>
                                 </ul>
                             </li>
-                        <? endif; ?>
+                        <?php endif; ?>
                     </ul>
 
 

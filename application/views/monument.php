@@ -145,6 +145,24 @@
                             <?php endif; ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Categorie</td>
+                        <td>
+                            <?php if (!isset($monument['Category'])): ?>
+                                Geen
+                            <?php
+                            else :
+                                foreach ($monument['Category'] as $cat) {
+                                    $href = url::base() . 'search/query/' . $cat['Category'];
+                                    $text = $cat['Category'];
+                                    ?>
+                                    <span class="label label-info">
+                                    <?php echo $text; ?>
+                                    </span>
+                                <?php } ?>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
                 </table>
 
             </div>
@@ -167,7 +185,7 @@
                 <?php endif; ?>
                 <?php if (count($books) > 0): ?>
                     <li><a href="#books">Boeken</a></li>
-                <?php endif; ?>
+<?php endif; ?>
             </ul>
 
             <div class="tab-content">
@@ -179,7 +197,7 @@
 
 
                 <!-- Related events -->
-                <?php if (count($events) > 0): ?>
+<?php if (count($events) > 0): ?>
                     <div class="tab-pane" id="related-events">
                         <div>
                             <table class="table table-striped">
@@ -187,37 +205,37 @@
                                     <th>Jaartal</th>
                                     <th>Gebeurtenis</th>
                                 </tr>
-                                <?php foreach ($events as $event): ?>
+    <?php foreach ($events as $event): ?>
                                     <tr>
                                         <td><?php echo $event['Year']; ?></td>
                                         <td><?php echo $event['Name']; ?></td>
                                     </tr>
-                                <?php endforeach; ?>
+    <?php endforeach; ?>
                             </table>
                         </div>
                     </div>
-                <?php endif; ?>
+<?php endif; ?>
 
                 <!-- Related people -->
-                <?php if (count($persons) > 0): ?>
+<?php if (count($persons) > 0): ?>
                     <div class="tab-pane" id="related-people">
                         <div>
                             <table class="table table-striped">
-                                <?php foreach ($persons as $person): ?>
+    <?php foreach ($persons as $person): ?>
                                     <tr>
                                         <td><a href="http://nl.wikipedia.org/wiki/<?php echo $person['Name']; ?>"><?php echo $person['Name']; ?></a></td>
                                     </tr>
-                                <?php endforeach; ?>
+    <?php endforeach; ?>
                             </table>
                         </div>
                     </div>
-                <?php endif; ?>         
+<?php endif; ?>         
 
                 <!-- Related books -->
-                <?php if (count($books) > 0): ?>
+<?php if (count($books) > 0): ?>
                     <div class="tab-pane" id="books">
                         <table class="table">
-                            <?php foreach ($books as $book): ?>
+    <?php foreach ($books as $book): ?>
                                 <tr>
                                     <td class="span1">
                                         <img src="<?= $book['ImgUrl'] ?>" alt="Boek cover" />
@@ -227,24 +245,24 @@
                                         <h4><?= $book['Author'] ?></h4>
                                         <a href="<?= $book['Link'] ?>">Meer informatie via Google Books</a>
                                         <?php if ($user): ?>
-                                            <?php if (in_array($book['BookID'], $userBooks)): ?>
+            <?php if (in_array($book['BookID'], $userBooks)): ?>
                                                 <a class="btn btn-danger pull-right" 
                                                    href="<?= url::base() ?>list/read/remove/<?= $book['BookID'] ?>">
                                                     <i class="icon-remove icon-white"></i>
                                                 </a>
-                                            <?php else: ?>
+            <?php else: ?>
                                                 <a class="btn btn-primary pull-right" 
                                                    href="<?= url::base() ?>list/read/add/<?= $book['BookID'] ?>">
                                                     <i class="icon-plus icon-white"></i>
                                                 </a>
                                             <?php endif; ?>
-                                        <?php endif; ?>
+        <?php endif; ?>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+    <?php endforeach; ?>
                         </table>
                     </div>
-                <?php endif; ?>
+<?php endif; ?>
 
             </div>
         </div>
@@ -253,13 +271,13 @@
     <!-- Similar images and videos -->
     <div class="row">
         <!-- If there are both images and videos show both next to each other -->
-        <?php if ((count($similarImages) > 0) && (count($videos) > 0)): ?>
+<?php if ((count($similarImages) > 0) && (count($videos) > 0)): ?>
             <!-- Start similar images -->
             <div class="span6">
                 <div id='carousel' class='carousel slide'>
                     <!-- Carousel items -->
                     <div class='carousel-inner'>
-                        <?php foreach ($similarImages as $image) { ?>
+    <?php foreach ($similarImages as $image) { ?>
                             <div class='item'>
                                 <a href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
                                     <img src="<?php echo url::base() . "assets/img/monuments/carousel/" . $image['MonumentID'] . ".jpg"; ?>">
@@ -268,7 +286,7 @@
                                     <h4><?php echo $image['Name']; ?></h4>
                                 </div>
                             </div>
-                        <?php } ?>
+    <?php } ?>
                     </div>
                     <a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
                     <a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
@@ -293,15 +311,15 @@
                     </div>
                 </div>
             </div>
-        <?php endif; ?>
+<?php endif; ?>
 
         <!-- If there are only similar images then only show them -->
-        <?php if ((count($similarImages) > 0) && (count($videos) <= 0)): ?>
+<?php if ((count($similarImages) > 0) && (count($videos) <= 0)): ?>
             <div class="span8 offset2">
                 <div id='carousel' class='carousel slide'>
                     <!-- Carousel items -->
                     <div class='carousel-inner'>
-                        <?php foreach ($similarImages as $image) { ?>
+    <?php foreach ($similarImages as $image) { ?>
                             <div class='item'>
                                 <a href="<?php echo '/monument/view/' . $image['MonumentID'] ?>">
                                     <img src="<?php echo url::base() . "assets/img/monuments/carousel/" . $image['MonumentID'] . ".jpg"; ?>">
@@ -310,16 +328,16 @@
                                     <h4><?php echo $image['Name']; ?></h4>
                                 </div>
                             </div>
-                        <?php } ?>
+    <?php } ?>
                     </div>
                     <a class='carousel-control left' href='#carousel' data-slide='prev'>&lsaquo;</a>
                     <a class='carousel-control right' href='#carousel' data-slide='next'>&rsaquo;</a>
                 </div>
             </div>
-        <?php endif; ?>
+<?php endif; ?>
 
         <!-- If there are only videos then only show them -->
-        <?php if ((count($similarImages) <= 0) && (count($videos) > 0)): ?>
+            <?php if ((count($similarImages) <= 0) && (count($videos) > 0)): ?>
             <div class="span8 offset2">
                 <?php
                 foreach ($videos as $video) {
@@ -401,10 +419,10 @@
                 <div class='error-container alert alert-error'></div>
                 <div class='success-container alert alert-success'></div>
 
-        <?php echo Form::close(); ?>
+    <?php echo Form::close(); ?>
             </div>
         </div>
-    <?php else: ?>
+<?php else: ?>
         <div class="span8 offset2">
         </div>
 <?php endif; ?>

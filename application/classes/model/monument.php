@@ -17,6 +17,7 @@ class Model_Monument extends Model_Database {
         $this->monument = $result[0];
         $this->monument['Image'] = $this->getBaseImage();
         $this->monument['TextTag'] = $this->getTextTags();
+        $this->monument['Category'] = $this->getCategory();
     }
 
     public function viewMonument() {
@@ -125,6 +126,16 @@ class Model_Monument extends Model_Database {
                 ->param(':monumentID', $this->monument['MonumentID'])
                 ->execute();
 
+        return $results->as_array();
+    }
+    
+    public function getCategory() {
+        $results = DB::query(Database::SELECT, 'SELECT Category FROM Category, Monument_Category 
+												WHERE Category.CategoryID = Monument_Category.CategoryID 
+												AND MonumentID = :monumentID')
+                ->param(':monumentID', $this->monument['MonumentID'])
+                ->execute();
+        
         return $results->as_array();
     }
 
