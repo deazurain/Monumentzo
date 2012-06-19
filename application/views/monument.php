@@ -424,6 +424,8 @@
         </div>
 <?php else: ?>
         <div class="span8 offset2">
+		<hr>
+		<div class="alert alert-error"><strong>Let op!</strong> Je bent niet ingelogd. Log in om commentaar te kunnen plaatsen.</div>
         </div>
 <?php endif; ?>
 </div>
